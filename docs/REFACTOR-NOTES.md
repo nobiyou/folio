@@ -60,6 +60,20 @@
 - 将 `Folio_posts_per_page` 规范为 `folio_posts_per_page`。
 - 保留旧函数名兼容代理，避免外部历史调用失效。
 
+### 8. 缺陷修复（第二轮）
+- 通知系统读状态修复：
+  - 移除游客对 `folio_mark_notification_read` / `folio_mark_all_read` 的写操作入口。
+  - 全局通知（`user_id = 0`）改为“按用户记录已读”，新增 `read_by_users` 字段并自动兼容迁移。
+  - 游客可读取全局通知，但不再落库修改全局已读状态。
+- 缓存接口冲突修复：
+  - 旧性能管理器将 `folio_cache_stats` 迁移为 `folio_cache_stats_legacy`，避免与统一性能后台冲突。
+  - `ajax_get_cache_stats` 与 `ajax_clear_cache` 增加 nonce 校验，补齐安全边界。
+- 性能缓存 helper 修复：
+  - `folio_clear_performance_cache()` 改为安全清理实现，避免调用不存在的方法导致致命错误。
+- 重复 AJAX 注册收敛：
+  - `cache-file-manager`、`cache-health-checker`、`memcached-helper` 在检测到统一性能后台类存在时仅保留兜底，不再主路径重复注册相同 action。
+  - `ajax_clear_all_cache` 的 nonce 校验兼容 `folio_performance_admin`，避免历史入口误报安全失败。
+
 ## 兼容开关
 - `folio_enable_style_manager_frontend`（默认 `false`）
   - 控制 `inc/class-style-manager.php` 的前台样式加载是否启用

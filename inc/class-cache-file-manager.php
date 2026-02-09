@@ -32,9 +32,11 @@ class folio_Cache_File_Manager {
         // 管理员页面钩子
         add_action('admin_init', array($this, 'admin_init'));
         
-        // AJAX处理器
-        add_action('wp_ajax_folio_install_object_cache', array($this, 'ajax_install_object_cache'));
-        add_action('wp_ajax_folio_uninstall_object_cache', array($this, 'ajax_uninstall_object_cache'));
+        // AJAX处理器：优先由统一性能后台接管，此处仅作为兜底注册
+        if (!class_exists('folio_Unified_Performance_Admin')) {
+            add_action('wp_ajax_folio_install_object_cache', array($this, 'ajax_install_object_cache'));
+            add_action('wp_ajax_folio_uninstall_object_cache', array($this, 'ajax_uninstall_object_cache'));
+        }
         add_action('wp_ajax_folio_check_object_cache', array($this, 'ajax_check_object_cache'));
     }
 

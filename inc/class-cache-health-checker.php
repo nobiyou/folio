@@ -24,7 +24,10 @@ class folio_Cache_Health_Checker {
     public function __construct() {
         // 只在管理员页面启用
         if (is_admin() && current_user_can('manage_options')) {
-            add_action('wp_ajax_folio_cache_health_check', array($this, 'ajax_health_check'));
+            // 优先由统一性能后台接管，此处仅作为兜底注册
+            if (!class_exists('folio_Unified_Performance_Admin')) {
+                add_action('wp_ajax_folio_cache_health_check', array($this, 'ajax_health_check'));
+            }
             add_action('admin_notices', array($this, 'show_health_notices'));
         }
     }

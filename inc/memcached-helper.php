@@ -367,5 +367,7 @@ function folio_ajax_memcached_status() {
     ));
 }
 
-// 注册AJAX处理器
-add_action('wp_ajax_folio_memcached_status', 'folio_ajax_memcached_status');
+// 注册AJAX处理器：优先由统一性能后台接管，此处仅作为兜底注册
+if (!class_exists('folio_Unified_Performance_Admin')) {
+    add_action('wp_ajax_folio_memcached_status', 'folio_ajax_memcached_status');
+}

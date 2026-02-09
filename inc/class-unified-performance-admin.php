@@ -1487,7 +1487,8 @@ class folio_Unified_Performance_Admin {
      * AJAX清除所有缓存（兼容旧接口）
      */
     public function ajax_clear_all_cache() {
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_performance_dashboard')) {
+        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+        if ($nonce === '' || (!wp_verify_nonce($nonce, 'folio_performance_dashboard') && !wp_verify_nonce($nonce, 'folio_performance_admin'))) {
             wp_send_json_error('安全验证失败');
         }
 
