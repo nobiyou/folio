@@ -109,6 +109,7 @@
   - 支持 `nonceMode: 'auto'` 显式启用自动注入。
   - 支持 `nonceValue` + `nonceField` 显式指定注入值与字段名。
 - 目标：避免通用 AJAX 封装误把不匹配的 nonce 注入到不同安全域接口。
+- 同步更新 `assets/js/folio-core.min.js`，确保压缩资源与源码行为一致。
 
 ## 兼容开关
 - `folio_enable_style_manager_frontend`（默认 `false`）

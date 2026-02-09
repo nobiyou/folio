@@ -68,7 +68,7 @@
   - 当前未发现主路径加载，但后续若误接入可能引入已修复过的旧行为。
 
 ## 建议优先级
-1. 对 `assets/js/folio-core.min.js` 执行与源码一致的构建更新，避免未来切换到 min 资源时行为偏差。
+1. 已完成：`assets/js/folio-core.min.js` 已与 `folio-core.js` 同步构建。
 2. 清理或显式标记历史脚本（如 `frontend-components-original.js`）为废弃，避免误用。
 3. 增加最小集成回归（通知、用户中心、性能后台关键按钮）并纳入发布前检查。
 
