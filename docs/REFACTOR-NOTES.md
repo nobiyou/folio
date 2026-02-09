@@ -117,6 +117,11 @@
   - 默认禁止执行，避免误加载导致旧逻辑回归。
   - 仅在显式设置 `window.folioEnableLegacyFrontendComponents = true` 时启用。
 
+### 14. 重复与遗留清理（第八轮）
+- 删除未加载的历史脚本：`assets/js/frontend-components-original.js`。
+- 删除未进入主流程的遗留后台文件：`inc/class-cache-admin-minimal.php`。
+- 保持 AI/SEO、安全运营、缓存主链不变，仅做遗留裁剪。
+
 ## 兼容开关
 - `folio_enable_style_manager_frontend`（默认 `false`）
   - 控制 `inc/class-style-manager.php` 的前台样式加载是否启用

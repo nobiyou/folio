@@ -64,6 +64,13 @@
 - 仅允许通过 `window.folioEnableLegacyFrontendComponents = true` 手动开启。
 
 对应提交：
+- `84d8329`
+
+### 第八批（遗留文件清理）
+- 删除未加载的历史脚本 `assets/js/frontend-components-original.js`。
+- 删除未进入主流程的遗留文件 `inc/class-cache-admin-minimal.php`。
+
+对应提交：
 - （当前待提交）
 
 ## 当前残余风险（未发现阻断级）
@@ -72,13 +79,12 @@
 - 暂未发现新的中风险阻断项。
 
 ### 低风险
-- 代码库仍保留历史脚本 `assets/js/frontend-components-original.js`（含旧 action 约定）。
+- 暂未发现新的低风险遗留脚本误加载项。
   - 当前未发现主路径加载，但后续若误接入可能引入已修复过的旧行为。
 
 ## 建议优先级
 1. 已完成：`assets/js/folio-core.min.js` 已与 `folio-core.js` 同步构建。
-2. 已完成：历史脚本 `frontend-components-original.js` 已显式标记废弃并默认禁用执行。
-3. 增加最小集成回归（通知、用户中心、性能后台关键按钮）并纳入发布前检查。
+2. 增加最小集成回归（通知、用户中心、性能后台关键按钮）并纳入发布前检查。
 
 ## 结论
 - 本轮重构后，已定位并修复的功能缺陷集中在“通知读状态模型、AJAX action 冲突、nonce 一致性、防御性校验”四大类。
