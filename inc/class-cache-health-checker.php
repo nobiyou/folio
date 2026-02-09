@@ -496,7 +496,8 @@ class folio_Cache_Health_Checker {
      * AJAX健康检查
      */
     public function ajax_health_check() {
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_cache_health_check')) {
+        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+        if ($nonce === '' || !wp_verify_nonce($nonce, 'folio_cache_health_check')) {
             wp_send_json_error('安全验证失败');
         }
 

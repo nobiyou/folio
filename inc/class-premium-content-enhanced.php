@@ -924,7 +924,8 @@ class folio_Premium_Content_Enhanced {
      * AJAX解锁内容
      */
     public function ajax_unlock_content() {
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_premium_content')) {
+        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+        if ($nonce === '' || !wp_verify_nonce($nonce, 'folio_premium_content')) {
             wp_send_json_error(array('message' => '安全验证失败'));
         }
 
@@ -1035,7 +1036,8 @@ add_action('wp_ajax_folio_get_article_badge', 'folio_ajax_get_article_badge');
 add_action('wp_ajax_nopriv_folio_get_article_badge', 'folio_ajax_get_article_badge');
 
 function folio_ajax_get_article_badge() {
-    if (!wp_verify_nonce($_POST['nonce'], 'folio_article_badge')) {
+    $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+    if ($nonce === '' || !wp_verify_nonce($nonce, 'folio_article_badge')) {
         wp_send_json_error(array('message' => '安全验证失败'));
     }
     

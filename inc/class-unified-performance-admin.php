@@ -106,6 +106,21 @@ class folio_Unified_Performance_Admin {
     }
 
     /**
+     * 获取当前请求中的 nonce（统一做判空与反斜线处理）
+     */
+    private function get_request_nonce() {
+        return isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+    }
+
+    /**
+     * 验证当前请求 nonce
+     */
+    private function verify_request_nonce($action) {
+        $nonce = $this->get_request_nonce();
+        return $nonce !== '' && wp_verify_nonce($nonce, $action);
+    }
+
+    /**
      * 加载管理页面资源
      */
     public function enqueue_admin_scripts($hook) {
@@ -1103,7 +1118,7 @@ class folio_Unified_Performance_Admin {
             error_log('Folio Cache Clear: Nonce check = ' . ($_POST['nonce'] ?? 'missing'));
         }
         
-        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'folio_performance_admin')) {
+        if (!$this->verify_request_nonce('folio_performance_admin')) {
             wp_send_json_error('安全验证失败');
         }
 
@@ -1189,7 +1204,7 @@ class folio_Unified_Performance_Admin {
     }
 
     public function ajax_get_cache_stats() {
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_performance_admin')) {
+        if (!$this->verify_request_nonce('folio_performance_admin')) {
             wp_send_json_error('安全验证失败');
         }
 
@@ -1215,7 +1230,7 @@ class folio_Unified_Performance_Admin {
     }
 
     public function ajax_refresh_cache_stats() {
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_performance_admin')) {
+        if (!$this->verify_request_nonce('folio_performance_admin')) {
             wp_send_json_error('安全验证失败');
         }
 
@@ -1231,7 +1246,7 @@ class folio_Unified_Performance_Admin {
     }
 
     public function ajax_get_performance_stats() {
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_performance_admin')) {
+        if (!$this->verify_request_nonce('folio_performance_admin')) {
             wp_send_json_error('安全验证失败');
         }
 
@@ -1257,7 +1272,7 @@ class folio_Unified_Performance_Admin {
     }
 
     public function ajax_optimize_cache() {
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_performance_admin')) {
+        if (!$this->verify_request_nonce('folio_performance_admin')) {
             wp_send_json_error('安全验证失败');
         }
 
@@ -1354,7 +1369,7 @@ class folio_Unified_Performance_Admin {
     }
 
     public function ajax_memcached_status() {
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_performance_admin')) {
+        if (!$this->verify_request_nonce('folio_performance_admin')) {
             wp_send_json_error('安全验证失败');
         }
 
@@ -1371,7 +1386,7 @@ class folio_Unified_Performance_Admin {
     }
 
     public function ajax_health_check() {
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_performance_admin')) {
+        if (!$this->verify_request_nonce('folio_performance_admin')) {
             wp_send_json_error('安全验证失败');
         }
 
@@ -1448,7 +1463,7 @@ class folio_Unified_Performance_Admin {
     }
 
     public function ajax_install_object_cache() {
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_object_cache')) {
+        if (!$this->verify_request_nonce('folio_object_cache')) {
             wp_send_json_error('安全验证失败');
         }
 
@@ -1466,7 +1481,7 @@ class folio_Unified_Performance_Admin {
     }
 
     public function ajax_uninstall_object_cache() {
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_object_cache')) {
+        if (!$this->verify_request_nonce('folio_object_cache')) {
             wp_send_json_error('安全验证失败');
         }
 
@@ -1487,7 +1502,7 @@ class folio_Unified_Performance_Admin {
      * AJAX清除所有缓存（兼容旧接口）
      */
     public function ajax_clear_all_cache() {
-        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+        $nonce = $this->get_request_nonce();
         if ($nonce === '' || (!wp_verify_nonce($nonce, 'folio_performance_dashboard') && !wp_verify_nonce($nonce, 'folio_performance_admin'))) {
             wp_send_json_error('安全验证失败');
         }
@@ -1825,7 +1840,7 @@ class folio_Unified_Performance_Admin {
      * AJAX预热缓存
      */
     public function ajax_preload_cache() {
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_performance_admin')) {
+        if (!$this->verify_request_nonce('folio_performance_admin')) {
             wp_send_json_error('安全验证失败');
         }
 
@@ -1845,7 +1860,7 @@ class folio_Unified_Performance_Admin {
      * AJAX分析缓存
      */
     public function ajax_analyze_cache() {
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_performance_admin')) {
+        if (!$this->verify_request_nonce('folio_performance_admin')) {
             wp_send_json_error('安全验证失败');
         }
 
@@ -1882,7 +1897,7 @@ class folio_Unified_Performance_Admin {
      * AJAX导出统计
      */
     public function ajax_export_stats() {
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_performance_admin')) {
+        if (!$this->verify_request_nonce('folio_performance_admin')) {
             wp_send_json_error('安全验证失败');
         }
 
@@ -1917,7 +1932,7 @@ class folio_Unified_Performance_Admin {
      * AJAX重置统计
      */
     public function ajax_reset_stats() {
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_performance_admin')) {
+        if (!$this->verify_request_nonce('folio_performance_admin')) {
             wp_send_json_error('安全验证失败');
         }
 
@@ -1952,7 +1967,7 @@ class folio_Unified_Performance_Admin {
      * AJAX设置定时清理
      */
     public function ajax_schedule_cleanup() {
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_performance_admin')) {
+        if (!$this->verify_request_nonce('folio_performance_admin')) {
             wp_send_json_error('安全验证失败');
         }
 

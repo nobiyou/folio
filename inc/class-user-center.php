@@ -368,7 +368,8 @@ class folio_User_Center {
      * AJAX 登录
      */
     public function ajax_user_login() {
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_ajax_nonce')) {
+        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+        if ($nonce === '' || !wp_verify_nonce($nonce, 'folio_ajax_nonce')) {
             wp_send_json_error(array('message' => __('安全验证失败', 'folio')));
         }
 
@@ -400,7 +401,8 @@ class folio_User_Center {
      * AJAX 注册
      */
     public function ajax_user_register() {
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_ajax_nonce')) {
+        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+        if ($nonce === '' || !wp_verify_nonce($nonce, 'folio_ajax_nonce')) {
             wp_send_json_error(array('message' => __('安全验证失败', 'folio')));
         }
 

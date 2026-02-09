@@ -527,28 +527,32 @@ class folio_Cache_File_Manager {
 
 // 添加AJAX处理器用于忽略提示
 add_action('wp_ajax_folio_dismiss_object_cache_notice', function() {
-    if (wp_verify_nonce($_POST['nonce'], 'folio_object_cache')) {
+    $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+    if ($nonce !== '' && wp_verify_nonce($nonce, 'folio_object_cache')) {
         delete_option('folio_show_memcached_notice');
     }
     wp_die();
 });
 
 add_action('wp_ajax_folio_dismiss_memcached_install_notice', function() {
-    if (wp_verify_nonce($_POST['nonce'], 'folio_object_cache')) {
+    $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+    if ($nonce !== '' && wp_verify_nonce($nonce, 'folio_object_cache')) {
         delete_option('folio_show_memcached_install_notice');
     }
     wp_die();
 });
 
 add_action('wp_ajax_folio_dismiss_replace_notice', function() {
-    if (wp_verify_nonce($_POST['nonce'], 'folio_object_cache')) {
+    $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+    if ($nonce !== '' && wp_verify_nonce($nonce, 'folio_object_cache')) {
         delete_option('folio_show_object_cache_replace_notice');
     }
     wp_die();
 });
 
 add_action('wp_ajax_folio_dismiss_cleanup_notice', function() {
-    if (wp_verify_nonce($_POST['nonce'], 'folio_object_cache')) {
+    $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+    if ($nonce !== '' && wp_verify_nonce($nonce, 'folio_object_cache')) {
         delete_option('folio_object_cache_cleanup_needed');
     }
     wp_die();

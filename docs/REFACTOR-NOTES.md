@@ -84,6 +84,16 @@
   - `folioMembershipAdmin.nonce` 对齐 `folio_membership_admin`。
   - 元框本地化对象统一为 `folioMetaBox`，nonce 对齐 `folio_membership_metabox`。
 
+### 10. 缺陷修复（第四轮）
+- 统一性能后台增加 nonce 读取/校验封装，替换多处直接访问 `$_POST['nonce']`：
+  - 新增 `get_request_nonce()` 与 `verify_request_nonce()`，减少未定义索引告警风险。
+- 高频前端 AJAX 接口补充 nonce 判空与清洗：
+  - `frontend-components` 的权限查询接口。
+  - `post-stats` 的点赞/收藏接口。
+  - `user-center` 的 AJAX 登录/注册接口。
+  - `premium-content` 的内容解锁与文章徽章接口。
+  - `cache-health-checker` 与 `cache-file-manager` 的通知 dismiss 接口。
+
 ## 兼容开关
 - `folio_enable_style_manager_frontend`（默认 `false`）
   - 控制 `inc/class-style-manager.php` 的前台样式加载是否启用

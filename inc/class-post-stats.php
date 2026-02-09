@@ -120,7 +120,8 @@ class folio_Post_Stats {
      */
     public function ajax_like_post() {
         // 验证 nonce
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_ajax_nonce')) {
+        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+        if ($nonce === '' || !wp_verify_nonce($nonce, 'folio_ajax_nonce')) {
             wp_send_json_error(array('message' => __('安全验证失败', 'folio')));
         }
 
@@ -301,7 +302,8 @@ class folio_Post_Stats {
      */
     public function ajax_favorite_post() {
         // 验证 nonce
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_ajax_nonce')) {
+        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+        if ($nonce === '' || !wp_verify_nonce($nonce, 'folio_ajax_nonce')) {
             wp_send_json_error(array('message' => __('安全验证失败', 'folio')));
         }
 
