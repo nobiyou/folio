@@ -49,7 +49,8 @@ class folio_Performance_Cache_Manager {
         add_action('wp_footer', array($this, 'end_performance_monitoring'));
         
         // 缓存统计
-        add_action('wp_ajax_folio_cache_stats', array($this, 'ajax_get_cache_stats'));
+        // 兼容旧接口：避免与统一性能后台 folio_cache_stats 冲突
+        add_action('wp_ajax_folio_cache_stats_legacy', array($this, 'ajax_get_cache_stats'));
         add_action('wp_ajax_folio_clear_cache', array($this, 'ajax_clear_cache'));
         
         // 定期清理过期缓存
@@ -684,6 +685,11 @@ class folio_Performance_Cache_Manager {
      * AJAX获取缓存统计
      */
     public function ajax_get_cache_stats() {
+        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+        if ($nonce === '' || (!wp_verify_nonce($nonce, 'folio_performance_admin') && !wp_verify_nonce($nonce, 'folio_performance_nonce'))) {
+            wp_send_json_error('安全验证失败');
+        }
+
         if (!current_user_can('manage_options')) {
             wp_send_json_error('权限不足');
         }
@@ -695,6 +701,11 @@ class folio_Performance_Cache_Manager {
      * AJAX清除缓存
      */
     public function ajax_clear_cache() {
+        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+        if ($nonce === '' || (!wp_verify_nonce($nonce, 'folio_performance_admin') && !wp_verify_nonce($nonce, 'folio_performance_nonce'))) {
+            wp_send_json_error('安全验证失败');
+        }
+
         if (!current_user_can('manage_options')) {
             wp_send_json_error('权限不足');
         }
@@ -920,8 +931,11 @@ if (!function_exists('folio_get_performance_stats')) {
 
 if (!function_exists('folio_clear_performance_cache')) {
     function folio_clear_performance_cache($type = 'all') {
-        $manager = new folio_Performance_Cache_Manager();
-        return $manager->ajax_clear_cache();
+        // 保持兼容：直接清理核心缓存与统计缓存，避免触发 AJAX 输出流程
+        wp_cache_flush();
+        delete_transient('folio_cache_statistics');
+        delete_transient('folio_cache_backend_info');
+        return true;
     }
 }
 

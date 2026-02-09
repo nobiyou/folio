@@ -27,9 +27,7 @@ class folio_Membership_Notifications {
         add_action('wp_ajax_folio_get_notifications', array($this, 'ajax_get_notifications'));
         add_action('wp_ajax_nopriv_folio_get_notifications', array($this, 'ajax_get_notifications'));
         add_action('wp_ajax_folio_mark_notification_read', array($this, 'ajax_mark_read'));
-        add_action('wp_ajax_nopriv_folio_mark_notification_read', array($this, 'ajax_mark_read'));
         add_action('wp_ajax_folio_mark_all_read', array($this, 'ajax_mark_all_read'));
-        add_action('wp_ajax_nopriv_folio_mark_all_read', array($this, 'ajax_mark_all_read'));
         add_action('wp_ajax_folio_delete_notification', array($this, 'ajax_delete_notification'));
         
         // 注册定时任务
@@ -79,6 +77,7 @@ class folio_Membership_Notifications {
             message text NOT NULL,
             metadata longtext DEFAULT NULL,
             is_read tinyint(1) NOT NULL DEFAULT 0,
+            read_by_users longtext DEFAULT NULL,
             created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (id),
             KEY user_id (user_id),
@@ -89,6 +88,12 @@ class folio_Membership_Notifications {
         
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         dbDelta($sql);
+
+        // 兼容老版本数据结构：确保 read_by_users 字段存在
+        $column_exists = $wpdb->get_var($wpdb->prepare("SHOW COLUMNS FROM {$table_name} LIKE %s", 'read_by_users'));
+        if (!$column_exists) {
+            $wpdb->query("ALTER TABLE {$table_name} ADD COLUMN read_by_users longtext DEFAULT NULL AFTER is_read");
+        }
     }
 
     /**
@@ -340,7 +345,8 @@ class folio_Membership_Notifications {
             $values[] = $args['type'];
         }
         
-        if ($args['is_read'] !== null) {
+        $filter_is_read_in_sql = !($user_id > 0 && $args['include_global']);
+        if ($args['is_read'] !== null && $filter_is_read_in_sql) {
             $where[] = 'is_read = %d';
             $values[] = absint($args['is_read']);
         }
@@ -356,7 +362,33 @@ class folio_Membership_Notifications {
             array_merge($values, array($args['limit'], $args['offset']))
         );
         
-        return $wpdb->get_results($query);
+        $notifications = $wpdb->get_results($query);
+
+        // 全局通知按用户记录已读，不再共享全局 is_read 状态
+        if ($user_id > 0) {
+            foreach ($notifications as $notification) {
+                if ((int) $notification->user_id === 0) {
+                    $notification->is_read = $this->is_global_notification_read_by_user($notification, $user_id) ? 1 : 0;
+                }
+            }
+        } else {
+            // 游客端不写库，统一视作未读
+            foreach ($notifications as $notification) {
+                if ((int) $notification->user_id === 0) {
+                    $notification->is_read = 0;
+                }
+            }
+        }
+
+        // include_global + is_read 时改为内存过滤（全局通知读状态依赖 read_by_users）
+        if ($args['is_read'] !== null && !$filter_is_read_in_sql) {
+            $target_is_read = absint($args['is_read']);
+            $notifications = array_values(array_filter($notifications, function($notification) use ($target_is_read) {
+                return (int) $notification->is_read === $target_is_read;
+            }));
+        }
+
+        return $notifications;
     }
     
     /**
@@ -382,10 +414,23 @@ class folio_Membership_Notifications {
         $table_name = $wpdb->prefix . self::$table_name;
         
         if ($user_id > 0 && $include_global) {
-            return (int) $wpdb->get_var($wpdb->prepare(
-                "SELECT COUNT(*) FROM {$table_name} WHERE (user_id = %d OR user_id = 0) AND is_read = 0",
+            $notifications = $wpdb->get_results($wpdb->prepare(
+                "SELECT user_id, is_read, read_by_users FROM {$table_name} WHERE (user_id = %d OR user_id = 0)",
                 $user_id
             ));
+
+            $unread_count = 0;
+            foreach ($notifications as $notification) {
+                if ((int) $notification->user_id === 0) {
+                    if (!$this->is_global_notification_read_by_user($notification, $user_id)) {
+                        $unread_count++;
+                    }
+                } elseif ((int) $notification->is_read === 0) {
+                    $unread_count++;
+                }
+            }
+
+            return $unread_count;
         } else {
             return (int) $wpdb->get_var($wpdb->prepare(
                 "SELECT COUNT(*) FROM {$table_name} WHERE user_id = %d AND is_read = 0",
@@ -405,21 +450,36 @@ class folio_Membership_Notifications {
         global $wpdb;
         
         $table_name = $wpdb->prefix . self::$table_name;
-        
-        $where = array('id = %d');
-        $values = array($notification_id);
-        
-        if ($user_id) {
-            $where[] = 'user_id = %d';
-            $values[] = $user_id;
-        }
-        
-        $where_clause = implode(' AND ', $where);
-        
-        $result = $wpdb->query($wpdb->prepare(
-            "UPDATE {$table_name} SET is_read = 1 WHERE {$where_clause}",
-            $values
+
+        $notification = $wpdb->get_row($wpdb->prepare(
+            "SELECT id, user_id, read_by_users FROM {$table_name} WHERE id = %d",
+            $notification_id
         ));
+
+        if (!$notification) {
+            return false;
+        }
+
+        if ((int) $notification->user_id === 0) {
+            if (!$user_id || $user_id <= 0) {
+                return false;
+            }
+            $result = $this->mark_global_notification_as_read_for_user($notification_id, $user_id, $notification);
+        } else {
+            $where = array('id = %d');
+            $values = array($notification_id);
+
+            if ($user_id) {
+                $where[] = 'user_id = %d';
+                $values[] = $user_id;
+            }
+
+            $where_clause = implode(' AND ', $where);
+            $result = $wpdb->query($wpdb->prepare(
+                "UPDATE {$table_name} SET is_read = 1 WHERE {$where_clause}",
+                $values
+            ));
+        }
         
         if ($result) {
             do_action('folio_notification_read', $notification_id, $user_id);
@@ -437,18 +497,117 @@ class folio_Membership_Notifications {
     public function mark_all_as_read($user_id) {
         global $wpdb;
         
+        if (!$user_id || $user_id <= 0) {
+            return false;
+        }
+
         $table_name = $wpdb->prefix . self::$table_name;
         
-        $result = $wpdb->query($wpdb->prepare(
+        $user_specific_result = $wpdb->query($wpdb->prepare(
             "UPDATE {$table_name} SET is_read = 1 WHERE user_id = %d AND is_read = 0",
             $user_id
         ));
+
+        $global_result = $this->mark_all_global_notifications_as_read_for_user($user_id);
+        $result = ($user_specific_result !== false) && $global_result;
         
         if ($result !== false) {
             do_action('folio_all_notifications_read', $user_id);
         }
         
         return $result !== false;
+    }
+
+    /**
+     * 将 read_by_users 字段解析为用户 ID 列表
+     */
+    private function parse_read_by_users($read_by_users) {
+        if (empty($read_by_users)) {
+            return array();
+        }
+
+        if (is_array($read_by_users)) {
+            return array_values(array_unique(array_map('absint', $read_by_users)));
+        }
+
+        $decoded = json_decode((string) $read_by_users, true);
+        if (is_array($decoded)) {
+            return array_values(array_unique(array_map('absint', $decoded)));
+        }
+
+        $unserialized = maybe_unserialize($read_by_users);
+        if (is_array($unserialized)) {
+            return array_values(array_unique(array_map('absint', $unserialized)));
+        }
+
+        return array();
+    }
+
+    /**
+     * 判断全局通知是否对指定用户已读
+     */
+    private function is_global_notification_read_by_user($notification, $user_id) {
+        if (!$user_id || $user_id <= 0) {
+            return false;
+        }
+
+        $read_by_users = $this->parse_read_by_users($notification->read_by_users ?? null);
+        return in_array((int) $user_id, $read_by_users, true);
+    }
+
+    /**
+     * 为指定用户标记一条全局通知为已读
+     */
+    private function mark_global_notification_as_read_for_user($notification_id, $user_id, $notification = null) {
+        global $wpdb;
+
+        $table_name = $wpdb->prefix . self::$table_name;
+        if (!$notification) {
+            $notification = $wpdb->get_row($wpdb->prepare(
+                "SELECT id, user_id, read_by_users FROM {$table_name} WHERE id = %d",
+                $notification_id
+            ));
+        }
+
+        if (!$notification || (int) $notification->user_id !== 0) {
+            return false;
+        }
+
+        $read_by_users = $this->parse_read_by_users($notification->read_by_users ?? null);
+        if (!in_array((int) $user_id, $read_by_users, true)) {
+            $read_by_users[] = (int) $user_id;
+        }
+
+        $result = $wpdb->update(
+            $table_name,
+            array('read_by_users' => wp_json_encode(array_values(array_unique($read_by_users)))),
+            array('id' => $notification_id),
+            array('%s'),
+            array('%d')
+        );
+
+        return $result !== false;
+    }
+
+    /**
+     * 为指定用户标记全部全局通知为已读
+     */
+    private function mark_all_global_notifications_as_read_for_user($user_id) {
+        global $wpdb;
+
+        $table_name = $wpdb->prefix . self::$table_name;
+        $global_notifications = $wpdb->get_results("SELECT id, user_id, read_by_users FROM {$table_name} WHERE user_id = 0");
+        if (!$global_notifications) {
+            return true;
+        }
+
+        foreach ($global_notifications as $notification) {
+            if (!$this->mark_global_notification_as_read_for_user((int) $notification->id, $user_id, $notification)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -1233,6 +1392,11 @@ class folio_Membership_Notifications {
      */
     public function ajax_mark_read() {
         check_ajax_referer('folio_notifications_nonce', 'nonce');
+
+        if (!is_user_logged_in()) {
+            wp_send_json_error(array('message' => '请先登录'));
+            return;
+        }
         
         $notification_id = isset($_POST['notification_id']) ? absint($_POST['notification_id']) : 0;
         
@@ -1254,24 +1418,13 @@ class folio_Membership_Notifications {
             return;
         }
         
-        // 如果是全局通知（user_id = 0），允许任何用户标记为已读
-        // 如果是用户特定通知，需要验证用户ID
-        if ($notification->user_id == 0) {
-            // 全局通知：直接标记为已读（不检查用户ID）
-            $result = $this->mark_as_read($notification_id, null);
-        } else {
-            // 用户特定通知：需要验证用户ID
-            if (!is_user_logged_in()) {
-                wp_send_json_error(array('message' => '请先登录'));
-                return;
-            }
-            $user_id = get_current_user_id();
-            if ($notification->user_id != $user_id) {
-                wp_send_json_error(array('message' => '无权操作此通知'));
-                return;
-            }
-            $result = $this->mark_as_read($notification_id, $user_id);
+        $user_id = get_current_user_id();
+        if ((int) $notification->user_id > 0 && (int) $notification->user_id !== $user_id) {
+            wp_send_json_error(array('message' => '无权操作此通知'));
+            return;
         }
+
+        $result = $this->mark_as_read($notification_id, $user_id);
         
         if ($result) {
             wp_send_json_success(array('message' => '已标记为已读'));
@@ -1285,26 +1438,14 @@ class folio_Membership_Notifications {
      */
     public function ajax_mark_all_read() {
         check_ajax_referer('folio_notifications_nonce', 'nonce');
-        
-        $user_id = is_user_logged_in() ? get_current_user_id() : 0;
-        
-        // 标记用户自己的通知和全局通知为已读
-        global $wpdb;
-        $table_name = $wpdb->prefix . self::$table_name;
-        
-        if ($user_id > 0) {
-            // 登录用户：标记用户自己的通知和全局通知
-            $result = $wpdb->query($wpdb->prepare(
-                "UPDATE {$table_name} SET is_read = 1 WHERE (user_id = %d OR user_id = 0) AND is_read = 0",
-                $user_id
-            ));
-        } else {
-            // 未登录用户：标记所有全局通知为已读（更新数据库）
-            // 全局通知对所有未登录用户都可见，所以可以直接更新数据库
-            $result = $wpdb->query(
-                "UPDATE {$table_name} SET is_read = 1 WHERE user_id = 0 AND is_read = 0"
-            );
+
+        if (!is_user_logged_in()) {
+            wp_send_json_error(array('message' => '请先登录'));
+            return;
         }
+
+        $user_id = get_current_user_id();
+        $result = $this->mark_all_as_read($user_id);
         
         if ($result !== false) {
             wp_send_json_success(array('message' => '已全部标记为已读'));
@@ -1344,4 +1485,3 @@ class folio_Membership_Notifications {
 
 // 初始化通知系统
 folio_Membership_Notifications::get_instance();
-

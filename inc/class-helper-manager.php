@@ -241,11 +241,11 @@ class folio_Helper_Manager {
              * 清除性能缓存
              */
             function folio_clear_performance_cache($type = 'all') {
-                if (class_exists('folio_Performance_Cache_Manager')) {
-                    $manager = new folio_Performance_Cache_Manager();
-                    return $manager->clear_cache($type);
-                }
-                return false;
+                // 兼容模式：避免调用不存在的方法或触发 AJAX 输出
+                wp_cache_flush();
+                delete_transient('folio_cache_statistics');
+                delete_transient('folio_cache_backend_info');
+                return true;
             }
             self::$registered_helpers[] = 'folio_clear_performance_cache';
         }
