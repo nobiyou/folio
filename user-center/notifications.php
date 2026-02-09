@@ -214,7 +214,7 @@ jQuery(document).ready(function($) {
             url: folioNotifications.ajaxurl,
             type: 'POST',
             data: {
-                action: 'folio_mark_all_notifications_read',
+                action: 'folio_mark_all_read',
                 nonce: folioNotifications.nonce
             },
             success: function(response) {

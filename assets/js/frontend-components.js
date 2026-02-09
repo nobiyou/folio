@@ -312,7 +312,7 @@
                     url: folioComponents.ajax_url,
                     type: 'POST',
                     data: {
-                        action: 'folio_check_article_permission',
+                        action: 'folio_check_user_access_article',
                         post_id: postId,
                         nonce: folioComponents.nonce
                     },

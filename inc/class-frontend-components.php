@@ -33,6 +33,9 @@ class folio_Frontend_Components {
         add_action('wp_ajax_nopriv_folio_get_permission_status', array($this, 'ajax_get_permission_status'));
         add_action('wp_ajax_folio_check_user_access_article', array($this, 'ajax_check_article_permission'));
         add_action('wp_ajax_nopriv_folio_check_user_access_article', array($this, 'ajax_check_article_permission'));
+        // 兼容历史前端 action 命名
+        add_action('wp_ajax_folio_check_article_permission', array($this, 'ajax_check_article_permission'));
+        add_action('wp_ajax_nopriv_folio_check_article_permission', array($this, 'ajax_check_article_permission'));
         
         // 前端样式已移动到独立的CSS文件中
         

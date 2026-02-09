@@ -74,6 +74,13 @@
   - `cache-file-manager`、`cache-health-checker`、`memcached-helper` 在检测到统一性能后台类存在时仅保留兜底，不再主路径重复注册相同 action。
   - `ajax_clear_all_cache` 的 nonce 校验兼容 `folio_performance_admin`，避免历史入口误报安全失败。
 
+### 9. 缺陷修复（第三轮）
+- 修复用户中心通知页“全部已读”按钮 action 名称错误：
+  - `folio_mark_all_notifications_read` -> `folio_mark_all_read`。
+- 修复前端权限检查 action 命名不一致：
+  - 前端主脚本统一使用 `folio_check_user_access_article`。
+  - 后端新增 `folio_check_article_permission` 兼容注册，避免旧缓存脚本请求失败。
+
 ## 兼容开关
 - `folio_enable_style_manager_frontend`（默认 `false`）
   - 控制 `inc/class-style-manager.php` 的前台样式加载是否启用
