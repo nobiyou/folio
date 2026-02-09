@@ -51,19 +51,24 @@
 对应提交：
 - `8023855`
 
+### 第六批（通用 AJAX 封装收敛）
+- `FolioCore.ajax()` 默认不再自动注入全局 nonce。
+- 新增 `nonceMode` / `nonceField` / `nonceValue` 显式注入策略，降低跨接口误注入风险。
+
+对应提交：
+- （当前待提交）
+
 ## 当前残余风险（未发现阻断级）
 
 ### 中风险
-- `assets/js/folio-core.js` 的 `FolioCore.ajax()` 会自动附加全局 `folioConfig.nonce`。
-  - 风险点：若后续业务直接复用该通用方法访问不同 nonce 规则的接口，可能触发“安全验证失败”。
-  - 参考：`assets/js/folio-core.js:570`、`assets/js/folio-core.js:571`、`inc/class-script-manager.php:186`
+- 暂未发现新的中风险阻断项。
 
 ### 低风险
 - 代码库仍保留历史脚本 `assets/js/frontend-components-original.js`（含旧 action 约定）。
   - 当前未发现主路径加载，但后续若误接入可能引入已修复过的旧行为。
 
 ## 建议优先级
-1. 为 `FolioCore.ajax()` 增加“可选 nonce key/自动不注入”策略，避免未来接口混用风险。
+1. 对 `assets/js/folio-core.min.js` 执行与源码一致的构建更新，避免未来切换到 min 资源时行为偏差。
 2. 清理或显式标记历史脚本（如 `frontend-components-original.js`）为废弃，避免误用。
 3. 增加最小集成回归（通知、用户中心、性能后台关键按钮）并纳入发布前检查。
 

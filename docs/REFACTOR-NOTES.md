@@ -103,6 +103,13 @@
   - `seo-admin` 的批量更新与爬虫测试接口。
 - `cache-file-manager` 的安装/卸载/状态检查接口统一改为先清洗 nonce 再校验。
 
+### 12. 缺陷修复（第六轮）
+- 改造 `FolioCore.ajax()` 的 nonce 注入策略：
+  - 默认 `nonceMode: 'none'`（不再强制注入全局 nonce）。
+  - 支持 `nonceMode: 'auto'` 显式启用自动注入。
+  - 支持 `nonceValue` + `nonceField` 显式指定注入值与字段名。
+- 目标：避免通用 AJAX 封装误把不匹配的 nonce 注入到不同安全域接口。
+
 ## 兼容开关
 - `folio_enable_style_manager_frontend`（默认 `false`）
   - 控制 `inc/class-style-manager.php` 的前台样式加载是否启用

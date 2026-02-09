@@ -561,14 +561,31 @@
                 data: {},
                 timeout: 10000,
                 showLoading: true,
-                showError: true
+                showError: true,
+                nonceMode: 'none', // none | auto
+                nonceField: 'nonce',
+                nonceValue: null
             };
 
             const config = Object.assign({}, defaults, options);
 
-            // 添加nonce
-            if (window.folioConfig && window.folioConfig.nonce) {
-                config.data.nonce = window.folioConfig.nonce;
+            // nonce 注入策略：
+            // - 默认不注入，避免通用请求误用全局 nonce
+            // - 可通过 nonceMode=auto 启用自动注入
+            // - 可通过 nonceValue 显式指定 nonce
+            const targetField = config.nonceField || 'nonce';
+            const explicitNonce = typeof config.nonceValue === 'string' ? config.nonceValue : '';
+            const autoNonce = window.folioConfig && typeof window.folioConfig.nonce === 'string' ? window.folioConfig.nonce : '';
+            const resolvedNonce = explicitNonce !== '' ? explicitNonce : (config.nonceMode === 'auto' ? autoNonce : '');
+
+            if (resolvedNonce !== '') {
+                if (config.data instanceof FormData) {
+                    if (!config.data.has(targetField)) {
+                        config.data.append(targetField, resolvedNonce);
+                    }
+                } else if (config.data && typeof config.data === 'object' && typeof config.data[targetField] === 'undefined') {
+                    config.data[targetField] = resolvedNonce;
+                }
             }
 
             return new Promise((resolve, reject) => {
