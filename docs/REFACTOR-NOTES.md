@@ -94,6 +94,15 @@
   - `premium-content` 的内容解锁与文章徽章接口。
   - `cache-health-checker` 与 `cache-file-manager` 的通知 dismiss 接口。
 
+### 11. 缺陷修复（第五轮）
+- 低频后台模块补齐 nonce 判空与清洗：
+  - `cache-auto-validation` 的自动验证接口。
+  - `ai-seo` 的手动生成接口。
+  - `cache-backend-validator` 的后端验证接口。
+  - `frontend-optimizer` 的资源优化与清缓存接口。
+  - `seo-admin` 的批量更新与爬虫测试接口。
+- `cache-file-manager` 的安装/卸载/状态检查接口统一改为先清洗 nonce 再校验。
+
 ## 兼容开关
 - `folio_enable_style_manager_frontend`（默认 `false`）
   - 控制 `inc/class-style-manager.php` 的前台样式加载是否启用

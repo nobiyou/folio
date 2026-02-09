@@ -661,7 +661,8 @@ Please return strictly in the following JSON format, without any other text:
      * AJAX 手动生成 SEO
      */
     public function ajax_generate_seo() {
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_ai_seo_nonce')) {
+        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+        if ($nonce === '' || !wp_verify_nonce($nonce, 'folio_ai_seo_nonce')) {
             wp_send_json_error(array('message' => __('安全验证失败', 'folio')));
         }
 

@@ -475,7 +475,8 @@ class folio_Cache_File_Manager {
         error_log('Folio: POST data: ' . print_r($_POST, true));
         
         // 检查nonce
-        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'folio_object_cache')) {
+        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+        if ($nonce === '' || !wp_verify_nonce($nonce, 'folio_object_cache')) {
             error_log('Folio: Nonce verification failed');
             wp_send_json_error('安全验证失败');
             return;
@@ -496,7 +497,8 @@ class folio_Cache_File_Manager {
      * AJAX: 卸载object-cache.php
      */
     public function ajax_uninstall_object_cache() {
-        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'folio_object_cache')) {
+        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+        if ($nonce === '' || !wp_verify_nonce($nonce, 'folio_object_cache')) {
             wp_send_json_error('安全验证失败');
             return;
         }
@@ -514,7 +516,8 @@ class folio_Cache_File_Manager {
      * AJAX: 检查object-cache.php状态
      */
     public function ajax_check_object_cache() {
-        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'folio_object_cache')) {
+        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+        if ($nonce === '' || !wp_verify_nonce($nonce, 'folio_object_cache')) {
             wp_send_json_error('安全验证失败');
             return;
         }

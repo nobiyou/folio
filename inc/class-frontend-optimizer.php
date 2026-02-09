@@ -950,7 +950,8 @@ class folio_Frontend_Optimizer {
      * AJAX优化资源
      */
     public function ajax_optimize_assets() {
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_optimize_assets')) {
+        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+        if ($nonce === '' || !wp_verify_nonce($nonce, 'folio_optimize_assets')) {
             wp_send_json_error('安全验证失败');
         }
         
@@ -972,7 +973,8 @@ class folio_Frontend_Optimizer {
      */
     public function ajax_clear_optimized_cache() {
         // 检查 nonce
-        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'folio_clear_optimized_cache')) {
+        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+        if ($nonce === '' || !wp_verify_nonce($nonce, 'folio_clear_optimized_cache')) {
             wp_send_json_error('安全验证失败');
         }
         

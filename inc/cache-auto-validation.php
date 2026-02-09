@@ -550,7 +550,8 @@ class folio_Cache_Auto_Validation {
      * AJAX运行验证
      */
     public function ajax_run_validation() {
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_cache_auto_validation')) {
+        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+        if ($nonce === '' || !wp_verify_nonce($nonce, 'folio_cache_auto_validation')) {
             wp_send_json_error('安全验证失败');
         }
 

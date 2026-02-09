@@ -322,7 +322,8 @@ class folio_SEO_Admin {
      * 处理批量SEO更新
      */
     public function handle_bulk_seo_update() {
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_seo_bulk_update')) {
+        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+        if ($nonce === '' || !wp_verify_nonce($nonce, 'folio_seo_bulk_update')) {
             wp_die('安全验证失败');
         }
 
@@ -374,7 +375,8 @@ class folio_SEO_Admin {
      * 测试爬虫访问
      */
     public function test_crawler_access() {
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_seo_test_crawlers')) {
+        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+        if ($nonce === '' || !wp_verify_nonce($nonce, 'folio_seo_test_crawlers')) {
             wp_die('安全验证失败');
         }
 

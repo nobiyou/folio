@@ -683,7 +683,8 @@ class folio_Cache_Backend_Validator {
      * AJAX验证后端
      */
     public function ajax_validate_backend() {
-        if (!wp_verify_nonce($_POST['nonce'], 'folio_cache_backend_validation')) {
+        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+        if ($nonce === '' || !wp_verify_nonce($nonce, 'folio_cache_backend_validation')) {
             wp_send_json_error('安全验证失败');
         }
 
