@@ -80,6 +80,9 @@
 - 修复前端权限检查 action 命名不一致：
   - 前端主脚本统一使用 `folio_check_user_access_article`。
   - 后端新增 `folio_check_article_permission` 兼容注册，避免旧缓存脚本请求失败。
+- 修复脚本管理器后台本地化 nonce 偏差：
+  - `folioMembershipAdmin.nonce` 对齐 `folio_membership_admin`。
+  - 元框本地化对象统一为 `folioMetaBox`，nonce 对齐 `folio_membership_metabox`。
 
 ## 兼容开关
 - `folio_enable_style_manager_frontend`（默认 `false`）

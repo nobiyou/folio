@@ -278,15 +278,15 @@ class folio_Script_Manager {
         if (wp_script_is('folio-membership-admin', 'enqueued')) {
             wp_localize_script('folio-membership-admin', 'folioMembershipAdmin', array(
                 'ajaxurl' => admin_url('admin-ajax.php'),
-                'nonce' => wp_create_nonce('folio_membership_admin_nonce'),
+                'nonce' => wp_create_nonce('folio_membership_admin'),
             ));
         }
 
         // 会员内容元框配置
         if (wp_script_is('folio-membership-metabox', 'enqueued')) {
-            wp_localize_script('folio-membership-metabox', 'folioMetabox', array(
+            wp_localize_script('folio-membership-metabox', 'folioMetaBox', array(
                 'ajaxurl' => admin_url('admin-ajax.php'),
-                'nonce' => wp_create_nonce('folio_metabox_nonce'),
+                'nonce' => wp_create_nonce('folio_membership_metabox'),
             ));
         }
     }
