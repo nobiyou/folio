@@ -1,0 +1,122 @@
+# Copyright (C) 2025 MPB Design
+# This file is distributed under the same license as the Folio theme.
+msgid ""
+msgstr ""
+"Project-Id-Version: Folio 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: header.php
+msgid "跳转到内容"
+msgstr ""
+
+#: header.php
+msgid "打开菜单"
+msgstr ""
+
+#: inc/custom-post-types.php
+msgid "作品集"
+msgstr ""
+
+#: inc/custom-post-types.php
+msgid "作品"
+msgstr ""
+
+#: inc/custom-post-types.php
+msgid "添加作品"
+msgstr ""
+
+#: inc/custom-post-types.php
+msgid "添加新作品"
+msgstr ""
+
+#: inc/custom-post-types.php
+msgid "编辑作品"
+msgstr ""
+
+#: inc/custom-post-types.php
+msgid "查看作品"
+msgstr ""
+
+#: inc/custom-post-types.php
+msgid "所有作品"
+msgstr ""
+
+#: inc/custom-post-types.php
+msgid "搜索作品"
+msgstr ""
+
+#: inc/custom-post-types.php
+msgid "作品分类"
+msgstr ""
+
+#: inc/template-tags.php
+msgid "New"
+msgstr ""
+
+#: inc/template-tags.php
+msgid "Updated"
+msgstr ""
+
+#: inc/template-tags.php
+msgid "Home"
+msgstr ""
+
+#: inc/template-tags.php
+msgid "All Work"
+msgstr ""
+
+#: single-portfolio.php
+msgid "Year"
+msgstr ""
+
+#: single-portfolio.php
+msgid "Category"
+msgstr ""
+
+#: single-portfolio.php
+msgid "Next Project"
+msgstr ""
+
+#: single-portfolio.php
+msgid "Previous Project"
+msgstr ""
+
+#: single-portfolio.php
+msgid "View All"
+msgstr ""
+
+#: single-portfolio.php
+msgid "See Project"
+msgstr ""
+
+#: front-page.php
+msgid "暂无作品"
+msgstr ""
+
+#: footer.php
+msgid "Print"
+msgstr ""
+
+#: footer.php
+msgid "Share"
+msgstr ""
+
+#: 404.php
+msgid "页面未找到"
+msgstr ""
+
+#: 404.php
+msgid "抱歉，您访问的页面不存在。"
+msgstr ""
+
+#: 404.php
+msgid "返回首页"
+msgstr ""

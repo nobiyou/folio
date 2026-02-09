@@ -1,0 +1,69 @@
+/**
+ * Frontend Components Styles (Cleaned)
+ * 
+ * 前端权限提示组件样式文件 - 已清理重复内容
+ * 只保留非重复的特定功能，通用样式已移至 consolidated-styles.css
+ */
+
+/* ==========================================================================
+   特定组件样式 - 只保留非重复内容
+   ========================================================================== */
+
+/* 空规则集已移除 */
+.folio-badge-list {
+    /* 列表页面中的徽章特定样式 */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+}
+
+.folio-badge-single {
+    /* 单页面中的徽章特定样式 */
+    margin: 0 0.5rem 0.5rem 0;
+}
+
+.folio-badge-widget {
+    /* 小工具中的徽章特定样式 */
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+/* ==========================================================================
+   特定权限提示样式 - 非重复内容
+   ========================================================================== */
+
+/* 紧凑样式特定调整 */
+.folio-prompt-style-compact .folio-prompt-benefits {
+    display: none;
+}
+
+/* 横幅样式特定调整 */
+.folio-prompt-style-banner {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    margin: 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+}
+
+.folio-prompt-style-banner .folio-prompt-benefits {
+    display: none;
+}
+
+/* ==========================================================================
+   特定内容遮罩样式
+   ========================================================================== */
+
+.folio-mask-solid .folio-content-fade {
+    background: #f9fafb;
+    opacity: 0.9;
+}
+
+.folio-mask-blur .folio-preview-content {
+    filter: blur(2px);
+}
+
+/* 注意：所有通用的按钮、徽章、提示样式已移至 consolidated-styles.css */

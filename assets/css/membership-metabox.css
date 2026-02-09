@@ -1,0 +1,586 @@
+/**
+ * Membership Meta Box Styles
+ * 会员保护设置元框样式
+ */
+
+.folio-membership-metabox {
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+/* 设置组 */
+.folio-setting-group {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f0f0f1;
+}
+
+.folio-setting-group:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+/* 切换开关样式 */
+.folio-toggle-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+
+.folio-toggle-label input[type="checkbox"] {
+    display: none;
+}
+
+.folio-toggle-slider {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    background-color: #ccd0d4;
+    border-radius: 12px;
+    margin-right: 10px;
+    transition: background-color 0.3s;
+}
+
+.folio-toggle-slider:before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: white;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.folio-toggle-label input:checked + .folio-toggle-slider {
+    background-color: #007cba;
+}
+
+.folio-toggle-label input:checked + .folio-toggle-slider:before {
+    transform: translateX(20px);
+}
+
+/* 保护面板 */
+.folio-protection-panel {
+    background: #f8f9fa;
+    border: 1px solid #e2e4e7;
+    border-radius: 6px;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+/* 会员等级选择器 */
+.folio-level-selector {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.folio-level-option {
+    flex: 1;
+    cursor: pointer;
+}
+
+.folio-level-option input[type="radio"] {
+    display: none;
+}
+
+.folio-level-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 8px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    background: white;
+    transition: all 0.3s;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.folio-level-badge .dashicons {
+    margin-right: 4px;
+    font-size: 16px;
+}
+
+.folio-level-badge.vip {
+    color: #f59e0b;
+}
+
+.folio-level-badge.svip {
+    color: #8b5cf6;
+}
+
+.folio-level-option.active .folio-level-badge,
+.folio-level-option:hover .folio-level-badge {
+    border-color: currentColor;
+    box-shadow: 0 0 0 1px currentColor;
+}
+
+/* 选择框样式 */
+.folio-select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: white;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.folio-select:focus {
+    border-color: #007cba;
+    box-shadow: 0 0 0 1px #007cba;
+    outline: none;
+}
+
+/* 预览设置 */
+.folio-preview-settings {
+    margin-top: 15px;
+}
+
+.folio-preview-option {
+    background: white;
+    border: 1px solid #e2e4e7;
+    border-radius: 4px;
+    padding: 12px;
+    margin-top: 10px;
+}
+
+.folio-preview-option label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+/* 范围滑块 */
+.folio-range-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.folio-range {
+    flex: 1;
+    height: 6px;
+    border-radius: 3px;
+    background: #e2e4e7;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.folio-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #007cba;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.folio-range::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #007cba;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.folio-range-value {
+    min-width: 80px;
+    text-align: right;
+    font-weight: 600;
+    color: #007cba;
+}
+
+/* 文本域 */
+.folio-textarea {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.folio-textarea:focus {
+    border-color: #007cba;
+    box-shadow: 0 0 0 1px #007cba;
+    outline: none;
+}
+
+/* 预览结果 */
+.folio-preview-result {
+    margin-top: 15px;
+    padding: 12px;
+    background: white;
+    border: 1px solid #e2e4e7;
+    border-radius: 4px;
+}
+
+.folio-preview-result h4 {
+    margin: 0 0 10px 0;
+    font-size: 13px;
+    color: #666;
+}
+
+.folio-preview-content {
+    padding: 10px;
+    background: #f8f9fa;
+    border-left: 3px solid #007cba;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.folio-no-preview {
+    color: #666;
+    font-style: italic;
+}
+
+/* 高级设置 */
+.folio-advanced-settings {
+    margin-top: 15px;
+    border: 1px solid #e2e4e7;
+    border-radius: 4px;
+}
+
+.folio-advanced-settings summary {
+    padding: 12px;
+    background: #f8f9fa;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.folio-advanced-settings summary .dashicons {
+    margin-right: 5px;
+}
+
+.folio-advanced-content {
+    padding: 15px;
+    border-top: 1px solid #e2e4e7;
+}
+
+/* 复选框标签 */
+.folio-checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+
+.folio-checkbox-label input[type="checkbox"] {
+    margin-right: 8px;
+    margin-top: 2px;
+}
+
+.folio-checkbox-label .description {
+    margin: 2px 0 0 0;
+    font-size: 12px;
+    color: #666;
+}
+
+/* 快速操作 */
+.folio-quick-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e2e4e7;
+}
+
+.folio-quick-actions .button {
+    flex: 1;
+    text-align: center;
+    font-size: 11px;
+    padding: 6px 8px;
+}
+
+/* 批量操作 */
+.folio-bulk-actions {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e2e4e7;
+    text-align: center;
+}
+
+.folio-bulk-actions .button-link {
+    color: #007cba;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.folio-bulk-actions .button-link:hover {
+    color: #005a87;
+}
+
+.folio-bulk-actions .dashicons {
+    margin-right: 5px;
+}
+
+/* 帮助部分 */
+.folio-help-section {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e2e4e7;
+}
+
+.folio-help-section details summary {
+    cursor: pointer;
+    color: #666;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.folio-help-section .dashicons {
+    margin-right: 5px;
+}
+
+.folio-help-content {
+    margin-top: 10px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.folio-help-content h4 {
+    margin: 0 0 8px 0;
+    font-size: 12px;
+}
+
+.folio-help-content code {
+    background: white;
+    padding: 2px 4px;
+    border-radius: 2px;
+    font-size: 11px;
+    display: inline-block;
+    margin: 2px 0;
+}
+
+.folio-help-content ul {
+    margin: 8px 0 0 15px;
+}
+
+.folio-help-content li {
+    margin-bottom: 4px;
+}
+
+/* 模态框样式 */
+.folio-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.folio-modal-content {
+    background: white;
+    border-radius: 6px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.folio-modal-header {
+    padding: 20px;
+    border-bottom: 1px solid #e2e4e7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.folio-modal-header h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.folio-modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.folio-modal-close:hover {
+    color: #000;
+}
+
+.folio-modal-body {
+    padding: 20px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.folio-modal-footer {
+    padding: 20px;
+    border-top: 1px solid #e2e4e7;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* 批量操作特定样式 */
+.folio-bulk-section {
+    margin-bottom: 20px;
+}
+
+.folio-bulk-section h4 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+}
+
+.folio-post-selector {
+    border: 1px solid #e2e4e7;
+    border-radius: 4px;
+    padding: 15px;
+    background: #f8f9fa;
+}
+
+#folio-post-list {
+    margin-top: 15px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.folio-post-item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-bottom: 1px solid #e2e4e7;
+}
+
+.folio-post-item:last-child {
+    border-bottom: none;
+}
+
+.folio-post-item input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.folio-post-title {
+    font-weight: 600;
+    color: #333;
+}
+
+.folio-post-meta {
+    font-size: 11px;
+    color: #666;
+    margin-left: auto;
+}
+
+/* 响应式设计 */
+@media (max-width: 782px) {
+    .folio-level-selector {
+        flex-direction: column;
+    }
+    
+    .folio-quick-actions {
+        flex-direction: column;
+    }
+    
+    .folio-range-input {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .folio-range-value {
+        text-align: left;
+        min-width: auto;
+    }
+    
+    .folio-modal-content {
+        width: 95%;
+        margin: 20px;
+    }
+    
+    .folio-modal-footer {
+        flex-direction: column;
+    }
+}
+
+/* 加载状态 */
+.folio-loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.folio-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #007cba;
+    border-radius: 50%;
+    animation: folio-spin 1s linear infinite;
+}
+
+@keyframes folio-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 成功/错误状态 */
+.folio-success {
+    color: #46b450;
+}
+
+.folio-error {
+    color: #dc3232;
+}
+
+.folio-notice {
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin: 10px 0;
+    font-size: 12px;
+}
+
+.folio-notice.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.folio-notice.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.folio-notice.info {
+    background: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
