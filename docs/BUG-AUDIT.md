@@ -56,6 +56,14 @@
 - 新增 `nonceMode` / `nonceField` / `nonceValue` 显式注入策略，降低跨接口误注入风险。
 
 对应提交：
+- `e47dca8`
+- `7140638`
+
+### 第七批（历史脚本防误用）
+- `frontend-components-original.js` 显式标记为 DEPRECATED，并默认禁用执行。
+- 仅允许通过 `window.folioEnableLegacyFrontendComponents = true` 手动开启。
+
+对应提交：
 - （当前待提交）
 
 ## 当前残余风险（未发现阻断级）
@@ -69,7 +77,7 @@
 
 ## 建议优先级
 1. 已完成：`assets/js/folio-core.min.js` 已与 `folio-core.js` 同步构建。
-2. 清理或显式标记历史脚本（如 `frontend-components-original.js`）为废弃，避免误用。
+2. 已完成：历史脚本 `frontend-components-original.js` 已显式标记废弃并默认禁用执行。
 3. 增加最小集成回归（通知、用户中心、性能后台关键按钮）并纳入发布前检查。
 
 ## 结论

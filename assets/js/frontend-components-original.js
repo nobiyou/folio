@@ -1,11 +1,20 @@
 /**
- * Frontend Components JavaScript
- * 
- * 前端权限提示组件交互脚本
+ * DEPRECATED: Legacy Frontend Components JavaScript
+ *
+ * 前端权限提示旧版脚本（已废弃）：
+ * - 默认禁用执行，避免误加载引发旧行为回归
+ * - 仅在显式设置 window.folioEnableLegacyFrontendComponents = true 时启用
  */
 
 (function($) {
     'use strict';
+
+    if (window.folioEnableLegacyFrontendComponents !== true) {
+        if (window.console && typeof window.console.warn === 'function') {
+            window.console.warn('[Folio] frontend-components-original.js is deprecated and disabled by default.');
+        }
+        return;
+    }
 
     // 前端组件管理器
     const FrontendComponents = {

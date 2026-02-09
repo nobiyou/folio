@@ -111,6 +111,12 @@
 - 目标：避免通用 AJAX 封装误把不匹配的 nonce 注入到不同安全域接口。
 - 同步更新 `assets/js/folio-core.min.js`，确保压缩资源与源码行为一致。
 
+### 13. 缺陷修复（第七轮）
+- 对历史脚本 `assets/js/frontend-components-original.js` 增加废弃保护：
+  - 文件头明确标记为 DEPRECATED。
+  - 默认禁止执行，避免误加载导致旧逻辑回归。
+  - 仅在显式设置 `window.folioEnableLegacyFrontendComponents = true` 时启用。
+
 ## 兼容开关
 - `folio_enable_style_manager_frontend`（默认 `false`）
   - 控制 `inc/class-style-manager.php` 的前台样式加载是否启用
