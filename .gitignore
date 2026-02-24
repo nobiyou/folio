@@ -27,3 +27,13 @@ wp-config.php
 .env
 .env.local
 *.env
+
+# 排除清单中的文件（与 .distignore 一致，不提交到仓库）
+build-for-production.bat
+git-init-and-push.bat
+merge-to-main-and-push.bat
+.distignore
+SECURITY.md
+GITHUB_SETUP.md
+TAILWIND-README.md
+README.md
