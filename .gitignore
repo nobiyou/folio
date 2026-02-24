@@ -5,6 +5,9 @@ node_modules/
 assets/css/tailwind.css
 assets/css/tailwind.css.map
 folio.zip
+.build_tmp/
+dist/
+dist_pkg/
 
 # OS files
 .DS_Store
