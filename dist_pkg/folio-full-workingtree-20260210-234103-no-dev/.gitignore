@@ -1,0 +1,21 @@
+# Node modules
+node_modules/
+
+# Build output
+assets/css/tailwind.css
+assets/css/tailwind.css.map
+folio.zip
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# WordPress
+wp-config.php
+.htaccess

@@ -14,6 +14,7 @@ if (!defined('ABSPATH')) {
 define('FOLIO_VERSION', '1.0.0');
 define('FOLIO_DIR', get_template_directory());
 define('FOLIO_URI', get_template_directory_uri());
+define('FOLIO_FRONTEND_LANG_COOKIE', 'folio_frontend_lang');
 
 /**
  * 获取主题资源版本（优先使用文件修改时间）
@@ -72,6 +73,214 @@ if (!function_exists('folio_get_theme_options')) {
 }
 
 /**
+ * Frontend language switching helpers.
+ */
+if (!function_exists('folio_get_supported_frontend_locales')) {
+    function folio_get_supported_frontend_locales() {
+        return array('zh_CN', 'en_US');
+    }
+}
+
+if (!function_exists('folio_get_current_frontend_locale')) {
+    function folio_get_current_frontend_locale() {
+        $supported = folio_get_supported_frontend_locales();
+
+        if (isset($_GET['lang'])) {
+            $requested = sanitize_text_field(wp_unslash($_GET['lang']));
+            if (in_array($requested, $supported, true)) {
+                return $requested;
+            }
+        }
+
+        if (isset($_COOKIE[FOLIO_FRONTEND_LANG_COOKIE])) {
+            $saved = sanitize_text_field(wp_unslash($_COOKIE[FOLIO_FRONTEND_LANG_COOKIE]));
+            if (in_array($saved, $supported, true)) {
+                return $saved;
+            }
+        }
+
+        // IMPORTANT:
+        // Do not call get_locale() here, otherwise locale filters may recurse
+        // back into this function and exhaust memory.
+        $site_locale = get_option('WPLANG');
+        if (is_string($site_locale) && in_array($site_locale, $supported, true)) {
+            return $site_locale;
+        }
+
+        return '';
+    }
+}
+
+if (!function_exists('folio_handle_frontend_language_switch')) {
+    function folio_handle_frontend_language_switch() {
+        if (is_admin() || wp_doing_ajax()) {
+            return;
+        }
+
+        if (!isset($_GET['lang'])) {
+            return;
+        }
+
+        $requested = sanitize_text_field(wp_unslash($_GET['lang']));
+        $supported = folio_get_supported_frontend_locales();
+        if (!in_array($requested, $supported, true)) {
+            return;
+        }
+
+        $_COOKIE[FOLIO_FRONTEND_LANG_COOKIE] = $requested;
+        setcookie(
+            FOLIO_FRONTEND_LANG_COOKIE,
+            $requested,
+            time() + YEAR_IN_SECONDS,
+            COOKIEPATH ? COOKIEPATH : '/',
+            COOKIE_DOMAIN,
+            is_ssl(),
+            true
+        );
+    }
+}
+
+if (!function_exists('folio_filter_frontend_locale')) {
+    function folio_filter_frontend_locale($locale) {
+        if (is_admin() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST)) {
+            return $locale;
+        }
+
+        $selected = folio_get_current_frontend_locale();
+        $supported = folio_get_supported_frontend_locales();
+        if (in_array($selected, $supported, true)) {
+            return $selected;
+        }
+
+        return $locale;
+    }
+}
+
+if (!function_exists('folio_apply_frontend_locale')) {
+    function folio_apply_frontend_locale() {
+        if (is_admin() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST)) {
+            return;
+        }
+
+        $selected = folio_get_current_frontend_locale();
+        $supported = folio_get_supported_frontend_locales();
+        if (!in_array($selected, $supported, true)) {
+            return;
+        }
+
+        if (function_exists('switch_to_locale')) {
+            switch_to_locale($selected);
+        }
+    }
+}
+
+if (!function_exists('folio_get_language_switch_url')) {
+    function folio_get_language_switch_url($locale) {
+        $supported = folio_get_supported_frontend_locales();
+        if (!in_array($locale, $supported, true)) {
+            return home_url('/');
+        }
+
+        $scheme = is_ssl() ? 'https://' : 'http://';
+        $host = isset($_SERVER['HTTP_HOST']) ? wp_unslash($_SERVER['HTTP_HOST']) : '';
+        $uri = isset($_SERVER['REQUEST_URI']) ? wp_unslash($_SERVER['REQUEST_URI']) : '/';
+        $current_url = $scheme . $host . $uri;
+        $url = add_query_arg('lang', $locale, remove_query_arg('lang', $current_url));
+
+        return esc_url_raw($url);
+    }
+}
+
+if (!function_exists('folio_format_post_date')) {
+    function folio_format_post_date($post_id = null, $format = '') {
+        $post_id = $post_id ?: get_the_ID();
+        if (!$post_id) {
+            return '';
+        }
+
+        if (!$format) {
+            $locale = function_exists('folio_get_current_frontend_locale') ? folio_get_current_frontend_locale() : get_locale();
+            if (strpos((string) $locale, 'zh_') === 0) {
+                $format = get_option('date_format');
+            } else {
+                $format = 'F j, Y';
+            }
+        }
+        $timestamp = get_post_timestamp($post_id);
+        if (!$timestamp) {
+            return '';
+        }
+
+        return wp_date($format, $timestamp);
+    }
+}
+
+if (!function_exists('folio_get_post_thumbnail_with_fallback')) {
+    function folio_get_post_thumbnail_with_fallback($post_id, $size = 'thumbnail', $attr = array()) {
+        $post_id = absint($post_id);
+        if (!$post_id) {
+            return '';
+        }
+
+        if (has_post_thumbnail($post_id)) {
+            return get_the_post_thumbnail($post_id, $size, $attr);
+        }
+
+        $post = get_post($post_id);
+        if (!$post || empty($post->post_content)) {
+            return '';
+        }
+
+        if (!preg_match('/<img[^>]+src=[\'"]([^\'"]+)[\'"]/i', $post->post_content, $matches)) {
+            return '';
+        }
+
+        $src = isset($matches[1]) ? esc_url($matches[1]) : '';
+        if ($src === '') {
+            return '';
+        }
+
+        $class = '';
+        if (isset($attr['class']) && is_string($attr['class'])) {
+            $class = trim($attr['class']);
+        }
+
+        $alt = get_the_title($post_id);
+        return sprintf(
+            '<img src="%s" alt="%s"%s loading="lazy" decoding="async">',
+            $src,
+            esc_attr($alt),
+            $class !== '' ? ' class="' . esc_attr($class) . '"' : ''
+        );
+    }
+}
+
+if (!function_exists('folio_render_thumbnail_block')) {
+    function folio_render_thumbnail_block($post_id, $size = 'thumbnail', $args = array()) {
+        $defaults = array(
+            'wrapper_class' => '',
+            'image_class' => '',
+            'placeholder_class' => 'w-full h-full bg-gradient-to-br from-gray-200 to-gray-300',
+        );
+        $args = wp_parse_args($args, $defaults);
+
+        $image_attr = array();
+        if (!empty($args['image_class'])) {
+            $image_attr['class'] = $args['image_class'];
+        }
+
+        $thumb_html = folio_get_post_thumbnail_with_fallback($post_id, $size, $image_attr);
+        $content = $thumb_html ?: '<div class="' . esc_attr($args['placeholder_class']) . '"></div>';
+
+        if (!empty($args['wrapper_class'])) {
+            return '<div class="' . esc_attr($args['wrapper_class']) . '">' . $content . '</div>';
+        }
+
+        return $content;
+    }
+}
+
+/**
  * Theme Setup
  */
 function folio_theme_setup() {
@@ -97,94 +306,32 @@ function folio_theme_setup() {
 
     // Register navigation menus
     register_nav_menus(array(
-        'primary' => __('主导航', 'folio'),
+        'primary' => __('Primary Navigation', 'folio'),
     ));
 
     // Add custom image sizes
-    add_image_size('portfolio-card', 600, 800, true);
-    add_image_size('portfolio-hero', 1200, 600, true);
-    add_image_size('portfolio-full', 1200, 800, true);
+    add_image_size('post-card', 600, 800, true);
+    add_image_size('post-hero', 1200, 600, true);
+    add_image_size('post-full', 1200, 800, true);
 
     // Load text domain
     load_theme_textdomain('folio', FOLIO_DIR . '/languages');
-}
 
-/**
- * 兼容注册 Portfolio 内容模型
- * 仅在站点中尚未注册时生效，避免与插件/外部代码冲突
- */
-function folio_register_portfolio_compat() {
-    if (!apply_filters('folio_enable_portfolio_compat', true)) {
-        return;
+    // Runtime fallback: explicitly load locale file to avoid environment-specific JIT mismatches.
+    $locale = is_admin() ? get_user_locale() : folio_get_current_frontend_locale();
+    $lang_dir = trailingslashit(FOLIO_DIR) . 'languages/';
+    $candidates = array(
+        $lang_dir . 'folio-' . $locale . '.mo',
+        $lang_dir . $locale . '.mo',
+    );
+
+    foreach ($candidates as $mofile) {
+        if (file_exists($mofile)) {
+            unload_textdomain('folio');
+            load_textdomain('folio', $mofile);
+            break;
+        }
     }
-
-    $did_register = false;
-
-    if (!post_type_exists('portfolio')) {
-        register_post_type('portfolio', array(
-            'labels' => array(
-                'name' => __('作品集', 'folio'),
-                'singular_name' => __('作品', 'folio'),
-                'add_new' => __('添加作品', 'folio'),
-                'add_new_item' => __('添加新作品', 'folio'),
-                'edit_item' => __('编辑作品', 'folio'),
-                'new_item' => __('新作品', 'folio'),
-                'view_item' => __('查看作品', 'folio'),
-                'search_items' => __('搜索作品', 'folio'),
-                'not_found' => __('未找到作品', 'folio'),
-                'not_found_in_trash' => __('回收站中未找到作品', 'folio'),
-            ),
-            'public' => true,
-            'has_archive' => true,
-            'rewrite' => array('slug' => 'portfolio'),
-            'menu_icon' => 'dashicons-format-gallery',
-            'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'author', 'revisions'),
-            'show_in_rest' => true,
-        ));
-        $did_register = true;
-    }
-
-    if (!taxonomy_exists('portfolio_category')) {
-        register_taxonomy('portfolio_category', array('portfolio'), array(
-            'labels' => array(
-                'name' => __('作品分类', 'folio'),
-                'singular_name' => __('作品分类', 'folio'),
-                'search_items' => __('搜索作品分类', 'folio'),
-                'all_items' => __('所有作品分类', 'folio'),
-                'edit_item' => __('编辑作品分类', 'folio'),
-                'update_item' => __('更新作品分类', 'folio'),
-                'add_new_item' => __('添加作品分类', 'folio'),
-                'new_item_name' => __('新作品分类名称', 'folio'),
-                'menu_name' => __('作品分类', 'folio'),
-            ),
-            'public' => true,
-            'hierarchical' => true,
-            'rewrite' => array('slug' => 'portfolio-category'),
-            'show_in_rest' => true,
-        ));
-        $did_register = true;
-    }
-
-    // 标记需要刷新重写规则（仅在发生兼容注册时设置）
-    if ($did_register) {
-        update_option('folio_portfolio_compat_rewrite_pending', 1, false);
-    }
-}
-
-/**
- * 一次性刷新重写规则（兼容注册触发）
- */
-function folio_maybe_flush_portfolio_compat_rewrite() {
-    if (!is_admin() || !current_user_can('manage_options')) {
-        return;
-    }
-
-    if (!get_option('folio_portfolio_compat_rewrite_pending')) {
-        return;
-    }
-
-    flush_rewrite_rules(false);
-    delete_option('folio_portfolio_compat_rewrite_pending');
 }
 
 /**
@@ -203,7 +350,7 @@ if (!function_exists('folio_disable_wp_site_icon_output')) {
 if (!function_exists('folio_enqueue_font_assets')) {
     function folio_enqueue_font_assets() {
         // Web Fonts - 使用国内镜像或本地字体
-        $font_source = apply_filters('folio_font_source', 'loli'); // 可选: 'google', 'loli', 'local'
+        $font_source = apply_filters('folio_font_source', 'loli'); // Options: google, loli, local
 
         switch ($font_source) {
             case 'google':
@@ -315,9 +462,9 @@ function folio_enqueue_assets() {
 function folio_widgets_init() {
     // 页脚小工具区域
     register_sidebar(array(
-        'name'          => __('页脚区域', 'folio'),
+        'name'          => __('Footer Area', 'folio'),
         'id'            => 'footer-widgets',
-        'description'   => __('页脚小工具区域', 'folio'),
+        'description'   => __('Footer widget area', 'folio'),
         'before_widget' => '<div id="%1$s" class="widget %2$s">',
         'after_widget'  => '</div>',
         'before_title'  => '<h3 class="widget-title">',
@@ -326,9 +473,9 @@ function folio_widgets_init() {
     
     // 文章页侧边栏小工具区域
     register_sidebar(array(
-        'name'          => __('文章页侧边栏', 'folio'),
+        'name'          => __('Single Post Sidebar', 'folio'),
         'id'            => 'single-post-sidebar',
-        'description'   => __('文章页右侧边栏小工具区域', 'folio'),
+        'description'   => __('Right sidebar widget area for single post page', 'folio'),
         'before_widget' => '<div id="%1$s" class="widget %2$s mb-8">',
         'after_widget'  => '</div>',
         'before_title'  => '<h3 class="widget-title text-xs uppercase font-bold tracking-widest mb-4 text-gray-700">',
@@ -349,11 +496,8 @@ function folio_include_required_files() {
     // 内置 SEO
     require_once FOLIO_DIR . '/inc/class-theme-seo.php';
 
-    // AI SEO 生成
     // AI API管理器（必须在其他AI类之前加载）
     require_once FOLIO_DIR . '/inc/class-ai-api-manager.php';
-
-    require_once FOLIO_DIR . '/inc/class-ai-seo.php';
 
     // 文章统计
     require_once FOLIO_DIR . '/inc/class-post-stats.php';
@@ -476,6 +620,9 @@ function folio_include_required_files() {
     // 缓存优化配置（基于测试结果应用）
     require_once FOLIO_DIR . '/inc/cache-optimized-config.php';
 
+    // 缓存自动验证系统（需要在前台/后台/WP-Cron 全局可用）
+    require_once FOLIO_DIR . '/inc/cache-auto-validation.php';
+
     // 缓存管理页面
     if (is_admin()) {
         // Memcached辅助功能（必须先加载）
@@ -490,8 +637,6 @@ function folio_include_required_files() {
         // 缓存后端验证器
         require_once FOLIO_DIR . '/inc/class-cache-backend-validator.php';
         
-        // 缓存自动验证系统
-        require_once FOLIO_DIR . '/inc/cache-auto-validation.php';
     }
 }
 folio_include_required_files();
@@ -518,10 +663,7 @@ function folio_init_classes() {
         // 设置标记，避免重复应用（24小时有效）
         set_transient('folio_cache_optimized_applied', true, 24 * HOUR_IN_SECONDS);
         
-        // 记录优化应用
-        if (WP_DEBUG) {
-            error_log('Folio Cache: Applied optimized configuration based on 96.8% success rate test results');
-        }
+        // 优化应用日志由 folio_Cache_Optimized_Config 统一输出，避免重复记录
     }
     
     // 初始化缓存管理类（仅在管理后台）
@@ -642,8 +784,6 @@ function folio_body_classes($classes) {
 if (!function_exists('folio_register_content_model_hooks')) {
     function folio_register_content_model_hooks() {
         add_action('after_setup_theme', 'folio_theme_setup');
-        add_action('init', 'folio_register_portfolio_compat', 5);
-        add_action('admin_init', 'folio_maybe_flush_portfolio_compat_rewrite');
     }
 }
 
@@ -674,8 +814,12 @@ if (!function_exists('folio_register_route_hooks')) {
  */
 if (!function_exists('folio_register_compat_hooks')) {
     function folio_register_compat_hooks() {
+        add_action('after_setup_theme', 'folio_apply_frontend_locale', 0);
         add_action('init', 'folio_init_classes');
+        add_action('init', 'folio_handle_frontend_language_switch', 1);
         add_filter('body_class', 'folio_body_classes');
+        add_filter('locale', 'folio_filter_frontend_locale', 20);
+        add_filter('determine_locale', 'folio_filter_frontend_locale', 20);
     }
 }
 

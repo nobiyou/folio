@@ -89,7 +89,7 @@ if (!defined('ABSPATH')) {
 
 <!-- Skip to content link -->
 <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-black text-white px-4 py-2 z-50">
-    <?php esc_html_e('跳转到内容', 'folio'); ?>
+    <?php esc_html_e('Skip to content', 'folio'); ?>
 </a>
 
 <div class="flex min-h-screen">
@@ -122,7 +122,7 @@ if (!defined('ABSPATH')) {
                         </a>
                         
                         <!-- 移动端菜单按钮 -->
-                        <button id="mobile-menu-toggle" class="md:hidden p-2 text-gray-600 hover:text-black transition" aria-label="<?php esc_attr_e('打开菜单', 'folio'); ?>" aria-expanded="false" aria-controls="mobile-menu">
+                        <button id="mobile-menu-toggle" class="md:hidden p-2 text-gray-600 hover:text-black transition" aria-label="<?php esc_attr_e('Open menu', 'folio'); ?>" aria-expanded="false" aria-controls="mobile-menu">
                             <svg class="w-6 h-6 menu-icon-open" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                             </svg>
@@ -151,17 +151,17 @@ if (!defined('ABSPATH')) {
                 <!-- 用户入口 -->
                 <?php if (is_user_logged_in()) : 
                     $current_user = wp_get_current_user();
-                    $membership = function_exists('folio_get_user_membership') ? folio_get_user_membership() : array('is_vip' => false, 'icon' => '', 'name' => '普通用户');
+                    $membership = function_exists('folio_get_user_membership') ? folio_get_user_membership() : array('is_vip' => false, 'icon' => '', 'name' => __('Regular User', 'folio'));
                 ?>
                 <!-- 通知铃铛 -->
-                <button class="notification-bell relative p-2 text-gray-600 hover:text-black transition" title="<?php esc_attr_e('通知', 'folio'); ?>">
+                <button class="notification-bell relative p-2 text-gray-600 hover:text-black transition" title="<?php esc_attr_e('Notifications', 'folio'); ?>">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
                     </svg>
                     <span class="notification-badge absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
                 </button>
                 
-                <a href="<?php echo esc_url(home_url('user-center')); ?>" class="user-menu-btn flex items-center gap-2" title="<?php esc_attr_e('用户中心', 'folio'); ?>">
+                <a href="<?php echo esc_url(home_url('user-center')); ?>" class="user-menu-btn flex items-center gap-2" title="<?php esc_attr_e('User Center', 'folio'); ?>">
                     <?php echo get_avatar($current_user->ID, 32, '', '', array('class' => 'rounded-full')); ?>
                     <span class="user-display-name hidden sm:inline text-sm font-medium">
                         <?php echo esc_html($current_user->display_name); ?>
@@ -172,7 +172,7 @@ if (!defined('ABSPATH')) {
                 </a>
                 <?php else : ?>
                 <!-- 未登录用户：通知铃铛（仅显示全局通知） -->
-                <button class="notification-bell relative p-2 text-gray-600 hover:text-black transition" title="<?php esc_attr_e('通知', 'folio'); ?>">
+                <button class="notification-bell relative p-2 text-gray-600 hover:text-black transition" title="<?php esc_attr_e('Notifications', 'folio'); ?>">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
                     </svg>
@@ -182,7 +182,7 @@ if (!defined('ABSPATH')) {
                     <?php esc_html_e('Sign In', 'folio'); ?>
                 </a>
                 <?php endif; ?>
-                
+
                 <!-- 主题切换按钮 -->
                 <?php 
                 $theme_options = get_option('folio_theme_options', array());
@@ -190,7 +190,7 @@ if (!defined('ABSPATH')) {
                 $show_theme_toggle = !isset($theme_options['show_theme_toggle']) || !empty($theme_options['show_theme_toggle']);
                 if ($show_theme_toggle) : 
                 ?>
-                <button id="theme-toggle" class="theme-toggle" aria-label="<?php esc_attr_e('切换深色模式', 'folio'); ?>">
+                <button id="theme-toggle" class="theme-toggle" aria-label="<?php esc_attr_e('Toggle dark mode', 'folio'); ?>">
                 <!-- 月亮图标 (亮色模式时显示) -->
                 <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
@@ -209,7 +209,7 @@ if (!defined('ABSPATH')) {
         <nav id="mobile-menu" class="mobile-menu-overlay md:hidden hidden fixed inset-0 z-40 px-6" aria-hidden="true">
             <!-- 关闭按钮 -->
             <div class="flex justify-end pt-6 pb-4">
-                <button id="mobile-menu-close" class="p-2 text-gray-600 hover:text-black transition" aria-label="<?php esc_attr_e('关闭菜单', 'folio'); ?>">
+                <button id="mobile-menu-close" class="p-2 text-gray-600 hover:text-black transition" aria-label="<?php esc_attr_e('Close menu', 'folio'); ?>">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                     </svg>
@@ -228,11 +228,15 @@ if (!defined('ABSPATH')) {
                 ?>
             </div>
             
-            <!-- 移动端社交链接 -->
+            <!-- 移动端社交链接（与桌面侧栏一致） -->
             <?php $links = folio_get_social_links(); ?>
-            <?php if (!empty($links['email']['url']) || !empty($links['instagram']['url']) || !empty($links['linkedin']['url'])) : ?>
-            <div class="mt-8 pt-8 border-t border-gray-200 flex gap-6">
-                <?php if (!empty($links['email']['url'])) : 
+            <?php
+            $has_social = !empty($links['email']['url']) || !empty($links['instagram']['url']) || !empty($links['linkedin']['url'])
+                || !empty($links['twitter']['url']) || !empty($links['facebook']['url']) || !empty($links['github']['url']);
+            ?>
+            <?php if ($has_social) : ?>
+            <div class="mt-8 pt-8 border-t border-gray-200 flex flex-wrap gap-6">
+                <?php if (!empty($links['email']['url'])) :
                     $email_label = folio_get_icon_display_name($links['email']['icon'], 'email');
                     $email_label = !empty($email_label) ? $email_label : __('Email', 'folio');
                 ?>
@@ -240,20 +244,44 @@ if (!defined('ABSPATH')) {
                     <?php echo folio_render_social_icon('email', $links['email']['icon']); ?>
                 </a>
                 <?php endif; ?>
-                <?php if (!empty($links['instagram']['url'])) : 
+                <?php if (!empty($links['instagram']['url'])) :
                     $instagram_label = folio_get_icon_display_name($links['instagram']['icon'], 'instagram');
-                    $instagram_label = !empty($instagram_label) ? $instagram_label : 'Instagram';
+                    $instagram_label = !empty($instagram_label) ? $instagram_label : __('Instagram', 'folio');
                 ?>
                 <a href="<?php echo esc_url($links['instagram']['url']); ?>" class="text-gray-400 hover:text-black transition" target="_blank" rel="noopener" aria-label="<?php echo esc_attr($instagram_label); ?>" title="<?php echo esc_attr($instagram_label); ?>">
                     <?php echo folio_render_social_icon('instagram', $links['instagram']['icon']); ?>
                 </a>
                 <?php endif; ?>
-                <?php if (!empty($links['linkedin']['url'])) : 
+                <?php if (!empty($links['linkedin']['url'])) :
                     $linkedin_label = folio_get_icon_display_name($links['linkedin']['icon'], 'linkedin');
-                    $linkedin_label = !empty($linkedin_label) ? $linkedin_label : 'LinkedIn';
+                    $linkedin_label = !empty($linkedin_label) ? $linkedin_label : __('LinkedIn', 'folio');
                 ?>
                 <a href="<?php echo esc_url($links['linkedin']['url']); ?>" class="text-gray-400 hover:text-black transition" target="_blank" rel="noopener" aria-label="<?php echo esc_attr($linkedin_label); ?>" title="<?php echo esc_attr($linkedin_label); ?>">
                     <?php echo folio_render_social_icon('linkedin', $links['linkedin']['icon']); ?>
+                </a>
+                <?php endif; ?>
+                <?php if (!empty($links['twitter']['url'])) :
+                    $twitter_label = folio_get_icon_display_name($links['twitter']['icon'], 'twitter');
+                    $twitter_label = !empty($twitter_label) ? $twitter_label : __('Twitter/X', 'folio');
+                ?>
+                <a href="<?php echo esc_url($links['twitter']['url']); ?>" class="text-gray-400 hover:text-black transition" target="_blank" rel="noopener" aria-label="<?php echo esc_attr($twitter_label); ?>" title="<?php echo esc_attr($twitter_label); ?>">
+                    <?php echo folio_render_social_icon('twitter', $links['twitter']['icon']); ?>
+                </a>
+                <?php endif; ?>
+                <?php if (!empty($links['facebook']['url'])) :
+                    $facebook_label = folio_get_icon_display_name($links['facebook']['icon'], 'facebook');
+                    $facebook_label = !empty($facebook_label) ? $facebook_label : __('Facebook', 'folio');
+                ?>
+                <a href="<?php echo esc_url($links['facebook']['url']); ?>" class="text-gray-400 hover:text-black transition" target="_blank" rel="noopener" aria-label="<?php echo esc_attr($facebook_label); ?>" title="<?php echo esc_attr($facebook_label); ?>">
+                    <?php echo folio_render_social_icon('facebook', $links['facebook']['icon']); ?>
+                </a>
+                <?php endif; ?>
+                <?php if (!empty($links['github']['url'])) :
+                    $github_label = folio_get_icon_display_name($links['github']['icon'], 'github');
+                    $github_label = !empty($github_label) ? $github_label : __('GitHub', 'folio');
+                ?>
+                <a href="<?php echo esc_url($links['github']['url']); ?>" class="text-gray-400 hover:text-black transition" target="_blank" rel="noopener" aria-label="<?php echo esc_attr($github_label); ?>" title="<?php echo esc_attr($github_label); ?>">
+                    <?php echo folio_render_social_icon('github', $links['github']['icon']); ?>
                 </a>
                 <?php endif; ?>
             </div>

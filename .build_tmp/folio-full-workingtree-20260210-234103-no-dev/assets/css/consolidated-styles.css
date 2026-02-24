@@ -1,0 +1,797 @@
+/**
+ * Folio Theme - Consolidated Styles
+ * 
+ * 合并和优化的CSS样式文件
+ * 消除重复样式，提高性能和可维护性
+ *
+ * @package Folio
+ */
+
+/* ==========================================================================
+   CSS Variables - 统一变量定义
+   ========================================================================== */
+:root {
+    /* 基础颜色 */
+    --folio-bg: #f4f5f7;
+    --folio-bg-secondary: #ffffff;
+    --folio-text: #1f2937;
+    --folio-text-light: #6b7280;
+    --folio-text-muted: #9ca3af;
+    --folio-white: #ffffff;
+    --folio-black: #111111;
+    --folio-border: #e5e7eb;
+    --folio-shadow: rgba(0, 0, 0, 0.1);
+    --folio-card-bg: #ffffff;
+    --folio-hover-bg: #f3f4f6;
+
+    /* 会员等级颜色 */
+    --folio-vip-primary: #f59e0b;
+    --folio-vip-secondary: #d97706;
+    --folio-vip-bg: #fef3c7;
+    --folio-vip-bg-light: #fde68a;
+    
+    --folio-svip-primary: #8b5cf6;
+    --folio-svip-secondary: #7c3aed;
+    --folio-svip-bg: #ede9fe;
+    --folio-svip-bg-light: #ddd6fe;
+    
+    --folio-success: #10b981;
+    --folio-success-bg: #d1fae5;
+    
+    /* 字体 */
+    --folio-font-primary: 'Roboto Condensed', 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+    --folio-font-heading: 'Oswald', 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+
+    /* 过渡动画 */
+    --folio-transition: all 0.2s ease;
+    --folio-transition-slow: all 0.3s ease;
+}
+
+/* 深色模式变量 */
+[data-theme="dark"] {
+    --folio-bg: #111827;
+    --folio-bg-secondary: #1f2937;
+    --folio-text: #f9fafb;
+    --folio-text-light: #d1d5db;
+    --folio-text-muted: #9ca3af;
+    --folio-white: #1f2937;
+    --folio-black: #f9fafb;
+    --folio-border: #374151;
+    --folio-shadow: rgba(0, 0, 0, 0.3);
+    --folio-card-bg: #1f2937;
+    --folio-hover-bg: #374151;
+}
+
+/* ==========================================================================
+   统一按钮样式 - Unified Button Styles
+   ========================================================================== */
+
+/* 基础按钮 */
+.folio-btn,
+.premium-btn,
+.membership-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--folio-transition);
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* 按钮尺寸变体 */
+.folio-btn-size-small,
+.premium-btn-size-small {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+.folio-btn-size-large,
+.premium-btn-size-large {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+}
+
+/* 主要按钮 */
+.folio-btn-primary,
+.premium-btn-login,
+.folio-btn-login {
+    background: #3b82f6;
+    color: white;
+}
+
+.folio-btn-primary:hover,
+.premium-btn-login:hover,
+.folio-btn-login:hover {
+    background: #2563eb;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+/* 次要按钮 */
+.folio-btn-secondary,
+.premium-btn-register,
+.folio-btn-register {
+    background: transparent;
+    color: var(--folio-text);
+    border-color: var(--folio-border);
+}
+
+.folio-btn-secondary:hover,
+.premium-btn-register:hover,
+.folio-btn-register:hover {
+    background: var(--folio-hover-bg);
+    color: var(--folio-text);
+    border-color: var(--folio-text-light);
+}
+
+/* 升级按钮 */
+.folio-btn-upgrade,
+.premium-btn-upgrade,
+.membership-btn-upgrade {
+    background: linear-gradient(135deg, var(--folio-vip-primary) 0%, var(--folio-vip-secondary) 100%);
+    color: white;
+    font-weight: 700;
+}
+
+.folio-btn-upgrade:hover,
+.premium-btn-upgrade:hover,
+.membership-btn-upgrade:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+/* SVIP按钮变体 */
+.folio-btn-svip,
+.folio-level-svip .folio-btn-upgrade,
+.premium-level-svip .premium-btn-upgrade,
+.membership-card-svip .membership-btn-upgrade {
+    background: linear-gradient(135deg, var(--folio-svip-primary) 0%, var(--folio-svip-secondary) 100%);
+}
+
+/* 当前状态按钮 */
+.folio-btn-current,
+.membership-btn-current {
+    background: var(--folio-success);
+    color: white;
+    cursor: default;
+    opacity: 0.8;
+}
+
+/* 按钮样式变体 */
+.folio-btn-style-outline,
+.premium-btn-style-outline {
+    background: transparent;
+    border: 2px solid currentColor;
+}
+
+.folio-btn-style-solid,
+.premium-btn-style-solid {
+    background: currentColor;
+    color: white;
+}
+
+/* 加载状态 */
+.folio-btn.loading,
+.folio-btn-loading,
+.premium-btn.loading {
+    opacity: 0.7;
+    pointer-events: none;
+    position: relative;
+}
+
+.folio-btn.loading::after,
+.folio-btn-loading::after,
+.premium-btn.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    margin: -8px 0 0 -8px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* ==========================================================================
+   统一会员徽章样式 - Unified Membership Badge Styles
+   ========================================================================== */
+
+/* 基础徽章 */
+.folio-membership-badge,
+.membership-badge-icon,
+.folio-premium-badge,
+.premium-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: var(--folio-transition);
+    vertical-align: middle;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* 徽章尺寸变体 */
+.folio-badge-size-small,
+.membership-badge-small {
+    font-size: 9px;
+    padding: 3px 6px;
+    gap: 3px;
+    border-radius: 10px;
+}
+
+.folio-badge-size-large {
+    font-size: 13px;
+    padding: 6px 12px;
+    gap: 6px;
+    border-radius: 16px;
+}
+
+/* FREE徽章 */
+.folio-badge-free,
+.membership-badge-free,
+.folio-premium-badge-free {
+    background: #f3f4f6;
+    color: #6b7280;
+    border: 1px solid #e5e7eb;
+}
+
+/* VIP徽章 */
+.folio-badge-vip,
+.membership-badge-vip,
+.folio-premium-badge-vip {
+    background: linear-gradient(135deg, var(--folio-vip-bg) 0%, var(--folio-vip-bg-light) 100%);
+    color: var(--folio-vip-secondary);
+    border: 1px solid var(--folio-vip-primary);
+    padding: 0 8px;
+    border-radius: 15px;
+}
+
+/* SVIP徽章 */
+.folio-badge-svip,
+.membership-badge-svip,
+.folio-premium-badge-svip {
+    background: linear-gradient(135deg, var(--folio-svip-bg) 0%, var(--folio-svip-bg-light) 100%);
+    color: var(--folio-svip-secondary);
+    border: 1px solid var(--folio-svip-primary);
+    padding: 0 8px;
+    border-radius: 15px;
+}
+
+/* 解锁状态徽章 */
+.folio-badge-unlocked,
+.folio-premium-badge-unlocked {
+    background: linear-gradient(135deg, var(--folio-success-bg) 0%, #a7f3d0 100%);
+    color: #065f46;
+    border: 1px solid var(--folio-success);
+}
+
+/* 徽章悬停效果 */
+.folio-membership-badge:hover,
+.folio-premium-badge:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ==========================================================================
+   统一会员内容样式 - Unified Premium Content Styles
+   ========================================================================== */
+
+/* 基础内容容器 */
+.folio-protected-article,
+.premium-content,
+.folio-content-mask {
+    position: relative;
+    margin: 2rem 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid var(--folio-border);
+}
+
+/* 解锁状态 */
+.premium-content-unlocked,
+.folio-content-unlocked {
+    padding: 1.5rem;
+    background: var(--folio-card-bg);
+    border-color: var(--folio-success);
+}
+
+/* 锁定状态 */
+.premium-content-locked,
+.folio-protected-article {
+    background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+}
+
+/* VIP级别样式 */
+.premium-level-vip,
+.folio-level-vip .folio-protected-article,
+.folio-prompt-vip {
+    border-color: var(--folio-vip-primary);
+    background: linear-gradient(135deg, var(--folio-vip-bg) 0%, var(--folio-vip-bg-light) 100%);
+}
+
+/* SVIP级别样式 */
+.premium-level-svip,
+.folio-level-svip .folio-protected-article,
+.folio-prompt-svip {
+    border-color: var(--folio-svip-primary);
+    background: linear-gradient(135deg, var(--folio-svip-bg) 0%, var(--folio-svip-bg-light) 100%);
+}
+
+/* 内容预览 */
+.folio-content-preview,
+.premium-content-preview,
+.folio-preview-content {
+    padding: 1.5rem;
+    color: var(--folio-text-light);
+    line-height: 1.7;
+    position: relative;
+}
+
+/* 渐变遮罩 */
+.folio-content-fade,
+.premium-content-fade {
+    height: 60px;
+    background: linear-gradient(transparent, var(--folio-bg));
+    margin-top: -60px;
+    position: relative;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* VIP级别渐变 */
+.folio-level-vip .folio-content-fade {
+    background: linear-gradient(transparent, var(--folio-vip-bg-light));
+}
+
+/* SVIP级别渐变 */
+.folio-level-svip .folio-content-fade {
+    background: linear-gradient(transparent, var(--folio-svip-bg-light));
+}
+
+/* ==========================================================================
+   统一权限提示样式 - Unified Permission Prompt Styles
+   ========================================================================== */
+
+/* 基础提示容器 */
+.folio-permission-prompt,
+.premium-content-lock {
+    padding: 2rem;
+    text-align: center;
+    background: var(--folio-card-bg);
+    border-top: 1px solid var(--folio-border);
+    position: relative;
+    z-index: 2;
+}
+
+/* 提示头部 */
+.folio-prompt-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem 2rem 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* 提示图标 */
+.folio-prompt-icon,
+.premium-lock-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.1);
+    color: var(--folio-text-light);
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+/* VIP图标样式 */
+.folio-level-vip .folio-prompt-icon,
+.folio-prompt-vip .folio-prompt-icon,
+.premium-level-vip .premium-lock-icon {
+    background: rgba(245, 158, 11, 0.2);
+    color: var(--folio-vip-primary);
+}
+
+/* SVIP图标样式 */
+.folio-level-svip .folio-prompt-icon,
+.folio-prompt-svip .folio-prompt-icon,
+.premium-level-svip .premium-lock-icon {
+    background: rgba(139, 92, 246, 0.2);
+    color: var(--folio-svip-primary);
+}
+
+/* 提示标题 */
+.folio-prompt-title,
+.premium-lock-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    color: var(--folio-text);
+}
+
+/* 提示描述 */
+.folio-prompt-description,
+.premium-lock-description {
+    color: var(--folio-text-light);
+    margin: 0 0 1.5rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* 操作按钮区域 */
+.folio-prompt-actions,
+.premium-lock-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   统一会员卡片样式 - Unified Membership Card Styles
+   ========================================================================== */
+
+/* 基础卡片 */
+.membership-card {
+    background: var(--folio-card-bg);
+    border: 2px solid var(--folio-border);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: var(--folio-transition-slow);
+    position: relative;
+    overflow: hidden;
+}
+
+/* 卡片顶部装饰条 */
+.membership-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #6b7280, #9ca3af);
+}
+
+/* VIP卡片 */
+.membership-card-vip {
+    border-color: var(--folio-vip-primary);
+}
+
+.membership-card-vip::before {
+    background: linear-gradient(90deg, var(--folio-vip-primary), var(--folio-vip-secondary));
+}
+
+/* SVIP卡片 */
+.membership-card-svip {
+    border-color: var(--folio-svip-primary);
+}
+
+.membership-card-svip::before {
+    background: linear-gradient(90deg, var(--folio-svip-primary), var(--folio-svip-secondary));
+}
+
+/* 当前会员卡片 */
+.membership-card-current {
+    border-color: var(--folio-success);
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(5, 150, 105, 0.05));
+}
+
+.membership-card-current::before {
+    background: linear-gradient(90deg, var(--folio-success), #059669);
+}
+
+/* 推荐卡片 */
+.membership-card-highlight {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+/* 卡片悬停效果 */
+.membership-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* 卡片标题 */
+.membership-card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    color: var(--folio-text);
+}
+
+/* 价格显示 */
+.membership-card-price {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.25rem;
+    margin-bottom: 2rem;
+}
+
+.price-amount {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--folio-text);
+}
+
+.price-duration {
+    font-size: 1rem;
+    color: var(--folio-text-muted);
+}
+
+/* 功能列表 */
+.membership-card-features,
+.membership-features {
+    text-align: left;
+    margin: 2rem 0;
+}
+
+.membership-feature {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--folio-border);
+}
+
+.membership-feature:last-child {
+    border-bottom: none;
+}
+
+.feature-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--folio-success);
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   统一动画效果 - Unified Animations
+   ========================================================================== */
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse-success {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.2);
+    }
+}
+
+@keyframes pulse-warning {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.1);
+    }
+}
+
+/* 入场动画 */
+.folio-permission-prompt,
+.premium-content {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+/* ==========================================================================
+   响应式设计 - Responsive Design
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    /* 按钮响应式 */
+    .folio-btn,
+    .premium-btn,
+    .membership-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .folio-prompt-actions,
+    .premium-lock-actions {
+        flex-direction: column;
+    }
+    
+    /* 提示响应式 */
+    .folio-permission-prompt,
+    .premium-content-lock {
+        padding: 1.5rem;
+    }
+    
+    .folio-prompt-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem 1.5rem 1rem;
+    }
+    
+    .folio-prompt-icon,
+    .premium-lock-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+    }
+    
+    .folio-prompt-title,
+    .premium-lock-title {
+        font-size: 1.25rem;
+    }
+    
+    /* 卡片响应式 */
+    .membership-card {
+        padding: 1.5rem;
+    }
+    
+    .membership-card-title {
+        font-size: 1.25rem;
+    }
+    
+    .price-amount {
+        font-size: 1.5rem;
+    }
+    
+    /* 徽章响应式 */
+    .folio-membership-badge,
+    .folio-premium-badge {
+        font-size: 9px;
+        padding: 3px 6px;
+        gap: 3px;
+    }
+}
+
+@media (max-width: 480px) {
+    .folio-membership-badge,
+    .folio-premium-badge {
+        font-size: 8px;
+        padding: 2px 5px;
+    }
+}
+
+/* ==========================================================================
+   无障碍访问 - Accessibility
+   ========================================================================== */
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+    .folio-permission-prompt,
+    .premium-content {
+        border-width: 3px;
+    }
+    
+    .folio-btn,
+    .premium-btn,
+    .membership-btn {
+        border-width: 2px;
+    }
+}
+
+/* 减少动画模式 */
+@media (prefers-reduced-motion: reduce) {
+    .folio-permission-prompt,
+    .premium-content,
+    .folio-btn,
+    .premium-btn,
+    .membership-btn,
+    .folio-membership-badge,
+    .membership-card {
+        animation: none;
+        transition: none;
+    }
+}
+
+/* 焦点样式 */
+.folio-btn:focus,
+.premium-btn:focus,
+.membership-btn:focus,
+.folio-membership-badge:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* ==========================================================================
+   深色模式适配 - Dark Mode Adaptations
+   ========================================================================== */
+
+[data-theme="dark"] .folio-protected-article,
+[data-theme="dark"] .premium-content-locked {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+}
+
+[data-theme="dark"] .folio-content-preview,
+[data-theme="dark"] .premium-content-preview {
+    background: #111827;
+    color: #d1d5db;
+}
+
+[data-theme="dark"] .folio-content-fade,
+[data-theme="dark"] .premium-content-fade {
+    background: linear-gradient(transparent, #111827);
+}
+
+[data-theme="dark"] .folio-permission-prompt,
+[data-theme="dark"] .premium-content-lock {
+    background: #1f2937;
+    color: #f9fafb;
+    border-color: #374151;
+}
+
+[data-theme="dark"] .folio-prompt-title,
+[data-theme="dark"] .premium-lock-title {
+    color: #f9fafb;
+}
+
+[data-theme="dark"] .folio-prompt-description,
+[data-theme="dark"] .premium-lock-description {
+    color: #d1d5db;
+}
+
+[data-theme="dark"] .membership-badge-free {
+    background: #374151;
+    color: #9ca3af;
+}
+
+[data-theme="dark"] .folio-badge-vip,
+[data-theme="dark"] .membership-badge-vip,
+[data-theme="dark"] .folio-premium-badge-vip {
+    background: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+    padding: 0 8px;
+    border-radius: 15px;
+}
+
+[data-theme="dark"] .folio-badge-svip,
+[data-theme="dark"] .membership-badge-svip,
+[data-theme="dark"] .folio-premium-badge-svip {
+    background: rgba(139, 92, 246, 0.2);
+    color: #a78bfa;
+    padding: 0 8px;
+    border-radius: 15px;
+}

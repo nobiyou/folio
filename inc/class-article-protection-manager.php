@@ -344,7 +344,11 @@ class folio_Article_Protection_Manager {
 
         // 对于受保护的文章，返回简化的摘要
         $level_name = $protection_info['required_level'] === 'svip' ? 'SVIP' : 'VIP';
-        return '此内容为会员专属，需要' . $level_name . '等级查看。';
+        return sprintf(
+            /* translators: %s: required membership level. */
+            __('This content is member-only and requires %s access.', 'folio'),
+            $level_name
+        );
     }
 
     /**
@@ -364,10 +368,10 @@ class folio_Article_Protection_Manager {
         // RSS中根据设置决定是否显示预览
         if ($protection_info['rss_include']) {
             $preview = self::generate_preview($content, $protection_info);
-            return $preview . "\n\n此内容为会员专属，请访问网站查看完整内容。";
+            return $preview . "\n\n" . __('This content is member-only. Please visit the website to view the full content.', 'folio');
         }
 
-        return '此内容为会员专属，请访问网站查看完整内容。';
+        return __('This content is member-only. Please visit the website to view the full content.', 'folio');
     }
 
     /**
@@ -429,13 +433,21 @@ class folio_Article_Protection_Manager {
                 'is_protected' => true,
                 'required_level' => $protection_info['required_level'],
                 'can_access' => false,
-                'message' => '此内容为会员专属，需要' . ($protection_info['required_level'] === 'svip' ? 'SVIP' : 'VIP') . '等级查看。'
+                'message' => sprintf(
+                    /* translators: %s: required membership level. */
+                    __('This content is member-only and requires %s access.', 'folio'),
+                    $protection_info['required_level'] === 'svip' ? 'SVIP' : 'VIP'
+                )
             );
         }
         
         if (isset($data['excerpt']['rendered'])) {
             $level_name = $protection_info['required_level'] === 'svip' ? 'SVIP' : 'VIP';
-            $data['excerpt']['rendered'] = '此内容为会员专属，需要' . $level_name . '等级查看。';
+            $data['excerpt']['rendered'] = sprintf(
+                /* translators: %s: required membership level. */
+                __('This content is member-only and requires %s access.', 'folio'),
+                $level_name
+            );
         }
 
         $response->set_data($data);
@@ -466,7 +478,7 @@ class folio_Article_Protection_Manager {
             return wpautop($preview);
         }
 
-        return '此内容为会员专属内容。';
+        return __('This content is member-only.', 'folio');
     }
 
     /**
@@ -527,21 +539,33 @@ class folio_Article_Protection_Manager {
             </div>
             
             <div class="folio-prompt-content">
-                <h4 class="folio-prompt-title">此内容为<?php echo esc_html($level_name); ?>会员专属</h4>
+                <h4 class="folio-prompt-title">
+                    <?php
+                    printf(
+                        esc_html__('This content is exclusive to %s members.', 'folio'),
+                        esc_html($level_name)
+                    );
+                    ?>
+                </h4>
                 
                 <?php if (!$user_id) : ?>
-                <p class="folio-prompt-description">请先登录查看专属内容</p>
+                <p class="folio-prompt-description"><?php esc_html_e('Please sign in to view member-only content.', 'folio'); ?></p>
                 <div class="folio-prompt-actions">
                     <a href="<?php echo esc_url(home_url('/user-center/login')); ?>" class="folio-btn folio-btn-login">
-                        <span class="dashicons dashicons-admin-users"></span> 登录
+                        <span class="dashicons dashicons-admin-users"></span> <?php esc_html_e('Sign In', 'folio'); ?>
                     </a>
                     <a href="<?php echo esc_url(home_url('/user-center/register')); ?>" class="folio-btn folio-btn-register">
-                        <span class="dashicons dashicons-plus"></span> 注册
+                        <span class="dashicons dashicons-plus"></span> <?php esc_html_e('Sign Up', 'folio'); ?>
                     </a>
                 </div>
                 <?php else : ?>
                 <p class="folio-prompt-description">
-                    当前等级：<?php echo esc_html($user_membership['name']); ?>
+                    <?php
+                    printf(
+                        esc_html__('Current level: %s', 'folio'),
+                        esc_html($user_membership['name'])
+                    );
+                    ?>
                     <?php if ($user_membership['level'] !== 'free') : ?>
                     <span class="folio-current-badge"><?php echo wp_kses_post($user_membership['icon']); ?></span>
                     <?php endif; ?>
@@ -549,7 +573,12 @@ class folio_Article_Protection_Manager {
                 <div class="folio-prompt-actions">
                     <a href="<?php echo esc_url(home_url('/user-center/membership')); ?>" class="folio-btn folio-btn-upgrade">
                         <span class="dashicons dashicons-star-filled"></span>
-                        升级<?php echo esc_html($level_name); ?>
+                        <?php
+                        printf(
+                            esc_html__('Upgrade to %s', 'folio'),
+                            esc_html($level_name)
+                        );
+                        ?>
                     </a>
                 </div>
                 <?php endif; ?>
@@ -637,7 +666,11 @@ class folio_Article_Protection_Manager {
         }
         
         // 清除WordPress缓存 - 删除所有预览相关缓存
-        wp_cache_flush_group('folio_preview');
+        if (function_exists('wp_cache_supports') && wp_cache_supports('flush_group')) {
+            wp_cache_flush_group('folio_preview');
+        } elseif (function_exists('wp_cache_flush')) {
+            wp_cache_flush();
+        }
     }
 
     /**

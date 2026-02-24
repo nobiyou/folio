@@ -24,12 +24,20 @@ class folio_Unified_Performance_Admin {
         add_action('wp_ajax_folio_cache_refresh_stats', array($this, 'ajax_refresh_cache_stats'));
         add_action('wp_ajax_folio_cache_optimize', array($this, 'ajax_optimize_cache'));
         add_action('wp_ajax_folio_performance_stats', array($this, 'ajax_get_performance_stats'));
-        add_action('wp_ajax_folio_memcached_status', array($this, 'ajax_memcached_status'));
-        add_action('wp_ajax_folio_cache_health_check', array($this, 'ajax_health_check'));
+        if (!has_action('wp_ajax_folio_memcached_status')) {
+            add_action('wp_ajax_folio_memcached_status', array($this, 'ajax_memcached_status'));
+        }
+        if (!has_action('wp_ajax_folio_cache_health_check')) {
+            add_action('wp_ajax_folio_cache_health_check', array($this, 'ajax_health_check'));
+        }
         
         // 对象缓存管理AJAX处理器
-        add_action('wp_ajax_folio_install_object_cache', array($this, 'ajax_install_object_cache'));
-        add_action('wp_ajax_folio_uninstall_object_cache', array($this, 'ajax_uninstall_object_cache'));
+        if (!has_action('wp_ajax_folio_install_object_cache')) {
+            add_action('wp_ajax_folio_install_object_cache', array($this, 'ajax_install_object_cache'));
+        }
+        if (!has_action('wp_ajax_folio_uninstall_object_cache')) {
+            add_action('wp_ajax_folio_uninstall_object_cache', array($this, 'ajax_uninstall_object_cache'));
+        }
         
         // 扩展缓存操作AJAX处理器
         add_action('wp_ajax_folio_cache_preload', array($this, 'ajax_preload_cache'));
@@ -47,8 +55,8 @@ class folio_Unified_Performance_Admin {
      */
     public function add_admin_menu() {
         add_management_page(
-            '性能与缓存管理',
-            '性能与缓存',
+            __('Performance & Cache Management', 'folio'),
+            __('Performance & Cache', 'folio'),
             'manage_options',
             'folio-performance-cache',
             array($this, 'render_admin_page')
@@ -121,6 +129,22 @@ class folio_Unified_Performance_Admin {
     }
 
     /**
+     * 是否启用缓存详细日志（默认关闭，避免刷屏）。
+     */
+    private function is_cache_verbose_logging_enabled() {
+        return (bool) apply_filters('folio_cache_verbose_logging', false);
+    }
+
+    /**
+     * 记录缓存详细日志（仅在开关开启时）。
+     */
+    private function log_cache_verbose($message) {
+        if ($this->is_cache_verbose_logging_enabled()) {
+            error_log($message);
+        }
+    }
+
+    /**
      * 加载管理页面资源
      */
     public function enqueue_admin_scripts($hook) {
@@ -175,12 +199,101 @@ class folio_Unified_Performance_Admin {
             'object_cache_nonce' => wp_create_nonce('folio_object_cache'),
             'debug' => WP_DEBUG,
             'strings' => array(
-                'clearing' => '清除中...',
-                'cleared' => '已清除',
-                'error' => '操作失败',
-                'loading' => '加载中...',
-                'success' => '操作成功',
-                'confirm_clear_all' => '确定要清除所有缓存吗？这可能会暂时影响网站性能。'
+                'all_cache_cleared' => __('All cache cleared', 'folio'),
+                'analysis_failed' => __('Analysis failed: ', 'folio'),
+                'analysis_result' => __('Analysis Result:', 'folio'),
+                'analyzing' => __('Analyzing...', 'folio'),
+                'analyzing_memory_usage' => __('Analyzing memory usage...', 'folio'),
+                'cache_analysis_complete' => __('Cache analysis complete', 'folio'),
+                'cache_cleared_success' => __('Cache cleared successfully', 'folio'),
+                'cache_optimized' => __('Cache optimization completed', 'folio'),
+                'cache_preload_complete' => __('Cache preload completed', 'folio'),
+                'chart_15m_ago' => __('15 min ago', 'folio'),
+                'chart_1h_ago' => __('1 hour ago', 'folio'),
+                'chart_30m_ago' => __('30 min ago', 'folio'),
+                'chart_45m_ago' => __('45 min ago', 'folio'),
+                'chart_cache_hit_rate' => __('Cache Hit Rate (%)', 'folio'),
+                'chart_now' => __('Now', 'folio'),
+                'chart_object_cache' => __('Object Cache', 'folio'),
+                'chart_page_load_time' => __('Page Load Time (s)', 'folio'),
+                'chart_permission_cache' => __('Permission Cache', 'folio'),
+                'chart_preview_cache' => __('Preview Cache', 'folio'),
+                'chart_query_cache' => __('Query Cache', 'folio'),
+                'metric_page_load_time' => __('Page Load Time', 'folio'),
+                'metric_memory_usage' => __('Memory Usage', 'folio'),
+                'metric_db_queries' => __('Database Queries', 'folio'),
+                'metric_cache_backend' => __('Cache Backend', 'folio'),
+                'metric_cache_entries' => __('Cache Entries', 'folio'),
+                'metric_performance_boost' => __('Performance Boost', 'folio'),
+                'cache_type_permission_validation' => __('Permission Validation', 'folio'),
+                'cache_type_content_preview' => __('Content Preview', 'folio'),
+                'cache_type_query_cache' => __('Query Cache', 'folio'),
+                'cache_type_object_cache' => __('Object Cache', 'folio'),
+                'checking' => __('Checking...', 'folio'),
+                'cleaning_database' => __('Cleaning database...', 'folio'),
+                'cleanup_plugins_tip' => __('Check plugin management page and disable unnecessary plugins', 'folio'),
+                'clear_failed' => __('Clear failed: ', 'folio'),
+                'clearing' => __('Clearing...', 'folio'),
+                'cleared' => __('Cleared', 'folio'),
+                'confirm_install_object_cache' => __('Install Folio object cache? This will significantly improve site performance.', 'folio'),
+                'error' => __('Operation failed', 'folio'),
+                'confirm_reset_stats' => __('Reset all statistics? This action cannot be undone.', 'folio'),
+                'confirm_uninstall_object_cache' => __('Uninstall object cache? This will affect site performance.', 'folio'),
+                'efficiency_score' => __('Efficiency score: ', 'folio'),
+                'enabling_query_cache' => __('Enabling query cache...', 'folio'),
+                'expired_cache_cleared' => __('Expired cache cleared', 'folio'),
+                'export_failed' => __('Export failed: ', 'folio'),
+                'exporting' => __('Exporting...', 'folio'),
+                'guide_note' => __('Server administrator access is required', 'folio'),
+                'guide_step_1' => __('Ensure Memcached service is installed on server', 'folio'),
+                'guide_step_2' => __('Install PHP Memcached extension', 'folio'),
+                'guide_step_3' => __('Click "Install Memcached" button', 'folio'),
+                'guide_step_4' => __('Verify installation success', 'folio'),
+                'health_check_complete' => __('Health check complete', 'folio'),
+                'health_check_failed' => __('Health check failed: ', 'folio'),
+                'health_check_results' => __('Health Check Results', 'folio'),
+                'hit_rate' => __('Hit rate: ', 'folio'),
+                'increasing_cache_time' => __('Increasing cache TTL...', 'folio'),
+                'install_failed' => __('Install failed: ', 'folio'),
+                'installing' => __('Installing...', 'folio'),
+                'loading' => __('Loading...', 'folio'),
+                'monitoring_in_dev' => __('Performance monitoring is under development...', 'folio'),
+                'network_error_retry' => __('Network error, please try again', 'folio'),
+                'note' => __('Note:', 'folio'),
+                'object_cache_install_guide' => __('Object Cache Installation Guide', 'folio'),
+                'object_cache_installed' => __('Object cache installed successfully', 'folio'),
+                'object_cache_uninstalled' => __('Object cache uninstalled', 'folio'),
+                'optimization_items' => __('Optimization items: ', 'folio'),
+                'optimize_failed' => __('Optimization failed: ', 'folio'),
+                'optimizing' => __('Optimizing...', 'folio'),
+                'optimizing_cache_config' => __('Optimizing cache configuration...', 'folio'),
+                'optimizing_database' => __('Optimizing database...', 'folio'),
+                'performance_optimized' => __('Performance optimization completed', 'folio'),
+                'preload_failed' => __('Preload failed: ', 'folio'),
+                'preloading' => __('Preloading...', 'folio'),
+                'prompt_user_id' => __('Enter user ID (leave empty to clear current user cache):', 'folio'),
+                'refresh_failed' => __('Refresh failed: ', 'folio'),
+                'refreshing' => __('Refreshing...', 'folio'),
+                'reports_in_dev' => __('Performance reports are under development...', 'folio'),
+                'reset_failed' => __('Reset failed: ', 'folio'),
+                'resetting' => __('Resetting...', 'folio'),
+                'scheduled_cleanup_set' => __('Scheduled cleanup configured', 'folio'),
+                'setting' => __('Setting...', 'folio'),
+                'setting_failed' => __('Setting failed: ', 'folio'),
+                'stats_exported' => __('Statistics exported', 'folio'),
+                'stats_refreshed' => __('Statistics refreshed', 'folio'),
+                'stats_reset' => __('Statistics reset', 'folio'),
+                'status_excellent' => __('Excellent', 'folio'),
+                'status_high' => __('High', 'folio'),
+                'status_improvable' => __('Can be improved', 'folio'),
+                'status_needs_optimization' => __('Needs optimization', 'folio'),
+                'status_normal' => __('Normal', 'folio'),
+                'status_optimized' => __('Optimized', 'folio'),
+                'success' => __('Operation successful', 'folio'),
+                'uninstall_failed' => __('Uninstall failed: ', 'folio'),
+                'uninstalling' => __('Uninstalling...', 'folio'),
+                'user_cache_cleared' => __('User cache cleared', 'folio'),
+                'confirm_clear_all' => __('Are you sure you want to clear all cache? This may temporarily affect site performance.', 'folio')
             )
         ));
 
@@ -204,14 +317,14 @@ class folio_Unified_Performance_Admin {
         $performance_stats = $this->get_performance_statistics();
         ?>
         <div class="wrap">
-            <h1>性能与缓存管理</h1>
+            <h1><?php esc_html_e('Performance & Cache Management', 'folio'); ?></h1>
             
             <!-- 标签页导航 -->
             <nav class="nav-tab-wrapper">
-                <a href="#overview" class="nav-tab nav-tab-active" data-tab="overview">性能概览</a>
-                <a href="#cache-management" class="nav-tab" data-tab="cache-management">缓存管理</a>
-                <a href="#optimization" class="nav-tab" data-tab="optimization">优化建议</a>
-                <a href="#settings" class="nav-tab" data-tab="settings">设置</a>
+                <a href="#overview" class="nav-tab nav-tab-active" data-tab="overview"><?php esc_html_e('Overview', 'folio'); ?></a>
+                <a href="#cache-management" class="nav-tab" data-tab="cache-management"><?php esc_html_e('Cache Management', 'folio'); ?></a>
+                <a href="#optimization" class="nav-tab" data-tab="optimization"><?php esc_html_e('Optimization', 'folio'); ?></a>
+                <a href="#settings" class="nav-tab" data-tab="settings"><?php esc_html_e('Settings', 'folio'); ?></a>
             </nav>
 
             <!-- 性能概览标签页 -->
@@ -276,10 +389,10 @@ class folio_Unified_Performance_Admin {
                 <div class="stat-card">
                     <div class="stat-icon">📊</div>
                     <div class="stat-content">
-                        <h3>缓存命中率</h3>
-                        <div class="stat-value"><?php echo number_format($cache_stats['overall_hit_rate'], 1); ?>%</div>
-                        <div class="stat-status <?php echo $cache_stats['overall_hit_rate'] > 80 ? 'good' : 'warning'; ?>">
-                            <?php echo $cache_stats['overall_hit_rate'] > 80 ? '优秀' : '需要优化'; ?>
+                        <h3><?php esc_html_e('Cache Hit Rate', 'folio'); ?></h3>
+                        <div class="stat-value"><?php echo esc_html(number_format($cache_stats['overall_hit_rate'], 1)); ?>%</div>
+                        <div class="stat-status <?php echo esc_attr($cache_stats['overall_hit_rate'] > 80 ? 'good' : 'warning'); ?>">
+                            <?php echo $cache_stats['overall_hit_rate'] > 80 ? esc_html__('Excellent', 'folio') : esc_html__('Needs Optimization', 'folio'); ?>
                         </div>
                     </div>
                 </div>
@@ -287,10 +400,10 @@ class folio_Unified_Performance_Admin {
                 <div class="stat-card">
                     <div class="stat-icon">⚡</div>
                     <div class="stat-content">
-                        <h3>页面加载时间</h3>
-                        <div class="stat-value"><?php echo number_format($performance_stats['avg_load_time'], 2); ?>s</div>
-                        <div class="stat-status <?php echo $performance_stats['avg_load_time'] < 2 ? 'good' : 'warning'; ?>">
-                            <?php echo $performance_stats['avg_load_time'] < 2 ? '优秀' : '需要优化'; ?>
+                        <h3><?php esc_html_e('Page Load Time', 'folio'); ?></h3>
+                        <div class="stat-value"><?php echo esc_html(number_format($performance_stats['avg_load_time'], 2)); ?>s</div>
+                        <div class="stat-status <?php echo esc_attr($performance_stats['avg_load_time'] < 2 ? 'good' : 'warning'); ?>">
+                            <?php echo $performance_stats['avg_load_time'] < 2 ? esc_html__('Excellent', 'folio') : esc_html__('Needs Optimization', 'folio'); ?>
                         </div>
                     </div>
                 </div>
@@ -298,10 +411,10 @@ class folio_Unified_Performance_Admin {
                 <div class="stat-card">
                     <div class="stat-icon">💾</div>
                     <div class="stat-content">
-                        <h3>内存使用</h3>
-                        <div class="stat-value"><?php echo size_format($performance_stats['memory_usage']); ?></div>
-                        <div class="stat-status <?php echo $performance_stats['memory_usage'] < 128 * 1024 * 1024 ? 'good' : 'warning'; ?>">
-                            <?php echo $performance_stats['memory_usage'] < 128 * 1024 * 1024 ? '正常' : '偏高'; ?>
+                        <h3><?php esc_html_e('Memory Usage', 'folio'); ?></h3>
+                        <div class="stat-value"><?php echo esc_html(size_format($performance_stats['memory_usage'])); ?></div>
+                        <div class="stat-status <?php echo esc_attr($performance_stats['memory_usage'] < 128 * 1024 * 1024 ? 'good' : 'warning'); ?>">
+                            <?php echo $performance_stats['memory_usage'] < 128 * 1024 * 1024 ? esc_html__('Normal', 'folio') : esc_html__('High', 'folio'); ?>
                         </div>
                     </div>
                 </div>
@@ -309,10 +422,10 @@ class folio_Unified_Performance_Admin {
                 <div class="stat-card">
                     <div class="stat-icon">🗄️</div>
                     <div class="stat-content">
-                        <h3>数据库查询</h3>
-                        <div class="stat-value"><?php echo $performance_stats['db_queries']; ?></div>
-                        <div class="stat-status <?php echo $performance_stats['db_queries'] < 50 ? 'good' : 'warning'; ?>">
-                            <?php echo $performance_stats['db_queries'] < 50 ? '优秀' : '需要优化'; ?>
+                        <h3><?php esc_html_e('Database Queries', 'folio'); ?></h3>
+                        <div class="stat-value"><?php echo esc_html($performance_stats['db_queries']); ?></div>
+                        <div class="stat-status <?php echo esc_attr($performance_stats['db_queries'] < 50 ? 'good' : 'warning'); ?>">
+                            <?php echo $performance_stats['db_queries'] < 50 ? esc_html__('Excellent', 'folio') : esc_html__('Needs Optimization', 'folio'); ?>
                         </div>
                     </div>
                 </div>
@@ -321,12 +434,12 @@ class folio_Unified_Performance_Admin {
             <!-- 图表区域 -->
             <div class="charts-container security-charts-container">
                 <div class="chart-wrapper security-chart">
-                    <h3>性能趋势</h3>
+                    <h3><?php esc_html_e('Performance Trend', 'folio'); ?></h3>
                     <canvas id="performanceChart" width="400" height="280"></canvas>
                 </div>
                 
                 <div class="chart-wrapper security-chart security-chart-doughnut">
-                    <h3>缓存分布</h3>
+                    <h3><?php esc_html_e('Cache Distribution', 'folio'); ?></h3>
                     <div class="doughnut-chart-wrapper">
                         <canvas id="cacheChart" width="400" height="280"></canvas>
                     </div>
@@ -335,12 +448,12 @@ class folio_Unified_Performance_Admin {
 
             <!-- 快速操作 -->
             <div class="quick-actions">
-                <h3>快速操作</h3>
+                <h3><?php esc_html_e('Quick Actions', 'folio'); ?></h3>
                 <div class="action-buttons">
-                    <button class="button button-primary" id="refresh-all-stats">🔄 刷新统计</button>
-                    <button class="button" id="clear-all-cache">🗑️ 清除所有缓存</button>
-                    <button class="button" id="run-health-check">🔍 健康检查</button>
-                    <button class="button" id="optimize-performance">⚡ 性能优化</button>
+                    <button class="button button-primary" id="refresh-all-stats">🔄 <?php esc_html_e('Refresh Stats', 'folio'); ?></button>
+                    <button class="button" id="clear-all-cache">🗑️ <?php esc_html_e('Clear All Cache', 'folio'); ?></button>
+                    <button class="button" id="run-health-check">🔍 <?php esc_html_e('Health Check', 'folio'); ?></button>
+                    <button class="button" id="optimize-performance">⚡ <?php esc_html_e('Optimize Performance', 'folio'); ?></button>
                 </div>
             </div>
         </div>
@@ -355,15 +468,15 @@ class folio_Unified_Performance_Admin {
         <div class="folio-cache-management">
             <!-- 缓存状态概览 -->
             <div class="cache-overview-section">
-                <h3>缓存状态概览</h3>
+                <h3><?php esc_html_e('Cache Status Overview', 'folio'); ?></h3>
                 <div class="cache-status-cards">
                     <div class="cache-card">
                         <div class="cache-card-icon">💾</div>
                         <div class="cache-card-content">
-                            <h4>缓存后端</h4>
-                            <div class="cache-card-value"><?php echo $cache_stats['cache_backend']; ?></div>
-                            <div class="cache-card-status <?php echo $cache_stats['backend_status']; ?>">
-                                <?php echo $cache_stats['backend_status'] === 'good' ? '已优化' : '可改进'; ?>
+                            <h4><?php esc_html_e('Cache Backend', 'folio'); ?></h4>
+                            <div class="cache-card-value"><?php echo esc_html($cache_stats['cache_backend']); ?></div>
+                            <div class="cache-card-status <?php echo esc_attr($cache_stats['backend_status']); ?>">
+                                <?php echo $cache_stats['backend_status'] === 'good' ? esc_html__('Optimized', 'folio') : esc_html__('Can Be Improved', 'folio'); ?>
                             </div>
                         </div>
                     </div>
@@ -371,18 +484,18 @@ class folio_Unified_Performance_Admin {
                     <div class="cache-card">
                         <div class="cache-card-icon">📊</div>
                         <div class="cache-card-content">
-                            <h4>缓存条目</h4>
-                            <div class="cache-card-value"><?php echo number_format($cache_stats['total_entries']); ?></div>
-                            <div class="cache-card-status good">活跃</div>
+                            <h4><?php esc_html_e('Cache Entries', 'folio'); ?></h4>
+                            <div class="cache-card-value"><?php echo esc_html(number_format($cache_stats['total_entries'])); ?></div>
+                            <div class="cache-card-status good"><?php esc_html_e('Active', 'folio'); ?></div>
                         </div>
                     </div>
 
                     <div class="cache-card">
                         <div class="cache-card-icon">⚡</div>
                         <div class="cache-card-content">
-                            <h4>性能提升</h4>
-                            <div class="cache-card-value"><?php echo $cache_stats['performance_boost']; ?>%</div>
-                            <div class="cache-card-status good">加速</div>
+                            <h4><?php esc_html_e('Performance Boost', 'folio'); ?></h4>
+                            <div class="cache-card-value"><?php echo esc_html($cache_stats['performance_boost']); ?>%</div>
+                            <div class="cache-card-status good"><?php esc_html_e('Boosted', 'folio'); ?></div>
                         </div>
                     </div>
                 </div>
@@ -390,60 +503,60 @@ class folio_Unified_Performance_Admin {
 
             <!-- 缓存类型管理 -->
             <div class="cache-types-section">
-                <h3>缓存类型管理</h3>
+                <h3><?php esc_html_e('Cache Type Management', 'folio'); ?></h3>
                 <table class="wp-list-table widefat fixed striped">
                     <thead>
                         <tr>
-                            <th>缓存类型</th>
-                            <th>描述</th>
-                            <th>条目数量</th>
-                            <th>命中率</th>
-                            <th>过期时间</th>
-                            <th>操作</th>
+                            <th><?php esc_html_e('Cache Type', 'folio'); ?></th>
+                            <th><?php esc_html_e('Description', 'folio'); ?></th>
+                            <th><?php esc_html_e('Entries', 'folio'); ?></th>
+                            <th><?php esc_html_e('Hit Rate', 'folio'); ?></th>
+                            <th><?php esc_html_e('TTL', 'folio'); ?></th>
+                            <th><?php esc_html_e('Actions', 'folio'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>权限验证缓存</strong></td>
-                            <td>用户访问权限检查结果</td>
-                            <td><?php echo $cache_stats['permission_cache']['count']; ?></td>
-                            <td><?php echo number_format($cache_stats['permission_cache']['hit_rate'], 1); ?>%</td>
-                            <td>1小时</td>
+                            <td><strong><?php esc_html_e('Permission Validation Cache', 'folio'); ?></strong></td>
+                            <td><?php esc_html_e('User access permission check results', 'folio'); ?></td>
+                            <td><?php echo esc_html($cache_stats['permission_cache']['count']); ?></td>
+                            <td><?php echo esc_html(number_format($cache_stats['permission_cache']['hit_rate'], 1)); ?>%</td>
+                            <td><?php esc_html_e('1 hour', 'folio'); ?></td>
                             <td>
-                                <button class="button cache-clear-btn" data-type="permission">清除</button>
-                                <button class="button cache-refresh-btn" data-type="permission">刷新</button>
+                                <button class="button cache-clear-btn" data-type="permission"><?php esc_html_e('Clear', 'folio'); ?></button>
+                                <button class="button cache-refresh-btn" data-type="permission"><?php esc_html_e('Refresh', 'folio'); ?></button>
                             </td>
                         </tr>
                         <tr>
-                            <td><strong>内容预览缓存</strong></td>
-                            <td>文章预览内容生成结果</td>
-                            <td><?php echo $cache_stats['preview_cache']['count']; ?></td>
-                            <td><?php echo number_format($cache_stats['preview_cache']['hit_rate'], 1); ?>%</td>
-                            <td>24小时</td>
+                            <td><strong><?php esc_html_e('Content Preview Cache', 'folio'); ?></strong></td>
+                            <td><?php esc_html_e('Generated article preview results', 'folio'); ?></td>
+                            <td><?php echo esc_html($cache_stats['preview_cache']['count']); ?></td>
+                            <td><?php echo esc_html(number_format($cache_stats['preview_cache']['hit_rate'], 1)); ?>%</td>
+                            <td><?php esc_html_e('24 hours', 'folio'); ?></td>
                             <td>
-                                <button class="button cache-clear-btn" data-type="preview">清除</button>
-                                <button class="button cache-refresh-btn" data-type="preview">刷新</button>
+                                <button class="button cache-clear-btn" data-type="preview"><?php esc_html_e('Clear', 'folio'); ?></button>
+                                <button class="button cache-refresh-btn" data-type="preview"><?php esc_html_e('Refresh', 'folio'); ?></button>
                             </td>
                         </tr>
                         <tr>
-                            <td><strong>查询缓存</strong></td>
-                            <td>数据库查询结果缓存</td>
-                            <td><?php echo $cache_stats['query_cache']['count']; ?></td>
-                            <td><?php echo number_format($cache_stats['query_cache']['hit_rate'], 1); ?>%</td>
-                            <td>30分钟</td>
+                            <td><strong><?php esc_html_e('Query Cache', 'folio'); ?></strong></td>
+                            <td><?php esc_html_e('Database query result cache', 'folio'); ?></td>
+                            <td><?php echo esc_html($cache_stats['query_cache']['count']); ?></td>
+                            <td><?php echo esc_html(number_format($cache_stats['query_cache']['hit_rate'], 1)); ?>%</td>
+                            <td><?php esc_html_e('30 minutes', 'folio'); ?></td>
                             <td>
-                                <button class="button cache-clear-btn" data-type="query">清除</button>
-                                <button class="button cache-refresh-btn" data-type="query">刷新</button>
+                                <button class="button cache-clear-btn" data-type="query"><?php esc_html_e('Clear', 'folio'); ?></button>
+                                <button class="button cache-refresh-btn" data-type="query"><?php esc_html_e('Refresh', 'folio'); ?></button>
                             </td>
                         </tr>
                         <tr>
-                            <td><strong>对象缓存</strong></td>
-                            <td>WordPress对象缓存</td>
-                            <td><?php echo $cache_stats['object_cache']['count']; ?></td>
-                            <td><?php echo number_format($cache_stats['object_cache']['hit_rate'], 1); ?>%</td>
-                            <td>变动</td>
+                            <td><strong><?php esc_html_e('Object Cache', 'folio'); ?></strong></td>
+                            <td><?php esc_html_e('WordPress object cache', 'folio'); ?></td>
+                            <td><?php echo esc_html($cache_stats['object_cache']['count']); ?></td>
+                            <td><?php echo esc_html(number_format($cache_stats['object_cache']['hit_rate'], 1)); ?>%</td>
+                            <td><?php esc_html_e('Dynamic', 'folio'); ?></td>
                             <td>
-                                <button class="button cache-clear-btn" data-type="object">清除</button>
+                                <button class="button cache-clear-btn" data-type="object"><?php esc_html_e('Clear', 'folio'); ?></button>
                             </td>
                         </tr>
                     </tbody>
@@ -452,33 +565,33 @@ class folio_Unified_Performance_Admin {
 
             <!-- 对象缓存管理 -->
             <div class="object-cache-section">
-                <h3>对象缓存管理</h3>
+                <h3><?php esc_html_e('Object Cache Management', 'folio'); ?></h3>
                 <?php $this->render_object_cache_management(); ?>
             </div>
 
             <!-- 批量操作 -->
             <div class="batch-operations-section">
-                <h3>批量操作</h3>
+                <h3><?php esc_html_e('Batch Operations', 'folio'); ?></h3>
                 <div class="batch-actions-grid">
                     <div class="action-group">
-                        <h4>清除操作</h4>
-                        <button class="button button-primary" id="clear-all-cache-detailed">清除所有缓存</button>
-                        <button class="button" id="clear-expired-cache">清除过期缓存</button>
-                        <button class="button" id="clear-user-cache">清除用户缓存</button>
+                        <h4><?php esc_html_e('Clear Actions', 'folio'); ?></h4>
+                        <button class="button button-primary" id="clear-all-cache-detailed"><?php esc_html_e('Clear All Cache', 'folio'); ?></button>
+                        <button class="button" id="clear-expired-cache"><?php esc_html_e('Clear Expired Cache', 'folio'); ?></button>
+                        <button class="button" id="clear-user-cache"><?php esc_html_e('Clear User Cache', 'folio'); ?></button>
                     </div>
 
                     <div class="action-group">
-                        <h4>优化操作</h4>
-                        <button class="button" id="optimize-cache">优化缓存配置</button>
-                        <button class="button" id="preload-cache">预热缓存</button>
-                        <button class="button" id="analyze-cache">分析缓存效率</button>
+                        <h4><?php esc_html_e('Optimization Actions', 'folio'); ?></h4>
+                        <button class="button" id="optimize-cache"><?php esc_html_e('Optimize Cache Config', 'folio'); ?></button>
+                        <button class="button" id="preload-cache"><?php esc_html_e('Preload Cache', 'folio'); ?></button>
+                        <button class="button" id="analyze-cache"><?php esc_html_e('Analyze Cache Efficiency', 'folio'); ?></button>
                     </div>
 
                     <div class="action-group">
-                        <h4>维护操作</h4>
-                        <button class="button" id="export-cache-stats">导出统计</button>
-                        <button class="button" id="reset-cache-stats">重置统计</button>
-                        <button class="button" id="schedule-cleanup">定时清理</button>
+                        <h4><?php esc_html_e('Maintenance Actions', 'folio'); ?></h4>
+                        <button class="button" id="export-cache-stats"><?php esc_html_e('Export Stats', 'folio'); ?></button>
+                        <button class="button" id="reset-cache-stats"><?php esc_html_e('Reset Stats', 'folio'); ?></button>
+                        <button class="button" id="schedule-cleanup"><?php esc_html_e('Schedule Cleanup', 'folio'); ?></button>
                     </div>
                 </div>
             </div>
@@ -493,32 +606,32 @@ class folio_Unified_Performance_Admin {
         $recommendations = $this->get_optimization_recommendations($performance_stats, $cache_stats);
         ?>
         <div class="folio-optimization-recommendations">
-            <h3>性能优化建议</h3>
+            <h3><?php esc_html_e('Performance Optimization Recommendations', 'folio'); ?></h3>
             
             <?php if (WP_DEBUG) : ?>
             <div class="debug-info" style="background: #f0f0f0; padding: 10px; margin: 10px 0; border-radius: 4px; font-size: 12px;">
-                <strong>调试信息：</strong><br>
-                缓存命中率: <?php echo number_format($cache_stats['overall_hit_rate'], 1); ?>%<br>
-                对象缓存: <?php echo wp_using_ext_object_cache() ? '已启用' : '未启用'; ?><br>
-                内存使用: <?php echo size_format($performance_stats['memory_usage']); ?><br>
-                数据库查询: <?php echo $performance_stats['db_queries']; ?><br>
-                建议数量: <?php echo count($recommendations); ?>
+                <strong><?php esc_html_e('Debug Info:', 'folio'); ?></strong><br>
+                <?php esc_html_e('Cache hit rate:', 'folio'); ?> <?php echo esc_html(number_format($cache_stats['overall_hit_rate'], 1)); ?>%<br>
+                <?php esc_html_e('Object cache:', 'folio'); ?> <?php echo wp_using_ext_object_cache() ? esc_html__('Enabled', 'folio') : esc_html__('Disabled', 'folio'); ?><br>
+                <?php esc_html_e('Memory usage:', 'folio'); ?> <?php echo esc_html(size_format($performance_stats['memory_usage'])); ?><br>
+                <?php esc_html_e('Database queries:', 'folio'); ?> <?php echo esc_html($performance_stats['db_queries']); ?><br>
+                <?php esc_html_e('Recommendation count:', 'folio'); ?> <?php echo esc_html((string) count($recommendations)); ?>
             </div>
             <?php endif; ?>
             
             <?php if (empty($recommendations)) : ?>
             <div class="no-recommendations" style="text-align: center; padding: 40px; color: #666;">
                 <div style="font-size: 48px; margin-bottom: 20px;">🎉</div>
-                <h4>系统运行完美！</h4>
-                <p>当前没有发现需要优化的项目，您的网站性能表现优秀。</p>
-                <button class="button button-primary" onclick="location.reload()">刷新检查</button>
+                <h4><?php esc_html_e('System is running great!', 'folio'); ?></h4>
+                <p><?php esc_html_e('No optimization issues were detected. Your site performance looks excellent.', 'folio'); ?></p>
+                <button class="button button-primary" onclick="location.reload()"><?php esc_html_e('Refresh Check', 'folio'); ?></button>
             </div>
             <?php else : ?>
             <div class="recommendations-grid">
                 <?php foreach ($recommendations as $recommendation) : ?>
                 <div class="recommendation-card <?php echo esc_attr($recommendation['priority']); ?>">
                     <div class="recommendation-header">
-                        <div class="recommendation-icon"><?php echo $recommendation['icon']; ?></div>
+                        <div class="recommendation-icon"><?php echo esc_html($recommendation['icon']); ?></div>
                         <div class="recommendation-title"><?php echo esc_html($recommendation['title']); ?></div>
                         <div class="recommendation-priority"><?php echo esc_html($recommendation['priority_text']); ?></div>
                     </div>
@@ -551,63 +664,63 @@ class folio_Unified_Performance_Admin {
             <form method="post" action="options.php">
                 <?php settings_fields('folio_cache_settings'); ?>
                 
-                <h3>缓存配置</h3>
+                <h3><?php esc_html_e('Cache Configuration', 'folio'); ?></h3>
                 <table class="form-table">
                     <tr>
-                        <th scope="row">启用缓存</th>
+                        <th scope="row"><?php esc_html_e('Enable Cache', 'folio'); ?></th>
                         <td>
                             <label>
                                 <input type="checkbox" name="folio_cache_enabled" value="1" 
                                        <?php checked(get_option('folio_cache_enabled', 1)); ?> />
-                                启用Folio缓存系统
+                                <?php esc_html_e('Enable Folio cache system', 'folio'); ?>
                             </label>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">权限缓存过期时间</th>
+                        <th scope="row"><?php esc_html_e('Permission Cache Expiry', 'folio'); ?></th>
                         <td>
                             <input type="number" name="folio_permission_cache_expiry" 
                                    value="<?php echo get_option('folio_permission_cache_expiry', 3600); ?>" 
                                    min="300" max="86400" />
-                            <p class="description">秒（300-86400）</p>
+                            <p class="description"><?php esc_html_e('Seconds (300-86400)', 'folio'); ?></p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">预览缓存过期时间</th>
+                        <th scope="row"><?php esc_html_e('Preview Cache Expiry', 'folio'); ?></th>
                         <td>
                             <input type="number" name="folio_preview_cache_expiry" 
                                    value="<?php echo get_option('folio_preview_cache_expiry', 86400); ?>" 
                                    min="3600" max="604800" />
-                            <p class="description">秒（3600-604800）</p>
+                            <p class="description"><?php esc_html_e('Seconds (3600-604800)', 'folio'); ?></p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">查询缓存过期时间</th>
+                        <th scope="row"><?php esc_html_e('Query Cache Expiry', 'folio'); ?></th>
                         <td>
                             <input type="number" name="folio_query_cache_expiry" 
                                    value="<?php echo get_option('folio_query_cache_expiry', 1800); ?>" 
                                    min="300" max="7200" />
-                            <p class="description">秒（300-7200）</p>
+                            <p class="description"><?php esc_html_e('Seconds (300-7200)', 'folio'); ?></p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">自动清理</th>
+                        <th scope="row"><?php esc_html_e('Auto Cleanup', 'folio'); ?></th>
                         <td>
                             <label>
                                 <input type="checkbox" name="folio_cache_auto_cleanup" value="1" 
                                        <?php checked(get_option('folio_cache_auto_cleanup', 1)); ?> />
-                                启用自动清理过期缓存
+                                <?php esc_html_e('Enable automatic cleanup of expired cache', 'folio'); ?>
                             </label>
                         </td>
                     </tr>
                 </table>
                 
-                <?php submit_button('保存配置'); ?>
+                <?php submit_button(__('Save Configuration', 'folio')); ?>
             </form>
 
             <!-- 系统信息 -->
             <div class="system-info-section">
-                <h3>系统信息</h3>
+                <h3><?php esc_html_e('System Information', 'folio'); ?></h3>
                 <?php $this->render_system_info(); ?>
             </div>
         </div>
@@ -629,30 +742,30 @@ class folio_Unified_Performance_Admin {
         <div class="object-cache-status">
             <div class="status-grid">
                 <div class="status-item">
-                    <strong>对象缓存状态:</strong>
+                    <strong><?php esc_html_e('Object Cache Status:', 'folio'); ?></strong>
                     <?php if ($status['has_object_cache']) : ?>
-                        <span class="status-active">✅ 已安装</span>
+                        <span class="status-active"><?php esc_html_e('✅ Installed', 'folio'); ?></span>
                     <?php else : ?>
-                        <span class="status-inactive">❌ 未安装</span>
+                        <span class="status-inactive"><?php esc_html_e('❌ Not installed', 'folio'); ?></span>
                     <?php endif; ?>
                 </div>
                 
                 <div class="status-item">
-                    <strong>Memcached支持:</strong>
+                    <strong><?php esc_html_e('Memcached Support:', 'folio'); ?></strong>
                     <?php if ($status['is_memcached_available']) : ?>
-                        <span class="status-active">✅ 可用</span>
+                        <span class="status-active"><?php esc_html_e('✅ Available', 'folio'); ?></span>
                     <?php else : ?>
-                        <span class="status-inactive">❌ 不可用</span>
+                        <span class="status-inactive"><?php esc_html_e('❌ Unavailable', 'folio'); ?></span>
                     <?php endif; ?>
                 </div>
                 
                 <?php if ($status['has_object_cache']) : ?>
                 <div class="status-item">
-                    <strong>版本类型:</strong>
+                    <strong><?php esc_html_e('Version Type:', 'folio'); ?></strong>
                     <?php if ($status['is_folio_version']) : ?>
-                        <span class="status-active">Folio优化版</span>
+                        <span class="status-active"><?php esc_html_e('Folio optimized version', 'folio'); ?></span>
                     <?php else : ?>
-                        <span class="status-warning">第三方版本</span>
+                        <span class="status-warning"><?php esc_html_e('Third-party version', 'folio'); ?></span>
                     <?php endif; ?>
                 </div>
                 <?php endif; ?>
@@ -661,28 +774,28 @@ class folio_Unified_Performance_Admin {
             <div class="object-cache-actions">
                 <?php if (!$status['has_object_cache'] && $status['is_memcached_available']) : ?>
                     <button type="button" class="button button-primary" id="install-object-cache-btn">
-                        安装Folio对象缓存
+                        <?php esc_html_e('Install Folio Object Cache', 'folio'); ?>
                     </button>
-                    <p class="description">安装Folio优化的Memcached对象缓存，显著提升网站性能。</p>
+                    <p class="description"><?php esc_html_e('Install the Folio-optimized Memcached object cache to significantly improve site performance.', 'folio'); ?></p>
                 
                 <?php elseif ($status['has_object_cache'] && $status['is_folio_version']) : ?>
                     <button type="button" class="button button-secondary" id="uninstall-object-cache-btn">
-                        卸载对象缓存
+                        <?php esc_html_e('Uninstall Object Cache', 'folio'); ?>
                     </button>
                     <button type="button" class="button" id="reinstall-object-cache-btn">
-                        重新安装
+                        <?php esc_html_e('Reinstall', 'folio'); ?>
                     </button>
-                    <p class="description">当前使用Folio优化的对象缓存。</p>
+                    <p class="description"><?php esc_html_e('Currently using the Folio-optimized object cache.', 'folio'); ?></p>
                 
                 <?php elseif ($status['has_object_cache'] && !$status['is_folio_version']) : ?>
                     <button type="button" class="button button-primary" id="replace-object-cache-btn">
-                        替换为Folio版本
+                        <?php esc_html_e('Replace with Folio Version', 'folio'); ?>
                     </button>
-                    <p class="description">检测到第三方对象缓存，可以替换为Folio优化版本。</p>
+                    <p class="description"><?php esc_html_e('A third-party object cache was detected. You can replace it with the Folio-optimized version.', 'folio'); ?></p>
                 
                 <?php else : ?>
                     <p class="description" style="color: #dc3232;">
-                        ⚠️ Memcached扩展不可用，请先安装php-memcached扩展。
+                        <?php esc_html_e('⚠️ Memcached extension is unavailable. Please install the php-memcached extension first.', 'folio'); ?>
                     </p>
                 <?php endif; ?>
             </div>
@@ -697,44 +810,44 @@ class folio_Unified_Performance_Admin {
         ?>
         <div class="system-info-grid">
             <div class="info-section">
-                <h4>缓存后端</h4>
+                <h4><?php esc_html_e('Cache Backend', 'folio'); ?></h4>
                 <ul>
-                    <li>对象缓存: <?php echo wp_using_ext_object_cache() ? '启用' : '禁用'; ?></li>
-                    <li>Redis: <?php echo class_exists('Redis') ? '可用' : '不可用'; ?></li>
+                    <li><?php esc_html_e('Object Cache:', 'folio'); ?> <?php echo wp_using_ext_object_cache() ? esc_html__('Enabled', 'folio') : esc_html__('Disabled', 'folio'); ?></li>
+                    <li><?php esc_html_e('Redis:', 'folio'); ?> <?php echo class_exists('Redis') ? esc_html__('Available', 'folio') : esc_html__('Unavailable', 'folio'); ?></li>
                     <li>Memcached: <?php 
                         if (class_exists('Memcached') && function_exists('folio_check_memcached_availability')) {
                             $mc_status = folio_check_memcached_availability();
                             if ($mc_status['connection_test']) {
-                                echo '✅ 已连接';
+                                echo esc_html__('✅ Connected', 'folio');
                             } elseif ($mc_status['server_reachable']) {
-                                echo '⚠️ 服务可达但连接失败';
+                                echo esc_html__('⚠️ Reachable but connection failed', 'folio');
                             } else {
-                                echo '❌ 服务不可达';
+                                echo esc_html__('❌ Service unreachable', 'folio');
                             }
                         } else {
-                            echo '不可用';
+                            echo esc_html__('Unavailable', 'folio');
                         }
                     ?></li>
-                    <li>APCu: <?php echo function_exists('apcu_enabled') && apcu_enabled() ? '启用' : '禁用'; ?></li>
+                    <li><?php esc_html_e('APCu:', 'folio'); ?> <?php echo function_exists('apcu_enabled') && apcu_enabled() ? esc_html__('Enabled', 'folio') : esc_html__('Disabled', 'folio'); ?></li>
                 </ul>
             </div>
 
             <div class="info-section">
-                <h4>PHP缓存</h4>
+                <h4><?php esc_html_e('PHP Cache', 'folio'); ?></h4>
                 <ul>
-                    <li>OPcache: <?php echo function_exists('opcache_get_status') && opcache_get_status() ? '启用' : '禁用'; ?></li>
-                    <li>内存限制: <?php echo ini_get('memory_limit'); ?></li>
-                    <li>最大执行时间: <?php echo ini_get('max_execution_time'); ?>s</li>
-                    <li>文件上传限制: <?php echo ini_get('upload_max_filesize'); ?></li>
+                    <li><?php esc_html_e('OPcache:', 'folio'); ?> <?php echo function_exists('opcache_get_status') && opcache_get_status() ? esc_html__('Enabled', 'folio') : esc_html__('Disabled', 'folio'); ?></li>
+                    <li><?php esc_html_e('Memory Limit:', 'folio'); ?> <?php echo ini_get('memory_limit'); ?></li>
+                    <li><?php esc_html_e('Max Execution Time:', 'folio'); ?> <?php echo ini_get('max_execution_time'); ?>s</li>
+                    <li><?php esc_html_e('Upload Max Filesize:', 'folio'); ?> <?php echo ini_get('upload_max_filesize'); ?></li>
                 </ul>
             </div>
 
             <div class="info-section">
-                <h4>WordPress缓存</h4>
+                <h4><?php esc_html_e('WordPress Cache', 'folio'); ?></h4>
                 <ul>
-                    <li>WP_CACHE: <?php echo defined('WP_CACHE') && WP_CACHE ? '启用' : '禁用'; ?></li>
-                    <li>调试模式: <?php echo WP_DEBUG ? '启用' : '禁用'; ?></li>
-                    <li>缓存插件: <?php echo $this->detect_cache_plugins(); ?></li>
+                    <li><?php esc_html_e('WP_CACHE:', 'folio'); ?> <?php echo defined('WP_CACHE') && WP_CACHE ? esc_html__('Enabled', 'folio') : esc_html__('Disabled', 'folio'); ?></li>
+                    <li><?php esc_html_e('Debug Mode:', 'folio'); ?> <?php echo WP_DEBUG ? esc_html__('Enabled', 'folio') : esc_html__('Disabled', 'folio'); ?></li>
+                    <li><?php esc_html_e('Cache Plugins:', 'folio'); ?> <?php echo $this->detect_cache_plugins(); ?></li>
                     <li>CDN: <?php echo $this->detect_cdn(); ?></li>
                 </ul>
             </div>
@@ -846,7 +959,7 @@ class folio_Unified_Performance_Admin {
             // 返回默认数据
             return array(
                 'overall_hit_rate' => 87.0,
-                'cache_backend' => '内置',
+                'cache_backend' => __('Built-in', 'folio'),
                 'backend_status' => 'warning',
                 'total_entries' => 150,
                 'performance_boost' => 78.3,
@@ -868,10 +981,10 @@ class folio_Unified_Performance_Admin {
             } elseif (class_exists('Redis')) {
                 return 'Redis';
             } else {
-                return '外部对象缓存';
+                return __('External Object Cache', 'folio');
             }
         }
-        return '内置';
+        return __('Built-in', 'folio');
     }
 
     /**
@@ -934,25 +1047,26 @@ class folio_Unified_Performance_Admin {
     private function get_optimization_recommendations($performance_stats, $cache_stats) {
         $recommendations = array();
 
-        // 调试信息（仅在WP_DEBUG模式下显示）
-        if (WP_DEBUG) {
-            error_log('Folio Optimization: Cache hit rate = ' . $cache_stats['overall_hit_rate']);
-            error_log('Folio Optimization: Object cache = ' . (wp_using_ext_object_cache() ? 'enabled' : 'disabled'));
-            error_log('Folio Optimization: Memory usage = ' . size_format($performance_stats['memory_usage']));
-            error_log('Folio Optimization: DB queries = ' . $performance_stats['db_queries']);
-        }
+        // 详细统计日志默认关闭，可通过过滤器 folio_cache_verbose_logging 开启。
+        $this->log_cache_verbose('Folio Optimization: Cache hit rate = ' . $cache_stats['overall_hit_rate']);
+        $this->log_cache_verbose('Folio Optimization: Object cache = ' . (wp_using_ext_object_cache() ? 'enabled' : 'disabled'));
+        $this->log_cache_verbose('Folio Optimization: Memory usage = ' . size_format($performance_stats['memory_usage']));
+        $this->log_cache_verbose('Folio Optimization: DB queries = ' . $performance_stats['db_queries']);
 
         // 缓存命中率建议
         if ($cache_stats['overall_hit_rate'] < 80) {
             $recommendations[] = array(
                 'icon' => '🎯',
-                'title' => '提升缓存命中率',
-                'description' => '当前缓存命中率为 ' . number_format($cache_stats['overall_hit_rate'], 1) . '%，建议优化缓存策略。',
+                'title' => __('Improve Cache Hit Rate', 'folio'),
+                'description' => sprintf(
+                    __('Current cache hit rate is %s%%. Consider optimizing your cache strategy.', 'folio'),
+                    number_format($cache_stats['overall_hit_rate'], 1)
+                ),
                 'priority' => 'high',
-                'priority_text' => '高优先级',
+                'priority_text' => __('High Priority', 'folio'),
                 'actions' => array(
-                    array('label' => '优化缓存配置', 'onclick' => 'optimizeCacheConfig()'),
-                    array('label' => '增加缓存时间', 'onclick' => 'increaseCacheTime()')
+                    array('label' => __('Optimize Cache Config', 'folio'), 'onclick' => 'optimizeCacheConfig()'),
+                    array('label' => __('Increase Cache TTL', 'folio'), 'onclick' => 'increaseCacheTime()')
                 )
             );
         }
@@ -961,13 +1075,13 @@ class folio_Unified_Performance_Admin {
         if (!wp_using_ext_object_cache()) {
             $recommendations[] = array(
                 'icon' => '💾',
-                'title' => '安装对象缓存',
-                'description' => '安装Redis或Memcached对象缓存可以显著提升数据库查询性能。',
+                'title' => __('Install Object Cache', 'folio'),
+                'description' => __('Installing Redis or Memcached object cache can significantly improve database query performance.', 'folio'),
                 'priority' => 'high',
-                'priority_text' => '高优先级',
+                'priority_text' => __('High Priority', 'folio'),
                 'actions' => array(
-                    array('label' => '安装Memcached', 'onclick' => 'installObjectCache()'),
-                    array('label' => '查看教程', 'onclick' => 'showCacheGuide()')
+                    array('label' => __('Install Memcached', 'folio'), 'onclick' => 'installObjectCache()'),
+                    array('label' => __('View Guide', 'folio'), 'onclick' => 'showCacheGuide()')
                 )
             );
         }
@@ -976,13 +1090,16 @@ class folio_Unified_Performance_Admin {
         if ($performance_stats['memory_usage'] > 128 * 1024 * 1024) {
             $recommendations[] = array(
                 'icon' => '🧠',
-                'title' => '优化内存使用',
-                'description' => '当前内存使用较高（' . size_format($performance_stats['memory_usage']) . '），建议检查插件和主题代码。',
+                'title' => __('Optimize Memory Usage', 'folio'),
+                'description' => sprintf(
+                    __('Current memory usage is high (%s). Consider checking plugins and theme code.', 'folio'),
+                    size_format($performance_stats['memory_usage'])
+                ),
                 'priority' => 'medium',
-                'priority_text' => '中优先级',
+                'priority_text' => __('Medium Priority', 'folio'),
                 'actions' => array(
-                    array('label' => '分析内存使用', 'onclick' => 'analyzeMemoryUsage()'),
-                    array('label' => '清理无用插件', 'onclick' => 'cleanupPlugins()')
+                    array('label' => __('Analyze Memory Usage', 'folio'), 'onclick' => 'analyzeMemoryUsage()'),
+                    array('label' => __('Clean Unused Plugins', 'folio'), 'onclick' => 'cleanupPlugins()')
                 )
             );
         }
@@ -991,13 +1108,16 @@ class folio_Unified_Performance_Admin {
         if ($performance_stats['db_queries'] > 50) {
             $recommendations[] = array(
                 'icon' => '🗄️',
-                'title' => '减少数据库查询',
-                'description' => '当前页面数据库查询数为 ' . $performance_stats['db_queries'] . '，建议优化查询。',
+                'title' => __('Reduce Database Queries', 'folio'),
+                'description' => sprintf(
+                    __('Current page has %d database queries. Consider optimizing queries.', 'folio'),
+                    $performance_stats['db_queries']
+                ),
                 'priority' => 'medium',
-                'priority_text' => '中优先级',
+                'priority_text' => __('Medium Priority', 'folio'),
                 'actions' => array(
-                    array('label' => '启用查询缓存', 'onclick' => 'enableQueryCache()'),
-                    array('label' => '优化数据库', 'onclick' => 'optimizeDatabase()')
+                    array('label' => __('Enable Query Cache', 'folio'), 'onclick' => 'enableQueryCache()'),
+                    array('label' => __('Optimize Database', 'folio'), 'onclick' => 'optimizeDatabase()')
                 )
             );
         }
@@ -1007,36 +1127,36 @@ class folio_Unified_Performance_Admin {
             // 系统运行良好时的建议
             $recommendations[] = array(
                 'icon' => '✅',
-                'title' => '系统运行良好',
-                'description' => '当前系统性能表现优秀！以下是一些进一步优化的建议。',
+                'title' => __('System Running Well', 'folio'),
+                'description' => __('Current system performance is excellent. Here are some further optimization suggestions.', 'folio'),
                 'priority' => 'low',
-                'priority_text' => '维护建议',
+                'priority_text' => __('Maintenance Suggestion', 'folio'),
                 'actions' => array()
             );
 
             // 定期维护建议
             $recommendations[] = array(
                 'icon' => '🔧',
-                'title' => '定期维护',
-                'description' => '建议定期清理数据库、更新插件和主题，保持系统最佳状态。',
+                'title' => __('Regular Maintenance', 'folio'),
+                'description' => __('Regularly clean the database and update plugins/themes to keep the system in best condition.', 'folio'),
                 'priority' => 'low',
-                'priority_text' => '维护建议',
+                'priority_text' => __('Maintenance Suggestion', 'folio'),
                 'actions' => array(
-                    array('label' => '清理数据库', 'onclick' => 'cleanupDatabase()'),
-                    array('label' => '检查更新', 'onclick' => 'checkUpdates()')
+                    array('label' => __('Clean Database', 'folio'), 'onclick' => 'cleanupDatabase()'),
+                    array('label' => __('Check Updates', 'folio'), 'onclick' => 'checkUpdates()')
                 )
             );
 
             // 监控建议
             $recommendations[] = array(
                 'icon' => '📊',
-                'title' => '性能监控',
-                'description' => '建议启用性能监控，定期查看网站性能趋势和用户体验指标。',
+                'title' => __('Performance Monitoring', 'folio'),
+                'description' => __('Enable performance monitoring and regularly review site trends and user experience metrics.', 'folio'),
                 'priority' => 'low',
-                'priority_text' => '监控建议',
+                'priority_text' => __('Monitoring Suggestion', 'folio'),
                 'actions' => array(
-                    array('label' => '设置监控', 'onclick' => 'setupMonitoring()'),
-                    array('label' => '查看报告', 'onclick' => 'viewReports()')
+                    array('label' => __('Set Up Monitoring', 'folio'), 'onclick' => 'setupMonitoring()'),
+                    array('label' => __('View Reports', 'folio'), 'onclick' => 'viewReports()')
                 )
             );
         } else {
@@ -1047,10 +1167,14 @@ class folio_Unified_Performance_Admin {
             if ($high_priority > 0) {
                 array_unshift($recommendations, array(
                     'icon' => '⚠️',
-                    'title' => '需要关注',
-                    'description' => "发现 {$total_issues} 个优化项目，其中 {$high_priority} 个高优先级项目需要优先处理。",
+                    'title' => __('Needs Attention', 'folio'),
+                    'description' => sprintf(
+                        __('Found %1$d optimization items, including %2$d high-priority items that should be handled first.', 'folio'),
+                        $total_issues,
+                        $high_priority
+                    ),
                     'priority' => 'high',
-                    'priority_text' => '系统状态',
+                    'priority_text' => __('System Status', 'folio'),
                     'actions' => array()
                 ));
             }
@@ -1059,14 +1183,14 @@ class folio_Unified_Performance_Admin {
         // 始终添加的通用建议
         $recommendations[] = array(
             'icon' => '🚀',
-            'title' => '性能优化工具',
-            'description' => '使用内置的性能优化工具进行一键优化，包括缓存预热、数据库优化等。',
+            'title' => __('Performance Optimization Tools', 'folio'),
+            'description' => __('Use built-in optimization tools for one-click tuning, including cache preloading and database optimization.', 'folio'),
             'priority' => 'medium',
-            'priority_text' => '工具推荐',
+            'priority_text' => __('Tool Recommendation', 'folio'),
             'actions' => array(
-                array('label' => '一键优化', 'onclick' => 'runOptimization()'),
-                array('label' => '预热缓存', 'onclick' => 'preloadCache()'),
-                array('label' => '健康检查', 'onclick' => 'runHealthCheck()')
+                array('label' => __('One-click Optimize', 'folio'), 'onclick' => 'runOptimization()'),
+                array('label' => __('Preload Cache', 'folio'), 'onclick' => 'preloadCache()'),
+                array('label' => __('Health Check', 'folio'), 'onclick' => 'runHealthCheck()')
             )
         );
 
@@ -1091,7 +1215,7 @@ class folio_Unified_Performance_Admin {
             $plugins[] = 'WP Fastest Cache';
         }
         
-        return empty($plugins) ? '无' : implode(', ', $plugins);
+        return empty($plugins) ? __('None', 'folio') : implode(', ', $plugins);
     }
 
     /**
@@ -1104,26 +1228,20 @@ class folio_Unified_Performance_Admin {
         $host = $parsed['host'] ?? '';
         
         if (strpos($host, 'cloudflare') !== false || strpos($host, 'cdn') !== false) {
-            return '已启用';
+            return __('Enabled', 'folio');
         }
         
-        return '未检测到';
+        return __('Not detected', 'folio');
     }
 
     // AJAX处理方法
     public function ajax_clear_cache() {
-        // 调试信息
-        if (WP_DEBUG) {
-            error_log('Folio Cache Clear: POST data = ' . print_r($_POST, true));
-            error_log('Folio Cache Clear: Nonce check = ' . ($_POST['nonce'] ?? 'missing'));
-        }
-        
         if (!$this->verify_request_nonce('folio_performance_admin')) {
-            wp_send_json_error('安全验证失败');
+            wp_send_json_error(__('Security verification failed', 'folio'));
         }
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
 
         $cache_type = sanitize_text_field($_POST['cache_type'] ?? 'all');
@@ -1139,16 +1257,16 @@ class folio_Unified_Performance_Admin {
                     // 清除Folio特定缓存
                     $this->clear_folio_specific_cache();
                     
-                    $message = '所有缓存已清除';
+                    $message = __('All cache has been cleared', 'folio');
                     break;
 
                 case 'permission':
                     // 清除权限缓存
                     try {
                         $this->clear_permission_cache();
-                        $message = '权限验证缓存已清除';
+                        $message = __('Permission validation cache cleared', 'folio');
                     } catch (Exception $e) {
-                        throw new Exception('清除权限缓存失败: ' . $e->getMessage());
+                        throw new Exception(__('Failed to clear permission cache: ', 'folio') . $e->getMessage());
                     }
                     break;
 
@@ -1156,9 +1274,9 @@ class folio_Unified_Performance_Admin {
                     // 清除预览缓存
                     try {
                         $this->clear_preview_cache();
-                        $message = '内容预览缓存已清除';
+                        $message = __('Content preview cache cleared', 'folio');
                     } catch (Exception $e) {
-                        throw new Exception('清除预览缓存失败: ' . $e->getMessage());
+                        throw new Exception(__('Failed to clear preview cache: ', 'folio') . $e->getMessage());
                     }
                     break;
 
@@ -1166,118 +1284,114 @@ class folio_Unified_Performance_Admin {
                     // 清除查询缓存
                     try {
                         $this->clear_query_cache();
-                        $message = '查询缓存已清除';
+                        $message = __('Query cache cleared', 'folio');
                     } catch (Exception $e) {
-                        throw new Exception('清除查询缓存失败: ' . $e->getMessage());
+                        throw new Exception(__('Failed to clear query cache: ', 'folio') . $e->getMessage());
                     }
                     break;
 
                 case 'object':
                     // 清除对象缓存
                     wp_cache_flush();
-                    $message = '对象缓存已清除';
+                    $message = __('Object cache cleared', 'folio');
                     break;
 
                 case 'expired':
                     // 清除过期缓存
                     $this->clear_expired_cache();
-                    $message = '过期缓存已清除';
+                    $message = __('Expired cache cleared', 'folio');
                     break;
 
                 case 'user':
                     // 清除用户缓存
                     $user_id = intval($_POST['user_id'] ?? get_current_user_id());
                     $this->clear_user_cache($user_id);
-                    $message = '用户缓存已清除';
+                    $message = __('User cache cleared', 'folio');
                     break;
 
                 default:
-                    wp_send_json_error('无效的缓存类型');
+                    wp_send_json_error(__('Invalid cache type', 'folio'));
                     return;
             }
 
             wp_send_json_success(array('message' => $message));
 
         } catch (Exception $e) {
-            wp_send_json_error('清除缓存时发生错误: ' . $e->getMessage());
+            wp_send_json_error(__('Error occurred while clearing cache: ', 'folio') . $e->getMessage());
         }
     }
 
     public function ajax_get_cache_stats() {
         if (!$this->verify_request_nonce('folio_performance_admin')) {
-            wp_send_json_error('安全验证失败');
+            wp_send_json_error(__('Security verification failed', 'folio'));
         }
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
 
         try {
             $stats = $this->get_cache_statistics();
             
-            // 调试信息
-            if (WP_DEBUG) {
-                error_log('Folio Cache Stats Response: ' . print_r($stats, true));
-            }
+            // 详细统计日志默认关闭，可通过过滤器开启。
+            $this->log_cache_verbose('Folio Cache Stats Response: ' . print_r($stats, true));
             
             wp_send_json_success($stats);
         } catch (Exception $e) {
             if (WP_DEBUG) {
                 error_log('Folio Cache Stats AJAX Error: ' . $e->getMessage());
             }
-            wp_send_json_error('获取缓存统计失败: ' . $e->getMessage());
+            wp_send_json_error(__('Failed to get cache stats: ', 'folio') . $e->getMessage());
         }
     }
 
     public function ajax_refresh_cache_stats() {
         if (!$this->verify_request_nonce('folio_performance_admin')) {
-            wp_send_json_error('安全验证失败');
+            wp_send_json_error(__('Security verification failed', 'folio'));
         }
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
 
         // 清除统计缓存
         delete_transient('folio_cache_statistics');
         delete_transient('folio_cache_backend_info');
         
-        wp_send_json_success(array('message' => '统计数据已刷新'));
+        wp_send_json_success(array('message' => __('Stats refreshed', 'folio')));
     }
 
     public function ajax_get_performance_stats() {
         if (!$this->verify_request_nonce('folio_performance_admin')) {
-            wp_send_json_error('安全验证失败');
+            wp_send_json_error(__('Security verification failed', 'folio'));
         }
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
 
         try {
             $stats = $this->get_performance_statistics();
             
-            // 调试信息
-            if (WP_DEBUG) {
-                error_log('Folio Performance Stats Response: ' . print_r($stats, true));
-            }
+            // 详细统计日志默认关闭，可通过过滤器开启。
+            $this->log_cache_verbose('Folio Performance Stats Response: ' . print_r($stats, true));
             
             wp_send_json_success($stats);
         } catch (Exception $e) {
             if (WP_DEBUG) {
                 error_log('Folio Performance Stats AJAX Error: ' . $e->getMessage());
             }
-            wp_send_json_error('获取性能统计失败: ' . $e->getMessage());
+            wp_send_json_error(__('Failed to get performance stats: ', 'folio') . $e->getMessage());
         }
     }
 
     public function ajax_optimize_cache() {
         if (!$this->verify_request_nonce('folio_performance_admin')) {
-            wp_send_json_error('安全验证失败');
+            wp_send_json_error(__('Security verification failed', 'folio'));
         }
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
 
         try {
@@ -1286,26 +1400,26 @@ class folio_Unified_Performance_Admin {
             
             // 清理过期缓存
             $this->clear_expired_cache();
-            $optimizations[] = '清理过期缓存';
+            $optimizations[] = __('Cleared expired cache', 'folio');
             
             // 优化缓存配置
             if (class_exists('folio_Performance_Cache_Manager')) {
                 // 执行缓存优化操作
                 $this->optimize_cache_configuration();
-                $optimizations[] = '优化缓存配置';
+                $optimizations[] = __('Optimized cache configuration', 'folio');
             }
             
             // 预热重要缓存
             $this->preload_important_cache();
-            $optimizations[] = '预热重要缓存';
+            $optimizations[] = __('Preloaded important cache', 'folio');
             
             wp_send_json_success(array(
-                'message' => '缓存优化完成',
+                'message' => __('Cache optimization completed', 'folio'),
                 'optimizations' => $optimizations
             ));
             
         } catch (Exception $e) {
-            wp_send_json_error('优化过程中发生错误: ' . $e->getMessage());
+            wp_send_json_error(__('Error occurred during optimization: ', 'folio') . $e->getMessage());
         }
     }
 
@@ -1370,28 +1484,28 @@ class folio_Unified_Performance_Admin {
 
     public function ajax_memcached_status() {
         if (!$this->verify_request_nonce('folio_performance_admin')) {
-            wp_send_json_error('安全验证失败');
+            wp_send_json_error(__('Security verification failed', 'folio'));
         }
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
 
         if (function_exists('folio_check_memcached_availability')) {
             $status = folio_check_memcached_availability();
             wp_send_json_success($status);
         } else {
-            wp_send_json_error('Memcached检查功能不可用');
+            wp_send_json_error(__('Memcached check feature is unavailable', 'folio'));
         }
     }
 
     public function ajax_health_check() {
         if (!$this->verify_request_nonce('folio_performance_admin')) {
-            wp_send_json_error('安全验证失败');
+            wp_send_json_error(__('Security verification failed', 'folio'));
         }
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
 
         try {
@@ -1401,21 +1515,21 @@ class folio_Unified_Performance_Admin {
             // 缓存后端检查
             $health_results['cache_backend'] = array(
                 'status' => wp_using_ext_object_cache() ? 'good' : 'warning',
-                'message' => wp_using_ext_object_cache() ? '对象缓存已启用' : '建议启用对象缓存'
+                'message' => wp_using_ext_object_cache() ? __('Object cache is enabled', 'folio') : __('Object cache is recommended', 'folio')
             );
             
             // 内存使用检查
             $memory_usage = memory_get_usage(true);
             $health_results['memory_usage'] = array(
                 'status' => $memory_usage < 128 * 1024 * 1024 ? 'good' : 'warning',
-                'message' => '内存使用: ' . size_format($memory_usage)
+                'message' => __('Memory usage: ', 'folio') . size_format($memory_usage)
             );
             
             // 缓存读写测试
             $cache_test = $this->test_cache_operations();
             $health_results['cache_operations'] = array(
                 'status' => $cache_test ? 'good' : 'critical',
-                'message' => $cache_test ? '缓存读写正常' : '缓存读写异常'
+                'message' => $cache_test ? __('Cache read/write is normal', 'folio') : __('Cache read/write test failed', 'folio')
             );
             
             // Memcached连接检查
@@ -1423,7 +1537,7 @@ class folio_Unified_Performance_Admin {
                 $mc_status = folio_check_memcached_availability();
                 $health_results['memcached'] = array(
                     'status' => $mc_status['connection_test'] ? 'good' : 'warning',
-                    'message' => $mc_status['connection_test'] ? 'Memcached连接正常' : 'Memcached连接异常'
+                    'message' => $mc_status['connection_test'] ? __('Memcached connection is healthy', 'folio') : __('Memcached connection has issues', 'folio')
                 );
             }
             
@@ -1432,13 +1546,13 @@ class folio_Unified_Performance_Admin {
             $hit_rate = $cache_stats['overall_hit_rate'];
             $health_results['cache_hit_rate'] = array(
                 'status' => $hit_rate > 80 ? 'good' : ($hit_rate > 60 ? 'warning' : 'critical'),
-                'message' => '缓存命中率: ' . number_format($hit_rate, 1) . '%'
+                'message' => __('Cache hit rate: ', 'folio') . number_format($hit_rate, 1) . '%'
             );
 
             wp_send_json_success($health_results);
             
         } catch (Exception $e) {
-            wp_send_json_error('健康检查过程中发生错误: ' . $e->getMessage());
+            wp_send_json_error(__('Error occurred during health check: ', 'folio') . $e->getMessage());
         }
     }
 
@@ -1464,11 +1578,11 @@ class folio_Unified_Performance_Admin {
 
     public function ajax_install_object_cache() {
         if (!$this->verify_request_nonce('folio_object_cache')) {
-            wp_send_json_error('安全验证失败');
+            wp_send_json_error(__('Security verification failed', 'folio'));
         }
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
 
         // 委托给文件管理器
@@ -1476,17 +1590,17 @@ class folio_Unified_Performance_Admin {
         if ($folio_cache_file_manager && method_exists($folio_cache_file_manager, 'ajax_install_object_cache')) {
             $folio_cache_file_manager->ajax_install_object_cache();
         } else {
-            wp_send_json_error('对象缓存管理功能不可用');
+            wp_send_json_error(__('Object cache management is unavailable', 'folio'));
         }
     }
 
     public function ajax_uninstall_object_cache() {
         if (!$this->verify_request_nonce('folio_object_cache')) {
-            wp_send_json_error('安全验证失败');
+            wp_send_json_error(__('Security verification failed', 'folio'));
         }
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
 
         // 委托给文件管理器
@@ -1494,7 +1608,7 @@ class folio_Unified_Performance_Admin {
         if ($folio_cache_file_manager && method_exists($folio_cache_file_manager, 'ajax_uninstall_object_cache')) {
             $folio_cache_file_manager->ajax_uninstall_object_cache();
         } else {
-            wp_send_json_error('对象缓存管理功能不可用');
+            wp_send_json_error(__('Object cache management is unavailable', 'folio'));
         }
     }
 
@@ -1504,11 +1618,11 @@ class folio_Unified_Performance_Admin {
     public function ajax_clear_all_cache() {
         $nonce = $this->get_request_nonce();
         if ($nonce === '' || (!wp_verify_nonce($nonce, 'folio_performance_dashboard') && !wp_verify_nonce($nonce, 'folio_performance_admin'))) {
-            wp_send_json_error('安全验证失败');
+            wp_send_json_error(__('Security verification failed', 'folio'));
         }
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
 
         try {
@@ -1520,10 +1634,10 @@ class folio_Unified_Performance_Admin {
             // 清除Folio特定缓存
             $this->clear_folio_specific_cache();
             
-            wp_send_json_success(array('message' => '所有缓存已清除'));
+            wp_send_json_success(array('message' => __('All caches cleared', 'folio')));
 
         } catch (Exception $e) {
-            wp_send_json_error('清除缓存时发生错误: ' . $e->getMessage());
+            wp_send_json_error(__('Error occurred while clearing cache: ', 'folio') . $e->getMessage());
         }
     }
 
@@ -1550,10 +1664,8 @@ class folio_Unified_Performance_Admin {
             // 清除WP Cache中的权限缓存
             $this->flush_cache_group('folio_permission');
             
-            // 调试日志
-            if (WP_DEBUG) {
-                error_log('Folio Cache: Permission cache cleared successfully');
-            }
+            // 成功日志默认关闭，可通过过滤器开启。
+            $this->log_cache_verbose('Folio Cache: Permission cache cleared successfully');
             
         } catch (Exception $e) {
             if (WP_DEBUG) {
@@ -1586,10 +1698,8 @@ class folio_Unified_Performance_Admin {
             // 清除WP Cache中的预览缓存
             $this->flush_cache_group('folio_preview');
             
-            // 调试日志
-            if (WP_DEBUG) {
-                error_log('Folio Cache: Preview cache cleared successfully');
-            }
+            // 成功日志默认关闭，可通过过滤器开启。
+            $this->log_cache_verbose('Folio Cache: Preview cache cleared successfully');
             
         } catch (Exception $e) {
             if (WP_DEBUG) {
@@ -1622,10 +1732,8 @@ class folio_Unified_Performance_Admin {
             // 清除WP Cache中的查询缓存
             $this->flush_cache_group('folio_query');
             
-            // 调试日志
-            if (WP_DEBUG) {
-                error_log('Folio Cache: Query cache cleared successfully');
-            }
+            // 成功日志默认关闭，可通过过滤器开启。
+            $this->log_cache_verbose('Folio Cache: Query cache cleared successfully');
             
         } catch (Exception $e) {
             if (WP_DEBUG) {
@@ -1681,9 +1789,7 @@ class folio_Unified_Performance_Admin {
                     ));
                 }
                 
-                if (WP_DEBUG) {
-                    error_log('Folio Cache: Cleared ' . count($expired_timeouts) . ' expired transients');
-                }
+                $this->log_cache_verbose('Folio Cache: Cleared ' . count($expired_timeouts) . ' expired transients');
             }
             
         } catch (Exception $e) {
@@ -1699,19 +1805,11 @@ class folio_Unified_Performance_Admin {
      */
     private function flush_cache_group($group) {
         try {
-            // 检查是否支持组清除功能
-            if (function_exists('wp_cache_flush_group') && wp_using_ext_object_cache()) {
-                // 抑制WordPress的警告，因为我们有备用方案
-                $original_error_reporting = error_reporting();
-                error_reporting($original_error_reporting & ~E_USER_NOTICE);
-                
-                $result = @wp_cache_flush_group($group);
-                
-                error_reporting($original_error_reporting);
-                
-                // 如果组清除失败，使用备用方案
+            // 仅在缓存后端显式支持按组清除时调用，避免触发 wp_cache_flush_group 的 incorrect notice
+            if (function_exists('wp_cache_supports') && wp_cache_supports('flush_group') && wp_using_ext_object_cache()) {
+                $result = wp_cache_flush_group($group);
                 if (!$result) {
-                    throw new Exception('Group flush not supported');
+                    throw new Exception('Group flush failed');
                 }
             } else {
                 throw new Exception('Group flush function not available');
@@ -1799,9 +1897,7 @@ class folio_Unified_Performance_Admin {
                  OR option_name LIKE '_transient_timeout_folio_%'"
             );
             
-            if (WP_DEBUG) {
-                error_log('Folio Cache: Folio-specific cache cleared successfully');
-            }
+            $this->log_cache_verbose('Folio Cache: Folio-specific cache cleared successfully');
             
         } catch (Exception $e) {
             if (WP_DEBUG) {
@@ -1841,18 +1937,18 @@ class folio_Unified_Performance_Admin {
      */
     public function ajax_preload_cache() {
         if (!$this->verify_request_nonce('folio_performance_admin')) {
-            wp_send_json_error('安全验证失败');
+            wp_send_json_error(__('Security verification failed', 'folio'));
         }
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
 
         try {
             $this->preload_important_cache();
-            wp_send_json_success(array('message' => '缓存预热完成'));
+            wp_send_json_success(array('message' => __('Cache preloading completed', 'folio')));
         } catch (Exception $e) {
-            wp_send_json_error('预热失败: ' . $e->getMessage());
+            wp_send_json_error(__('Preload failed: ', 'folio') . $e->getMessage());
         }
     }
 
@@ -1861,11 +1957,11 @@ class folio_Unified_Performance_Admin {
      */
     public function ajax_analyze_cache() {
         if (!$this->verify_request_nonce('folio_performance_admin')) {
-            wp_send_json_error('安全验证失败');
+            wp_send_json_error(__('Security verification failed', 'folio'));
         }
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
 
         try {
@@ -1877,19 +1973,19 @@ class folio_Unified_Performance_Admin {
             );
 
             if ($cache_stats['overall_hit_rate'] < 80) {
-                $analysis['recommendations'][] = '建议优化缓存配置';
+                $analysis['recommendations'][] = __('Consider optimizing cache configuration', 'folio');
             }
 
             if (!wp_using_ext_object_cache()) {
-                $analysis['recommendations'][] = '建议启用对象缓存';
+                $analysis['recommendations'][] = __('Consider enabling object cache', 'folio');
             }
 
             wp_send_json_success(array(
-                'message' => '缓存分析完成',
+                'message' => __('Cache analysis completed', 'folio'),
                 'analysis' => $analysis
             ));
         } catch (Exception $e) {
-            wp_send_json_error('分析失败: ' . $e->getMessage());
+            wp_send_json_error(__('Analysis failed: ', 'folio') . $e->getMessage());
         }
     }
 
@@ -1898,11 +1994,11 @@ class folio_Unified_Performance_Admin {
      */
     public function ajax_export_stats() {
         if (!$this->verify_request_nonce('folio_performance_admin')) {
-            wp_send_json_error('安全验证失败');
+            wp_send_json_error(__('Security verification failed', 'folio'));
         }
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
 
         try {
@@ -1924,7 +2020,7 @@ class folio_Unified_Performance_Admin {
 
             wp_send_json_success($export_data);
         } catch (Exception $e) {
-            wp_send_json_error('导出失败: ' . $e->getMessage());
+            wp_send_json_error(__('Export failed: ', 'folio') . $e->getMessage());
         }
     }
 
@@ -1933,11 +2029,11 @@ class folio_Unified_Performance_Admin {
      */
     public function ajax_reset_stats() {
         if (!$this->verify_request_nonce('folio_performance_admin')) {
-            wp_send_json_error('安全验证失败');
+            wp_send_json_error(__('Security verification failed', 'folio'));
         }
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
 
         try {
@@ -1957,9 +2053,9 @@ class folio_Unified_Performance_Admin {
                  OR option_name LIKE '_transient_timeout_folio_performance_%'"
             );
 
-            wp_send_json_success(array('message' => '统计数据已重置'));
+            wp_send_json_success(array('message' => __('Statistics reset completed', 'folio')));
         } catch (Exception $e) {
-            wp_send_json_error('重置失败: ' . $e->getMessage());
+            wp_send_json_error(__('Reset failed: ', 'folio') . $e->getMessage());
         }
     }
 
@@ -1968,11 +2064,11 @@ class folio_Unified_Performance_Admin {
      */
     public function ajax_schedule_cleanup() {
         if (!$this->verify_request_nonce('folio_performance_admin')) {
-            wp_send_json_error('安全验证失败');
+            wp_send_json_error(__('Security verification failed', 'folio'));
         }
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
 
         try {
@@ -1986,9 +2082,9 @@ class folio_Unified_Performance_Admin {
                 add_action('folio_daily_cache_cleanup', array($this, 'daily_cache_cleanup'));
             }
 
-            wp_send_json_success(array('message' => '定时清理已设置，每日自动执行'));
+            wp_send_json_success(array('message' => __('Scheduled cleanup has been configured and will run daily', 'folio')));
         } catch (Exception $e) {
-            wp_send_json_error('设置失败: ' . $e->getMessage());
+            wp_send_json_error(__('Configuration failed: ', 'folio') . $e->getMessage());
         }
     }
 
@@ -1999,10 +2095,8 @@ class folio_Unified_Performance_Admin {
         try {
             $this->clear_expired_cache();
             
-            // 记录清理日志
-            if (WP_DEBUG) {
-                error_log('Folio Cache: Daily cleanup completed at ' . current_time('mysql'));
-            }
+            // 成功日志默认关闭，可通过过滤器开启。
+            $this->log_cache_verbose('Folio Cache: Daily cleanup completed at ' . current_time('mysql'));
         } catch (Exception $e) {
             if (WP_DEBUG) {
                 error_log('Folio Cache: Daily cleanup failed - ' . $e->getMessage());
@@ -2104,3 +2198,4 @@ class folio_Unified_Performance_Admin {
 if (is_admin()) {
     new folio_Unified_Performance_Admin();
 }
+

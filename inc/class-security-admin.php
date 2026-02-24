@@ -35,8 +35,8 @@ class folio_Security_Admin {
         // 这样可以在主题设置菜单下显示安全防护子菜单
         add_submenu_page(
             'themes.php',
-            '安全防护',
-            '安全防护',
+            __('Security Protection', 'folio'),
+            __('Security Protection', 'folio'),
             'manage_options',
             'folio-security',
             array($this, 'render_admin_page')
@@ -67,29 +67,29 @@ class folio_Security_Admin {
         $current_tab = $_GET['tab'] ?? 'dashboard';
         ?>
         <div class="wrap">
-            <h1>安全防护管理</h1>
+            <h1><?php esc_html_e('Security Protection Management', 'folio'); ?></h1>
             
             <nav class="nav-tab-wrapper">
-                <a href="?page=folio-security&tab=dashboard" class="nav-tab <?php echo $current_tab === 'dashboard' ? 'nav-tab-active' : ''; ?>">
-                    安全概览
+                <a href="?page=folio-security&tab=dashboard" class="nav-tab <?php echo esc_attr($current_tab === 'dashboard' ? 'nav-tab-active' : ''); ?>">
+                    <?php esc_html_e('Security Overview', 'folio'); ?>
                 </a>
-                <a href="?page=folio-security&tab=logs" class="nav-tab <?php echo $current_tab === 'logs' ? 'nav-tab-active' : ''; ?>">
-                    访问日志
+                <a href="?page=folio-security&tab=logs" class="nav-tab <?php echo esc_attr($current_tab === 'logs' ? 'nav-tab-active' : ''); ?>">
+                    <?php esc_html_e('Access Logs', 'folio'); ?>
                 </a>
-                <a href="?page=folio-security&tab=settings" class="nav-tab <?php echo $current_tab === 'settings' ? 'nav-tab-active' : ''; ?>">
-                    安全设置
+                <a href="?page=folio-security&tab=settings" class="nav-tab <?php echo esc_attr($current_tab === 'settings' ? 'nav-tab-active' : ''); ?>">
+                    <?php esc_html_e('Security Settings', 'folio'); ?>
                 </a>
-                <a href="?page=folio-security&tab=spiders" class="nav-tab <?php echo $current_tab === 'spiders' ? 'nav-tab-active' : ''; ?>">
-                    蜘蛛池管理
+                <a href="?page=folio-security&tab=spiders" class="nav-tab <?php echo esc_attr($current_tab === 'spiders' ? 'nav-tab-active' : ''); ?>">
+                    <?php esc_html_e('Spider Pool Management', 'folio'); ?>
                 </a>
-                <a href="?page=folio-security&tab=reports" class="nav-tab <?php echo $current_tab === 'reports' ? 'nav-tab-active' : ''; ?>">
-                    AI运营报告
+                <a href="?page=folio-security&tab=reports" class="nav-tab <?php echo esc_attr($current_tab === 'reports' ? 'nav-tab-active' : ''); ?>">
+                    <?php esc_html_e('AI Operations Reports', 'folio'); ?>
                 </a>
             </nav>
 
             <div class="tab-content">
                 <div id="security-loading" style="display: none; text-align: center; padding: 40px;">
-                    <p>正在加载...</p>
+                    <p><?php esc_html_e('Loading...', 'folio'); ?></p>
                 </div>
                 <div id="security-content">
                 <?php
@@ -113,8 +113,8 @@ class folio_Security_Admin {
                 }
                     } catch (Exception $e) {
                         error_log('Folio Security Admin Error: ' . $e->getMessage());
-                        echo '<div class="notice notice-error"><p>加载页面时出错：' . esc_html($e->getMessage()) . '</p></div>';
-                        echo '<p>如果问题持续存在，请检查错误日志或联系技术支持。</p>';
+                        echo '<div class="notice notice-error"><p>' . esc_html__('Error loading page: ', 'folio') . esc_html($e->getMessage()) . '</p></div>';
+                        echo '<p>' . esc_html__('If the issue persists, check error logs or contact technical support.', 'folio') . '</p>';
                 }
                 ?>
                 </div>
@@ -359,7 +359,7 @@ class folio_Security_Admin {
             if (isset($_GET['clear_cache']) && $_GET['clear_cache'] === 'today') {
                 delete_transient($cache_key_today);
                 delete_transient($cache_key_7d);
-                echo '<div class="notice notice-success"><p>缓存已清除，正在重新加载...</p></div>';
+                echo '<div class="notice notice-success"><p>' . esc_html__('Cache cleared, reloading...', 'folio') . '</p></div>';
                 echo '<script>setTimeout(function(){ window.location.href = window.location.pathname + "?page=folio-security&tab=dashboard"; }, 1000);</script>';
             }
             
@@ -404,91 +404,91 @@ class folio_Security_Admin {
         }
         ?>
         <div class="security-dashboard">
-            <h2>7天安全统计</h2>
+            <h2><?php esc_html_e('7-Day Security Stats', 'folio'); ?></h2>
             <div class="security-stats">
                 <div class="stat-card">
                     <span class="stat-number"><?php echo number_format($stats_7d['total_access']); ?></span>
-                    <div class="stat-label">总访问次数</div>
+                    <div class="stat-label"><?php esc_html_e('Total Accesses', 'folio'); ?></div>
                 </div>
                 <div class="stat-card">
                     <span class="stat-number status-denied"><?php echo number_format($stats_7d['denied_access']); ?></span>
-                    <div class="stat-label">被拒绝访问</div>
+                    <div class="stat-label"><?php esc_html_e('Denied Access', 'folio'); ?></div>
                 </div>
                 <div class="stat-card">
                     <span class="stat-number status-suspicious"><?php echo number_format($stats_7d['suspicious_activity']); ?></span>
-                    <div class="stat-label">可疑活动</div>
+                    <div class="stat-label"><?php esc_html_e('Suspicious Activity', 'folio'); ?></div>
                 </div>
                 <div class="stat-card">
                     <span class="stat-number status-blocked"><?php echo number_format($stats_7d['bypass_attempts']); ?></span>
-                    <div class="stat-label">绕过尝试</div>
+                    <div class="stat-label"><?php esc_html_e('Bypass Attempts', 'folio'); ?></div>
                 </div>
                 <div class="stat-card">
                     <span class="stat-number status-blocked"><?php echo number_format($stats_7d['blocked_ips']); ?></span>
-                    <div class="stat-label">被阻止IP</div>
+                    <div class="stat-label"><?php esc_html_e('Blocked IPs', 'folio'); ?></div>
                 </div>
                 <div class="stat-card">
                     <span class="stat-number" style="color: #0073aa;"><?php echo number_format($stats_7d['spider_access']); ?></span>
-                    <div class="stat-label">蜘蛛访问</div>
+                    <div class="stat-label"><?php esc_html_e('Spider Access', 'folio'); ?></div>
                 </div>
                 <div class="stat-card">
                     <span class="stat-number" style="color: #666;"><?php echo number_format($stats_7d['user_access']); ?></span>
-                    <div class="stat-label">用户访问</div>
+                    <div class="stat-label"><?php esc_html_e('User Access', 'folio'); ?></div>
                 </div>
                 <div class="stat-card">
                     <span class="stat-number" style="color: #2271b1;"><?php echo number_format($stats_7d['logged_in_access']); ?></span>
-                    <div class="stat-label">登录用户访问</div>
+                    <div class="stat-label"><?php esc_html_e('Logged-in User Access', 'folio'); ?></div>
                 </div>
                 <div class="stat-card">
                     <span class="stat-number" style="color: #00a32a;"><?php echo number_format($stats_7d['unique_ips']); ?></span>
-                    <div class="stat-label">独立IP数</div>
+                    <div class="stat-label"><?php esc_html_e('Unique IPs', 'folio'); ?></div>
                 </div>
                 <div class="stat-card">
                     <span class="stat-number" style="color: #8c8f94;"><?php echo number_format($stats_7d['unique_posts']); ?></span>
-                    <div class="stat-label">访问文章数</div>
+                    <div class="stat-label"><?php esc_html_e('Visited Posts', 'folio'); ?></div>
                 </div>
             </div>
 
-            <h2>今天的数据统计</h2>
+            <h2><?php esc_html_e('Today\'s Stats', 'folio'); ?></h2>
             <div class="security-stats">
                 <div class="stat-card">
                     <span class="stat-number"><?php echo number_format($stats_today['total_access']); ?></span>
-                    <div class="stat-label">总访问次数</div>
+                    <div class="stat-label"><?php esc_html_e('Total Accesses', 'folio'); ?></div>
                 </div>
                 <div class="stat-card">
                     <span class="stat-number status-denied"><?php echo number_format($stats_today['denied_access']); ?></span>
-                    <div class="stat-label">被拒绝访问</div>
+                    <div class="stat-label"><?php esc_html_e('Denied Access', 'folio'); ?></div>
                 </div>
                 <div class="stat-card">
                     <span class="stat-number status-suspicious"><?php echo number_format($stats_today['suspicious_activity']); ?></span>
-                    <div class="stat-label">可疑活动</div>
+                    <div class="stat-label"><?php esc_html_e('Suspicious Activity', 'folio'); ?></div>
                 </div>
                 <div class="stat-card">
                     <span class="stat-number status-blocked"><?php echo number_format($stats_today['bypass_attempts']); ?></span>
-                    <div class="stat-label">绕过尝试</div>
+                    <div class="stat-label"><?php esc_html_e('Bypass Attempts', 'folio'); ?></div>
                 </div>
                 <div class="stat-card">
                     <span class="stat-number status-blocked"><?php echo number_format($stats_today['blocked_ips']); ?></span>
-                    <div class="stat-label">被阻止IP</div>
+                    <div class="stat-label"><?php esc_html_e('Blocked IPs', 'folio'); ?></div>
                 </div>
                 <div class="stat-card">
                     <span class="stat-number" style="color: #0073aa;"><?php echo number_format($stats_today['spider_access']); ?></span>
-                    <div class="stat-label">蜘蛛访问</div>
+                    <div class="stat-label"><?php esc_html_e('Spider Access', 'folio'); ?></div>
                 </div>
                 <div class="stat-card">
                     <span class="stat-number" style="color: #666;"><?php echo number_format($stats_today['user_access']); ?></span>
-                    <div class="stat-label">用户访问</div>
+                    <div class="stat-label"><?php esc_html_e('User Access', 'folio'); ?></div>
                 </div>
                 <div class="stat-card">
                     <span class="stat-number" style="color: #2271b1;"><?php echo number_format($stats_today['logged_in_access']); ?></span>
-                    <div class="stat-label">登录用户访问</div>
+                    <div class="stat-label"><?php esc_html_e('Logged-in User Access', 'folio'); ?></div>
                 </div>
                 <div class="stat-card">
                     <span class="stat-number" style="color: #00a32a;"><?php echo number_format($stats_today['unique_ips']); ?></span>
-                    <div class="stat-label">独立IP数</div>
+                    <div class="stat-label"><?php esc_html_e('Unique IPs', 'folio'); ?></div>
                 </div>
                 <div class="stat-card">
                     <span class="stat-number" style="color: #8c8f94;"><?php echo number_format($stats_today['unique_posts']); ?></span>
-                    <div class="stat-label">访问文章数</div>
+                    <div class="stat-label"><?php esc_html_e('Visited Posts', 'folio'); ?></div>
                 </div>
             </div>
 
@@ -496,11 +496,11 @@ class folio_Security_Admin {
                 <!-- 访问趋势图 - 正常访问 -->
             <div class="security-chart">
                     <div class="chart-header">
-                        <h3>访问趋势图 - 正常访问</h3>
+                        <h3><?php echo esc_html__('Access Trend - Normal Access', 'folio'); ?></h3>
                         <div class="chart-controls">
                             <select id="chartType" onchange="updateChartType()">
-                                <option value="7days" <?php echo ($chart_type === '7days') ? 'selected' : ''; ?>>最近7天</option>
-                                <option value="today" <?php echo ($chart_type === 'today') ? 'selected' : ''; ?>>今天</option>
+                                <option value="7days" <?php echo ($chart_type === '7days') ? 'selected' : ''; ?>><?php echo esc_html__('Last 7 Days', 'folio'); ?></option>
+                                <option value="today" <?php echo ($chart_type === 'today') ? 'selected' : ''; ?>><?php esc_html_e('Today', 'folio'); ?></option>
                             </select>
                         </div>
                     </div>
@@ -509,13 +509,19 @@ class folio_Security_Admin {
                 
                 <!-- 访问趋势图 - 安全事件 -->
                 <div class="security-chart">
-                    <h3>访问趋势图 - 安全事件</h3>
+                    <h3><?php echo esc_html__('Access Trend - Security Events', 'folio'); ?></h3>
                     <canvas id="securityAccessChart" width="400" height="280"></canvas>
                 </div>
                 
                 <!-- 访问类型分布图 -->
                 <div class="security-chart security-chart-doughnut">
-                    <h3>访问类型分布<?php echo ($chart_type === 'today') ? '（今天）' : '（最近7天）'; ?></h3>
+                    <h3>
+                        <?php
+                        echo ($chart_type === 'today')
+                            ? esc_html__('Access Type Distribution (Today)', 'folio')
+                            : esc_html__('Access Type Distribution (Last 7 Days)', 'folio');
+                        ?>
+                    </h3>
                     <div class="doughnut-chart-wrapper">
                         <canvas id="accessTypeChart" width="400" height="280"></canvas>
                     </div>
@@ -523,7 +529,7 @@ class folio_Security_Admin {
                 
                 <!-- 安全事件趋势图 -->
                 <div class="security-chart">
-                    <h3>安全事件详细趋势</h3>
+                    <h3><?php echo esc_html__('Detailed Security Events Trend', 'folio'); ?></h3>
                     <canvas id="securityEventsChart" width="400" height="280"></canvas>
                 </div>
             </div>
@@ -533,7 +539,7 @@ class folio_Security_Admin {
         jQuery(document).ready(function($) {
             // 检查 Chart.js 是否已加载
             if (typeof Chart === 'undefined') {
-                console.error('Chart.js 未加载');
+                console.error('<?php echo esc_js(__('Chart.js is not loaded', 'folio')); ?>');
                 return;
             }
             
@@ -541,7 +547,7 @@ class folio_Security_Admin {
             // 创建访问趋势图
                 const ctx = document.getElementById('accessChart');
                 if (!ctx) {
-                    console.error('图表画布元素不存在');
+                    console.error('<?php echo esc_js(__('Chart canvas element not found', 'folio')); ?>');
                     return;
                 }
                 
@@ -551,7 +557,7 @@ class folio_Security_Admin {
                 data: {
                         labels: <?php echo json_encode($chart_data['labels']); ?>,
                     datasets: [{
-                        label: '总访问',
+                        label: '<?php echo esc_js(__('Total Access', 'folio')); ?>',
                             data: <?php echo json_encode($chart_data['total']); ?>,
                             borderColor: '#2271b1',
                             backgroundColor: 'rgba(34, 113, 177, 0.12)',
@@ -564,7 +570,7 @@ class folio_Security_Admin {
                             pointBorderColor: '#fff',
                             pointBorderWidth: 2
                         }, {
-                            label: '用户访问',
+                            label: '<?php echo esc_js(__('User Access', 'folio')); ?>',
                             data: <?php echo json_encode($chart_data['user_access']); ?>,
                             borderColor: '#50575e',
                             backgroundColor: 'rgba(80, 87, 94, 0.12)',
@@ -577,7 +583,7 @@ class folio_Security_Admin {
                             pointBorderColor: '#fff',
                             pointBorderWidth: 2
                         }, {
-                            label: '蜘蛛访问',
+                            label: '<?php echo esc_js(__('Spider Access', 'folio')); ?>',
                             data: <?php echo json_encode($chart_data['spider_access']); ?>,
                             borderColor: '#00a32a',
                             backgroundColor: 'rgba(0, 163, 42, 0.12)',
@@ -687,7 +693,7 @@ class folio_Security_Admin {
                         data: {
                             labels: <?php echo json_encode($chart_data['labels']); ?>,
                             datasets: [{
-                                label: '被拒绝访问',
+                                label: '<?php echo esc_js(__('Denied Access', 'folio')); ?>',
                             data: <?php echo json_encode($chart_data['denied']); ?>,
                                 borderColor: '#d63638',
                                 backgroundColor: 'rgba(214, 54, 56, 0.12)',
@@ -700,7 +706,7 @@ class folio_Security_Admin {
                                 pointBorderColor: '#fff',
                                 pointBorderWidth: 2
                     }, {
-                        label: '可疑活动',
+                        label: '<?php echo esc_js(__('Suspicious Activity', 'folio')); ?>',
                             data: <?php echo json_encode($chart_data['suspicious']); ?>,
                                 borderColor: '#f0b849',
                                 backgroundColor: 'rgba(240, 184, 73, 0.12)',
@@ -805,7 +811,11 @@ class folio_Security_Admin {
                     new Chart(accessTypeCtx.getContext('2d'), {
                         type: 'doughnut',
                         data: {
-                            labels: ['用户访问', '蜘蛛访问', '被拒绝访问'],
+                            labels: [
+                                '<?php echo esc_js(__('User Access', 'folio')); ?>',
+                                '<?php echo esc_js(__('Spider Access', 'folio')); ?>',
+                                '<?php echo esc_js(__('Denied Access', 'folio')); ?>'
+                            ],
                             datasets: [{
                                 data: [totalUser, totalSpider, totalDenied],
                                 backgroundColor: [
@@ -859,7 +869,7 @@ class folio_Security_Admin {
                         data: {
                             labels: <?php echo json_encode($chart_data['labels']); ?>,
                             datasets: [{
-                                label: '绕过尝试',
+                                label: '<?php echo esc_js(__('Bypass Attempts', 'folio')); ?>',
                                 data: <?php echo json_encode($chart_data['bypass_attempts']); ?>,
                                 borderColor: '#b32d2e',
                                 backgroundColor: 'rgba(179, 45, 46, 0.12)',
@@ -872,7 +882,7 @@ class folio_Security_Admin {
                                 pointBorderColor: '#fff',
                                 pointBorderWidth: 2
                             }, {
-                                label: '被拒绝访问',
+                                label: '<?php echo esc_js(__('Denied Access', 'folio')); ?>',
                                 data: <?php echo json_encode($chart_data['denied']); ?>,
                                 borderColor: '#d63638',
                                 backgroundColor: 'rgba(214, 54, 56, 0.12)',
@@ -885,7 +895,7 @@ class folio_Security_Admin {
                                 pointBorderColor: '#fff',
                                 pointBorderWidth: 2
                             }, {
-                                label: '可疑活动',
+                                label: '<?php echo esc_js(__('Suspicious Activity', 'folio')); ?>',
                                 data: <?php echo json_encode($chart_data['suspicious']); ?>,
                                 borderColor: '#f0b849',
                                 backgroundColor: 'rgba(240, 184, 73, 0.12)',
@@ -898,7 +908,7 @@ class folio_Security_Admin {
                                 pointBorderColor: '#fff',
                                 pointBorderWidth: 2
                             }, {
-                                label: '被阻止IP数',
+                                label: '<?php echo esc_js(__('Blocked IP Count', 'folio')); ?>',
                                 data: <?php echo json_encode($chart_data['blocked_ips']); ?>,
                                 borderColor: '#646970',
                                 backgroundColor: 'rgba(100, 105, 112, 0.12)',
@@ -1018,7 +1028,7 @@ class folio_Security_Admin {
                     window.location.href = '?page=folio-security&tab=dashboard&chart_type=' + chartType;
                 };
             } catch (error) {
-                console.error('创建图表失败:', error);
+                console.error('<?php echo esc_js(__('Failed to create charts:', 'folio')); ?>', error);
             }
         });
         </script>
@@ -1088,11 +1098,11 @@ class folio_Security_Admin {
             error_log('Folio Security Logs Error: ' . $e->getMessage());
             $logs = array();
             $total_logs = 0;
-            echo '<div class="notice notice-error"><p>加载日志时出错：' . esc_html($e->getMessage()) . '</p></div>';
+            echo '<div class="notice notice-error"><p>' . esc_html__('Error loading logs: ', 'folio') . esc_html($e->getMessage()) . '</p></div>';
         }
         ?>
         <div class="logs-section">
-            <h2>访问日志</h2>
+            <h2><?php echo esc_html__('Access Logs', 'folio'); ?></h2>
             
             <div class="log-filters">
                 <form method="get">
@@ -1100,38 +1110,38 @@ class folio_Security_Admin {
                     <input type="hidden" name="tab" value="logs">
                     
                     <div class="filter-row">
-                        <label>IP地址:</label>
-                        <input type="text" name="filter_ip" value="<?php echo esc_attr($_GET['filter_ip'] ?? ''); ?>" placeholder="输入IP地址">
+                        <label><?php echo esc_html__('IP Address:', 'folio'); ?></label>
+                        <input type="text" name="filter_ip" value="<?php echo esc_attr($_GET['filter_ip'] ?? ''); ?>" placeholder="<?php echo esc_attr__('Enter IP address', 'folio'); ?>">
                         
-                        <label>操作类型:</label>
+                        <label><?php echo esc_html__('Action Type:', 'folio'); ?></label>
                         <select name="filter_action">
-                            <option value="">全部</option>
-                            <option value="page_view" <?php selected($_GET['filter_action'] ?? '', 'page_view'); ?>>页面访问</option>
-                            <option value="content_view" <?php selected($_GET['filter_action'] ?? '', 'content_view'); ?>>内容查看</option>
-                            <option value="api_access" <?php selected($_GET['filter_action'] ?? '', 'api_access'); ?>>API访问</option>
-                            <option value="rss_access" <?php selected($_GET['filter_action'] ?? '', 'rss_access'); ?>>RSS访问</option>
-                            <option value="bypass_attempt" <?php selected($_GET['filter_action'] ?? '', 'bypass_attempt'); ?>>绕过尝试</option>
+                            <option value=""><?php echo esc_html__('All', 'folio'); ?></option>
+                            <option value="page_view" <?php selected($_GET['filter_action'] ?? '', 'page_view'); ?>><?php echo esc_html__('Page View', 'folio'); ?></option>
+                            <option value="content_view" <?php selected($_GET['filter_action'] ?? '', 'content_view'); ?>><?php echo esc_html__('Content View', 'folio'); ?></option>
+                            <option value="api_access" <?php selected($_GET['filter_action'] ?? '', 'api_access'); ?>><?php echo esc_html__('API Access', 'folio'); ?></option>
+                            <option value="rss_access" <?php selected($_GET['filter_action'] ?? '', 'rss_access'); ?>><?php echo esc_html__('RSS Access', 'folio'); ?></option>
+                            <option value="bypass_attempt" <?php selected($_GET['filter_action'] ?? '', 'bypass_attempt'); ?>><?php echo esc_html__('Bypass Attempt', 'folio'); ?></option>
                         </select>
                         
-                        <label>类型:</label>
+                        <label><?php echo esc_html__('Type:', 'folio'); ?></label>
                         <select name="filter_type">
-                            <option value="">全部</option>
-                            <option value="spider" <?php selected($_GET['filter_type'] ?? '', 'spider'); ?>>蜘蛛</option>
-                            <option value="user" <?php selected($_GET['filter_type'] ?? '', 'user'); ?>>用户</option>
+                            <option value=""><?php echo esc_html__('All', 'folio'); ?></option>
+                            <option value="spider" <?php selected($_GET['filter_type'] ?? '', 'spider'); ?>><?php echo esc_html__('Spider', 'folio'); ?></option>
+                            <option value="user" <?php selected($_GET['filter_type'] ?? '', 'user'); ?>><?php echo esc_html__('User', 'folio'); ?></option>
                         </select>
                         
                         <label>
                             <input type="checkbox" name="filter_suspicious" value="1" <?php checked(!empty($_GET['filter_suspicious'])); ?>>
-                            仅显示可疑活动
+                            <?php echo esc_html__('Show suspicious activity only', 'folio'); ?>
                         </label>
                     </div>
                     
                     <div class="filter-row">
-                        <label>日期从:</label>
+                        <label><?php echo esc_html__('Date From:', 'folio'); ?></label>
                         <input type="date" name="filter_date" value="<?php echo esc_attr($_GET['filter_date'] ?? ''); ?>">
                         
-                        <button type="submit" class="button">筛选</button>
-                        <a href="?page=folio-security&tab=logs" class="button">清除筛选</a>
+                        <button type="submit" class="button"><?php echo esc_html__('Filter', 'folio'); ?></button>
+                        <a href="?page=folio-security&tab=logs" class="button"><?php echo esc_html__('Clear Filters', 'folio'); ?></a>
                     </div>
                 </form>
             </div>
@@ -1139,21 +1149,21 @@ class folio_Security_Admin {
             <table class="logs-table">
                 <thead>
                     <tr>
-                        <th>时间</th>
-                        <th>IP地址</th>
-                        <th>用户</th>
-                        <th>操作类型</th>
-                        <th>文章ID</th>
-                        <th>结果</th>
-                        <th>类型</th>
+                        <th><?php echo esc_html__('Time', 'folio'); ?></th>
+                        <th><?php echo esc_html__('IP Address', 'folio'); ?></th>
+                        <th><?php echo esc_html__('User', 'folio'); ?></th>
+                        <th><?php echo esc_html__('Action Type', 'folio'); ?></th>
+                        <th><?php echo esc_html__('Post ID', 'folio'); ?></th>
+                        <th><?php echo esc_html__('Result', 'folio'); ?></th>
+                        <th><?php echo esc_html__('Type', 'folio'); ?></th>
                         <th>User Agent</th>
-                        <th>状态</th>
+                        <th><?php echo esc_html__('Status', 'folio'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if (empty($logs)) : ?>
                     <tr>
-                        <td colspan="9" style="text-align: center; padding: 20px;">没有找到日志记录</td>
+                        <td colspan="9" style="text-align: center; padding: 20px;"><?php echo esc_html__('No logs found', 'folio'); ?></td>
                     </tr>
                     <?php else : ?>
                     <?php foreach ($logs as $log) : ?>
@@ -1164,9 +1174,9 @@ class folio_Security_Admin {
                             <?php 
                             if ($log->user_id) {
                                 $user = get_user_by('id', $log->user_id);
-                                echo $user ? esc_html($user->display_name) : '未知用户';
+                                echo $user ? esc_html($user->display_name) : esc_html__('Unknown User', 'folio');
                             } else {
-                                echo '访客';
+                                echo esc_html__('Guest', 'folio');
                             }
                             ?>
                         </td>
@@ -1191,12 +1201,12 @@ class folio_Security_Admin {
                                 $spider_info = isset($spider_info_cache[$log->ip_address]) ? $spider_info_cache[$log->ip_address] : null;
                                 
                                 if ($spider_info) {
-                                    $types[] = '<span style="color: #0073aa; font-weight: bold;" title="蜘蛛ID: ' . esc_attr($spider_info['spider_id']) . '">' . esc_html($spider_info['spider_name']) . '</span>';
+                                    $types[] = '<span style="color: #0073aa; font-weight: bold;" title="' . esc_attr__('Spider ID:', 'folio') . ' ' . esc_attr($spider_info['spider_id']) . '">' . esc_html($spider_info['spider_name']) . '</span>';
                                 } else {
-                                    $types[] = '<span style="color: #0073aa; font-weight: bold;">蜘蛛</span>';
+                                    $types[] = '<span style="color: #0073aa; font-weight: bold;">' . esc_html__('Spider', 'folio') . '</span>';
                                 }
                             } else {
-                                $types[] = '<span style="color: #666;">用户</span>';
+                                $types[] = '<span style="color: #666;">' . esc_html__('User', 'folio') . '</span>';
                             }
                             echo implode(' ', $types);
                             ?>
@@ -1208,10 +1218,10 @@ class folio_Security_Admin {
                             <?php 
                             $statuses = array();
                             if (!empty($log->is_suspicious)) {
-                                $statuses[] = '<span class="status-suspicious">可疑</span>';
+                                $statuses[] = '<span class="status-suspicious">' . esc_html__('Suspicious', 'folio') . '</span>';
                             }
                             if (!empty($log->protection_bypassed)) {
-                                $statuses[] = '<span class="status-blocked">绕过</span>';
+                                $statuses[] = '<span class="status-blocked">' . esc_html__('Bypass', 'folio') . '</span>';
                             }
                             echo !empty($statuses) ? implode(' ', $statuses) : '-';
                             ?>
@@ -1231,14 +1241,14 @@ class folio_Security_Admin {
                 
                 if ($page > 1) {
                     $prev_url = add_query_arg('paged', $page - 1, remove_query_arg('paged'));
-                    echo '<a class="button" href="' . esc_url($prev_url) . '">上一页</a> ';
+                    echo '<a class="button" href="' . esc_url($prev_url) . '">' . esc_html__('Previous', 'folio') . '</a> ';
                 }
                 
-                echo '<span class="paging-input">第 ' . $page . ' 页，共 ' . $total_pages . ' 页（共 ' . number_format($total_logs) . ' 条记录）</span> ';
+                echo '<span class="paging-input">' . sprintf(esc_html__('Page %1$d of %2$d (%3$s records)', 'folio'), $page, $total_pages, number_format($total_logs)) . '</span> ';
                 
                 if ($page < $total_pages) {
                     $next_url = add_query_arg('paged', $page + 1, remove_query_arg('paged'));
-                    echo '<a class="button" href="' . esc_url($next_url) . '">下一页</a>';
+                    echo '<a class="button" href="' . esc_url($next_url) . '">' . esc_html__('Next', 'folio') . '</a>';
                 }
                 
                 echo '</div>';
@@ -1262,10 +1272,21 @@ class folio_Security_Admin {
             update_option('folio_security_log_retention', intval($_POST['log_retention']));
             update_option('folio_security_enable_logging', !empty($_POST['enable_logging']));
             update_option('folio_security_spider_whitelist', !empty($_POST['spider_whitelist']));
+            update_option('folio_security_unknown_crawler_auto_action', !empty($_POST['unknown_crawler_auto_action']));
+            $unknown_action = isset($_POST['unknown_crawler_action']) ? sanitize_text_field(wp_unslash($_POST['unknown_crawler_action'])) : 'block';
+            if (!in_array($unknown_action, array('block', 'blacklist'), true)) {
+                $unknown_action = 'block';
+            }
+            update_option('folio_security_unknown_crawler_action', $unknown_action);
+            $unknown_block_duration = isset($_POST['unknown_crawler_block_duration']) ? intval($_POST['unknown_crawler_block_duration']) : 3600;
+            $unknown_block_duration = max(300, min(604800, $unknown_block_duration));
+            update_option('folio_security_unknown_crawler_block_duration', $unknown_block_duration);
             update_option('folio_security_whitelist', isset($_POST['whitelist']) ? wp_unslash($_POST['whitelist']) : '');
             update_option('folio_security_blacklist', isset($_POST['blacklist']) ? wp_unslash($_POST['blacklist']) : '');
+            update_option('folio_banned_users', isset($_POST['banned_users']) ? wp_unslash($_POST['banned_users']) : '');
+            update_option('folio_register_blocklist', isset($_POST['register_blocklist']) ? wp_unslash($_POST['register_blocklist']) : '');
             
-            echo '<div class="notice notice-success"><p>设置已保存</p></div>';
+            echo '<div class="notice notice-success"><p>' . esc_html__('Settings saved', 'folio') . '</p></div>';
         }
 
         $rate_limit = get_option('folio_security_rate_limit', 10);
@@ -1273,142 +1294,191 @@ class folio_Security_Admin {
         $log_retention = get_option('folio_security_log_retention', 7);
         $enable_logging = get_option('folio_security_enable_logging', true);
         $spider_whitelist = get_option('folio_security_spider_whitelist', true);
+        $unknown_crawler_auto_action = get_option('folio_security_unknown_crawler_auto_action', true);
+        $unknown_crawler_action = get_option('folio_security_unknown_crawler_action', 'block');
+        if (!in_array($unknown_crawler_action, array('block', 'blacklist'), true)) {
+            $unknown_crawler_action = 'block';
+        }
+        $unknown_crawler_block_duration = intval(get_option('folio_security_unknown_crawler_block_duration', 3600));
         $whitelist = get_option('folio_security_whitelist', '');
         $blacklist = get_option('folio_security_blacklist', '');
+        $banned_users = get_option('folio_banned_users', '');
+        $register_blocklist = get_option('folio_register_blocklist', '');
         ?>
         <div class="settings-section">
-            <h2>安全设置</h2>
+            <h2><?php echo esc_html__('Security Settings', 'folio'); ?></h2>
             
             <form method="post">
                 <?php wp_nonce_field('folio_security_settings'); ?>
                 
                 <table class="form-table">
                     <tr>
-                        <th scope="row">访问频率限制</th>
+                        <th scope="row"><?php echo esc_html__('Rate Limit', 'folio'); ?></th>
                         <td>
                             <input type="number" name="rate_limit" value="<?php echo esc_attr($rate_limit); ?>" min="1" max="100">
-                            <p class="description">10分钟内允许的最大访问次数</p>
+                            <p class="description"><?php echo esc_html__('Maximum number of visits allowed within 10 minutes', 'folio'); ?></p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">阻止访问时长</th>
+                        <th scope="row"><?php echo esc_html__('Block Duration', 'folio'); ?></th>
                         <td>
                             <input type="number" name="block_duration" value="<?php echo esc_attr($block_duration); ?>" min="300" max="86400">
-                            <p class="description">阻止访问的时长（秒），默认3600秒（1小时）</p>
+                            <p class="description"><?php echo esc_html__('Block duration in seconds, default 3600 (1 hour)', 'folio'); ?></p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">日志保留天数</th>
+                        <th scope="row"><?php echo esc_html__('Log Retention Days', 'folio'); ?></th>
                         <td>
                             <input type="number" name="log_retention" value="<?php echo esc_attr($log_retention); ?>" min="7" max="365">
-                            <p class="description">访问日志保留的天数</p>
+                            <p class="description"><?php echo esc_html__('Days to keep access logs', 'folio'); ?></p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">启用访问日志</th>
+                        <th scope="row"><?php echo esc_html__('Enable Access Logging', 'folio'); ?></th>
                         <td>
                             <label>
                                 <input type="checkbox" name="enable_logging" value="1" <?php checked($enable_logging); ?>>
-                                记录访问日志（可能影响性能）
+                                <?php echo esc_html__('Record access logs (may impact performance)', 'folio'); ?>
                             </label>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">蜘蛛自动白名单</th>
+                        <th scope="row"><?php echo esc_html__('Spider Auto Whitelist', 'folio'); ?></th>
                         <td>
                             <label>
                                 <input type="checkbox" name="spider_whitelist" value="1" <?php checked($spider_whitelist); ?>>
-                                蜘蛛/爬虫不受频率限制和封禁，自动放行
+                                <?php echo esc_html__('Spiders/crawlers bypass rate limit and blocking automatically', 'folio'); ?>
                             </label>
-                            <p class="description">识别为搜索引擎蜘蛛（如 Google、Baidu）的访问将跳过防护检测</p>
+                            <p class="description"><?php echo esc_html__('Visits identified as search engine spiders (e.g. Google, Baidu) will skip protection checks', 'folio'); ?></p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">白名单</th>
+                        <th scope="row"><?php echo esc_html__('Unknown Crawler Auto Action', 'folio'); ?></th>
                         <td>
-                            <textarea name="whitelist" rows="6" class="large-text code" placeholder="每行一个 IP 或 CIDR 网段&#10;例如：&#10;192.168.1.1&#10;10.0.0.0/24"><?php echo esc_textarea($whitelist); ?></textarea>
-                            <p class="description">白名单 IP 不受频率限制和封禁。支持单个 IP 或 CIDR 格式（如 192.168.1.0/24）</p>
+                            <label>
+                                <input type="checkbox" name="unknown_crawler_auto_action" value="1" <?php checked($unknown_crawler_auto_action); ?>>
+                                <?php echo esc_html__('Automatically handle unknown crawlers', 'folio'); ?>
+                            </label>
+                            <p class="description"><?php echo esc_html__('When enabled, unknown crawler requests are auto-blocked or added to blacklist based on the action below.', 'folio'); ?></p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">黑名单</th>
+                        <th scope="row"><?php echo esc_html__('Unknown Crawler Action', 'folio'); ?></th>
                         <td>
-                            <textarea name="blacklist" rows="6" class="large-text code" placeholder="每行一个 IP 或 CIDR 网段&#10;例如：&#10;1.2.3.4&#10;5.6.0.0/16"><?php echo esc_textarea($blacklist); ?></textarea>
-                            <p class="description">黑名单 IP 将被直接拒绝访问。支持单个 IP 或 CIDR 格式</p>
+                            <select name="unknown_crawler_action">
+                                <option value="block" <?php selected($unknown_crawler_action, 'block'); ?>><?php echo esc_html__('Temporary Block', 'folio'); ?></option>
+                                <option value="blacklist" <?php selected($unknown_crawler_action, 'blacklist'); ?>><?php echo esc_html__('Add to Blacklist', 'folio'); ?></option>
+                            </select>
+                            <p class="description"><?php echo esc_html__('Choose how unknown crawler IPs should be handled.', 'folio'); ?></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><?php echo esc_html__('Unknown Crawler Block Duration', 'folio'); ?></th>
+                        <td>
+                            <input type="number" name="unknown_crawler_block_duration" value="<?php echo esc_attr($unknown_crawler_block_duration); ?>" min="300" max="604800">
+                            <p class="description"><?php echo esc_html__('When action is temporary block, use this duration (seconds). Default: 3600.', 'folio'); ?></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><?php echo esc_html__('Whitelist', 'folio'); ?></th>
+                        <td>
+                            <textarea name="whitelist" rows="6" class="large-text code" placeholder="<?php echo esc_attr__('One IP or CIDR per line&#10;Example:&#10;192.168.1.1&#10;10.0.0.0/24', 'folio'); ?>"><?php echo esc_textarea($whitelist); ?></textarea>
+                            <p class="description"><?php echo esc_html__('Whitelisted IPs bypass rate limits and blocking. Supports single IP and CIDR format (e.g. 192.168.1.0/24)', 'folio'); ?></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><?php echo esc_html__('Blacklist', 'folio'); ?></th>
+                        <td>
+                            <textarea name="blacklist" rows="6" class="large-text code" placeholder="<?php echo esc_attr__('One IP or CIDR per line&#10;Example:&#10;1.2.3.4&#10;5.6.0.0/16', 'folio'); ?>"><?php echo esc_textarea($blacklist); ?></textarea>
+                            <p class="description"><?php echo esc_html__('Blacklisted IPs are denied directly. Supports single IP and CIDR format', 'folio'); ?></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><?php echo esc_html__('Banned Users', 'folio'); ?></th>
+                        <td>
+                            <textarea name="banned_users" rows="6" class="large-text code" placeholder="<?php echo esc_attr__('One username or user ID per line&#10;Example:&#10;spambot1&#10;12345', 'folio'); ?>"><?php echo esc_textarea($banned_users); ?></textarea>
+                            <p class="description"><?php echo esc_html__('Banned users cannot log in. One username or user ID (number) per line. Add robot-registered accounts here and save to ban them in batch.', 'folio'); ?></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><?php echo esc_html__('Registration Blocklist', 'folio'); ?></th>
+                        <td>
+                            <textarea name="register_blocklist" rows="4" class="large-text code" placeholder="<?php echo esc_attr__('One username, email or domain per line&#10;Example:&#10;admin&#10;@tempmail.com', 'folio'); ?>"><?php echo esc_textarea($register_blocklist); ?></textarea>
+                            <p class="description"><?php echo esc_html__('Usernames or emails in this list cannot register. Supports: username, full email, or email domain (e.g. @tempmail.com)', 'folio'); ?></p>
                         </td>
                     </tr>
                 </table>
                 
                 <p class="submit">
-                    <input type="submit" name="save_settings" class="button-primary" value="保存设置">
+                    <input type="submit" name="save_settings" class="button-primary" value="<?php echo esc_attr__('Save Settings', 'folio'); ?>">
                 </p>
             </form>
 
             <div class="security-actions" style="margin-top: 40px;">
-                <h3>安全操作</h3>
+                <h3><?php echo esc_html__('Security Actions', 'folio'); ?></h3>
                 <p>
-                    <button type="button" class="button" onclick="cleanupOldLogs()">清理过期日志</button>
-                    <span class="description">清理超过 <?php echo esc_html($log_retention); ?> 天的访问日志记录</span>
+                    <button type="button" class="button" onclick="cleanupOldLogs()"><?php echo esc_html__('Clean Expired Logs', 'folio'); ?></button>
+                    <span class="description"><?php echo sprintf(esc_html__('Remove access logs older than %d days', 'folio'), esc_html($log_retention)); ?></span>
                 </p>
                 <p>
-                    <button type="button" class="button" onclick="clearSecurityLogs()">清除所有日志</button>
-                    <span class="description">清除所有访问日志记录（危险操作）</span>
+                    <button type="button" class="button" onclick="clearSecurityLogs()"><?php echo esc_html__('Clear All Logs', 'folio'); ?></button>
+                    <span class="description"><?php echo esc_html__('Clear all access logs (dangerous)', 'folio'); ?></span>
                 </p>
                 <p>
-                    <button type="button" class="button" onclick="unblockAllIPs()">解除所有IP阻止</button>
-                    <span class="description">解除所有被阻止的IP地址</span>
+                    <button type="button" class="button" onclick="unblockAllIPs()"><?php echo esc_html__('Unblock All IPs', 'folio'); ?></button>
+                    <span class="description"><?php echo esc_html__('Unblock all blocked IP addresses', 'folio'); ?></span>
                 </p>
             </div>
         </div>
 
         <script>
         function cleanupOldLogs() {
-            if (confirm('确定要清理超过 <?php echo esc_js($log_retention); ?> 天的过期日志吗？')) {
+            if (confirm('<?php echo esc_js(sprintf(__('Clean logs older than %d days?', 'folio'), $log_retention)); ?>')) {
                 jQuery.post(ajaxurl, {
                     action: 'folio_security_action',
                     security_action: 'cleanup_old_logs',
                     nonce: folioSecurity.nonce
                 }, function(response) {
                     if (response.success) {
-                        var message = response.data && response.data.message ? response.data.message : '过期日志已清理';
+                        var message = response.data && response.data.message ? response.data.message : '<?php echo esc_js(__('Expired logs cleaned', 'folio')); ?>';
                         alert(message);
                         location.reload();
                     } else {
-                        alert('操作失败：' + (response.data || '未知错误'));
+                        alert('<?php echo esc_js(__('Operation failed: ', 'folio')); ?>' + (response.data || '<?php echo esc_js(__('Unknown error', 'folio')); ?>'));
                     }
                 });
             }
         }
 
         function clearSecurityLogs() {
-            if (confirm('确定要清除所有访问日志吗？此操作不可恢复。')) {
+            if (confirm('<?php echo esc_js(__('Clear all access logs? This action cannot be undone.', 'folio')); ?>')) {
                 jQuery.post(ajaxurl, {
                     action: 'folio_security_action',
                     security_action: 'clear_logs',
                     nonce: folioSecurity.nonce
                 }, function(response) {
                     if (response.success) {
-                        alert('日志已清除');
+                        alert('<?php echo esc_js(__('Logs cleared', 'folio')); ?>');
                         location.reload();
                     } else {
-                        alert('操作失败：' + response.data);
+                        alert('<?php echo esc_js(__('Operation failed: ', 'folio')); ?>' + response.data);
                     }
                 });
             }
         }
 
         function unblockAllIPs() {
-            if (confirm('确定要解除所有IP阻止吗？')) {
+            if (confirm('<?php echo esc_js(__('Unblock all IPs?', 'folio')); ?>')) {
                 jQuery.post(ajaxurl, {
                     action: 'folio_security_action',
                     security_action: 'unblock_ips',
                     nonce: folioSecurity.nonce
                 }, function(response) {
                     if (response.success) {
-                        alert('所有IP阻止已解除');
+                        alert('<?php echo esc_js(__('All IP blocks removed', 'folio')); ?>');
                         location.reload();
                     } else {
-                        alert('操作失败：' + response.data);
+                        alert('<?php echo esc_js(__('Operation failed: ', 'folio')); ?>' + response.data);
                     }
                 });
             }
@@ -1424,7 +1494,7 @@ class folio_Security_Admin {
         check_ajax_referer('folio_security_nonce', 'nonce');
         
         if (!current_user_can('manage_options')) {
-            wp_die('权限不足');
+            wp_die(esc_html__('Insufficient permissions', 'folio'));
         }
 
         $action = $_POST['security_action'] ?? '';
@@ -1438,11 +1508,11 @@ class folio_Security_Admin {
                 if ($deleted !== false) {
                     $log_retention = get_option('folio_security_log_retention', 7);
                     wp_send_json_success(array(
-                        'message' => sprintf('已清理 %d 条超过 %d 天的过期日志', $deleted, $log_retention),
+                        'message' => sprintf(__('Cleaned %1$d expired logs older than %2$d days', 'folio'), $deleted, $log_retention),
                         'deleted' => $deleted
                     ));
                 } else {
-                    wp_send_json_error('清理过期日志失败');
+                    wp_send_json_error(__('Failed to clean expired logs', 'folio'));
                 }
                 break;
                 
@@ -1453,27 +1523,27 @@ class folio_Security_Admin {
                 // 确保表存在
                 $table_exists = $wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s", $table_name));
                 if ($table_exists !== $table_name) {
-                    wp_send_json_error('日志表不存在');
+                    wp_send_json_error(__('Log table does not exist', 'folio'));
                     return;
                 }
                 
                 $result = $wpdb->query("TRUNCATE TABLE $table_name");
                 
                 if ($result !== false) {
-                    wp_send_json_success('日志已清除');
+                    wp_send_json_success(__('Logs cleared', 'folio'));
                 } else {
-                    wp_send_json_error('清除日志失败: ' . $wpdb->last_error);
+                    wp_send_json_error(__('Failed to clear logs: ', 'folio') . $wpdb->last_error);
                 }
                 break;
                 
             case 'unblock_ips':
                 // 清除所有IP阻止缓存
                 wp_cache_flush();
-                wp_send_json_success('所有IP阻止已解除');
+                wp_send_json_success(__('All IP blocks have been removed', 'folio'));
                 break;
                 
             default:
-                wp_send_json_error('未知操作');
+                wp_send_json_error(__('Unknown action', 'folio'));
         }
     }
 
@@ -1484,20 +1554,20 @@ class folio_Security_Admin {
         check_ajax_referer('folio_security_nonce', 'nonce');
         
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
         
         $spider_data = json_decode(stripslashes($_POST['spider_data'] ?? ''), true);
         
         if (empty($spider_data) || !is_array($spider_data)) {
-            wp_send_json_error('无效的数据格式');
+            wp_send_json_error(__('Invalid data format', 'folio'));
         }
         
         $security_manager = folio_Security_Protection_Manager::get_instance();
         $imported = $security_manager->import_spider_nets($spider_data);
         
         wp_send_json_success(array(
-            'message' => "成功导入 {$imported} 条蜘蛛IP网段",
+            'message' => sprintf(__('Successfully imported %d spider IP ranges', 'folio'), $imported),
             'imported' => $imported
         ));
     }
@@ -1509,22 +1579,22 @@ class folio_Security_Admin {
         check_ajax_referer('folio_security_nonce', 'nonce');
         
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
         
         $id = intval($_POST['id'] ?? 0);
         
         if (!$id) {
-            wp_send_json_error('无效的ID');
+            wp_send_json_error(__('Invalid ID', 'folio'));
         }
         
         $security_manager = folio_Security_Protection_Manager::get_instance();
         $result = $security_manager->delete_spider_net($id);
         
         if ($result !== false) {
-            wp_send_json_success('删除成功');
+            wp_send_json_success(__('Deleted successfully', 'folio'));
         } else {
-            wp_send_json_error('删除失败');
+            wp_send_json_error(__('Delete failed', 'folio'));
         }
     }
 
@@ -1535,16 +1605,16 @@ class folio_Security_Admin {
         check_ajax_referer('folio_security_nonce', 'nonce');
         
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
         
         $security_manager = folio_Security_Protection_Manager::get_instance();
         $result = $security_manager->clear_spider_nets();
         
         if ($result !== false) {
-            wp_send_json_success('清空成功');
+            wp_send_json_success(__('Cleared successfully', 'folio'));
         } else {
-            wp_send_json_error('清空失败');
+            wp_send_json_error(__('Clear failed', 'folio'));
         }
     }
 
@@ -1555,7 +1625,7 @@ class folio_Security_Admin {
         check_ajax_referer('folio_security_nonce', 'nonce');
         
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
         
         $days = isset($_POST['days']) ? intval($_POST['days']) : 7;
@@ -1570,11 +1640,15 @@ class folio_Security_Admin {
         
         if ($result !== false) {
             wp_send_json_success(array(
-                'message' => "分析完成：发现 {$result['spiders_found']} 种蜘蛛，新增 {$result['nets_added']} 条IP网段",
+                'message' => sprintf(
+                    __('Analysis completed: found %1$d spider types and added %2$d IP ranges', 'folio'),
+                    $result['spiders_found'],
+                    $result['nets_added']
+                ),
                 'result' => $result
             ));
         } else {
-            wp_send_json_error('分析失败');
+            wp_send_json_error(__('Analysis failed', 'folio'));
         }
     }
 
@@ -1591,7 +1665,7 @@ class folio_Security_Admin {
             $spider_id = $net['spider_id'];
             if (!isset($grouped_nets[$spider_id])) {
                 $grouped_nets[$spider_id] = array(
-                    'spider_name' => $net['spider_name'] ?? '未知蜘蛛',
+                    'spider_name' => $net['spider_name'] ?? __('Unknown Spider', 'folio'),
                     'nets' => array()
                 );
             }
@@ -1599,72 +1673,72 @@ class folio_Security_Admin {
         }
         ?>
         <div class="spiders-section">
-            <h2>蜘蛛池管理</h2>
+            <h2><?php echo esc_html__('Spider Pool Management', 'folio'); ?></h2>
             
             <div class="spider-import-section" style="margin: 20px 0; padding: 20px; background: #f9f9f9; border-radius: 4px;">
-                <h3>分析日志添加蜘蛛</h3>
-                <p>自动分析访问日志，识别蜘蛛和爬虫的IP地址并添加到蜘蛛池。</p>
+                <h3><?php echo esc_html__('Analyze Logs and Add Spiders', 'folio'); ?></h3>
+                <p><?php echo esc_html__('Automatically analyze access logs, identify spider/crawler IPs, and add them to the spider pool.', 'folio'); ?></p>
                 <div style="margin: 15px 0;">
                     <label style="display: inline-block; margin-right: 15px;">
-                        <span>分析天数：</span>
+                        <span><?php echo esc_html__('Analysis Days:', 'folio'); ?></span>
                         <select id="analyze-days" style="width: 80px;">
-                            <option value="1">1天</option>
-                            <option value="3">3天</option>
-                            <option value="7" selected>7天</option>
-                            <option value="15">15天</option>
-                            <option value="30">30天</option>
+                            <option value="1"><?php echo esc_html__('1 day', 'folio'); ?></option>
+                            <option value="3"><?php echo esc_html__('3 days', 'folio'); ?></option>
+                            <option value="7" selected><?php echo esc_html__('7 days', 'folio'); ?></option>
+                            <option value="15"><?php echo esc_html__('15 days', 'folio'); ?></option>
+                            <option value="30"><?php echo esc_html__('30 days', 'folio'); ?></option>
                         </select>
                     </label>
                     <label style="display: inline-block;">
-                        <span>最少访问次数：</span>
+                        <span><?php echo esc_html__('Minimum Visits:', 'folio'); ?></span>
                         <input type="number" id="analyze-min-count" value="3" min="1" max="100" style="width: 80px;">
                     </label>
                 </div>
                 <p>
-                    <button type="button" id="analyze-logs-btn" class="button button-primary">开始分析日志</button>
+                    <button type="button" id="analyze-logs-btn" class="button button-primary"><?php echo esc_html__('Start Log Analysis', 'folio'); ?></button>
                 </p>
                 <div id="analyze-result" style="margin-top: 10px;"></div>
             </div>
             
             <div class="spider-import-section" style="margin: 20px 0; padding: 20px; background: #f9f9f9; border-radius: 4px;">
-                <h3>手动导入蜘蛛IP网段</h3>
-                <p>请粘贴JSON格式的蜘蛛池数据：</p>
+                <h3><?php echo esc_html__('Import Spider IP Ranges Manually', 'folio'); ?></h3>
+                <p><?php echo esc_html__('Paste spider pool data in JSON format:', 'folio'); ?></p>
                 <textarea id="spider-data-input" rows="10" style="width: 100%; font-family: monospace;" placeholder='[{"spider_id": 13, "net_list": [{"ip_net": "123.6.49.0/24", "id": 1}]}]'></textarea>
                 <p style="margin-top: 10px;">
-                    <button type="button" id="import-spiders-btn" class="button button-primary">导入数据</button>
-                    <button type="button" id="clear-spiders-btn" class="button" style="margin-left: 10px;">清空所有</button>
+                    <button type="button" id="import-spiders-btn" class="button button-primary"><?php echo esc_html__('Import Data', 'folio'); ?></button>
+                    <button type="button" id="clear-spiders-btn" class="button" style="margin-left: 10px;"><?php echo esc_html__('Clear All', 'folio'); ?></button>
                 </p>
                 <div id="import-result" style="margin-top: 10px;"></div>
             </div>
             
             <div class="spider-stats" style="margin: 20px 0;">
-                <p><strong>当前共有 <?php echo count($spider_nets); ?> 条蜘蛛IP网段记录</strong></p>
+                <p><strong><?php echo sprintf(esc_html__('Total spider IP range records: %d', 'folio'), count($spider_nets)); ?></strong></p>
             </div>
             
             <div class="spider-nets-list">
                 <?php if (empty($grouped_nets)) : ?>
-                    <p>暂无蜘蛛IP网段数据，请先导入数据。</p>
+                    <p><?php echo esc_html__('No spider IP range data yet. Please import data first.', 'folio'); ?></p>
                 <?php else : ?>
                     <?php foreach ($grouped_nets as $spider_id => $group) : ?>
                         <div class="spider-group" style="margin-bottom: 30px; padding: 15px; border: 1px solid #ddd; border-radius: 4px;">
-                            <h3><?php echo esc_html($group['spider_name']); ?> (ID: <?php echo $spider_id; ?>) - <?php echo count($group['nets']); ?> 条网段</h3>
+                            <h3><?php echo esc_html($group['spider_name']); ?> (ID: <?php echo esc_html($spider_id); ?>) - <?php echo sprintf(esc_html__('%d ranges', 'folio'), count($group['nets'])); ?></h3>
                             <table class="wp-list-table widefat fixed striped">
                                 <thead>
                                     <tr>
                                         <th style="width: 60px;">ID</th>
-                                        <th>IP网段</th>
-                                        <th style="width: 150px;">添加时间</th>
-                                        <th style="width: 100px;">操作</th>
+                                        <th><?php echo esc_html__('IP Range', 'folio'); ?></th>
+                                        <th style="width: 150px;"><?php echo esc_html__('Created At', 'folio'); ?></th>
+                                        <th style="width: 100px;"><?php echo esc_html__('Actions', 'folio'); ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($group['nets'] as $net) : ?>
                                         <tr>
-                                            <td><?php echo $net['id']; ?></td>
+                                            <td><?php echo esc_html($net['id']); ?></td>
                                             <td><code><?php echo esc_html($net['ip_net']); ?></code></td>
                                             <td><?php echo esc_html($net['created_at']); ?></td>
                                             <td>
-                                                <button type="button" class="button button-small delete-spider-net" data-id="<?php echo $net['id']; ?>">删除</button>
+                                                <button type="button" class="button button-small delete-spider-net" data-id="<?php echo esc_attr($net['id']); ?>"><?php echo esc_html__('Delete', 'folio'); ?></button>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -1684,23 +1758,23 @@ class folio_Security_Admin {
                 var minCount = parseInt($('#analyze-min-count').val()) || 3;
                 
                 if (days < 1 || days > 365) {
-                    alert('分析天数必须在1-365之间');
+                    alert('<?php echo esc_js(__('Analysis days must be between 1 and 365', 'folio')); ?>');
                     return;
                 }
                 
                 if (minCount < 1 || minCount > 1000) {
-                    alert('最少访问次数必须在1-1000之间');
+                    alert('<?php echo esc_js(__('Minimum visits must be between 1 and 1000', 'folio')); ?>');
                     return;
                 }
                 
-                if (!confirm('将分析最近 ' + days + ' 天的访问日志，识别蜘蛛和爬虫并添加到蜘蛛池。确定要继续吗？')) {
+                if (!confirm('<?php echo esc_js(__('Analyze logs from the last', 'folio')); ?> ' + days + ' <?php echo esc_js(__('days and add detected spiders/crawlers to the pool. Continue?', 'folio')); ?>')) {
                     return;
                 }
                 
                 var $btn = $(this);
                 var $result = $('#analyze-result');
-                $btn.prop('disabled', true).text('分析中...');
-                $result.html('<div class="notice notice-info"><p><span class="spinner is-active" style="float: none; margin: 0 5px 0 0;"></span>正在分析日志，请稍候...</p></div>');
+                $btn.prop('disabled', true).text('<?php echo esc_js(__('Analyzing...', 'folio')); ?>');
+                $result.html('<div class="notice notice-info"><p><span class="spinner is-active" style="float: none; margin: 0 5px 0 0;"></span><?php echo esc_js(__('Analyzing logs, please wait...', 'folio')); ?></p></div>');
                 
                 $.ajax({
                     url: folioSecurity.ajax_url,
@@ -1718,7 +1792,7 @@ class folio_Security_Admin {
                             
                             if (result.details && result.details.length > 0) {
                                 html += '<table class="widefat" style="margin-top: 10px;">';
-                                html += '<thead><tr><th>蜘蛛名称</th><th>IP数量</th><th>访问次数</th><th>新增网段</th></tr></thead>';
+                                html += '<thead><tr><th><?php echo esc_js(__('Spider Name', 'folio')); ?></th><th><?php echo esc_js(__('IP Count', 'folio')); ?></th><th><?php echo esc_js(__('Access Count', 'folio')); ?></th><th><?php echo esc_js(__('New Ranges', 'folio')); ?></th></tr></thead>';
                                 html += '<tbody>';
                                 
                                 result.details.forEach(function(detail) {
@@ -1743,13 +1817,13 @@ class folio_Security_Admin {
                                 }, 3000);
                             }
                         } else {
-                            $result.html('<div class="notice notice-error"><p>' + (response.data || '分析失败') + '</p></div>');
+                            $result.html('<div class="notice notice-error"><p>' + (response.data || '<?php echo esc_js(__('Analysis failed', 'folio')); ?>') + '</p></div>');
                         }
-                        $btn.prop('disabled', false).text('开始分析日志');
+                        $btn.prop('disabled', false).text('<?php echo esc_js(__('Start Log Analysis', 'folio')); ?>');
                     },
                     error: function(xhr, status, error) {
-                        $result.html('<div class="notice notice-error"><p>请求失败：' + error + '</p></div>');
-                        $btn.prop('disabled', false).text('开始分析日志');
+                        $result.html('<div class="notice notice-error"><p><?php echo esc_js(__('Request failed: ', 'folio')); ?>' + error + '</p></div>');
+                        $btn.prop('disabled', false).text('<?php echo esc_js(__('Start Log Analysis', 'folio')); ?>');
                     }
                 });
             });
@@ -1759,7 +1833,7 @@ class folio_Security_Admin {
                 var spiderData = $('#spider-data-input').val().trim();
                 
                 if (!spiderData) {
-                    alert('请输入蜘蛛数据');
+                    alert('<?php echo esc_js(__('Please input spider data', 'folio')); ?>');
                     return;
                 }
                 
@@ -1767,12 +1841,12 @@ class folio_Security_Admin {
                 try {
                     JSON.parse(spiderData);
                 } catch (e) {
-                    alert('JSON格式错误：' + e.message);
+                    alert('<?php echo esc_js(__('Invalid JSON format: ', 'folio')); ?>' + e.message);
                     return;
                 }
                 
                 var $btn = $(this);
-                $btn.prop('disabled', true).text('导入中...');
+                $btn.prop('disabled', true).text('<?php echo esc_js(__('Importing...', 'folio')); ?>');
                 
                 $.ajax({
                     url: folioSecurity.ajax_url,
@@ -1789,25 +1863,25 @@ class folio_Security_Admin {
                                 location.reload();
                             }, 1500);
                         } else {
-                            $('#import-result').html('<div class="notice notice-error"><p>' + (response.data || '导入失败') + '</p></div>');
-                            $btn.prop('disabled', false).text('导入数据');
+                            $('#import-result').html('<div class="notice notice-error"><p>' + (response.data || '<?php echo esc_js(__('Import failed', 'folio')); ?>') + '</p></div>');
+                            $btn.prop('disabled', false).text('<?php echo esc_js(__('Import Data', 'folio')); ?>');
                         }
                     },
                     error: function() {
-                        $('#import-result').html('<div class="notice notice-error"><p>请求失败，请重试</p></div>');
-                        $btn.prop('disabled', false).text('导入数据');
+                        $('#import-result').html('<div class="notice notice-error"><p><?php echo esc_js(__('Request failed, please try again', 'folio')); ?></p></div>');
+                        $btn.prop('disabled', false).text('<?php echo esc_js(__('Import Data', 'folio')); ?>');
                     }
                 });
             });
             
             // 清空所有蜘蛛网段
             $('#clear-spiders-btn').on('click', function() {
-                if (!confirm('确定要清空所有蜘蛛IP网段吗？此操作不可恢复！')) {
+                if (!confirm('<?php echo esc_js(__('Clear all spider IP ranges? This action cannot be undone.', 'folio')); ?>')) {
                     return;
                 }
                 
                 var $btn = $(this);
-                $btn.prop('disabled', true).text('清空中...');
+                $btn.prop('disabled', true).text('<?php echo esc_js(__('Clearing...', 'folio')); ?>');
                 
                 $.ajax({
                     url: folioSecurity.ajax_url,
@@ -1818,29 +1892,29 @@ class folio_Security_Admin {
                     },
                     success: function(response) {
                         if (response.success) {
-                            alert('清空成功');
+                            alert('<?php echo esc_js(__('Cleared successfully', 'folio')); ?>');
                             location.reload();
                         } else {
-                            alert('清空失败：' + (response.data || '未知错误'));
-                            $btn.prop('disabled', false).text('清空所有');
+                            alert('<?php echo esc_js(__('Clear failed: ', 'folio')); ?>' + (response.data || '<?php echo esc_js(__('Unknown error', 'folio')); ?>'));
+                            $btn.prop('disabled', false).text('<?php echo esc_js(__('Clear All', 'folio')); ?>');
                         }
                     },
                     error: function() {
-                        alert('请求失败，请重试');
-                        $btn.prop('disabled', false).text('清空所有');
+                        alert('<?php echo esc_js(__('Request failed, please try again', 'folio')); ?>');
+                        $btn.prop('disabled', false).text('<?php echo esc_js(__('Clear All', 'folio')); ?>');
                     }
                 });
             });
             
             // 删除单个网段
             $('.delete-spider-net').on('click', function() {
-                if (!confirm('确定要删除这条记录吗？')) {
+                if (!confirm('<?php echo esc_js(__('Are you sure to delete this record?', 'folio')); ?>')) {
                     return;
                 }
                 
                 var $btn = $(this);
                 var id = $btn.data('id');
-                $btn.prop('disabled', true).text('删除中...');
+                $btn.prop('disabled', true).text('<?php echo esc_js(__('Deleting...', 'folio')); ?>');
                 
                 $.ajax({
                     url: folioSecurity.ajax_url,
@@ -1856,13 +1930,13 @@ class folio_Security_Admin {
                                 $(this).remove();
                             });
                         } else {
-                            alert('删除失败：' + (response.data || '未知错误'));
-                            $btn.prop('disabled', false).text('删除');
+                            alert('<?php echo esc_js(__('Delete failed: ', 'folio')); ?>' + (response.data || '<?php echo esc_js(__('Unknown error', 'folio')); ?>'));
+                            $btn.prop('disabled', false).text('<?php echo esc_js(__('Delete', 'folio')); ?>');
                         }
                     },
                     error: function() {
-                        alert('请求失败，请重试');
-                        $btn.prop('disabled', false).text('删除');
+                        alert('<?php echo esc_js(__('Request failed, please try again', 'folio')); ?>');
+                        $btn.prop('disabled', false).text('<?php echo esc_js(__('Delete', 'folio')); ?>');
                     }
                 });
             });
@@ -2182,69 +2256,69 @@ class folio_Security_Admin {
         $reports = $report_manager->get_reports(50, 0);
         ?>
         <div class="reports-section">
-            <h2>AI运营报告</h2>
+            <h2><?php echo esc_html__('AI Operations Reports', 'folio'); ?></h2>
             
             <div class="report-generate-section" style="margin: 20px 0; padding: 20px; background: #f9f9f9; border-radius: 4px;">
-                <h3>生成新报告</h3>
-                <p>选择时间范围，系统将自动分析访问日志并生成AI运营报告。</p>
+                <h3><?php echo esc_html__('Generate New Report', 'folio'); ?></h3>
+                <p><?php echo esc_html__('Select a time range, and the system will analyze access logs to generate an AI operations report.', 'folio'); ?></p>
                 <div style="margin: 15px 0;">
                     <label style="display: inline-block; margin-right: 15px;">
-                        <span>报告名称：</span>
-                        <input type="text" id="report-name" placeholder="自动生成" style="width: 300px;">
+                        <span><?php echo esc_html__('Report Name:', 'folio'); ?></span>
+                        <input type="text" id="report-name" placeholder="<?php echo esc_attr__('Auto generated', 'folio'); ?>" style="width: 300px;">
                     </label>
                 </div>
                 <div style="margin: 15px 0;">
                     <label style="display: inline-block; margin-right: 15px;">
-                        <span>开始日期：</span>
+                        <span><?php echo esc_html__('Start Date:', 'folio'); ?></span>
                         <input type="date" id="report-start-date" value="<?php echo date('Y-m-d', strtotime('-7 days')); ?>" style="width: 150px;">
                     </label>
                     <label style="display: inline-block;">
-                        <span>结束日期：</span>
+                        <span><?php echo esc_html__('End Date:', 'folio'); ?></span>
                         <input type="date" id="report-end-date" value="<?php echo date('Y-m-d'); ?>" style="width: 150px;">
                     </label>
                 </div>
                 <div style="margin: 15px 0;">
                     <label style="display: inline-block; margin-right: 15px;">
                         <input type="checkbox" id="use-ai" checked>
-                        <span>使用AI分析（需要在主题设置 → AI设置中配置API Key和Endpoint）</span>
+                        <span><?php echo esc_html__('Use AI analysis (requires API Key and Endpoint in Theme Settings > AI Settings)', 'folio'); ?></span>
                     </label>
                 </div>
                 <p>
-                    <button type="button" id="generate-report-btn" class="button button-primary">生成报告</button>
+                    <button type="button" id="generate-report-btn" class="button button-primary"><?php echo esc_html__('Generate Report', 'folio'); ?></button>
                 </p>
                 <div id="generate-result" style="margin-top: 10px;"></div>
             </div>
             
             <div class="reports-list" style="margin: 20px 0;">
-                <h3>历史报告</h3>
+                <h3><?php echo esc_html__('Report History', 'folio'); ?></h3>
                 <?php if (empty($reports)) : ?>
-                    <p>暂无报告，请先生成报告。</p>
+                    <p><?php echo esc_html__('No reports yet. Please generate one first.', 'folio'); ?></p>
                 <?php else : ?>
                     <table class="wp-list-table widefat fixed striped">
                         <thead>
                             <tr>
                                 <th style="width: 60px;">ID</th>
-                                <th>报告名称</th>
-                                <th>时间范围</th>
-                                <th style="width: 150px;">生成时间</th>
-                                <th style="width: 200px;">操作</th>
+                                <th><?php echo esc_html__('Report Name', 'folio'); ?></th>
+                                <th><?php echo esc_html__('Time Range', 'folio'); ?></th>
+                                <th style="width: 150px;"><?php echo esc_html__('Generated At', 'folio'); ?></th>
+                                <th style="width: 200px;"><?php echo esc_html__('Actions', 'folio'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($reports as $report) : ?>
                                 <tr>
-                                    <td><?php echo $report['id']; ?></td>
+                                    <td><?php echo esc_html($report['id']); ?></td>
                                     <td><strong><?php echo esc_html($report['report_name']); ?></strong></td>
                                     <td>
-                                        <?php echo date('Y-m-d', strtotime($report['period_start'])); ?>
-                                        至
-                                        <?php echo date('Y-m-d', strtotime($report['period_end'])); ?>
+                                        <?php echo esc_html(date('Y-m-d', strtotime($report['period_start']))); ?>
+                                        <?php echo esc_html__('to', 'folio'); ?>
+                                        <?php echo esc_html(date('Y-m-d', strtotime($report['period_end']))); ?>
                                     </td>
-                                    <td><?php echo date('Y-m-d H:i', strtotime($report['created_at'])); ?></td>
+                                    <td><?php echo esc_html(date('Y-m-d H:i', strtotime($report['created_at']))); ?></td>
                                     <td>
-                                        <button type="button" class="button button-small view-report" data-id="<?php echo $report['id']; ?>">查看</button>
-                                        <button type="button" class="button button-small compare-report" data-id="<?php echo $report['id']; ?>">对比</button>
-                                        <button type="button" class="button button-small delete-report" data-id="<?php echo $report['id']; ?>">删除</button>
+                                        <button type="button" class="button button-small view-report" data-id="<?php echo esc_attr($report['id']); ?>"><?php echo esc_html__('View', 'folio'); ?></button>
+                                        <button type="button" class="button button-small compare-report" data-id="<?php echo esc_attr($report['id']); ?>"><?php echo esc_html__('Compare', 'folio'); ?></button>
+                                        <button type="button" class="button button-small delete-report" data-id="<?php echo esc_attr($report['id']); ?>"><?php echo esc_html__('Delete', 'folio'); ?></button>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -2258,7 +2332,7 @@ class folio_Security_Admin {
         <div id="report-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 100000; overflow-y: auto;">
             <div style="background: white; margin: 50px auto; padding: 20px; max-width: 900px; border-radius: 4px;">
                 <div style="text-align: right; margin-bottom: 15px;">
-                    <button type="button" id="close-report-modal" class="button">关闭</button>
+                    <button type="button" id="close-report-modal" class="button"><?php echo esc_html__('Close', 'folio'); ?></button>
                 </div>
                 <div id="report-content"></div>
             </div>
@@ -2274,19 +2348,19 @@ class folio_Security_Admin {
                 var useAI = $('#use-ai').is(':checked') ? 1 : 0;
                 
                 if (!startDate || !endDate) {
-                    alert('请选择时间范围');
+                    alert('<?php echo esc_js(__('Please select a time range', 'folio')); ?>');
                     return;
                 }
                 
                 if (startDate > endDate) {
-                    alert('开始日期不能晚于结束日期');
+                    alert('<?php echo esc_js(__('Start date cannot be later than end date', 'folio')); ?>');
                     return;
                 }
                 
                 var $btn = $(this);
                 var $result = $('#generate-result');
-                $btn.prop('disabled', true).text('生成中...');
-                $result.html('<div class="notice notice-info"><p><span class="spinner is-active" style="float: none; margin: 0 5px 0 0;"></span>正在生成报告，请稍候（这可能需要几分钟）...</p></div>');
+                $btn.prop('disabled', true).text('<?php echo esc_js(__('Generating...', 'folio')); ?>');
+                $result.html('<div class="notice notice-info"><p><span class="spinner is-active" style="float: none; margin: 0 5px 0 0;"></span><?php echo esc_js(__('Generating report, please wait (this may take a few minutes)...', 'folio')); ?></p></div>');
                 
                 $.ajax({
                     url: folioSecurity.ajax_url,
@@ -2307,13 +2381,13 @@ class folio_Security_Admin {
                                 location.reload();
                             }, 2000);
                         } else {
-                            $result.html('<div class="notice notice-error"><p>' + (response.data || '生成失败') + '</p></div>');
-                            $btn.prop('disabled', false).text('生成报告');
+                            $result.html('<div class="notice notice-error"><p>' + (response.data || '<?php echo esc_js(__('Generation failed', 'folio')); ?>') + '</p></div>');
+                            $btn.prop('disabled', false).text('<?php echo esc_js(__('Generate Report', 'folio')); ?>');
                         }
                     },
                     error: function(xhr, status, error) {
-                        $result.html('<div class="notice notice-error"><p>请求失败：' + error + '</p></div>');
-                        $btn.prop('disabled', false).text('生成报告');
+                        $result.html('<div class="notice notice-error"><p><?php echo esc_js(__('Request failed: ', 'folio')); ?>' + error + '</p></div>');
+                        $btn.prop('disabled', false).text('<?php echo esc_js(__('Generate Report', 'folio')); ?>');
                     }
                 });
             });
@@ -2322,7 +2396,7 @@ class folio_Security_Admin {
             $('.view-report').on('click', function() {
                 var reportId = $(this).data('id');
                 $('#report-modal').show();
-                $('#report-content').html('<p>加载中...</p>');
+                $('#report-content').html('<p><?php echo esc_js(__('Loading...', 'folio')); ?></p>');
                 
                 $.ajax({
                     url: folioSecurity.ajax_url,
@@ -2336,11 +2410,11 @@ class folio_Security_Admin {
                         if (response.success) {
                             $('#report-content').html(response.data.html);
                         } else {
-                            $('#report-content').html('<p>加载失败：' + (response.data || '未知错误') + '</p>');
+                            $('#report-content').html('<p><?php echo esc_js(__('Load failed: ', 'folio')); ?>' + (response.data || '<?php echo esc_js(__('Unknown error', 'folio')); ?>') + '</p>');
                         }
                     },
                     error: function() {
-                        $('#report-content').html('<p>请求失败</p>');
+                        $('#report-content').html('<p><?php echo esc_js(__('Request failed', 'folio')); ?></p>');
                     }
                 });
             });
@@ -2355,14 +2429,14 @@ class folio_Security_Admin {
             // 对比报告
             $('.compare-report').on('click', function() {
                 var reportId1 = $(this).data('id');
-                var reportId2 = prompt('请输入要对比的报告ID：');
+                var reportId2 = prompt('<?php echo esc_js(__('Please enter the report ID to compare:', 'folio')); ?>');
                 
                 if (!reportId2) {
                     return;
                 }
                 
                 $('#report-modal').show();
-                $('#report-content').html('<p>对比中...</p>');
+                $('#report-content').html('<p><?php echo esc_js(__('Comparing...', 'folio')); ?></p>');
                 
                 $.ajax({
                     url: folioSecurity.ajax_url,
@@ -2377,18 +2451,18 @@ class folio_Security_Admin {
                         if (response.success) {
                             $('#report-content').html(response.data.html);
                         } else {
-                            $('#report-content').html('<p>对比失败：' + (response.data || '未知错误') + '</p>');
+                            $('#report-content').html('<p><?php echo esc_js(__('Comparison failed: ', 'folio')); ?>' + (response.data || '<?php echo esc_js(__('Unknown error', 'folio')); ?>') + '</p>');
                         }
                     },
                     error: function() {
-                        $('#report-content').html('<p>请求失败</p>');
+                        $('#report-content').html('<p><?php echo esc_js(__('Request failed', 'folio')); ?></p>');
                     }
                 });
             });
             
             // 删除报告
             $('.delete-report').on('click', function() {
-                if (!confirm('确定要删除此报告吗？')) {
+                if (!confirm('<?php echo esc_js(__('Are you sure to delete this report?', 'folio')); ?>')) {
                     return;
                 }
                 
@@ -2409,11 +2483,11 @@ class folio_Security_Admin {
                                 $(this).remove();
                             });
                         } else {
-                            alert('删除失败：' + (response.data || '未知错误'));
+                            alert('<?php echo esc_js(__('Delete failed: ', 'folio')); ?>' + (response.data || '<?php echo esc_js(__('Unknown error', 'folio')); ?>'));
                         }
                     },
                     error: function() {
-                        alert('请求失败');
+                        alert('<?php echo esc_js(__('Request failed', 'folio')); ?>');
                     }
                 });
             });
@@ -2429,7 +2503,7 @@ class folio_Security_Admin {
         check_ajax_referer('folio_security_nonce', 'nonce');
         
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
         
         $report_name = isset($_POST['report_name']) ? sanitize_text_field($_POST['report_name']) : '';
@@ -2438,7 +2512,7 @@ class folio_Security_Admin {
         $use_ai = isset($_POST['use_ai']) ? (int)$_POST['use_ai'] : 0;
         
         if (empty($period_start) || empty($period_end)) {
-            wp_send_json_error('请选择时间范围');
+            wp_send_json_error(__('Please select a time range', 'folio'));
         }
         
         $report_manager = folio_Operations_Report_Manager::get_instance();
@@ -2460,11 +2534,11 @@ class folio_Security_Admin {
         
         if ($report_id) {
             wp_send_json_success(array(
-                'message' => '报告生成成功！报告ID：' . $report_id,
+                'message' => sprintf(__('Report generated successfully! Report ID: %d', 'folio'), $report_id),
                 'report_id' => $report_id
             ));
         } else {
-            wp_send_json_error('报告生成失败');
+            wp_send_json_error(__('Failed to generate report', 'folio'));
         }
     }
 
@@ -2475,20 +2549,20 @@ class folio_Security_Admin {
         check_ajax_referer('folio_security_nonce', 'nonce');
         
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
         
         $report_id = isset($_POST['report_id']) ? intval($_POST['report_id']) : 0;
         
         if (!$report_id) {
-            wp_send_json_error('无效的报告ID');
+            wp_send_json_error(__('Invalid report ID', 'folio'));
         }
         
         $report_manager = folio_Operations_Report_Manager::get_instance();
         $report = $report_manager->get_report($report_id);
         
         if (!$report) {
-            wp_send_json_error('报告不存在');
+            wp_send_json_error(__('Report not found', 'folio'));
         }
         
         $html = $this->format_report_html($report);
@@ -2508,13 +2582,13 @@ class folio_Security_Admin {
         $html = '<div style="max-width: 1200px;">';
         $html .= '<h2>' . esc_html($report['report_name']) . '</h2>';
         $html .= '<div style="margin-bottom: 20px; padding: 15px; background: #f9f9f9; border-radius: 4px;">';
-        $html .= '<p><strong>时间范围：</strong>' . date('Y-m-d', strtotime($report['period_start'])) . ' 至 ' . date('Y-m-d', strtotime($report['period_end'])) . '</p>';
-        $html .= '<p><strong>生成时间：</strong>' . date('Y-m-d H:i:s', strtotime($report['created_at'])) . '</p>';
+        $html .= '<p><strong>' . esc_html__('Time Range:', 'folio') . '</strong> ' . date('Y-m-d', strtotime($report['period_start'])) . ' ' . esc_html__('to', 'folio') . ' ' . date('Y-m-d', strtotime($report['period_end'])) . '</p>';
+        $html .= '<p><strong>' . esc_html__('Generated At:', 'folio') . '</strong> ' . date('Y-m-d H:i:s', strtotime($report['created_at'])) . '</p>';
         $html .= '</div>';
         
         // 核心指标卡片
         if (!empty($summary['overview']) || !empty($summary['metrics'])) {
-            $html .= '<h3 style="margin-top: 30px;">📊 核心运营指标</h3>';
+            $html .= '<h3 style="margin-top: 30px;">📊 ' . esc_html__('Core Operations Metrics', 'folio') . '</h3>';
             $html .= '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 30px;">';
             
             // 流量质量评分卡片
@@ -2523,16 +2597,16 @@ class folio_Security_Admin {
                 $color = $score >= 80 ? '#28a745' : ($score >= 60 ? '#ffc107' : '#dc3545');
                 $html .= '<div style="padding: 20px; background: white; border: 2px solid ' . $color . '; border-radius: 8px; text-align: center;">';
                 $html .= '<div style="font-size: 36px; font-weight: bold; color: ' . $color . ';">' . $score . '</div>';
-                $html .= '<div style="margin-top: 10px; color: #666;">流量质量评分</div>';
+                $html .= '<div style="margin-top: 10px; color: #666;">' . esc_html__('Traffic Quality Score', 'folio') . '</div>';
                 $html .= '</div>';
             }
             
             // 其他关键指标
             $key_metrics = array(
-                'avg_visits_per_ip' => array('label' => '平均每IP访问', 'suffix' => '次', 'color' => '#0073aa'),
-                'user_retention_rate' => array('label' => '用户留存率', 'suffix' => '%', 'color' => '#28a745'),
-                'content_concentration' => array('label' => '内容集中度', 'suffix' => '%', 'color' => '#ffc107'),
-                'suspicious_ratio' => array('label' => '可疑活动占比', 'suffix' => '%', 'color' => '#dc3545'),
+                'avg_visits_per_ip' => array('label' => __('Avg Visits per IP', 'folio'), 'suffix' => __('times', 'folio'), 'color' => '#0073aa'),
+                'user_retention_rate' => array('label' => __('User Retention Rate', 'folio'), 'suffix' => '%', 'color' => '#28a745'),
+                'content_concentration' => array('label' => __('Content Concentration', 'folio'), 'suffix' => '%', 'color' => '#ffc107'),
+                'suspicious_ratio' => array('label' => __('Suspicious Activity Ratio', 'folio'), 'suffix' => '%', 'color' => '#dc3545'),
             );
             
             foreach ($key_metrics as $key => $config) {
@@ -2550,19 +2624,19 @@ class folio_Security_Admin {
         
         // 访问概览（详细版）
         if (!empty($summary['overview'])) {
-            $html .= '<h3 style="margin-top: 30px;">📈 访问概览</h3>';
-            $html .= '<table class="widefat" style="margin-bottom: 30px;"><thead><tr><th>指标</th><th>数值</th><th>占比/比例</th></tr></thead><tbody>';
+            $html .= '<h3 style="margin-top: 30px;">📈 ' . esc_html__('Access Overview', 'folio') . '</h3>';
+            $html .= '<table class="widefat" style="margin-bottom: 30px;"><thead><tr><th>' . esc_html__('Metric', 'folio') . '</th><th>' . esc_html__('Value', 'folio') . '</th><th>' . esc_html__('Ratio', 'folio') . '</th></tr></thead><tbody>';
             
             $total = $summary['overview']['total_access'] ?? 0;
             $overview_labels = array(
-                'total_access' => array('总访问量', '', ''),
-                'user_access' => array('用户访问', 'user_ratio', '%'),
-                'spider_access' => array('蜘蛛访问', 'spider_ratio', '%'),
-                'logged_in_access' => array('登录用户访问', '', ''),
-                'unique_ips' => array('独立IP', '', ''),
-                'unique_posts' => array('访问文章数', '', ''),
-                'suspicious_activity' => array('可疑活动', 'suspicious_ratio', '%'),
-                'denied_access' => array('被拒绝访问', 'denied_ratio', '%')
+                'total_access' => array(__('Total Access', 'folio'), '', ''),
+                'user_access' => array(__('User Access', 'folio'), 'user_ratio', '%'),
+                'spider_access' => array(__('Spider Access', 'folio'), 'spider_ratio', '%'),
+                'logged_in_access' => array(__('Logged-in User Access', 'folio'), '', ''),
+                'unique_ips' => array(__('Unique IPs', 'folio'), '', ''),
+                'unique_posts' => array(__('Visited Posts', 'folio'), '', ''),
+                'suspicious_activity' => array(__('Suspicious Activity', 'folio'), 'suspicious_ratio', '%'),
+                'denied_access' => array(__('Denied Access', 'folio'), 'denied_ratio', '%')
             );
             
             foreach ($overview_labels as $key => $info) {
@@ -2585,31 +2659,34 @@ class folio_Security_Admin {
         
         // 趋势分析
         if (!empty($summary['trends'])) {
-            $html .= '<h3 style="margin-top: 30px;">📉 访问趋势分析</h3>';
+            $html .= '<h3 style="margin-top: 30px;">📉 ' . esc_html__('Access Trend Analysis', 'folio') . '</h3>';
             $html .= '<div style="padding: 20px; background: #f9f9f9; border-radius: 4px; margin-bottom: 30px;">';
             $trends = $summary['trends'];
-            $html .= '<p><strong>平均每日访问量：</strong>' . number_format($trends['average_daily_access'] ?? 0) . ' 次</p>';
-            $html .= '<p><strong>趋势方向：</strong>' . ($trends['trend_direction'] === 'up' ? '📈 上升' : ($trends['trend_direction'] === 'down' ? '📉 下降' : '➡️ 稳定')) . '</p>';
+            $html .= '<p><strong>' . esc_html__('Average Daily Access:', 'folio') . '</strong> ' . number_format($trends['average_daily_access'] ?? 0) . ' ' . esc_html__('times', 'folio') . '</p>';
+            $trend_text = ($trends['trend_direction'] === 'up')
+                ? '📈 ' . esc_html__('Rising', 'folio')
+                : (($trends['trend_direction'] === 'down') ? '📉 ' . esc_html__('Falling', 'folio') : '➡️ ' . esc_html__('Stable', 'folio'));
+            $html .= '<p><strong>' . esc_html__('Trend Direction:', 'folio') . '</strong> ' . $trend_text . '</p>';
             if (!empty($trends['peak_day'])) {
-                $html .= '<p><strong>访问峰值日期：</strong>' . $trends['peak_day'] . '</p>';
+                $html .= '<p><strong>' . esc_html__('Peak Day:', 'folio') . '</strong> ' . $trends['peak_day'] . '</p>';
             }
             if (!empty($trends['peak_hour'])) {
-                $html .= '<p><strong>访问峰值时段：</strong>' . $trends['peak_hour'] . '</p>';
+                $html .= '<p><strong>' . esc_html__('Peak Hour:', 'folio') . '</strong> ' . $trends['peak_hour'] . '</p>';
             }
             if (!empty($trends['daily_variance'])) {
-                $html .= '<p><strong>访问稳定性（方差）：</strong>' . number_format($trends['daily_variance'], 2) . '（数值越大表示波动越大）</p>';
+                $html .= '<p><strong>' . esc_html__('Access Stability (Variance):', 'folio') . '</strong> ' . number_format($trends['daily_variance'], 2) . ' (' . esc_html__('higher values indicate larger fluctuations', 'folio') . ')</p>';
             }
             $html .= '</div>';
         }
         
         // 周分布模式
         if (!empty($detailed['weekly_pattern'])) {
-            $html .= '<h3 style="margin-top: 30px;">📅 每周访问模式</h3>';
-            $html .= '<table class="widefat" style="margin-bottom: 30px;"><thead><tr><th>星期</th><th>平均访问量</th></tr></thead><tbody>';
+            $html .= '<h3 style="margin-top: 30px;">📅 ' . esc_html__('Weekly Access Pattern', 'folio') . '</h3>';
+            $html .= '<table class="widefat" style="margin-bottom: 30px;"><thead><tr><th>' . esc_html__('Weekday', 'folio') . '</th><th>' . esc_html__('Average Access', 'folio') . '</th></tr></thead><tbody>';
             foreach ($detailed['weekly_pattern'] as $pattern) {
                 $html .= '<tr>';
                 $html .= '<td><strong>' . $pattern['day_name'] . '</strong></td>';
-                $html .= '<td>' . number_format($pattern['average_visits']) . ' 次</td>';
+                $html .= '<td>' . number_format($pattern['average_visits']) . ' ' . esc_html__('times', 'folio') . '</td>';
                 $html .= '</tr>';
             }
             $html .= '</tbody></table>';
@@ -2617,7 +2694,7 @@ class folio_Security_Admin {
         
         // AI洞察（分类显示）
         if (!empty($insights)) {
-            $html .= '<h3 style="margin-top: 30px;">🔍 AI深度洞察</h3>';
+            $html .= '<h3 style="margin-top: 30px;">🔍 ' . esc_html__('AI Insights', 'folio') . '</h3>';
             $html .= '<div style="padding: 20px; background: #e7f3ff; border-left: 4px solid #0073aa; margin-bottom: 30px;">';
             $html .= '<ul style="line-height: 2;">';
             foreach ($insights as $insight) {
@@ -2629,7 +2706,7 @@ class folio_Security_Admin {
         
         // 优化建议（分类显示）
         if (!empty($recommendations)) {
-            $html .= '<h3 style="margin-top: 30px;">💡 优化建议</h3>';
+            $html .= '<h3 style="margin-top: 30px;">💡 ' . esc_html__('Optimization Suggestions', 'folio') . '</h3>';
             $html .= '<div style="padding: 20px; background: #fff3cd; border-left: 4px solid #ffc107; margin-bottom: 30px;">';
             $html .= '<ol style="line-height: 2;">';
             foreach ($recommendations as $recommendation) {
@@ -2641,9 +2718,9 @@ class folio_Security_Admin {
         
         // 热门内容（增强版，包含更多指标）
         if (!empty($summary['top_content'])) {
-            $html .= '<h3 style="margin-top: 30px;">🔥 热门内容 Top 20</h3>';
+            $html .= '<h3 style="margin-top: 30px;">🔥 ' . esc_html__('Top Content 20', 'folio') . '</h3>';
             $html .= '<table class="widefat" style="margin-bottom: 30px;">';
-            $html .= '<thead><tr><th>排名</th><th>文章标题</th><th>访问次数</th><th>独立访客</th><th>人均访问</th><th>粘性评分</th></tr></thead>';
+            $html .= '<thead><tr><th>' . esc_html__('Rank', 'folio') . '</th><th>' . esc_html__('Post Title', 'folio') . '</th><th>' . esc_html__('Visits', 'folio') . '</th><th>' . esc_html__('Unique Visitors', 'folio') . '</th><th>' . esc_html__('Avg Visits/User', 'folio') . '</th><th>' . esc_html__('Engagement Score', 'folio') . '</th></tr></thead>';
             $html .= '<tbody>';
             foreach (array_slice($summary['top_content'], 0, 20) as $index => $post) {
                 $avg_visits = isset($post['avg_visits_per_visitor']) ? $post['avg_visits_per_visitor'] : ($post['unique_visitors'] > 0 ? round($post['views'] / $post['unique_visitors'], 2) : 0);
@@ -2655,7 +2732,7 @@ class folio_Security_Admin {
                 $html .= '<td><a href="' . esc_url($post['url']) . '" target="_blank">' . esc_html($post['title']) . '</a></td>';
                 $html .= '<td>' . number_format($post['views']) . '</td>';
                 $html .= '<td>' . number_format($post['unique_visitors']) . '</td>';
-                $html .= '<td>' . $avg_visits . ' 次/人</td>';
+                $html .= '<td>' . $avg_visits . ' ' . esc_html__('times/user', 'folio') . '</td>';
                 $html .= '<td><span style="color: ' . $engagement_color . '; font-weight: bold;">' . $engagement . '</span>/100</td>';
                 $html .= '</tr>';
             }
@@ -2664,9 +2741,9 @@ class folio_Security_Admin {
         
         // 蜘蛛分布
         if (!empty($detailed['spider_breakdown'])) {
-            $html .= '<h3 style="margin-top: 30px;">🕷️ 搜索引擎爬虫分布</h3>';
+            $html .= '<h3 style="margin-top: 30px;">🕷️ ' . esc_html__('Search Engine Spider Distribution', 'folio') . '</h3>';
             $html .= '<table class="widefat" style="margin-bottom: 30px;">';
-            $html .= '<thead><tr><th>蜘蛛类型</th><th>访问次数</th><th>独立IP</th><th>占比</th></tr></thead>';
+            $html .= '<thead><tr><th>' . esc_html__('Spider Type', 'folio') . '</th><th>' . esc_html__('Visits', 'folio') . '</th><th>' . esc_html__('Unique IPs', 'folio') . '</th><th>' . esc_html__('Ratio', 'folio') . '</th></tr></thead>';
             $html .= '<tbody>';
             $spider_total = $summary['overview']['spider_access'] ?? 1;
             foreach (array_slice($detailed['spider_breakdown'], 0, 15) as $spider) {
@@ -2683,9 +2760,9 @@ class folio_Security_Admin {
         
         // 流量来源
         if (!empty($summary['traffic_sources'])) {
-            $html .= '<h3 style="margin-top: 30px;">🌐 主要流量来源</h3>';
+            $html .= '<h3 style="margin-top: 30px;">🌐 ' . esc_html__('Top Traffic Sources', 'folio') . '</h3>';
             $html .= '<table class="widefat" style="margin-bottom: 30px;">';
-            $html .= '<thead><tr><th>来源域名</th><th>访问次数</th><th>占比</th></tr></thead>';
+            $html .= '<thead><tr><th>' . esc_html__('Source Domain', 'folio') . '</th><th>' . esc_html__('Visits', 'folio') . '</th><th>' . esc_html__('Ratio', 'folio') . '</th></tr></thead>';
             $html .= '<tbody>';
             $source_total = $summary['overview']['total_access'] ?? 1;
             foreach (array_slice($summary['traffic_sources'], 0, 15, true) as $domain => $count) {
@@ -2710,38 +2787,38 @@ class folio_Security_Admin {
         check_ajax_referer('folio_security_nonce', 'nonce');
         
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
         
         $report_id1 = isset($_POST['report_id1']) ? intval($_POST['report_id1']) : 0;
         $report_id2 = isset($_POST['report_id2']) ? intval($_POST['report_id2']) : 0;
         
         if (!$report_id1 || !$report_id2) {
-            wp_send_json_error('无效的报告ID');
+            wp_send_json_error(__('Invalid report ID', 'folio'));
         }
         
         $report_manager = folio_Operations_Report_Manager::get_instance();
         $comparison = $report_manager->compare_reports($report_id1, $report_id2);
         
         if (!$comparison) {
-            wp_send_json_error('对比失败');
+            wp_send_json_error(__('Comparison failed', 'folio'));
         }
         
-        $html = '<h2>报告对比</h2>';
-        $html .= '<p><strong>报告1：</strong>' . esc_html($comparison['report1']['name']) . ' (' . $comparison['report1']['period']['start'] . ' 至 ' . $comparison['report1']['period']['end'] . ')</p>';
-        $html .= '<p><strong>报告2：</strong>' . esc_html($comparison['report2']['name']) . ' (' . $comparison['report2']['period']['start'] . ' 至 ' . $comparison['report2']['period']['end'] . ')</p>';
+        $html = '<h2>' . esc_html__('Report Comparison', 'folio') . '</h2>';
+        $html .= '<p><strong>' . esc_html__('Report 1:', 'folio') . '</strong> ' . esc_html($comparison['report1']['name']) . ' (' . $comparison['report1']['period']['start'] . ' ' . esc_html__('to', 'folio') . ' ' . $comparison['report1']['period']['end'] . ')</p>';
+        $html .= '<p><strong>' . esc_html__('Report 2:', 'folio') . '</strong> ' . esc_html($comparison['report2']['name']) . ' (' . $comparison['report2']['period']['start'] . ' ' . esc_html__('to', 'folio') . ' ' . $comparison['report2']['period']['end'] . ')</p>';
         
-        $html .= '<h3>指标对比</h3>';
-        $html .= '<table class="widefat"><thead><tr><th>指标</th><th>报告1</th><th>报告2</th><th>变化</th><th>变化率</th></tr></thead><tbody>';
+        $html .= '<h3>' . esc_html__('Metric Comparison', 'folio') . '</h3>';
+        $html .= '<table class="widefat"><thead><tr><th>' . esc_html__('Metric', 'folio') . '</th><th>' . esc_html__('Report 1', 'folio') . '</th><th>' . esc_html__('Report 2', 'folio') . '</th><th>' . esc_html__('Change', 'folio') . '</th><th>' . esc_html__('Change Rate', 'folio') . '</th></tr></thead><tbody>';
         
         $labels = array(
-            'total_access' => '总访问量',
-            'user_access' => '用户访问',
-            'spider_access' => '蜘蛛访问',
-            'unique_ips' => '独立IP',
-            'unique_posts' => '访问文章数',
-            'suspicious_activity' => '可疑活动',
-            'denied_access' => '被拒绝访问'
+            'total_access' => __('Total Access', 'folio'),
+            'user_access' => __('User Access', 'folio'),
+            'spider_access' => __('Spider Access', 'folio'),
+            'unique_ips' => __('Unique IPs', 'folio'),
+            'unique_posts' => __('Visited Posts', 'folio'),
+            'suspicious_activity' => __('Suspicious Activity', 'folio'),
+            'denied_access' => __('Denied Access', 'folio')
         );
         
         foreach ($comparison['metrics'] as $key => $metric) {
@@ -2762,7 +2839,7 @@ class folio_Security_Admin {
         $html .= '</tbody></table>';
         
         if (!empty($comparison['trend_analysis'])) {
-            $html .= '<h3>趋势分析</h3><ul>';
+            $html .= '<h3>' . esc_html__('Trend Analysis', 'folio') . '</h3><ul>';
             foreach ($comparison['trend_analysis'] as $analysis) {
                 $html .= '<li>' . esc_html($analysis) . '</li>';
             }
@@ -2779,22 +2856,22 @@ class folio_Security_Admin {
         check_ajax_referer('folio_security_nonce', 'nonce');
         
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
         
         $report_id = isset($_POST['report_id']) ? intval($_POST['report_id']) : 0;
         
         if (!$report_id) {
-            wp_send_json_error('无效的报告ID');
+            wp_send_json_error(__('Invalid report ID', 'folio'));
         }
         
         $report_manager = folio_Operations_Report_Manager::get_instance();
         $result = $report_manager->delete_report($report_id);
         
         if ($result) {
-            wp_send_json_success('删除成功');
+            wp_send_json_success(__('Deleted successfully', 'folio'));
         } else {
-            wp_send_json_error('删除失败');
+            wp_send_json_error(__('Delete failed', 'folio'));
         }
     }
 }

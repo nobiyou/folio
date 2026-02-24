@@ -24,8 +24,8 @@ if (class_exists('folio_Frontend_Components')) {
     // 回退到默认值
     $vip_benefits = array();
     $svip_benefits = array();
-    $vip_price = '¥68/月';
-    $svip_price = '¥128/月';
+    $vip_price = __('¥68/month', 'folio');
+    $svip_price = __('¥128/month', 'folio');
 }
 
 // 获取支付二维码和说明（从会员系统设置中获取）
@@ -37,7 +37,7 @@ $payment_contact = isset($membership_options['payment_contact']) ? $membership_o
 
 <div class="membership-page">
     <h1 class="membership-page-title text-3xl font-bold mb-8">
-        <?php esc_html_e('会员中心', 'folio'); ?>
+        <?php esc_html_e('Membership Center', 'folio'); ?>
     </h1>
 
     <!-- 当前会员状态 -->
@@ -51,14 +51,14 @@ $payment_contact = isset($membership_options['payment_contact']) ? $membership_o
                 <div>
                     <h2 class="text-2xl font-bold mb-2"><?php echo esc_html($user_membership['name']); ?></h2>
                     <?php if ($user_membership['is_permanent']) : ?>
-                    <p class="text-gray-600"><?php esc_html_e('永久会员', 'folio'); ?></p>
+                    <p class="text-gray-600"><?php esc_html_e('Lifetime Member', 'folio'); ?></p>
                     <?php elseif ($user_membership['days_left'] !== null) : ?>
                     <p class="text-gray-600">
                         <?php 
                         if ($user_membership['days_left'] > 0) {
-                            printf(esc_html__('剩余 %d 天到期', 'folio'), $user_membership['days_left']);
+                            printf(esc_html__('%d days remaining', 'folio'), $user_membership['days_left']);
                         } else {
-                            esc_html_e('今日到期', 'folio');
+                            esc_html_e('Expires today', 'folio');
                         }
                         ?>
                     </p>
@@ -70,10 +70,14 @@ $payment_contact = isset($membership_options['payment_contact']) ? $membership_o
     <?php else : ?>
     <div class="current-membership-card bg-gray-100 mb-8 p-6 rounded-lg">
         <div class="flex items-center gap-4">
-            <div class="text-4xl">👤</div>
+            <div class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500/20 to-indigo-500/20 text-purple-500">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM4 20a8 8 0 0116 0"/>
+                </svg>
+            </div>
             <div>
-                <h2 class="text-2xl font-bold mb-2"><?php esc_html_e('普通用户', 'folio'); ?></h2>
-                <p class="text-gray-600"><?php esc_html_e('升级会员解锁更多特权', 'folio'); ?></p>
+                <h2 class="text-2xl font-bold mb-2"><?php esc_html_e('Regular User', 'folio'); ?></h2>
+                <p class="text-gray-600"><?php esc_html_e('Upgrade to unlock more benefits', 'folio'); ?></p>
             </div>
         </div>
     </div>
@@ -89,7 +93,7 @@ $payment_contact = isset($membership_options['payment_contact']) ? $membership_o
                         <span class="text-red-500 text-xl"><?php echo esc_html($vip_price); ?></span>
                     </div>
                     <div class="text-gray-600 text-sm font-normal">
-                        <?php printf(esc_html__('尊享%d大特权，解锁更多精品相册', 'folio'), count($vip_benefits)); ?>
+                        <?php printf(esc_html__('Enjoy %d premium benefits and unlock more curated albums', 'folio'), count($vip_benefits)); ?>
                     </div>
                 </div>
             </button>
@@ -100,7 +104,7 @@ $payment_contact = isset($membership_options['payment_contact']) ? $membership_o
                         <span class="text-red-500 text-xl"><?php echo esc_html($svip_price); ?></span>
                     </div>
                     <div class="text-gray-600 text-sm font-normal">
-                        <?php printf(esc_html__('尊享%d大特权，解锁所有专属内容', 'folio'), count($svip_benefits)); ?>
+                        <?php printf(esc_html__('Enjoy %d premium benefits and unlock all exclusive content', 'folio'), count($svip_benefits)); ?>
                     </div>
                 </div>
             </button>
@@ -148,21 +152,21 @@ $payment_contact = isset($membership_options['payment_contact']) ? $membership_o
                     <?php if (!$user_membership['is_vip']) : ?>
                         <!-- 普通用户显示升级VIP按钮 -->
                         <a href="#" class="btn-upgrade-vip inline-block px-8 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all shadow-md hover:shadow-lg">
-                            <?php esc_html_e('升级VIP', 'folio'); ?>
+                            <?php esc_html_e('Upgrade to VIP', 'folio'); ?>
                         </a>
                     <?php elseif ($user_membership['level'] === 'vip' && $user_membership['days_left'] !== null && $user_membership['days_left'] < 7) : ?>
                         <!-- VIP用户且即将到期，显示续费VIP按钮 -->
                         <a href="#" class="btn-renew-vip inline-block px-8 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all shadow-md hover:shadow-lg">
-                            <?php esc_html_e('续费VIP', 'folio'); ?>
+                            <?php esc_html_e('Renew VIP', 'folio'); ?>
                         </a>
                     <?php elseif ($user_membership['level'] === 'vip') : ?>
                         <!-- VIP用户且未到期，提示已经是VIP，引导升级SVIP -->
                         <div class="text-gray-600 mb-4">
-                            <p class="mb-2"><?php esc_html_e('您已经是VIP会员', 'folio'); ?></p>
-                            <p class="text-sm"><?php esc_html_e('想要更多特权？', 'folio'); ?></p>
+                            <p class="mb-2"><?php esc_html_e('You are already a VIP member', 'folio'); ?></p>
+                            <p class="text-sm"><?php esc_html_e('Want more benefits?', 'folio'); ?></p>
                         </div>
                         <a href="#tab-svip" class="btn-upgrade-svip-from-vip inline-block px-8 py-3 bg-gradient-to-r from-purple-500 to-purple-600 text-white font-semibold rounded-lg hover:from-purple-600 hover:to-purple-700 transition-all shadow-md hover:shadow-lg" onclick="document.querySelector('[data-tab=\"svip\"]').click(); return false;">
-                            <?php esc_html_e('升级SVIP', 'folio'); ?>
+                            <?php esc_html_e('Upgrade to SVIP', 'folio'); ?>
                         </a>
                     <?php endif; ?>
                 </div>
@@ -227,17 +231,17 @@ $payment_contact = isset($membership_options['payment_contact']) ? $membership_o
                     <?php if (!$user_membership['is_svip']) : ?>
                         <!-- 非SVIP用户显示升级SVIP按钮 -->
                         <a href="#" class="btn-upgrade-svip inline-block px-8 py-3 bg-gradient-to-r from-purple-500 to-purple-600 text-white font-semibold rounded-lg hover:from-purple-600 hover:to-purple-700 transition-all shadow-md hover:shadow-lg">
-                            <?php esc_html_e('升级SVIP', 'folio'); ?>
+                            <?php esc_html_e('Upgrade to SVIP', 'folio'); ?>
                         </a>
                     <?php elseif ($user_membership['level'] === 'svip' && $user_membership['days_left'] !== null && $user_membership['days_left'] < 7) : ?>
                         <!-- SVIP用户且即将到期，显示续费SVIP按钮 -->
                         <a href="#" class="btn-renew-svip inline-block px-8 py-3 bg-gradient-to-r from-purple-500 to-purple-600 text-white font-semibold rounded-lg hover:from-purple-600 hover:to-purple-700 transition-all shadow-md hover:shadow-lg">
-                            <?php esc_html_e('续费SVIP', 'folio'); ?>
+                            <?php esc_html_e('Renew SVIP', 'folio'); ?>
                         </a>
                     <?php else : ?>
                         <!-- SVIP用户且未到期，提示已经是SVIP -->
                         <div class="text-gray-600">
-                            <p><?php esc_html_e('您已经是SVIP会员，享受所有特权！', 'folio'); ?></p>
+                            <p><?php esc_html_e('You are already an SVIP member and enjoy all benefits!', 'folio'); ?></p>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -247,16 +251,16 @@ $payment_contact = isset($membership_options['payment_contact']) ? $membership_o
 
     <!-- 支付信息 -->
     <div class="membership-payment-section mt-12">
-        <h2 class="text-2xl font-bold mb-6"><?php esc_html_e('支付方式', 'folio'); ?></h2>
+        <h2 class="text-2xl font-bold mb-6"><?php esc_html_e('Payment Methods', 'folio'); ?></h2>
         <div class="payment-content-wrapper bg-white rounded-lg shadow-sm p-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- 支付二维码 -->
                 <div class="payment-qr-section">
-                    <h3 class="text-lg font-semibold mb-4 text-gray-800"><?php esc_html_e('扫码支付', 'folio'); ?></h3>
+                    <h3 class="text-lg font-semibold mb-4 text-gray-800"><?php esc_html_e('Scan to Pay', 'folio'); ?></h3>
                     <?php if ($payment_qr_code) : ?>
                         <div class="qr-code-wrapper mb-4">
                             <img src="<?php echo esc_url($payment_qr_code); ?>" 
-                                 alt="<?php esc_attr_e('支付二维码', 'folio'); ?>" 
+                                 alt="<?php esc_attr_e('Payment QR Code', 'folio'); ?>" 
                                  class="payment-qr-code max-w-xl mx-auto border border-gray-200 rounded-lg p-2 bg-white">
                         </div>
                     <?php else : ?>
@@ -266,14 +270,14 @@ $payment_contact = isset($membership_options['payment_contact']) ? $membership_o
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
                                 </svg>
                             </div>
-                            <p class="text-gray-500 text-sm"><?php esc_html_e('请管理员在后台设置支付二维码', 'folio'); ?></p>
+                            <p class="text-gray-500 text-sm"><?php esc_html_e('Please ask the administrator to configure a payment QR code in backend.', 'folio'); ?></p>
                         </div>
                     <?php endif; ?>
                 </div>
 
                 <!-- 支付说明 -->
                 <div class="payment-instructions-section">
-                    <h3 class="text-lg font-semibold mb-4 text-gray-800"><?php esc_html_e('支付说明', 'folio'); ?></h3>
+                    <h3 class="text-lg font-semibold mb-4 text-gray-800"><?php esc_html_e('Payment Instructions', 'folio'); ?></h3>
                     <div class="payment-instructions-content text-gray-600 space-y-3">
                         <?php if ($payment_instructions) : ?>
                             <div class="instructions-text">
@@ -282,21 +286,21 @@ $payment_contact = isset($membership_options['payment_contact']) ? $membership_o
                         <?php else : ?>
                             <div class="default-instructions space-y-3">
                                 <div class="instruction-item">
-                                    <p class="mb-2"><strong><?php esc_html_e('支付步骤：', 'folio'); ?></strong></p>
+                                    <p class="mb-2"><strong><?php esc_html_e('Payment Steps:', 'folio'); ?></strong></p>
                                     <ol class="list-decimal list-inside space-y-1 text-sm">
-                                        <li><?php esc_html_e('选择您要购买的会员类型（VIP或SVIP）', 'folio'); ?></li>
-                                        <li><?php esc_html_e('点击"升级VIP"或"升级SVIP"按钮', 'folio'); ?></li>
-                                        <li><?php esc_html_e('使用微信或支付宝扫描上方二维码完成支付', 'folio'); ?></li>
-                                        <li><?php esc_html_e('支付完成后，请截图保存支付凭证', 'folio'); ?></li>
-                                        <li><?php esc_html_e('联系客服或发送支付凭证，我们将在24小时内为您开通会员', 'folio'); ?></li>
+                                        <li><?php esc_html_e('Select the membership type you want to purchase (VIP or SVIP)', 'folio'); ?></li>
+                                        <li><?php esc_html_e('Click the "Upgrade VIP" or "Upgrade SVIP" button', 'folio'); ?></li>
+                                        <li><?php esc_html_e('Use WeChat Pay or Alipay to scan the QR code above to complete payment', 'folio'); ?></li>
+                                        <li><?php esc_html_e('After payment, please save a screenshot of your receipt', 'folio'); ?></li>
+                                        <li><?php esc_html_e('Contact support or send your receipt, and we will activate your membership within 24 hours', 'folio'); ?></li>
                                     </ol>
                                 </div>
                                 <div class="instruction-item">
-                                    <p class="mb-2"><strong><?php esc_html_e('注意事项：', 'folio'); ?></strong></p>
+                                    <p class="mb-2"><strong><?php esc_html_e('Notes:', 'folio'); ?></strong></p>
                                     <ul class="list-disc list-inside space-y-1 text-sm">
-                                        <li><?php esc_html_e('请确保支付金额与所选会员类型一致', 'folio'); ?></li>
-                                        <li><?php esc_html_e('支付完成后请保留支付凭证，以便核对', 'folio'); ?></li>
-                                        <li><?php esc_html_e('如有疑问，请联系客服', 'folio'); ?></li>
+                                        <li><?php esc_html_e('Please ensure the payment amount matches your selected membership type', 'folio'); ?></li>
+                                        <li><?php esc_html_e('Please keep your payment receipt for verification', 'folio'); ?></li>
+                                        <li><?php esc_html_e('If you have any questions, please contact support', 'folio'); ?></li>
                                     </ul>
                                 </div>
                             </div>
@@ -305,7 +309,7 @@ $payment_contact = isset($membership_options['payment_contact']) ? $membership_o
                         <?php if ($payment_contact) : ?>
                             <div class="payment-contact mt-4 pt-4 border-t border-gray-200">
                                 <p class="text-sm">
-                                    <strong><?php esc_html_e('联系方式：', 'folio'); ?></strong>
+                                    <strong><?php esc_html_e('Contact:', 'folio'); ?></strong>
                                     <span class="text-gray-700"><?php echo esc_html($payment_contact); ?></span>
                                 </p>
                             </div>
@@ -318,19 +322,19 @@ $payment_contact = isset($membership_options['payment_contact']) ? $membership_o
 
     <!-- 常见问题 -->
     <div class="membership-faq-section mt-12">
-        <h2 class="text-2xl font-bold mb-6"><?php esc_html_e('常见问题', 'folio'); ?></h2>
+        <h2 class="text-2xl font-bold mb-6"><?php esc_html_e('FAQ', 'folio'); ?></h2>
         <div class="space-y-4">
             <div class="faq-item bg-white rounded-lg shadow-sm p-4">
-                <h3 class="font-semibold mb-2"><?php esc_html_e('会员权益如何生效？', 'folio'); ?></h3>
-                <p class="text-gray-600 text-sm"><?php esc_html_e('升级会员后，所有权益立即生效，您可以立即访问所有专属内容。', 'folio'); ?></p>
+                <h3 class="font-semibold mb-2"><?php esc_html_e('When do membership benefits take effect?', 'folio'); ?></h3>
+                <p class="text-gray-600 text-sm"><?php esc_html_e('After upgrading, all benefits take effect immediately and you can access exclusive content right away.', 'folio'); ?></p>
             </div>
             <div class="faq-item bg-white rounded-lg shadow-sm p-4">
-                <h3 class="font-semibold mb-2"><?php esc_html_e('会员到期后怎么办？', 'folio'); ?></h3>
-                <p class="text-gray-600 text-sm"><?php esc_html_e('会员到期后，您将无法访问专属内容。您可以随时续费或升级会员。', 'folio'); ?></p>
+                <h3 class="font-semibold mb-2"><?php esc_html_e('What happens after membership expires?', 'folio'); ?></h3>
+                <p class="text-gray-600 text-sm"><?php esc_html_e('After expiry, you can no longer access exclusive content. You can renew or upgrade anytime.', 'folio'); ?></p>
             </div>
             <div class="faq-item bg-white rounded-lg shadow-sm p-4">
-                <h3 class="font-semibold mb-2"><?php esc_html_e('如何升级会员？', 'folio'); ?></h3>
-                <p class="text-gray-600 text-sm"><?php esc_html_e('点击上方的升级按钮，按照提示完成支付即可升级会员。', 'folio'); ?></p>
+                <h3 class="font-semibold mb-2"><?php esc_html_e('How do I upgrade my membership?', 'folio'); ?></h3>
+                <p class="text-gray-600 text-sm"><?php esc_html_e('Click the upgrade button above and complete payment as instructed.', 'folio'); ?></p>
             </div>
         </div>
     </div>

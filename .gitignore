@@ -19,3 +19,8 @@ Thumbs.db
 # WordPress
 wp-config.php
 .htaccess
+
+# Environment / secrets (do not commit)
+.env
+.env.local
+*.env

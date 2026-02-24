@@ -1,0 +1,720 @@
+/**
+ * Membership Content Styles (Cleaned)
+ * 
+ * 会员专属内容样式 - 已清理重复内容
+ * 只保留非重复的特定功能，通用样式已移至 consolidated-styles.css
+ */
+
+/* ==========================================================================
+   特定文章列表徽章样式 - 非重复内容
+   ========================================================================== */
+
+/* 锁定状态特定图标 */
+.folio-premium-badge-locked::after {
+    content: '🔒';
+    margin-left: 2px;
+}
+
+.folio-premium-badge-unlocked::after {
+    content: '✓';
+    margin-left: 2px;
+}
+
+/* ==========================================================================
+   特定会员卡片功能 - 非重复内容
+   ========================================================================== */
+
+.membership-card-highlight::before {
+    content: '推荐';
+    position: absolute;
+    top: 1rem;
+    right: -2rem;
+    background: #f59e0b;
+    color: white;
+    padding: 0.5rem 3rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transform: rotate(45deg);
+}
+
+/* ==========================================================================
+   特定升级提示样式 - 非重复内容
+   ========================================================================== */
+
+.upgrade-prompt-minimal {
+    background: #f8f9fa;
+    color: #495057;
+    border: 1px solid #dee2e6;
+    padding: 1rem;
+}
+
+.upgrade-prompt-banner {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    margin: 0;
+    border-radius: 0;
+}
+
+/* ==========================================================================
+   会员文章图片模糊滤镜
+   ========================================================================== */
+
+/* 未解锁的会员文章图片模糊效果 */
+.folio-premium-blur {
+    filter: blur(8px) brightness(0.7) !important;
+    transition: filter 0.3s ease;
+    pointer-events: none; /* 防止点击模糊图片 */
+}
+
+/* 鼠标悬停时稍微减少模糊，增加吸引力 */
+article:hover .folio-premium-blur,
+.group:hover .folio-premium-blur {
+    filter: blur(6px) brightness(0.75) !important;
+}
+
+/* 已解锁的会员文章图片恢复正常 */
+article.folio-premium-unlocked .folio-premium-blur,
+article.folio-premium-unlocked img.folio-premium-blur {
+    filter: brightness(0.9) !important;
+    filter: blur(0px) brightness(0.9) !important;
+}
+
+article.folio-premium-unlocked:hover img.folio-premium-blur,
+article.folio-premium-unlocked.group:hover img.folio-premium-blur {
+    filter: brightness(1) !important;
+    filter: blur(0px) brightness(1) !important;
+}
+
+/* 确保模糊效果在文章卡片上正确应用 */
+article img.folio-premium-blur {
+    transform: scale(1.05); /* 稍微放大以补偿模糊造成的视觉缩小 */
+    will-change: filter; /* 优化性能 */
+}
+
+/* 相关文章和导航文章的模糊效果 */
+.related-post-card .folio-premium-blur,
+.nav-card .folio-premium-blur {
+    filter: blur(6px) brightness(0.75) !important;
+}
+
+.related-post-card:hover .folio-premium-blur,
+.nav-card:hover .folio-premium-blur {
+    filter: blur(4px) brightness(0.8) !important;
+}
+
+/* ==========================================================================
+   新设计会员提醒样式 - Modern Permission Prompt
+   ========================================================================== */
+
+/* 新设计容器 */
+.folio-permission-prompt.folio-prompt-modern {
+    background: #1a1a1a;
+    border-radius: 16px;
+    padding: 0;
+    margin: 3rem 0;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+/* 顶部标题 */
+.folio-prompt-modern-header {
+    padding: 1.75rem 1.5rem 1.25rem;
+    text-align: center;
+}
+
+.folio-prompt-modern-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #f59e0b;
+    margin: 0;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+}
+
+.folio-prompt-vip .folio-prompt-modern-title {
+    color: #f59e0b;
+}
+
+.folio-prompt-svip .folio-prompt-modern-title {
+    color: #8b5cf6;
+}
+
+/* VIP会员信息卡片 */
+.folio-prompt-vip-card {
+    margin: 1.25rem 1.5rem;
+    padding: 0;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+}
+
+.folio-prompt-vip-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(245, 158, 11, 0.25);
+}
+
+.folio-vip-card-content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.75rem 1.5rem;
+    gap: 2rem;
+}
+
+.folio-vip-card-left {
+    flex: 1;
+    min-width: 0;
+}
+
+.folio-vip-card-right {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+    padding-left: 1.5rem;
+    border-left: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.folio-prompt-svip .folio-prompt-vip-card {
+    background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+}
+
+.folio-vip-card-header {
+    margin-bottom: 0.75rem;
+}
+
+.folio-vip-card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #92400e;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.folio-prompt-svip .folio-vip-card-title {
+    color: #6b21a8;
+}
+
+.folio-vip-card-content {
+    color: #78350f;
+}
+
+.folio-prompt-svip .folio-vip-card-content {
+    color: #581c87;
+}
+
+/* VIP卡片右侧价格和按钮区域 */
+.folio-vip-card-pricing {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+}
+
+.folio-vip-price-label {
+    font-size: 0.875rem;
+    color: #78350f;
+    font-weight: 500;
+}
+
+.folio-prompt-svip .folio-vip-price-label {
+    color: #581c87;
+}
+
+.folio-vip-price-amount {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #f59e0b;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.folio-prompt-svip .folio-vip-price-amount {
+    color: #8b5cf6;
+}
+
+.folio-vip-card-action {
+    width: 100%;
+    max-width: 140px;
+}
+
+.folio-btn-vip-action {
+    display: inline-block;
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 0.01em;
+}
+
+.folio-btn-vip-login {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.folio-prompt-svip .folio-btn-vip-login {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.folio-btn-vip-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.45);
+    background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+}
+
+.folio-prompt-svip .folio-btn-vip-login:hover {
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.45);
+    background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+}
+
+.folio-btn-vip-upgrade {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.folio-prompt-svip .folio-btn-vip-upgrade {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.folio-btn-vip-upgrade:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.45);
+    background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+}
+
+.folio-prompt-svip .folio-btn-vip-upgrade:hover {
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.45);
+    background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+}
+
+.folio-btn-vip-action:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}
+
+.folio-prompt-svip .folio-btn-vip-action:active {
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+}
+
+.folio-vip-card-description {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    margin: 0;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+.folio-vip-card-note {
+    font-size: 0.8125rem;
+    color: #92400e;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.folio-prompt-svip .folio-vip-card-note {
+    color: #6b21a8;
+}
+
+.folio-vip-gift-icon {
+    font-size: 0.875rem;
+}
+
+/* 对比表格区域 */
+.folio-prompt-comparison-section {
+    margin: 1.5rem;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem 1.25rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.folio-comparison-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #f59e0b;
+    margin: 0 0 1rem 0;
+    text-align: center;
+}
+
+.folio-prompt-svip .folio-comparison-title {
+    color: #8b5cf6;
+}
+
+.folio-comparison-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.folio-comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8125rem;
+    min-width: 500px;
+}
+
+.folio-comparison-table thead {
+    background: #f9fafb;
+}
+
+.folio-comparison-table th {
+    padding: 0.875rem 0.625rem;
+    text-align: center;
+    font-weight: 600;
+    color: #374151;
+    border-bottom: 2px solid #e5e7eb;
+    font-size: 0.8125rem;
+    letter-spacing: 0.01em;
+}
+
+.folio-comparison-table .folio-col-feature {
+    text-align: left;
+    width: 35%;
+}
+
+.folio-comparison-table .folio-col-normal,
+.folio-comparison-table .folio-col-vip,
+.folio-comparison-table .folio-col-svip {
+    width: auto;
+}
+
+/* 两列布局（VIP） */
+.folio-prompt-vip .folio-comparison-table .folio-col-normal,
+.folio-prompt-vip .folio-comparison-table .folio-col-vip {
+    width: 32.5%;
+}
+
+/* 三列布局（SVIP） */
+.folio-prompt-svip .folio-comparison-table .folio-col-normal,
+.folio-prompt-svip .folio-comparison-table .folio-col-vip,
+.folio-prompt-svip .folio-comparison-table .folio-col-svip {
+    width: 21.66%;
+}
+
+.folio-comparison-table tbody tr {
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.folio-comparison-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.folio-comparison-table td {
+    padding: 1rem 0.625rem;
+    text-align: center;
+    vertical-align: middle;
+    transition: background-color 0.15s ease;
+}
+
+.folio-comparison-table tbody tr:hover td {
+    background-color: #f9fafb;
+}
+
+.folio-comparison-table .folio-col-feature {
+    text-align: left;
+}
+
+.folio-feature-name {
+    font-weight: 500;
+    color: #111827;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+}
+
+.folio-not-available {
+    color: #9ca3af;
+    font-size: 1.5rem;
+    font-weight: 300;
+    line-height: 1;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.folio-available {
+    color: #10b981;
+    font-size: 1.375rem;
+    font-weight: 600;
+    line-height: 1;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.folio-normal-value,
+.folio-vip-value {
+    color: #6b7280;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.folio-vip-value {
+    color: #f59e0b;
+    font-weight: 600;
+}
+
+.folio-svip-value {
+    color: #8b5cf6;
+    font-weight: 600;
+}
+
+.folio-prompt-svip .folio-vip-value {
+    color: #f59e0b;
+    font-weight: 500;
+}
+
+/* 底部状态信息区域 */
+.folio-prompt-modern-footer {
+    padding: 1.25rem 1.5rem;
+    background: #ffffff;
+    border-top: 1px solid #e5e7eb;
+}
+
+.folio-pricing-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.folio-pricing-info {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.folio-price-label {
+    font-size: 0.9375rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.folio-price-amount {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #f59e0b;
+    letter-spacing: -0.02em;
+}
+
+.folio-prompt-svip .folio-price-amount {
+    color: #8b5cf6;
+}
+
+.folio-prompt-modern-actions {
+    display: flex;
+    gap: 0.875rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.folio-btn-modern {
+    padding: 0.9375rem 2.25rem;
+    border-radius: 8px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+    flex: 1;
+    min-width: 120px;
+    max-width: 200px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.01em;
+}
+
+.folio-btn-login-modern {
+    background: #f3f4f6;
+    color: #374151;
+    border: 1px solid #e5e7eb;
+}
+
+.folio-btn-login-modern:hover {
+    background: #e5e7eb;
+    border-color: #d1d5db;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.folio-btn-register-modern {
+    background: #ffffff;
+    color: #374151;
+    border: 1px solid #d1d5db;
+}
+
+.folio-btn-register-modern:hover {
+    background: #f9fafb;
+    border-color: #9ca3af;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.folio-btn-upgrade-modern {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    border: none;
+}
+
+.folio-prompt-svip .folio-btn-upgrade-modern {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.folio-btn-upgrade-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.45);
+    background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+}
+
+.folio-prompt-svip .folio-btn-upgrade-modern:hover {
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.45);
+    background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+}
+
+.folio-btn-upgrade-modern:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}
+
+.folio-prompt-svip .folio-btn-upgrade-modern:active {
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+}
+
+.folio-current-status-modern {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    flex-wrap: wrap;
+}
+
+.folio-status-text {
+    font-size: 0.8125rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.folio-current-badge-modern {
+    display: inline-block;
+    font-size: 1.125rem;
+    line-height: 1;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .folio-permission-prompt.folio-prompt-modern {
+        margin: 2rem 0;
+        border-radius: 12px;
+    }
+    
+    .folio-prompt-modern-header {
+        padding: 1.5rem 1.25rem 1rem;
+    }
+    
+    .folio-prompt-modern-title {
+        font-size: 1.25rem;
+    }
+    
+    .folio-prompt-vip-card {
+        margin: 1rem 1.25rem;
+    }
+    
+    .folio-vip-card-content-wrapper {
+        flex-direction: column;
+        padding: 1.5rem 1.25rem;
+        gap: 1.5rem;
+    }
+    
+    .folio-vip-card-right {
+        width: 100%;
+        align-items: center;
+        padding-left: 0;
+        padding-top: 1.5rem;
+        border-left: none;
+        border-top: 1px solid rgba(245, 158, 11, 0.2);
+    }
+    
+    .folio-vip-card-pricing {
+        text-align: center;
+        align-items: center;
+    }
+    
+    .folio-vip-card-action {
+        max-width: 100%;
+    }
+    
+    .folio-vip-price-amount {
+        font-size: 1.5rem;
+    }
+    
+    .folio-prompt-comparison-section {
+        margin: 1.25rem;
+        padding: 1.25rem 1rem;
+    }
+    
+    .folio-comparison-table {
+        font-size: 0.75rem;
+    }
+    
+    .folio-comparison-table th,
+    .folio-comparison-table td {
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .folio-comparison-table th {
+        font-size: 0.75rem;
+    }
+    
+    .folio-feature-name {
+        font-size: 0.75rem;
+    }
+    
+    .folio-prompt-modern-footer {
+        padding: 1.5rem 1.25rem;
+    }
+    
+    .folio-prompt-modern-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .folio-btn-modern {
+        max-width: 100%;
+        width: 100%;
+        padding: 1rem 2rem;
+    }
+    
+    .folio-pricing-info {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.375rem;
+    }
+    
+    .folio-price-amount {
+        font-size: 1.375rem;
+    }
+}
+
+/* 注意：所有通用的按钮、徽章、卡片、提示样式已移至 consolidated-styles.css */

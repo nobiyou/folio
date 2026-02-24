@@ -15,6 +15,21 @@ if (!defined('ABSPATH')) {
  * 缓存优化配置类
  */
 class folio_Cache_Optimized_Config {
+    /**
+     * 是否启用缓存详细日志（默认关闭，避免刷屏）。
+     */
+    private static function is_cache_verbose_logging_enabled() {
+        return (bool) apply_filters('folio_cache_verbose_logging', false);
+    }
+
+    /**
+     * 记录缓存详细日志（仅在开关开启时）。
+     */
+    private static function log_cache_verbose($message) {
+        if (self::is_cache_verbose_logging_enabled()) {
+            error_log($message);
+        }
+    }
 
     /**
      * 应用优化配置
@@ -191,9 +206,9 @@ class folio_Cache_Optimized_Config {
                                 
                                 wp_cache_set($cache_key, $cached_stats, 'folio_monitor', 60);
                                 
-                                // 如果命中率低于95%，记录警告（但不在每次请求时检查）
+                                // 如果命中率低于95%，记录警告（默认关闭详细日志）
                                 if ($hit_rate < 95) {
-                                    error_log("Folio Cache Warning: Hit rate dropped to " . number_format($hit_rate, 2) . "%");
+                                    self::log_cache_verbose("Folio Cache Warning: Hit rate dropped to " . number_format($hit_rate, 2) . "%");
                                 }
                             }
                         }
@@ -250,10 +265,7 @@ class folio_Cache_Optimized_Config {
         // 设置内存优化
         self::setup_memory_optimization();
         
-        // 记录优化应用
-        if (WP_DEBUG) {
-            error_log('Folio Cache: Applied optimized configuration based on test results');
-        }
+        // 不记录成功日志，避免后台操作时刷屏。
     }
 
     /**
@@ -264,34 +276,34 @@ class folio_Cache_Optimized_Config {
         
         // 基于测试结果的建议
         $recommendations[] = array(
-            'title' => '缓存过期时间优化',
-            'description' => '基于98.83%命中率，建议延长缓存过期时间以进一步提升性能',
-            'action' => '权限缓存: 1小时 → 2小时，预览缓存: 24小时 → 48小时',
-            'impact' => '预计命中率提升至99%+',
+            'title' => __('Optimize cache expiration time', 'folio'),
+            'description' => __('Based on a 98.83% hit rate, extending cache TTL can further improve performance.', 'folio'),
+            'action' => __('Permission cache: 1 hour -> 2 hours, preview cache: 24 hours -> 48 hours', 'folio'),
+            'impact' => __('Estimated hit rate improvement to 99%+', 'folio'),
             'priority' => 'high'
         );
         
         $recommendations[] = array(
-            'title' => '智能预加载启用',
-            'description' => '基于优秀的读写性能，启用智能预加载可进一步提升用户体验',
-            'action' => '预加载热门内容的权限和预览缓存',
-            'impact' => '首次访问速度提升30-50%',
+            'title' => __('Enable intelligent preloading', 'folio'),
+            'description' => __('Given strong read/write performance, intelligent preloading can further improve user experience.', 'folio'),
+            'action' => __('Preload permission and preview cache for popular content', 'folio'),
+            'impact' => __('First-visit speed improvement by 30-50%', 'folio'),
             'priority' => 'medium'
         );
         
         $recommendations[] = array(
-            'title' => '性能监控增强',
-            'description' => '添加实时性能监控，及时发现性能问题',
-            'action' => '监控命中率、响应时间、内存使用',
-            'impact' => '提前发现和解决性能问题',
+            'title' => __('Enhance performance monitoring', 'folio'),
+            'description' => __('Add real-time performance monitoring to detect issues earlier.', 'folio'),
+            'action' => __('Monitor hit rate, response time, and memory usage', 'folio'),
+            'impact' => __('Detect and resolve performance issues earlier', 'folio'),
             'priority' => 'medium'
         );
         
         $recommendations[] = array(
-            'title' => 'Memcached配置优化',
-            'description' => '基于稳定的连接状态，优化Memcached配置参数',
-            'action' => '启用压缩、二进制协议、连接池',
-            'impact' => '网络传输效率提升20-30%',
+            'title' => __('Optimize Memcached configuration', 'folio'),
+            'description' => __('With stable connection status, optimize Memcached configuration parameters.', 'folio'),
+            'action' => __('Enable compression, binary protocol, and connection pooling', 'folio'),
+            'impact' => __('Network transfer efficiency improvement by 20-30%', 'folio'),
             'priority' => 'low'
         );
         

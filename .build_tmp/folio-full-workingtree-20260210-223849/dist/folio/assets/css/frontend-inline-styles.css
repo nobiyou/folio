@@ -1,0 +1,251 @@
+/**
+ * Frontend Inline Styles
+ * 
+ * 将前端显示的内联样式移动到此文件中
+ * 包括维护模式、安全保护、性能监控等前端显示的样式
+ */
+
+/* 维护模式小工具样式 */
+.folio-maintenance-widget {
+    padding: 15px;
+    border-radius: 4px;
+    margin: 15px 0;
+    border: 1px solid;
+}
+
+.folio-maintenance-widget.enabled {
+    background: #fff3cd;
+    border-color: #ffeaa7;
+    color: #856404;
+}
+
+.folio-maintenance-widget.disabled {
+    background: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.folio-maintenance-widget h4 {
+    margin: 0 0 10px 0;
+}
+
+.folio-maintenance-widget p {
+    margin: 0;
+}
+
+.folio-maintenance-widget p:not(:first-of-type) {
+    margin: 10px 0 0 0;
+}
+
+/* 安全保护阻止消息样式 */
+.folio-blocked-message {
+    padding: 20px;
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    color: #721c24;
+    text-align: center;
+}
+
+.folio-blocked-message h3 {
+    margin: 0 0 15px 0;
+    font-size: 1.2em;
+}
+
+.folio-blocked-message p {
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
+/* 性能监控小工具样式 */
+.folio-performance-widget {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 11px;
+    line-height: 1.4;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.folio-performance-metric {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 4px 0;
+    padding: 2px 0;
+}
+
+.folio-performance-metric .label {
+    font-size: 10px;
+    font-weight: 700;
+    opacity: 0.8;
+}
+
+.folio-performance-metric .value {
+    font-weight: 600;
+}
+
+/* 性能指标颜色 */
+.folio-performance-time-good { color: #4CAF50; }
+.folio-performance-time-warning { color: #ffa726; }
+.folio-performance-time-critical { color: #ff6b6b; }
+
+.folio-performance-memory-good { color: #4CAF50; }
+.folio-performance-memory-warning { color: #ffa726; }
+
+.folio-performance-queries-good { color: #4CAF50; }
+.folio-performance-queries-warning { color: #ffa726; }
+.folio-performance-queries-critical { color: #ff6b6b; }
+
+/* 慢查询警告样式 */
+.folio-slow-query {
+    margin: 4px 0;
+    padding: 4px;
+    background: rgba(255, 107, 107, 0.1);
+    border-radius: 4px;
+}
+
+.folio-slow-query .time {
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+.folio-slow-query .sql {
+    font-size: 10px;
+    opacity: 0.8;
+    font-family: monospace;
+    margin-top: 2px;
+}
+
+/* 优化建议样式 */
+.folio-optimization-suggestion {
+    margin: 4px 0;
+    padding: 6px;
+    border-radius: 4px;
+    border-left: 3px solid;
+}
+
+.folio-optimization-suggestion.critical {
+    background: rgba(255, 107, 107, 0.1);
+    border-left-color: #ff6b6b;
+}
+
+.folio-optimization-suggestion.warning {
+    background: rgba(255, 167, 38, 0.1);
+    border-left-color: #ffa726;
+}
+
+.folio-optimization-suggestion .type {
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.folio-optimization-suggestion.critical .type {
+    color: #ff6b6b;
+}
+
+.folio-optimization-suggestion.warning .type {
+    color: #ffa726;
+}
+
+/* 性能提示框样式 */
+.folio-performance-tip {
+    background: rgba(76, 175, 80, 0.1);
+    padding: 8px;
+    border-radius: 4px;
+    border-left: 3px solid #4CAF50;
+    margin: 10px 0;
+}
+
+.folio-performance-tip .title {
+    color: #4CAF50;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.folio-performance-tip .content {
+    font-size: 10px;
+    line-height: 1.4;
+}
+
+/* 文章统计列样式 */
+.folio-post-stat {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.folio-post-stat.views {
+    color: #666;
+    background: rgba(102, 102, 102, 0.1);
+}
+
+.folio-post-stat.likes {
+    color: #e74c3c;
+    background: rgba(231, 76, 60, 0.1);
+}
+
+.folio-post-stat.likes::before {
+    content: "♥ ";
+}
+
+.folio-post-stat.favorites {
+    color: #f39c12;
+    background: rgba(243, 156, 18, 0.1);
+}
+
+.folio-post-stat.favorites::before {
+    content: "★ ";
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .folio-maintenance-widget {
+        margin: 10px 0;
+        padding: 12px;
+    }
+    
+    .folio-blocked-message {
+        padding: 15px;
+        margin: 10px;
+    }
+    
+    .folio-performance-widget {
+        font-size: 10px;
+        padding: 8px;
+    }
+}
+
+/* 打印样式 */
+@media print {
+    .folio-maintenance-widget,
+    .folio-performance-widget {
+        display: none;
+    }
+}
+
+/* 高对比度模式支持 */
+@media (prefers-contrast: high) {
+    .folio-maintenance-widget,
+    .folio-blocked-message {
+        border-width: 2px;
+    }
+    
+    .folio-performance-widget {
+        border-width: 2px;
+        box-shadow: none;
+    }
+}
+
+/* 减少动画模式支持 */
+@media (prefers-reduced-motion: reduce) {
+    .folio-maintenance-widget,
+    .folio-blocked-message,
+    .folio-performance-widget {
+        transition: none;
+    }
+}

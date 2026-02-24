@@ -1,0 +1,1885 @@
+/*
+Theme Name: Folio
+Theme URI: https://dongzuren.com/folio
+Author: Folio Design
+Author URI: https://dongzuren.com
+Description: 专为设计师和插画师打造的作品集主题，具有独特的六边形卡片设计和现代化视觉风格。
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.4
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: folio
+Tags: portfolio, grid-layout, custom-logo, featured-images, translation-ready
+
+Folio WordPress Theme
+Copyright (C) 2025 Folio Design
+*/
+
+/* ==========================================================================
+   CSS Variables - Light Mode (Default)
+   ========================================================================== */
+:root {
+    /* 亮色模式颜色 */
+    --folio-bg: #f4f5f7;
+    --folio-bg-secondary: #ffffff;
+    --folio-text: #1f2937;
+    --folio-text-light: #6b7280;
+    --folio-text-muted: #9ca3af;
+    --folio-white: #ffffff;
+    --folio-black: #111111;
+    --folio-border: #e5e7eb;
+    --folio-shadow: rgba(0, 0, 0, 0.1);
+    --folio-card-bg: #ffffff;
+    --folio-hover-bg: #f3f4f6;
+
+    /* 字体回退：优先使用 Web 字体，然后是中文字体，最后是系统字体 */
+    --folio-font-primary: 'Roboto Condensed', 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+    --folio-font-heading: 'Oswald', 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+
+    /* 颜色模式过渡 */
+    --folio-transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* ==========================================================================
+   CSS Variables - Dark Mode
+   ========================================================================== */
+[data-theme="dark"] {
+    --folio-bg: #111827;
+    --folio-bg-secondary: #1f2937;
+    --folio-text: #f9fafb;
+    --folio-text-light: #d1d5db;
+    --folio-text-muted: #9ca3af;
+    --folio-white: #1f2937;
+    --folio-black: #f9fafb;
+    --folio-border: #374151;
+    --folio-shadow: rgba(0, 0, 0, 0.3);
+    --folio-card-bg: #1f2937;
+    --folio-hover-bg: #374151;
+}
+
+/* 自动跟随系统偏好 (当没有手动设置时) */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --folio-bg: #111827;
+        --folio-bg-secondary: #1f2937;
+        --folio-text: #f9fafb;
+        --folio-text-light: #d1d5db;
+        --folio-text-muted: #9ca3af;
+        --folio-white: #1f2937;
+        --folio-black: #f9fafb;
+        --folio-border: #374151;
+        --folio-shadow: rgba(0, 0, 0, 0.3);
+        --folio-card-bg: #1f2937;
+        --folio-hover-bg: #374151;
+    }
+}
+
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+body {
+    font-family: var(--folio-font-primary);
+    background-color: var(--folio-bg);
+    color: var(--folio-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+/* HTML元素也需要背景色 */
+html {
+    background-color: var(--folio-bg);
+    transition: background-color 0.15s ease;
+}
+
+/* ==========================================================================
+   Dark Mode Toggle Button
+   ========================================================================== */
+.theme-toggle {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--folio-text-muted);
+    transition: color 0.3s ease;
+}
+
+.theme-toggle:hover {
+    color: var(--folio-text);
+}
+
+.theme-toggle svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* 亮色模式显示月亮图标 */
+.theme-toggle .icon-moon {
+    display: block;
+}
+
+.theme-toggle .icon-sun {
+    display: none;
+}
+
+/* 暗色模式显示太阳图标 */
+[data-theme="dark"] .theme-toggle .icon-moon {
+    display: none;
+}
+
+[data-theme="dark"] .theme-toggle .icon-sun {
+    display: block;
+}
+
+/* 自动模式下跟随系统 */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .theme-toggle .icon-moon {
+        display: none;
+    }
+
+    :root:not([data-theme="light"]) .theme-toggle .icon-sun {
+        display: block;
+    }
+}
+
+/* ==========================================================================
+   Hexagon Card Styles
+   ========================================================================== */
+.hexagon {
+    clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+    width: 130px;
+    height: 145px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--folio-white);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+}
+
+.hexagon-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem 0.75rem;
+    height: 100%;
+    gap: 0.375rem;
+}
+
+.hexagon-category {
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--folio-text-muted);
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.hexagon-divider {
+    width: 16px;
+    height: 1px;
+    background-color: var(--folio-border);
+    opacity: 0.5;
+}
+
+.hexagon-title {
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--folio-text);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    max-width: 100%;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 2.4em;
+    /* 确保在不支持 line-clamp 的浏览器中也能正常显示 */
+    max-height: 2.4em;
+}
+
+.hexagon-image-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--folio-text-light);
+}
+
+.hexagon-count {
+    font-size: 1.125rem;
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.hexagon-badge {
+    clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+    background-color: var(--folio-black);
+    color: var(--folio-white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* 悬停时显示六边形 */
+.group:hover .hexagon {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* ==========================================================================
+   Ribbon Styles
+   ========================================================================== */
+.ribbon-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 85px;
+    height: 85px;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.ribbon {
+    position: absolute;
+    top: 12px;
+    right: -26px;
+    transform: rotate(45deg);
+    background-color: #ffffff; /* 亮色模式：白色背景 */
+    color: #333; /* 亮色模式：深色文字 */
+    font-size: 10px;
+    font-weight: bold;
+    padding: 4px 30px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    width: 98px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 暗色模式下的 ribbon 基础样式 */
+[data-theme="dark"] .ribbon {
+    background-color: #1f2937; /* 暗色模式：深灰色背景 */
+    color: #f9fafb; /* 暗色模式：浅色文字 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .ribbon {
+        background-color: #1f2937;
+        color: #f9fafb;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.ribbon--new {
+    background-color: #111111; /* 亮色模式：黑色背景 */
+    color: #ffffff; /* 亮色模式：白色文字 */
+}
+
+/* 暗色模式下的 new ribbon */
+[data-theme="dark"] .ribbon--new {
+    background-color: #f9fafb; /* 暗色模式：浅色背景 */
+    color: #111827; /* 暗色模式：深色文字 */
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .ribbon--new {
+        background-color: #f9fafb;
+        color: #111827;
+    }
+}
+
+.ribbon--updated {
+    background-color: #ffffff; /* 亮色模式：白色背景 */
+    color: #333; /* 亮色模式：深色文字 */
+}
+
+/* 暗色模式下的 updated ribbon */
+[data-theme="dark"] .ribbon--updated {
+    background-color: #1f2937; /* 暗色模式：深灰色背景 */
+    color: #d1d5db; /* 暗色模式：浅灰色文字 */
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .ribbon--updated {
+        background-color: #1f2937;
+        color: #d1d5db;
+    }
+}
+
+/* ==========================================================================
+   Portfolio Card Styles
+   ========================================================================== */
+.portfolio-card {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    border-radius: 0.25rem;
+    overflow: hidden;
+    box-shadow: 0 1px 3px var(--folio-shadow);
+    transition: box-shadow 0.3s ease;
+}
+
+.portfolio-card:hover {
+    box-shadow: 0 10px 15px -3px var(--folio-shadow);
+}
+
+.portfolio-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.portfolio-card:hover .portfolio-card__image {
+    transform: scale(1.1);
+}
+
+.portfolio-card__placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.portfolio-card__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.portfolio-card__link {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+}
+
+/* 图片数量徽章 */
+.post-image-count-badge {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    backdrop-filter: blur(4px);
+    transition: all 0.3s ease;
+}
+
+.post-image-count-badge:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* 会员专属徽章 */
+.premium-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.premium-badge-vip {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.9), rgba(217, 119, 6, 0.9));
+    color: white;
+}
+
+.premium-badge-svip {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(124, 58, 237, 0.9));
+    color: white;
+}
+
+/* ==========================================================================
+   Logo Styles
+   ========================================================================== */
+.site-logo {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    font-style: italic;
+    transform: skewX(-6deg);
+    color: var(--folio-text);
+    line-height: 1;
+}
+
+/* ==========================================================================
+   Navigation Styles
+   ========================================================================== */
+.nav-menu,
+nav > ul,
+nav > div > ul {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(100px, auto));
+    grid-template-rows: repeat(3, auto);
+    grid-auto-flow: column;
+    gap: 0.25rem 3rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.nav-menu li,
+nav > ul > li,
+nav > div > ul > li {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-menu a,
+nav a {
+    color: var(--folio-text-light);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+
+.nav-menu a:hover,
+nav a:hover {
+    color: var(--folio-black);
+}
+
+/* 导航链接默认样式 */
+nav .nav-link,
+.primary-nav .nav-link {
+    color: var(--folio-text-light);
+}
+
+nav .nav-link:hover,
+.primary-nav .nav-link:hover {
+    color: var(--folio-text);
+}
+
+/* 当前菜单项样式 */
+nav .nav-item-current,
+.primary-nav .nav-item-current,
+nav li.nav-item-current,
+.primary-nav li.nav-item-current {
+    color: var(--folio-text) !important;
+    font-weight: 700;
+}
+
+nav .nav-item-active,
+.primary-nav .nav-item-active,
+nav span.nav-item-active,
+.primary-nav span.nav-item-active {
+    color: var(--folio-text) !important;
+    font-weight: 700;
+}
+
+/* 导航圆点 */
+nav .nav-dot,
+.primary-nav .nav-dot,
+nav span.nav-dot,
+.primary-nav span.nav-dot {
+    background-color: var(--folio-text) !important;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* 兼容旧的类名 */
+nav li.text-black,
+.primary-nav li.text-black {
+    color: var(--folio-text) !important;
+}
+
+nav li .bg-black,
+.primary-nav li .bg-black {
+    background-color: var(--folio-text) !important;
+}
+
+nav a.hover\:text-black:hover,
+.primary-nav a.hover\:text-black:hover {
+    color: var(--folio-text) !important;
+}
+
+/* 子菜单样式 */
+.nav-menu .sub-menu,
+nav .sub-menu {
+    display: none;
+}
+
+/* 移动端导航 */
+@media (max-width: 768px) {
+    #mobile-menu .nav-menu,
+    #mobile-menu > ul,
+    #mobile-menu > div > ul {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem 2rem;
+        grid-auto-flow: row;
+    }
+    
+    #mobile-menu a,
+    #mobile-menu .nav-link {
+        font-size: 0.875rem;
+    }
+    
+    #mobile-menu .nav-menu li,
+    #mobile-menu > ul > li,
+    #mobile-menu > div > ul > li {
+        width: 100%;
+    }
+    
+    /* 移动端导航高亮样式 */
+    #mobile-menu .nav-item-current,
+    #mobile-menu li.nav-item-current {
+        color: var(--folio-text) !important;
+    }
+    
+    #mobile-menu .nav-item-active,
+    #mobile-menu span.nav-item-active {
+        color: var(--folio-text) !important;
+    }
+    
+    #mobile-menu .nav-dot,
+    #mobile-menu span.nav-dot {
+        background-color: var(--folio-text) !important;
+    }
+}
+
+/* ==========================================================================
+   Social Sidebar Styles
+   ========================================================================== */
+.social-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 8rem;
+    gap: 1.5rem;
+    color: var(--folio-text-muted);
+    z-index: 20;
+}
+
+.social-sidebar a {
+    transition: color 0.3s ease;
+}
+
+.social-sidebar a:hover {
+    color: var(--folio-text);
+}
+
+/* ==========================================================================
+   Responsive Utilities
+   ========================================================================== */
+@media (max-width: 1279px) {
+    .social-sidebar {
+        display: none;
+    }
+}
+
+/* Membership badge styles moved to consolidated-styles.css */
+
+
+/* ==========================================================================
+   Single Post Content Styles
+   ========================================================================== */
+
+/* 文章内容区域 */
+.single-post-page main.prose {
+    color: var(--folio-text);
+}
+
+/* 图片容器 */
+.single-post-page .pic-box {
+    margin: 2rem 0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.single-post-page .pic-box img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.single-post-page .pic-box:hover img {
+    transform: scale(1.02);
+}
+
+/* 侧边栏小工具样式 */
+.post-tags-widget,
+.popular-posts-widget {
+    background: var(--folio-bg-secondary);
+    border: 1px solid var(--folio-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.widget-title {
+    color: var(--folio-text);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--folio-border);
+}
+
+/* 标签小工具样式 */
+.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag-item {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background: var(--folio-hover-bg);
+    color: var(--folio-text);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.tag-item:hover {
+    background: var(--folio-text);
+    color: var(--folio-white);
+    transform: translateY(-1px);
+}
+
+/* 热门文章小工具样式 */
+.popular-posts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.popular-post-item {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--folio-border);
+}
+
+.popular-post-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.popular-post-item a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.post-thumbnail {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 6px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--folio-hover-bg);
+}
+
+.post-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.popular-post-item:hover .post-thumbnail img {
+    transform: scale(1.1);
+}
+
+.post-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.post-info .post-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.4;
+    margin-bottom: 0.25rem;
+    color: var(--folio-text);
+    transition: color 0.2s ease;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.popular-post-item:hover .post-title {
+    color: var(--folio-text-light);
+}
+
+.post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.75rem;
+    color: var(--folio-text-muted);
+}
+
+.post-meta svg {
+    width: 0.75rem;
+    height: 0.75rem;
+}
+
+/* 响应式调整 */
+@media (max-width: 1024px) {
+    .post-tags-widget,
+    .popular-posts-widget {
+        margin-bottom: 2rem;
+    }
+}
+
+/* 引用块样式 */
+.single-post-page blockquote {
+    position: relative;
+    margin: 2.5rem 0;
+    padding: 2rem 2rem 2rem 3.5rem;
+    border-left: 5px solid var(--folio-text);
+    background: linear-gradient(to right, var(--folio-hover-bg), transparent);
+    border-radius: 0 0.5rem 0.5rem 0;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--folio-text-light);
+    font-style: normal;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.single-post-page blockquote::before {
+    content: '"';
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    font-size: 4rem;
+    line-height: 1;
+    color: var(--folio-text-muted);
+    opacity: 0.3;
+    font-family: Georgia, serif;
+    font-weight: bold;
+}
+
+/* 标题样式 */
+.single-post-page h2 {
+    position: relative;
+    font-size: 1.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 3rem 0 1.5rem 0;
+    padding-bottom: 0.75rem;
+    padding-left: 1rem;
+    border-left: 5px solid var(--folio-text);
+    color: var(--folio-text);
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+}
+
+.single-post-page h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--folio-text), transparent);
+}
+
+.single-post-page h2 small {
+    font-size: 0.7rem;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--folio-text-muted);
+    opacity: 0.8;
+}
+
+/* 相册网格 - 优化为固定2列布局 */
+.gallery-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+}
+
+@media (max-width: 768px) {
+    .gallery-2 {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+.gallery-2 .gallery-item {
+    margin: 0;
+    padding: 0;
+}
+
+.gallery-2 .graphic {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    aspect-ratio: 3 / 4;
+    background-color: var(--folio-hover-bg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.gallery-2 .graphic:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+}
+
+.gallery-2 .graphic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.gallery-2 .hover-zoom-img:hover img {
+    transform: scale(1.1);
+}
+
+/* 图片适配 */
+.single-post-page img.alignnone,
+.single-post-page img.size-full,
+.single-post-page img.fit-cover {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 响应式调整 */
+@media (max-width: 640px) {
+    .single-post-page blockquote {
+        padding: 1rem 1rem 1rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .single-post-page h2 {
+        font-size: 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .single-post-page h2 small {
+        font-size: 0.7rem;
+    }
+}
+
+/* ==========================================================================
+   Single Post Page Specific Styles
+   ========================================================================== */
+
+/* 分类标签 */
+.single-post-page .category-badge {
+    background-color: var(--folio-hover-bg);
+    color: var(--folio-text-light);
+}
+
+/* 文章标题 */
+.single-post-page .post-title {
+    color: var(--folio-text);
+}
+
+/* 图片数量徽章 */
+.single-post-page .image-count-badge {
+    background-color: var(--folio-hover-bg);
+}
+
+.single-post-page .image-count-label {
+    color: var(--folio-text-muted);
+}
+
+.single-post-page .image-count-number {
+    color: var(--folio-text);
+}
+
+/* 管理员编辑链接 */
+.admin-edit-link {
+    color: var(--folio-text-muted);
+    font-size: 0.875rem;
+}
+
+.admin-edit-link:hover {
+    color: var(--folio-primary);
+}
+
+/* 相关文章推荐 */
+.related-posts {
+    border-top-color: var(--folio-border);
+}
+
+.related-post-card {
+    transition: transform 0.3s ease;
+}
+
+.related-post-thumbnail {
+    background-color: var(--folio-hover-bg);
+}
+
+.related-post-category {
+    color: var(--folio-text-muted);
+}
+
+.related-post-title {
+    color: var(--folio-text);
+}
+
+.related-post-card:hover .related-post-title {
+    color: var(--folio-text-light);
+}
+
+.related-post-stats {
+    color: var(--folio-text-muted);
+}
+
+/* 底部导航区域 */
+.single-post-page .post-navigation {
+    border-top: 2px solid var(--folio-border);
+}
+
+.single-post-page .nav-section-title {
+    color: var(--folio-text-muted);
+}
+
+.single-post-page .nav-view-all {
+    color: var(--folio-text-muted);
+    transition: color 0.3s ease;
+}
+
+.single-post-page .nav-view-all:hover {
+    color: var(--folio-text);
+}
+
+.single-post-page .nav-card {
+    background-color: var(--folio-card-bg);
+    box-shadow: 0 2px 8px var(--folio-shadow);
+    transition: all 0.3s ease;
+}
+
+.single-post-page .nav-card:hover {
+    box-shadow: 0 8px 24px var(--folio-shadow);
+    transform: translateY(-4px);
+}
+
+.single-post-page .nav-card-image-wrapper {
+    background-color: var(--folio-hover-bg);
+}
+
+.single-post-page .nav-card-category {
+    color: var(--folio-text-muted);
+}
+
+.single-post-page .nav-card-title {
+    color: var(--folio-text);
+}
+
+.single-post-page .nav-card-excerpt {
+    color: var(--folio-text-light);
+}
+
+.single-post-page .nav-card-readmore {
+    color: var(--folio-text);
+}
+
+/* ==========================================================================
+   Header & Navigation Styles
+   ========================================================================== */
+
+/* Body 基础样式 */
+body {
+    background-color: var(--folio-bg);
+    color: var(--folio-text);
+}
+
+/* 桌面端导航 */
+.primary-nav {
+    color: var(--folio-text-light);
+}
+
+/* 用户菜单 */
+.user-display-name {
+    color: var(--folio-text);
+}
+
+.user-login-btn {
+    color: var(--folio-text-light);
+    border: 1px solid var(--folio-border);
+}
+
+.user-login-btn:hover {
+    color: var(--folio-text);
+    border-color: var(--folio-text);
+}
+
+/* 移动端菜单 */
+.mobile-menu-overlay {
+    background-color: var(--folio-bg-secondary, var(--folio-bg));
+}
+
+/* ==========================================================================
+   Breadcrumb Navigation Styles
+   ========================================================================== */
+.breadcrumb-nav {
+    color: var(--folio-text-muted);
+}
+
+.breadcrumb-link {
+    color: var(--folio-text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.breadcrumb-link:hover {
+    color: var(--folio-text);
+}
+
+.breadcrumb-current {
+    color: var(--folio-text);
+}
+
+.breadcrumb-separator {
+    color: var(--folio-text-muted);
+}
+
+/* 覆盖 Tailwind 硬编码类名（兼容性） */
+nav[aria-label="Breadcrumb"] .text-gray-400 {
+    color: var(--folio-text-muted) !important;
+}
+
+nav[aria-label="Breadcrumb"] .hover\:text-black:hover {
+    color: var(--folio-text) !important;
+}
+
+nav[aria-label="Breadcrumb"] .text-black {
+    color: var(--folio-text) !important;
+}
+
+/* ==========================================================================
+   Archive & Category Page Styles
+   ========================================================================== */
+
+/* 归档页头部区域 */
+.archive-header {
+    border-bottom: 4px solid var(--folio-text);
+}
+
+.archive-title {
+    color: var(--folio-text);
+}
+
+.archive-description {
+    color: var(--folio-text-light);
+}
+
+/* 覆盖硬编码的 Tailwind 类名 */
+.archive-header.border-black {
+    border-color: var(--folio-text) !important;
+}
+
+.archive-header .text-gray-900 {
+    color: var(--folio-text) !important;
+}
+
+.archive-header .text-gray-600 {
+    color: var(--folio-text-light) !important;
+}
+
+/* ==========================================================================
+   Remove Focus Outline
+   ========================================================================== */
+
+/* 移除所有元素的焦点框 */
+*:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* 为键盘用户保留可访问性（可选，如果不需要可以删除） */
+*:focus-visible {
+    outline: 2px solid var(--folio-text);
+    outline-offset: 2px;
+}
+
+/* Premium content styles moved to consolidated-styles.css */
+
+/* ==========================================================================
+   Back to Top Button
+   ========================================================================== */
+.back-to-top {
+    display: none;
+    position: fixed;
+    bottom: 4rem;
+    right: 2rem;
+    width: 3rem;
+    height: 3rem;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 9999;
+    transition: all 0.3s ease;
+    opacity: 0.8;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    align-items: center;
+    justify-content: center;
+}
+
+.back-to-top:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+.back-to-top.show {
+    display: flex !important;
+}
+
+/* 暗色模式支持 */
+[data-theme="dark"] .back-to-top {
+    background-color: #374151;
+    color: #f9fafb;
+}
+
+[data-theme="dark"] .back-to-top:hover {
+    background-color: #4b5563;
+}
+
+/* ==========================================================================
+   Hexagon Placeholder
+   ========================================================================== */
+.hexagon-placeholder {
+    width: 140px;
+    height: 160px;
+    opacity: 1 !important;
+    transform: scale(1) !important;
+    background-color: #d1d5db; /* 浅灰色背景（亮色模式） */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 暗色模式下的六边形背景 */
+[data-theme="dark"] .hexagon-placeholder {
+    background-color: #374151; /* 深灰色背景 */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .hexagon-placeholder {
+        background-color: #374151;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.hexagon-placeholder .hexagon-content {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hexagon-placeholder-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #ffffff; /* 白色圆形（亮色模式） */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 暗色模式下的圆形背景 */
+[data-theme="dark"] .hexagon-placeholder-circle {
+    background-color: #f9fafb; /* 浅色圆形（暗色模式下保持浅色以形成对比） */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .hexagon-placeholder-circle {
+        background-color: #f9fafb;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.hexagon-placeholder-circle h3 {
+    color: #6b7280; /* 深灰色文字（亮色模式） */
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    line-height: 1.4;
+    margin: 0;
+    text-transform: uppercase;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+/* 暗色模式下的文字颜色 */
+[data-theme="dark"] .hexagon-placeholder-circle h3 {
+    color: #4b5563; /* 深灰色文字（暗色模式下在浅色圆形上） */
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .hexagon-placeholder-circle h3 {
+        color: #4b5563;
+    }
+}
+
+/* ==========================================================================
+   User Center Styles
+   ========================================================================== */
+
+/* 用户中心容器 */
+.user-center-container {
+    min-height: 100vh;
+    width: 100%;
+    max-width: 100%;
+}
+
+.user-center-container > div {
+    max-width: 100%;
+    width: 100%;
+}
+
+/* 用户侧边栏 */
+.user-sidebar {
+    background-color: var(--folio-card-bg);
+    border: 1px solid var(--folio-border);
+    border-radius: 12px;
+    padding: 24px;
+}
+
+/* 用户信息 */
+.user-info h3 {
+    color: var(--folio-text);
+}
+
+.user-info p {
+    color: var(--folio-text-muted);
+}
+
+/* 导航菜单项 */
+.user-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.user-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    grid-template-columns: none !important;
+    grid-template-rows: none !important;
+    grid-auto-flow: row !important;
+}
+
+.user-nav li {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.user-nav .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    color: var(--folio-text-light);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.user-nav .nav-item svg {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+}
+
+.user-nav .nav-item:hover {
+    background-color: var(--folio-hover-bg);
+    color: var(--folio-text);
+}
+
+.user-nav .nav-item.active {
+    background-color: var(--folio-hover-bg);
+    color: var(--folio-text);
+    font-weight: 600;
+}
+
+/* 退出登录按钮边框 */
+.user-nav .border-t {
+    border-color: var(--folio-border);
+}
+
+/* 用户内容区域 */
+.user-content {
+    background-color: var(--folio-card-bg);
+    border: 1px solid var(--folio-border);
+    border-radius: 12px;
+    padding: 32px;
+}
+
+.user-content h1 {
+    color: var(--folio-text);
+}
+
+/* Membership badge styles moved to consolidated-styles.css */
+
+/* Membership card styles moved to consolidated-styles.css */
+
+/* 统计卡片 */
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    background-color: var(--folio-hover-bg);
+    border-radius: 12px;
+    border: 1px solid var(--folio-border);
+    transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--folio-shadow);
+}
+
+.stat-card-vip {
+    border-color: rgba(245, 158, 11, 0.25);
+}
+
+.stat-card-svip {
+    border-color: rgba(124, 58, 237, 0.25);
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    background-color: var(--folio-text);
+    color: var(--folio-bg);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-icon-vip {
+    background-color: #f59e0b;
+}
+
+.stat-icon-svip {
+    background-color: #7c3aed;
+}
+
+.membership-emoji {
+    font-size: 20px;
+}
+
+.stat-number {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--folio-text);
+}
+
+.stat-number-vip {
+    color: #f59e0b;
+}
+
+.stat-number-svip {
+    color: #7c3aed;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: var(--folio-text-muted);
+}
+
+/* 空状态 */
+.empty-state-icon {
+    color: var(--folio-text-muted);
+}
+
+.empty-state-title {
+    color: var(--folio-text);
+}
+
+.empty-state-text {
+    color: var(--folio-text-muted);
+}
+
+/* 最近收藏 */
+.recent-favorites-title {
+    color: var(--folio-text);
+}
+
+.recent-favorites-link {
+    color: var(--folio-text-light);
+}
+
+.favorite-item-title {
+    color: var(--folio-text);
+}
+
+/* Dashboard标题 */
+.dashboard-title {
+    color: var(--folio-text);
+}
+
+/* 会员特权标签 */
+.membership-benefits span {
+    color: var(--folio-text-muted);
+}
+
+.benefit-tag {
+    display: inline-block;
+    padding: 4px 8px;
+    background-color: var(--folio-bg);
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--folio-text);
+}
+
+/* 收藏项 */
+.favorite-item {
+    transition: transform 0.2s ease;
+}
+
+.favorite-item:hover {
+    transform: translateY(-2px);
+}
+
+/* 主按钮 */
+.btn-primary {
+    display: inline-block;
+    padding: 10px 24px;
+    background-color: var(--folio-text);
+    color: var(--folio-bg);
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Favorites Page Styles
+   ========================================================================== */
+
+/* 收藏页面标题 */
+.favorites-page h1 {
+    color: var(--folio-text);
+}
+
+.favorites-page > div > span {
+    color: var(--folio-text-muted);
+}
+
+/* 收藏卡片 */
+.favorite-card {
+    transition: transform 0.2s ease;
+}
+
+.favorite-card:hover {
+    transform: translateY(-4px);
+}
+
+.favorite-info h3 {
+    color: var(--folio-text);
+}
+
+.favorite-info > div {
+    color: var(--folio-text-muted);
+}
+
+/* 分页 */
+.pagination-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--folio-border);
+    border-radius: 8px;
+    color: var(--folio-text-light);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.pagination-btn:hover,
+.pagination-btn.active {
+    background-color: var(--folio-text);
+    color: var(--folio-bg);
+    border-color: var(--folio-text);
+}
+
+/* ==========================================================================
+   Profile Page Styles
+   ========================================================================== */
+
+/* 个人资料页面 */
+.profile-page h1,
+.profile-page h2,
+.profile-page h3 {
+    color: var(--folio-text);
+}
+
+.profile-page small,
+.profile-page .text-sm {
+    color: var(--folio-text-muted);
+}
+
+.profile-page a.text-sm {
+    color: var(--folio-text-light);
+}
+
+.stat-item span:first-child {
+    color: var(--folio-text-light);
+}
+
+.stat-item span:last-child {
+    color: var(--folio-text);
+}
+
+/* Membership badge small styles moved to consolidated-styles.css */
+
+.expiry-warning {
+    color: #ef4444;
+}
+
+/* 表单样式 */
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--folio-text);
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--folio-border);
+    border-radius: 8px;
+    background-color: var(--folio-bg);
+    color: var(--folio-text);
+    transition: border-color 0.2s ease;
+}
+
+.form-input:focus {
+    border-color: var(--folio-text);
+}
+
+.form-input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* 快捷操作按钮 */
+.quick-action-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    background-color: var(--folio-hover-bg);
+    color: var(--folio-text);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.quick-action-btn:hover {
+    background-color: var(--folio-text);
+    color: var(--folio-bg);
+}
+
+/* ==========================================================================
+   Login & Register Page Styles
+   ========================================================================== */
+
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--folio-bg);
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 32px;
+    background-color: var(--folio-card-bg);
+    border: 1px solid var(--folio-border);
+    border-radius: 16px;
+    box-shadow: 0 4px 12px var(--folio-shadow);
+}
+
+.auth-card h1 {
+    color: var(--folio-text);
+}
+
+.auth-card p {
+    color: var(--folio-text-muted);
+}
+
+.auth-card a {
+    color: var(--folio-text-light);
+}
+
+.auth-card a:hover {
+    color: var(--folio-text);
+}
+
+.auth-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: var(--folio-text-muted);
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--folio-border);
+}
+
+.auth-divider span {
+    padding: 0 10px;
+}
+
+/* 提交按钮 */
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--folio-text);
+    color: var(--folio-bg);
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.btn-submit:hover {
+    opacity: 0.9;
+}
+
+.btn-submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ==========================================================================
+   分页登录提示样式
+   ========================================================================== */
+/* 亮色模式 */
+.bg-yellow-50 {
+    background-color: #fefce8;
+}
+.border-yellow-200 {
+    border-color: #fde047;
+}
+.text-yellow-800 {
+    color: #854d0e;
+}
+.text-yellow-600 {
+    color: #ca8a04;
+}
+.text-yellow-600:hover {
+    color: #a16207;
+}
+
+/* 暗色模式 */
+[data-theme="dark"] .bg-yellow-50,
+@media (prefers-color-scheme: dark) :root:not([data-theme="light"]) .bg-yellow-50 {
+    background-color: #422006;
+    border-color: #854d0e;
+}
+[data-theme="dark"] .text-yellow-800,
+@media (prefers-color-scheme: dark) :root:not([data-theme="light"]) .text-yellow-800 {
+    color: #fde047;
+}
+[data-theme="dark"] .text-yellow-600,
+@media (prefers-color-scheme: dark) :root:not([data-theme="light"]) .text-yellow-600 {
+    color: #facc15;
+}
+[data-theme="dark"] .text-yellow-600:hover,
+@media (prefers-color-scheme: dark) :root:not([data-theme="light"]) .text-yellow-600:hover {
+    color: #fde047;
+}
+
+/* ==========================================================================
+   分页样式优化 - Pagination Styles
+   ========================================================================== */
+
+/* WordPress 默认分页样式 - 紧凑间距，无分割线 */
+.navigation,
+.nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    padding-top: 0;
+    border-top: none !important;
+}
+
+/* 隐藏分页标题文本（"文章分页"） */
+.navigation .screen-reader-text,
+.nav-links .screen-reader-text,
+.navigation .screen-reader-text:empty,
+.nav-links .screen-reader-text:empty {
+    display: none !important;
+    position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px) !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+}
+
+.navigation .page-numbers,
+.nav-links .page-numbers {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    padding: 0 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--folio-text-light);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.navigation .page-numbers:hover,
+.nav-links .page-numbers:hover {
+    color: var(--folio-text);
+    background-color: var(--folio-hover-bg);
+}
+
+.navigation .page-numbers.current,
+.nav-links .page-numbers.current {
+    color: var(--folio-text) !important;
+    background-color: var(--folio-hover-bg);
+    border: 1px solid var(--folio-text);
+    font-weight: 700;
+}
+
+.navigation .page-numbers.dots,
+.nav-links .page-numbers.dots {
+    color: var(--folio-text-muted);
+    cursor: default;
+    background: none;
+}
+
+.navigation .page-numbers.dots:hover,
+.nav-links .page-numbers.dots:hover {
+    background: none;
+    color: var(--folio-text-muted);
+}
+
+/* 暗色模式 */
+[data-theme="dark"] .navigation .page-numbers,
+[data-theme="dark"] .nav-links .page-numbers {
+    color: var(--folio-text-light);
+}
+
+[data-theme="dark"] .navigation .page-numbers:hover,
+[data-theme="dark"] .nav-links .page-numbers:hover {
+    color: var(--folio-text);
+    background-color: var(--folio-bg-secondary);
+}
+
+[data-theme="dark"] .navigation .page-numbers.current,
+[data-theme="dark"] .nav-links .page-numbers.current {
+    color: var(--folio-text) !important;
+    background-color: var(--folio-bg-secondary);
+    border: 1px solid var(--folio-text);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .navigation .page-numbers,
+    :root:not([data-theme="light"]) .nav-links .page-numbers {
+        color: var(--folio-text-light);
+    }
+    
+    :root:not([data-theme="light"]) .navigation .page-numbers:hover,
+    :root:not([data-theme="light"]) .nav-links .page-numbers:hover {
+        color: var(--folio-text);
+        background-color: var(--folio-bg-secondary);
+    }
+    
+    :root:not([data-theme="light"]) .navigation .page-numbers.current,
+    :root:not([data-theme="light"]) .nav-links .page-numbers.current {
+        color: var(--folio-text) !important;
+        background-color: var(--folio-bg-secondary);
+        border: 1px solid var(--folio-text);
+    }
+}
+
+/* Membership card styles moved to consolidated-styles.css */

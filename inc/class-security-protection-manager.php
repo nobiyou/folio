@@ -52,6 +52,7 @@ class folio_Security_Protection_Manager {
         add_action('wp', array($this, 'detect_suspicious_access'));
         add_action('wp_login', array($this, 'log_user_login'), 10, 2);
         add_action('wp_logout', array($this, 'log_user_logout'));
+        add_action('user_register', array($this, 'log_user_register'), 10, 1);
         
         // 访问日志记录
         add_action('wp', array($this, 'log_content_access'));
@@ -529,6 +530,11 @@ class folio_Security_Protection_Manager {
         }
 
         // 从配置选项读取访问频率限制（默认使用常量值）
+        // Unknown crawler auto action: temporary block or add to blacklist.
+        if ($this->handle_unknown_crawler_auto_action($ip, $current_time)) {
+            return;
+        }
+
         $rate_limit = get_option('folio_security_rate_limit', self::SUSPICIOUS_THRESHOLD);
 
         // 获取访问计数
@@ -551,6 +557,90 @@ class folio_Security_Protection_Manager {
     /**
      * 检测内容保护绕过尝试
      */
+
+    /**
+     * Handle unknown crawler requests automatically.
+     *
+     * Option: folio_security_unknown_crawler_auto_action (bool, default true)
+     * Option: folio_security_unknown_crawler_action (block|blacklist, default block)
+     * Option: folio_security_unknown_crawler_block_duration (seconds, default BLOCK_DURATION)
+     */
+    private function handle_unknown_crawler_auto_action($ip, $current_time) {
+        if (!get_option('folio_security_unknown_crawler_auto_action', true)) {
+            return false;
+        }
+
+        if (!$this->is_unknown_crawler_request($ip)) {
+            return false;
+        }
+
+        $action = get_option('folio_security_unknown_crawler_action', 'block');
+        $action = is_string($action) ? strtolower(trim($action)) : 'block';
+
+        if ($action === 'blacklist') {
+            $added = $this->add_ip_to_blacklist($ip);
+            $this->log_access(null, 'unknown_crawler_blacklisted', 'blocked', true, true);
+
+            if ($added) {
+                error_log('Folio Security: Unknown crawler IP added to blacklist - ' . $ip);
+            }
+        } else {
+            $block_duration = (int) get_option('folio_security_unknown_crawler_block_duration', self::BLOCK_DURATION);
+            if ($block_duration < 300) {
+                $block_duration = self::BLOCK_DURATION;
+            }
+
+            $this->block_ip($ip, $current_time, $block_duration);
+            $this->log_access(null, 'unknown_crawler_blocked', 'blocked', true, true);
+        }
+
+        $this->send_blocked_response();
+        return true;
+    }
+
+    /**
+     * Detect whether current request is from an unknown crawler.
+     */
+    private function is_unknown_crawler_request($ip) {
+        $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? strtolower((string) $_SERVER['HTTP_USER_AGENT']) : '';
+        if ($user_agent == '') {
+            return false;
+        }
+
+        // Known search engines or known spider IPs are not treated as unknown crawlers.
+        if ($this->is_search_engine() || $this->is_spider_ip($ip)) {
+            return false;
+        }
+
+        $crawler_patterns = array(
+            'bot',
+            'crawler',
+            'spider',
+            'scraper',
+            'curl',
+            'wget',
+            'python-requests',
+            'aiohttp',
+            'okhttp',
+            'libwww-perl',
+            'httpclient',
+            'go-http-client',
+            'java/',
+            'postmanruntime',
+            'headless',
+            'selenium',
+            'phantom',
+        );
+
+        foreach ($crawler_patterns as $pattern) {
+            if (strpos($user_agent, $pattern) !== false) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private function detect_bypass_attempt($post_id, $content) {
         $suspicious_patterns = array(
             'curl',
@@ -687,9 +777,24 @@ class folio_Security_Protection_Manager {
     }
 
     /**
-     * 记录用户登录
+     * 记录用户注册（保存注册 IP 到 user meta）
+     */
+    public function log_user_register($user_id) {
+        $ip = $this->get_client_ip();
+        if ($ip && $user_id) {
+            update_user_meta($user_id, 'folio_register_ip', $ip);
+        }
+        $this->log_access(null, 'user_register', 'success');
+    }
+
+    /**
+     * 记录用户登录（保存最后登录时间与 IP 到 user meta）
      */
     public function log_user_login($user_login, $user) {
+        if ($user && isset($user->ID)) {
+            update_user_meta($user->ID, 'folio_last_login_time', time());
+            update_user_meta($user->ID, 'folio_last_login_ip', $this->get_client_ip());
+        }
         $this->log_access(null, 'user_login', 'success');
     }
 
@@ -1059,6 +1164,26 @@ class folio_Security_Protection_Manager {
         $list = get_option('folio_security_blacklist', '');
         return $this->parse_ip_list($list);
     }
+
+    /**
+     * Add an IP to blacklist option.
+     */
+    private function add_ip_to_blacklist($ip) {
+        if (!is_string($ip) || !filter_var($ip, FILTER_VALIDATE_IP)) {
+            return false;
+        }
+
+        $entries = $this->get_blacklist();
+        if ($this->is_ip_in_list($ip, $entries)) {
+            return false;
+        }
+
+        $entries[] = $ip;
+        $entries = array_unique(array_filter(array_map('trim', $entries)));
+
+        return update_option('folio_security_blacklist', implode("\n", $entries));
+    }
+
 
     /**
      * 解析 IP 列表（每行一个，支持单个 IP 或 CIDR）

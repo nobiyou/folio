@@ -99,7 +99,7 @@ class folio_Helper_Manager {
                 global $wpdb;
                 $notification_table = $wpdb->prefix . 'folio_notifications';
                 
-                if ($wpdb->get_var("SHOW TABLES LIKE '$notification_table'") != $notification_table) {
+                if ($wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $notification_table)) !== $notification_table) {
                     return 0;
                 }
                 
@@ -134,7 +134,7 @@ class folio_Helper_Manager {
                 global $wpdb;
                 $notification_table = $wpdb->prefix . 'folio_notifications';
                 
-                if ($wpdb->get_var("SHOW TABLES LIKE '$notification_table'") != $notification_table) {
+                if ($wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $notification_table)) !== $notification_table) {
                     return array();
                 }
                 
@@ -293,7 +293,7 @@ class folio_Helper_Manager {
                 $options = get_option('folio_theme_options', array());
                 return array(
                     'enabled' => isset($options['maintenance_mode']) && $options['maintenance_mode'],
-                    'message' => $options['maintenance_message'] ?? '网站正在维护中，请稍后访问。',
+                    'message' => $options['maintenance_message'] ?? __('Site is under maintenance. Please visit later.', 'folio'),
                     'start_time' => $options['maintenance_start_time'] ?? '',
                     'end_time' => $options['maintenance_end_time'] ?? '',
                 );
@@ -387,11 +387,11 @@ class folio_Helper_Manager {
                 $default_links = array(
                     array(
                         'url' => admin_url('themes.php?page=folio-theme-options&tab=advanced'),
-                        'text' => '主题设置'
+                        'text' => __('Theme Settings', 'folio')
                     ),
                     array(
                         'url' => admin_url(),
-                        'text' => '返回后台'
+                        'text' => __('Go to Admin', 'folio')
                     )
                 );
                 

@@ -12,6 +12,11 @@ if (!defined('ABSPATH')) {
 }
 
 class folio_Cache_Auto_Validation {
+    /**
+     * Notice validity window (seconds).
+     * Auto validation runs every 6 hours, so keep at 18 hours to tolerate delays.
+     */
+    const NOTICE_MAX_AGE = 18 * HOUR_IN_SECONDS;
 
     /**
      * 构造函数
@@ -114,7 +119,7 @@ class folio_Cache_Auto_Validation {
         $external_cache = wp_using_ext_object_cache();
         $results['tests']['external_cache'] = array(
             'status' => $external_cache ? 'good' : 'warning',
-            'message' => $external_cache ? '外部对象缓存已启用' : '使用内置缓存'
+            'message' => $external_cache ? __('External object cache is enabled', 'folio') : __('Using built-in cache', 'folio')
         );
         if (!$external_cache) $results['issues']++;
 
@@ -123,7 +128,7 @@ class folio_Cache_Auto_Validation {
             $mc_status = folio_check_memcached_availability();
             $results['tests']['memcached'] = array(
                 'status' => $mc_status['connection_test'] ? 'good' : 'critical',
-                'message' => $mc_status['connection_test'] ? 'Memcached连接正常' : 'Memcached连接失败'
+                'message' => $mc_status['connection_test'] ? __('Memcached connection is healthy', 'folio') : __('Memcached connection failed', 'folio')
             );
             if (!$mc_status['connection_test']) $results['issues']++;
         }
@@ -132,12 +137,12 @@ class folio_Cache_Auto_Validation {
         if (class_exists('folio_Performance_Cache_Manager')) {
             $results['tests']['cache_manager'] = array(
                 'status' => 'good',
-                'message' => '缓存管理器可用'
+                'message' => __('Cache manager is available', 'folio')
             );
         } else {
             $results['tests']['cache_manager'] = array(
                 'status' => 'critical',
-                'message' => '缓存管理器不可用'
+                'message' => __('Cache manager is unavailable', 'folio')
             );
             $results['issues']++;
         }
@@ -197,20 +202,27 @@ class folio_Cache_Auto_Validation {
             );
 
             // 评估性能
-            if ($write_ops_per_sec > 500 && $read_ops_per_sec > 1000) {
+            if ($write_ops_per_sec > 300 && $read_ops_per_sec > 600) {
                 $results['status'] = 'good';
-                $results['message'] = '缓存性能优秀';
-            } elseif ($write_ops_per_sec > 200 && $read_ops_per_sec > 500) {
+                $results['message'] = __('Cache performance is excellent', 'folio');
+            } elseif ($write_ops_per_sec > 80 && $read_ops_per_sec > 150) {
                 $results['status'] = 'warning';
-                $results['message'] = '缓存性能一般';
+                $results['message'] = __('Cache performance is fair', 'folio');
+            } elseif ($write_ops_per_sec > 20 && $read_ops_per_sec > 40) {
+                $results['status'] = 'warning';
+                $results['message'] = __('Cache performance is below expected baseline', 'folio');
             } else {
                 $results['status'] = 'critical';
-                $results['message'] = '缓存性能较差';
+                $results['message'] = __('Cache performance is poor', 'folio');
             }
 
         } catch (Exception $e) {
             $results['status'] = 'critical';
-            $results['message'] = '性能测试失败: ' . $e->getMessage();
+            $results['message'] = sprintf(
+                /* translators: %s: exception message. */
+                __('Performance test failed: %s', 'folio'),
+                $e->getMessage()
+            );
         }
 
         return $results;
@@ -244,13 +256,13 @@ class folio_Cache_Auto_Validation {
                             
                             if ($hit_rate > 90) {
                                 $results['status'] = 'good';
-                                $results['message'] = '缓存命中率优秀';
+                                $results['message'] = __('Cache hit rate is excellent', 'folio');
                             } elseif ($hit_rate > 70) {
                                 $results['status'] = 'warning';
-                                $results['message'] = '缓存命中率一般';
+                                $results['message'] = __('Cache hit rate is fair', 'folio');
                             } else {
                                 $results['status'] = 'critical';
-                                $results['message'] = '缓存命中率较低';
+                                $results['message'] = __('Cache hit rate is low', 'folio');
                             }
                         }
                     }
@@ -269,7 +281,11 @@ class folio_Cache_Auto_Validation {
                     if ($total > 0) {
                         $hit_rate = ($cache_hits / $total) * 100;
                         $results['hit_rate'] = round($hit_rate, 2);
-                        $results['message'] = 'Folio缓存命中率: ' . $results['hit_rate'] . '%';
+                        $results['message'] = sprintf(
+                            /* translators: %s: cache hit rate percentage. */
+                            __('Folio cache hit rate: %s%%', 'folio'),
+                            $results['hit_rate']
+                        );
                         $results['status'] = $hit_rate > 80 ? 'good' : ($hit_rate > 60 ? 'warning' : 'critical');
                     }
                 }
@@ -277,7 +293,11 @@ class folio_Cache_Auto_Validation {
 
         } catch (Exception $e) {
             $results['status'] = 'warning';
-            $results['message'] = '无法获取命中率数据: ' . $e->getMessage();
+            $results['message'] = sprintf(
+                /* translators: %s: exception message. */
+                __('Failed to get hit rate data: %s', 'folio'),
+                $e->getMessage()
+            );
         }
 
         return $results;
@@ -303,7 +323,11 @@ class folio_Cache_Auto_Validation {
         $results['metrics']['memory_percent'] = round($memory_percent, 1);
 
         if ($memory_percent > 90) {
-            $results['issues'][] = '内存使用率过高: ' . round($memory_percent, 1) . '%';
+            $results['issues'][] = sprintf(
+                /* translators: %s: memory usage percentage. */
+                __('High memory usage: %s%%', 'folio'),
+                round($memory_percent, 1)
+            );
         }
 
         // 检查磁盘空间
@@ -316,7 +340,11 @@ class folio_Cache_Auto_Validation {
         $results['metrics']['disk_percent'] = round($disk_percent, 1);
 
         if ($disk_percent > 90) {
-            $results['issues'][] = '磁盘使用率过高: ' . round($disk_percent, 1) . '%';
+            $results['issues'][] = sprintf(
+                /* translators: %s: disk usage percentage. */
+                __('High disk usage: %s%%', 'folio'),
+                round($disk_percent, 1)
+            );
         }
 
         // 检查数据库查询数量
@@ -325,7 +353,11 @@ class folio_Cache_Auto_Validation {
         $results['metrics']['db_queries'] = $query_count;
 
         if ($query_count > 100) {
-            $results['issues'][] = '数据库查询过多: ' . $query_count . ' 次';
+            $results['issues'][] = sprintf(
+                /* translators: %d: database query count. */
+                __('Too many database queries: %d', 'folio'),
+                $query_count
+            );
         }
 
         // 更新状态
@@ -355,44 +387,90 @@ class folio_Cache_Auto_Validation {
                 // 读取最近的日志条目
                 $log_content = file_get_contents($error_log_path);
                 $log_lines = explode("\n", $log_content);
-                
-                // 查找最近24小时的缓存相关错误
+
+                // 仅统计最近24小时、缓存相关、且属于真正错误级别的日志
                 $cache_keywords = array('cache', 'memcached', 'redis', 'folio');
-                $recent_time = time() - 86400; // 24小时前
-                
+                $recent_time = time() - DAY_IN_SECONDS;
+                $max_lines = 2000;
+                $checked = 0;
+                $severity_pattern = '/\b(fatal error|error|uncaught)\b/i';
+                $ignore_patterns = array(
+                    'completed successfully',
+                    'applied optimized configuration',
+                    'stats response',
+                    'performance stats response',
+                    'cache hit rate',
+                    'object cache = enabled',
+                    'memory usage =',
+                    'db queries =',
+                    'cache cleared successfully',
+                );
+
                 foreach (array_reverse($log_lines) as $line) {
-                    if (empty($line)) continue;
-                    
-                    // 检查是否为缓存相关错误
-                    $is_cache_error = false;
+                    if (++$checked > $max_lines) {
+                        break;
+                    }
+                    if (empty($line) || !is_string($line)) {
+                        continue;
+                    }
+
+                    // 如果日志行包含时间戳，且早于24小时，则跳过
+                    if (preg_match('/^\[(.+?)\]/', $line, $matches)) {
+                        $line_ts = strtotime($matches[1]);
+                        if ($line_ts !== false && $line_ts < $recent_time) {
+                            continue;
+                        }
+                    }
+
+                    // 必须先是缓存相关
+                    $is_cache_related = false;
                     foreach ($cache_keywords as $keyword) {
                         if (stripos($line, $keyword) !== false) {
-                            $is_cache_error = true;
+                            $is_cache_related = true;
                             break;
                         }
                     }
-                    
-                    if ($is_cache_error) {
-                        $results['cache_errors']++;
-                        if (count($results['recent_errors']) < 5) {
-                            $results['recent_errors'][] = substr($line, 0, 200);
+                    if (!$is_cache_related) {
+                        continue;
+                    }
+
+                    // 再判断是否为真正错误级别（忽略 notice/info 噪音）
+                    if (!preg_match($severity_pattern, $line)) {
+                        continue;
+                    }
+
+                    // 忽略已知的成功信息/统计日志
+                    $ignored = false;
+                    foreach ($ignore_patterns as $ignore) {
+                        if (stripos($line, $ignore) !== false) {
+                            $ignored = true;
+                            break;
                         }
                     }
-                    
-                    // 只检查最近1000行
-                    if (count($results['recent_errors']) >= 1000) break;
+                    if ($ignored) {
+                        continue;
+                    }
+
+                    $results['cache_errors']++;
+                    if (count($results['recent_errors']) < 5) {
+                        $results['recent_errors'][] = substr($line, 0, 200);
+                    }
                 }
-                
+
             } catch (Exception $e) {
                 $results['status'] = 'warning';
-                $results['message'] = '无法读取错误日志: ' . $e->getMessage();
+                $results['message'] = sprintf(
+                    /* translators: %s: exception message. */
+                    __('Unable to read error log: %s', 'folio'),
+                    $e->getMessage()
+                );
             }
         }
 
         // 评估错误状态
-        if ($results['cache_errors'] > 10) {
+        if ($results['cache_errors'] > 20) {
             $results['status'] = 'critical';
-        } elseif ($results['cache_errors'] > 3) {
+        } elseif ($results['cache_errors'] > 5) {
             $results['status'] = 'warning';
         }
 
@@ -414,9 +492,15 @@ class folio_Cache_Auto_Validation {
             }
         }
 
-        if ($critical_count > 0) {
+        // 仅当核心健康检查为严重问题时才判定为 critical，减少误报。
+        // 对于其它非核心检测项，要求“多项同时异常”才提升为 warning。
+        if (isset($tests['health_check']['status']) && $tests['health_check']['status'] === 'critical') {
             return 'critical';
-        } elseif ($warning_count > 2) {
+        } elseif ($critical_count >= 2) {
+            return 'warning';
+        } elseif ($critical_count >= 1 && $warning_count >= 1) {
+            return 'warning';
+        } elseif ($warning_count >= 2) {
             return 'warning';
         } else {
             return 'good';
@@ -433,40 +517,56 @@ class folio_Cache_Auto_Validation {
         if (isset($tests['health_check']) && $tests['health_check']['issues'] > 0) {
             $recommendations[] = array(
                 'priority' => 'high',
-                'title' => '修复健康检查问题',
-                'description' => '发现 ' . $tests['health_check']['issues'] . ' 个健康检查问题，建议立即处理'
+                'title' => __('Fix health check issues', 'folio'),
+                'description' => sprintf(
+                    /* translators: %d: issue count. */
+                    __('Detected %d health check issues. Please resolve them immediately.', 'folio'),
+                    $tests['health_check']['issues']
+                )
             );
         }
 
         if (isset($tests['performance']) && $tests['performance']['status'] !== 'good') {
             $recommendations[] = array(
                 'priority' => 'medium',
-                'title' => '优化缓存性能',
-                'description' => '缓存性能不佳，建议检查服务器资源和配置'
+                'title' => __('Optimize cache performance', 'folio'),
+                'description' => __('Cache performance is not ideal. Check server resources and cache configuration.', 'folio')
             );
         }
 
         if (isset($tests['hit_rate']) && $tests['hit_rate']['hit_rate'] < 80) {
             $recommendations[] = array(
                 'priority' => 'medium',
-                'title' => '提升缓存命中率',
-                'description' => '当前命中率 ' . $tests['hit_rate']['hit_rate'] . '%，建议优化缓存策略'
+                'title' => __('Improve cache hit rate', 'folio'),
+                'description' => sprintf(
+                    /* translators: %s: hit rate percentage. */
+                    __('Current hit rate is %s%%. Consider optimizing your cache strategy.', 'folio'),
+                    $tests['hit_rate']['hit_rate']
+                )
             );
         }
 
         if (isset($tests['resources']) && count($tests['resources']['issues']) > 0) {
             $recommendations[] = array(
                 'priority' => 'high',
-                'title' => '解决资源问题',
-                'description' => '发现系统资源问题: ' . implode(', ', $tests['resources']['issues'])
+                'title' => __('Resolve resource issues', 'folio'),
+                'description' => sprintf(
+                    /* translators: %s: comma-separated issues list. */
+                    __('Detected system resource issues: %s', 'folio'),
+                    implode(', ', $tests['resources']['issues'])
+                )
             );
         }
 
         if (isset($tests['errors']) && $tests['errors']['cache_errors'] > 5) {
             $recommendations[] = array(
                 'priority' => 'high',
-                'title' => '处理缓存错误',
-                'description' => '发现 ' . $tests['errors']['cache_errors'] . ' 个缓存相关错误，需要调查'
+                'title' => __('Investigate cache errors', 'folio'),
+                'description' => sprintf(
+                    /* translators: %d: cache error count. */
+                    __('Detected %d cache-related errors. Investigation is required.', 'folio'),
+                    $tests['errors']['cache_errors']
+                )
             );
         }
 
@@ -494,9 +594,13 @@ class folio_Cache_Auto_Validation {
         $admin_email = get_option('admin_email');
         $site_name = get_bloginfo('name');
         
-        $subject = "[{$site_name}] 缓存系统严重问题警报";
+        $subject = sprintf(
+            /* translators: %s: site name. */
+            __('[%s] Critical cache system alert', 'folio'),
+            $site_name
+        );
         
-        $message = "检测到缓存系统存在严重问题：\n\n";
+        $message = __("Critical cache system issues were detected:\n\n", 'folio');
         
         foreach ($results['tests'] as $test_name => $test_result) {
             if ($test_result['status'] === 'critical') {
@@ -504,9 +608,13 @@ class folio_Cache_Auto_Validation {
             }
         }
         
-        $message .= "\n建议立即检查缓存系统配置和服务器状态。\n";
-        $message .= "详细信息请查看WordPress后台的缓存管理页面。\n\n";
-        $message .= "检查时间: " . $results['timestamp'];
+        $message .= "\n" . __('Please check cache configuration and server status immediately.', 'folio') . "\n";
+        $message .= __('For details, visit the cache management page in WordPress admin.', 'folio') . "\n\n";
+        $message .= sprintf(
+            /* translators: %s: timestamp. */
+            __('Check time: %s', 'folio'),
+            $results['timestamp']
+        );
         
         wp_mail($admin_email, $subject, $message);
     }
@@ -516,12 +624,45 @@ class folio_Cache_Auto_Validation {
      */
     public function add_validation_notices() {
         $results = get_option('folio_cache_auto_validation_results');
-        
-        if ($results && $results['overall_status'] === 'critical') {
+
+        if (!$this->is_recent_validation_result($results)) {
+            return;
+        }
+
+        // 兼容旧结果：按当前规则重算状态，避免历史规则导致的持续红色误报。
+        if (is_array($results) && isset($results['tests']) && is_array($results['tests'])) {
+            $recalculated = $this->calculate_overall_status($results['tests']);
+            if (!isset($results['overall_status']) || $results['overall_status'] !== $recalculated) {
+                $results['overall_status'] = $recalculated;
+                update_option('folio_cache_auto_validation_results', $results);
+            }
+        }
+
+        $status = isset($results['overall_status']) ? $results['overall_status'] : '';
+        if ($status === 'critical') {
             add_action('admin_notices', array($this, 'show_critical_notice'));
-        } elseif ($results && $results['overall_status'] === 'warning') {
+        } elseif ($status === 'warning') {
             add_action('admin_notices', array($this, 'show_warning_notice'));
         }
+    }
+
+    /**
+     * Validate that notice data is recent enough to avoid stale false alerts.
+     *
+     * @param mixed $results Validation result option value.
+     * @return bool
+     */
+    private function is_recent_validation_result($results) {
+        if (!is_array($results) || empty($results['timestamp'])) {
+            return false;
+        }
+
+        $ts = strtotime((string) $results['timestamp']);
+        if ($ts === false) {
+            return false;
+        }
+
+        return (time() - $ts) <= self::NOTICE_MAX_AGE;
     }
 
     /**
@@ -530,7 +671,12 @@ class folio_Cache_Auto_Validation {
     public function show_critical_notice() {
         ?>
         <div class="notice notice-error">
-            <p><strong>缓存系统警报:</strong> 检测到严重问题，请立即查看 <a href="<?php echo admin_url('tools.php?page=folio-cache-management'); ?>">缓存管理页面</a> 进行处理。</p>
+            <p>
+                <strong><?php esc_html_e('Cache System Alert:', 'folio'); ?></strong>
+                <?php esc_html_e('Critical issues were detected. Please review', 'folio'); ?>
+                <a href="<?php echo esc_url(admin_url('tools.php?page=folio-cache-management')); ?>"><?php esc_html_e('Cache Management', 'folio'); ?></a>
+                <?php esc_html_e('immediately.', 'folio'); ?>
+            </p>
         </div>
         <?php
     }
@@ -541,7 +687,12 @@ class folio_Cache_Auto_Validation {
     public function show_warning_notice() {
         ?>
         <div class="notice notice-warning">
-            <p><strong>缓存系统提醒:</strong> 发现一些需要注意的问题，建议查看 <a href="<?php echo admin_url('tools.php?page=folio-cache-management'); ?>">缓存管理页面</a> 进行优化。</p>
+            <p>
+                <strong><?php esc_html_e('Cache System Warning:', 'folio'); ?></strong>
+                <?php esc_html_e('Potential issues were detected. Consider reviewing', 'folio'); ?>
+                <a href="<?php echo esc_url(admin_url('tools.php?page=folio-cache-management')); ?>"><?php esc_html_e('Cache Management', 'folio'); ?></a>
+                <?php esc_html_e('for optimization.', 'folio'); ?>
+            </p>
         </div>
         <?php
     }
@@ -552,11 +703,11 @@ class folio_Cache_Auto_Validation {
     public function ajax_run_validation() {
         $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
         if ($nonce === '' || !wp_verify_nonce($nonce, 'folio_cache_auto_validation')) {
-            wp_send_json_error('安全验证失败');
+            wp_send_json_error(__('Security verification failed', 'folio'));
         }
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
 
         $results = $this->run_auto_validation();
@@ -582,7 +733,7 @@ class folio_Cache_Auto_Validation {
 add_filter('cron_schedules', function($schedules) {
     $schedules['folio_6hours'] = array(
         'interval' => 6 * HOUR_IN_SECONDS,
-        'display' => '每6小时'
+        'display' => __('Every 6 hours', 'folio')
     );
     return $schedules;
 });

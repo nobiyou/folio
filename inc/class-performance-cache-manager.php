@@ -86,7 +86,7 @@ class folio_Performance_Cache_Manager {
             // Memcached可用，显示成功信息
             add_action('admin_notices', function() {
                 if (current_user_can('manage_options')) {
-                    echo '<div class="notice notice-success is-dismissible"><p><strong>Folio缓存：</strong>Memcached已启用，缓存性能已优化。</p></div>';
+            echo '<div class="notice notice-success is-dismissible"><p><strong>' . esc_html__('Folio Cache:', 'folio') . '</strong> ' . esc_html__('Memcached is enabled. Cache performance has been optimized.', 'folio') . '</p></div>';
                 }
             });
             
@@ -96,7 +96,7 @@ class folio_Performance_Cache_Manager {
             // Redis可用
             add_action('admin_notices', function() {
                 if (current_user_can('manage_options')) {
-                    echo '<div class="notice notice-success is-dismissible"><p><strong>Folio缓存：</strong>Redis已启用，缓存性能已优化。</p></div>';
+            echo '<div class="notice notice-success is-dismissible"><p><strong>' . esc_html__('Folio Cache:', 'folio') . '</strong> ' . esc_html__('Redis is enabled. Cache performance has been optimized.', 'folio') . '</p></div>';
                 }
             });
             
@@ -106,14 +106,14 @@ class folio_Performance_Cache_Manager {
             // 其他对象缓存
             add_action('admin_notices', function() {
                 if (current_user_can('manage_options')) {
-                    echo '<div class="notice notice-info is-dismissible"><p><strong>Folio缓存：</strong>对象缓存已启用。</p></div>';
+            echo '<div class="notice notice-info is-dismissible"><p><strong>' . esc_html__('Folio Cache:', 'folio') . '</strong> ' . esc_html__('Object cache is enabled.', 'folio') . '</p></div>';
                 }
             });
         } else {
             // 没有外部对象缓存
             add_action('admin_notices', function() {
                 if (current_user_can('manage_options')) {
-                    echo '<div class="notice notice-warning is-dismissible"><p><strong>Folio缓存：</strong>建议安装Redis或Memcached以获得更好的缓存性能。<a href="' . admin_url('tools.php?page=folio-performance-cache') . '">查看缓存设置</a></p></div>';
+            echo '<div class="notice notice-warning is-dismissible"><p><strong>' . esc_html__('Folio Cache:', 'folio') . '</strong> ' . esc_html__('Installing Redis or Memcached is recommended for better cache performance.', 'folio') . ' <a href="' . admin_url('tools.php?page=folio-performance-cache') . '">' . esc_html__('View cache settings', 'folio') . '</a></p></div>';
                 }
             });
         }
@@ -573,8 +573,12 @@ class folio_Performance_Cache_Manager {
             }
         }
         
-        // 对于WordPress缓存，由于无法按模式删除，我们使用缓存组
-        wp_cache_flush_group('folio_performance');
+        // 对于WordPress缓存，优先按缓存组清理；不支持时降级为全量清理
+        if (function_exists('wp_cache_supports') && wp_cache_supports('flush_group')) {
+            wp_cache_flush_group('folio_performance');
+        } elseif (function_exists('wp_cache_flush')) {
+            wp_cache_flush();
+        }
     }
 
     /**
@@ -687,11 +691,11 @@ class folio_Performance_Cache_Manager {
     public function ajax_get_cache_stats() {
         $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
         if ($nonce === '' || (!wp_verify_nonce($nonce, 'folio_performance_admin') && !wp_verify_nonce($nonce, 'folio_performance_nonce'))) {
-            wp_send_json_error('安全验证失败');
+            wp_send_json_error(__('Security verification failed', 'folio'));
         }
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
         
         wp_send_json_success(self::get_cache_statistics());
@@ -703,11 +707,11 @@ class folio_Performance_Cache_Manager {
     public function ajax_clear_cache() {
         $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
         if ($nonce === '' || (!wp_verify_nonce($nonce, 'folio_performance_admin') && !wp_verify_nonce($nonce, 'folio_performance_nonce'))) {
-            wp_send_json_error('安全验证失败');
+            wp_send_json_error(__('Security verification failed', 'folio'));
         }
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
         
         $cache_type = sanitize_text_field($_POST['cache_type'] ?? 'all');
@@ -715,19 +719,19 @@ class folio_Performance_Cache_Manager {
         switch ($cache_type) {
             case 'permission':
                 $this->clear_cache_by_pattern(self::PERMISSION_CACHE_PREFIX);
-                $message = '权限缓存已清除';
+                $message = __('Permission cache cleared', 'folio');
                 break;
             case 'preview':
                 $this->clear_cache_by_pattern(self::PREVIEW_CACHE_PREFIX);
-                $message = '预览缓存已清除';
+                $message = __('Preview cache cleared', 'folio');
                 break;
             case 'query':
                 $this->clear_cache_by_pattern(self::QUERY_CACHE_PREFIX);
-                $message = '查询缓存已清除';
+                $message = __('Query cache cleared', 'folio');
                 break;
             case 'object':
                 wp_cache_flush();
-                $message = '对象缓存已清除';
+                $message = __('Object cache cleared', 'folio');
                 break;
             case 'all':
             default:
@@ -745,7 +749,7 @@ class folio_Performance_Cache_Manager {
                     opcache_reset();
                 }
                 
-                $message = '所有缓存已清除';
+                $message = __('All caches cleared', 'folio');
                 break;
         }
         
@@ -760,11 +764,11 @@ class folio_Performance_Cache_Manager {
      */
     public function ajax_get_memcached_stats() {
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
         
         if (!class_exists('Memcached')) {
-            wp_send_json_error('Memcached不可用');
+            wp_send_json_error(__('Memcached is unavailable', 'folio'));
         }
         
         try {
@@ -818,7 +822,7 @@ class folio_Performance_Cache_Manager {
             wp_send_json_success($stats);
             
         } catch (Exception $e) {
-            wp_send_json_error('获取Memcached统计失败: ' . $e->getMessage());
+            wp_send_json_error(__('Failed to get Memcached stats:', 'folio') . ' ' . $e->getMessage());
         }
     }
 
@@ -827,11 +831,11 @@ class folio_Performance_Cache_Manager {
      */
     public function ajax_get_redis_stats() {
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
         
         if (!class_exists('Redis')) {
-            wp_send_json_error('Redis不可用');
+            wp_send_json_error(__('Redis is unavailable', 'folio'));
         }
         
         try {
@@ -874,7 +878,7 @@ class folio_Performance_Cache_Manager {
             wp_send_json_success($stats);
             
         } catch (Exception $e) {
-            wp_send_json_error('获取Redis统计失败: ' . $e->getMessage());
+            wp_send_json_error(__('Failed to get Redis stats:', 'folio') . ' ' . $e->getMessage());
         }
     }
 
@@ -950,3 +954,4 @@ if (!function_exists('folio_check_bulk_permissions')) {
         return folio_Performance_Cache_Manager::check_bulk_user_permissions($post_ids, $user_id);
     }
 }
+

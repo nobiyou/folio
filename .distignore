@@ -1,0 +1,54 @@
+# Folio Theme - 打包/上传时排除列表
+# 使用方式：打包或上传主题时排除此处列出的文件与目录，避免包含开发环境与敏感文件
+# 若使用 wp dist-archive 等工具，可配合此文件使用
+
+# 依赖与构建
+node_modules/
+
+# 版本控制与 CI
+.git/
+.github/
+
+# 环境与密钥（禁止上传）
+.env
+.env.local
+.env.*
+*.env
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 前端构建配置（可选：仅部署时可不包含）
+package-lock.json
+package.json
+tailwind.config.js
+postcss.config.js
+
+# 构建脚本与排除配置（可选）
+build-for-production.bat
+.distignore
+
+# 仓库/开发文档（运行时不需要）
+SECURITY.md
+README.md
+*README*.md
+GITHUB_SETUP.md
+git-init-and-push.bat
+
+# Source map（可选，减小体积）
+*.map
+
+# 构建产物与打包目录
+*.zip
+.build_tmp/
+dist/
+dist_pkg/
+
+# WordPress 相关（通常不在主题目录内，此处仅作说明）
+wp-config.php
+.htaccess

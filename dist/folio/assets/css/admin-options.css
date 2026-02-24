@@ -1,0 +1,144 @@
+/**
+ * Folio Theme Options - Admin Styles
+ */
+
+.folio-options-wrap {
+    margin: 20px 20px 0 0;
+}
+
+.folio-options-wrap h1 {
+    margin-bottom: 20px;
+    font-size: 23px;
+    font-weight: 400;
+    line-height: 1.3;
+}
+
+/* 标签导航 */
+.nav-tab-wrapper {
+    margin-bottom: 0;
+    border-bottom: 1px solid #ccd0d4;
+}
+
+.nav-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 15px;
+    font-size: 14px;
+}
+
+.nav-tab .dashicons {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+/* 内容区域 */
+.folio-options-content {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-top: none;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.folio-tab-content {
+    max-width: 1000px;
+}
+
+/* 分组样式 */
+.folio-section {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #f0f0f1;
+}
+
+.folio-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.folio-section h2 {
+    font-size: 18px;
+    margin: 0 0 15px 0;
+    padding: 0;
+    font-weight: 600;
+}
+
+.folio-section > p.description {
+    margin: -10px 0 20px 0;
+    color: #646970;
+}
+
+/* 表单样式 */
+.form-table th {
+    width: 220px;
+    padding: 15px 10px 15px 0;
+    vertical-align: top;
+}
+
+.form-table th .dashicons {
+    color: #2271b1;
+    margin-right: 4px;
+}
+
+.form-table td {
+    padding: 15px 10px;
+}
+
+.form-table input[type="text"],
+.form-table input[type="email"],
+.form-table input[type="url"],
+.form-table input[type="number"],
+.form-table textarea,
+.form-table select {
+    width: 100%;
+    max-width: 500px;
+}
+
+.form-table textarea.code {
+    font-family: Consolas, Monaco, monospace;
+    font-size: 13px;
+}
+
+.form-table .small-text {
+    width: 80px;
+}
+
+.form-table p.description {
+    margin: 8px 0 0 0;
+    font-size: 13px;
+    color: #646970;
+}
+
+/* 提交按钮 */
+.folio-options-wrap .submit {
+    padding: 0;
+    margin: 0;
+}
+
+.folio-options-wrap .button-primary {
+    padding: 8px 20px;
+    height: auto;
+    font-size: 14px;
+}
+
+/* 响应式 */
+@media screen and (max-width: 782px) {
+    .form-table th,
+    .form-table td {
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+    }
+    
+    .form-table th {
+        padding-bottom: 5px;
+    }
+    
+    .nav-tab {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+}

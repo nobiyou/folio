@@ -1,0 +1,9951 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Folio Theme\n"
+"POT-Creation-Date: 2026-02-09 00:00+0000\n"
+"PO-Revision-Date: 2026-02-09 00:00+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: codex-local-extractor\n"
+
+#: inc/class-notification-admin.php:1628
+msgid " (including guests)"
+msgstr ""
+
+#: inc/class-notification-admin.php:377
+msgid ""
+" On-site test notifications are only sent to your on-site notification "
+"center and no emails are sent. You can view them in \"My Notifications\" in "
+"User Center."
+msgstr ""
+
+#: inc/class-notification-admin.php:538
+msgid ""
+" Test email will be sent to the currently logged-in administrator email. "
+"Expiry check will scan all members and send reminder emails when needed."
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid " protection preset"
+msgstr ""
+
+#: inc/class-seo-admin.php:435
+msgid "%1$s: Access failed - %2$s"
+msgstr ""
+
+#: inc/class-seo-admin.php:448
+msgid "%1$s: HTTP %2$d, Preview: %3$s, Paywall Prompt: %4$s"
+msgstr ""
+
+msgid "%d active plugins"
+msgstr ""
+
+msgid "%d critical optimization suggestions"
+msgstr ""
+
+msgid "%d database queries"
+msgstr ""
+
+msgid "%d days"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "%d days ago"
+msgstr ""
+
+#: inc/class-membership-admin.php:565
+msgid "%d days left"
+msgstr ""
+
+#: user-center
+msgid "%d days remaining"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:104
+#: inc/class-cache-backend-validator.php:119
+msgid "%d groups"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "%d hours ago"
+msgstr ""
+
+#: inc/class-membership-admin.php:461
+msgid "%d members"
+msgstr ""
+
+#: inc/class-theme-enhancements.php:173
+msgid "%d min read"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "%d minutes ago"
+msgstr ""
+
+msgid "%d posts have been set to SVIP only."
+msgstr ""
+
+msgid "%d posts have been set to VIP only."
+msgstr ""
+
+#: inc/class-seo-admin.php:562
+msgid ""
+"%d protected posts are not marked as SEO-visible, which may affect indexing."
+msgstr ""
+
+msgid "%d queries"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "%d ranges"
+msgstr ""
+
+#: user-center
+msgid "%d unread"
+msgstr ""
+
+#: user-center
+msgid "%d works in total"
+msgstr ""
+
+#: user-center/notifications.php:55
+msgid "%d 条未读"
+msgstr ""
+
+msgid "%s Exclusive"
+msgstr ""
+
+msgid "%s Exclusive Benefits"
+msgstr ""
+
+msgid "%s Member"
+msgstr ""
+
+msgid "%s Membership Activated"
+msgstr ""
+
+msgid "%s Unlocked"
+msgstr ""
+
+#: user-center
+msgid "%s ago"
+msgstr ""
+
+#: manual
+msgid "%s category archive"
+msgstr ""
+
+#: inc/class-seo-admin.php:488
+msgid "%s exclusive content"
+msgstr ""
+
+msgid "%s member benefits:"
+msgstr ""
+
+msgid "%s members only content"
+msgstr ""
+
+msgid "%s unlocked"
+msgstr ""
+
+#: inc/class-theme-seo.php:81
+msgid "%s 分类下的所有作品"
+msgstr ""
+
+#: inc/class-ai-content-generator.php:690
+msgid "%s: Connection failed - %s"
+msgstr ""
+
+#: inc/class-ai-content-generator.php:687
+msgid "%s: Connection successful"
+msgstr ""
+
+#: footer.php:17 inc/class-theme-options.php:374
+msgid "&copy; %s Design & build by %s."
+msgstr ""
+
+#: archive.php:88 category.php:65 front-page.php:146 home.php:112 index.php:35
+msgid "&larr; Previous"
+msgstr ""
+
+msgid "(Experimental)"
+msgstr ""
+
+#: inc/class-theme-options.php:603
+msgid "(实验性)"
+msgstr ""
+
+msgid "+ Add API Config"
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid "+ Add Benefit"
+msgstr ""
+
+#: inc/class-theme-options.php:1380
+msgid "+ 添加API配置"
+msgstr ""
+
+msgid "1 Day"
+msgstr ""
+
+msgid "1 Hour"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "1 day"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:411
+msgid "1 hour"
+msgstr ""
+
+msgid "1 hour ago"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "15 days"
+msgstr ""
+
+msgid "15 min ago"
+msgstr ""
+
+#: inc/class-theme-options.php:708
+msgid "1天"
+msgstr ""
+
+#: inc/class-theme-options.php:707
+msgid "1小时"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:422
+msgid "24 hours"
+msgstr ""
+
+msgid "24-hour dedicated support"
+msgstr ""
+
+msgid "24/7 dedicated support"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "3 days"
+msgstr ""
+
+#: user-center/register.php:40
+msgid "3-60 characters, letters, numbers and underscores only"
+msgstr ""
+
+msgid "30 Days"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "30 days"
+msgstr ""
+
+msgid "30 min ago"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:433
+msgid "30 minutes"
+msgstr ""
+
+#: inc/class-theme-options.php:710
+msgid "30天"
+msgstr ""
+
+msgid "404 Error"
+msgstr ""
+
+#: inc/class-theme-enhancements.php:143
+msgid "404 错误"
+msgstr ""
+
+msgid "45 min ago"
+msgstr ""
+
+msgid "7 Days"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "7 days"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "7-Day Security Stats"
+msgstr ""
+
+#: inc/class-theme-options.php:709
+msgid "7天"
+msgstr ""
+
+msgid "A new user has registered on your website. Details are as follows:"
+msgstr ""
+
+msgid ""
+"A third-party object cache was detected. You can replace it with the Folio-"
+"optimized version."
+msgstr ""
+
+msgid "AI API Configuration"
+msgstr ""
+
+#: inc/class-theme-options.php:1316
+msgid "AI API 配置"
+msgstr ""
+
+#: inc/class-ai-content-generator.php:39
+msgid "AI Content Generator"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "AI Insights"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "AI Operations Reports"
+msgstr ""
+
+msgid "AI Response"
+msgstr ""
+
+#: inc/class-ai-seo.php:427 inc/class-ai-seo.php:428 inc/class-ai-seo.php:453
+#: inc/class-ai-seo.php:620
+msgid "AI SEO 设置"
+msgstr ""
+
+msgid "AI Settings"
+msgstr ""
+
+#: inc/class-ai-content-generator.php:316
+msgid "AI generation failed. Check API configuration or site error logs."
+msgstr ""
+
+#: inc/class-ai-content-generator.php:93
+#: inc/class-ai-content-generator.php:207
+msgid "AI is generating..."
+msgstr ""
+
+msgid "AI model to use"
+msgstr ""
+
+#: inc/class-ai-seo.php:460
+msgid "AI 服务提供商"
+msgstr ""
+
+#: inc/class-ai-seo.php:566
+msgid "AI 生成 SEO"
+msgstr ""
+
+#: inc/class-ai-seo.php:689
+msgid "AI 生成失败，请检查 API 配置"
+msgstr ""
+
+#: inc/class-theme-options.php:167
+msgid "AI设置"
+msgstr ""
+
+msgid "APCu:"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "API Access"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "API Access Control"
+msgstr ""
+
+msgid "API Config"
+msgstr ""
+
+msgid "API Config #"
+msgstr ""
+
+#: inc/class-ai-api-manager.php:285 inc/class-ai-api-manager.php:300
+msgid "API Config #%d"
+msgstr ""
+
+#: inc/class-theme-options.php:1344 inc/class-theme-options.php:1435
+msgid "API Endpoint"
+msgstr ""
+
+#: inc/class-ai-seo.php:473 inc/class-theme-options.php:1356
+#: inc/class-theme-options.php:1442
+msgid "API Key"
+msgstr ""
+
+msgid "API endpoint URL"
+msgstr ""
+
+#: inc/class-ai-api-manager.php:236
+msgid "API error: %s"
+msgstr ""
+
+msgid "API test details:"
+msgstr ""
+
+#: inc/class-theme-options.php:1348 inc/class-theme-options.php:1438
+msgid "API接口地址"
+msgstr ""
+
+#: inc/class-theme-options.php:1323 inc/class-theme-options.php:1414
+msgid "API配置"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Access Count"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Access Logs"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Access Overview"
+msgstr ""
+
+msgid "Access Restricted"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Access Stability (Variance):"
+msgstr ""
+
+#: inc/class-membership-analytics.php:535
+msgid "Access Stats (30 days)"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Access Trend - Normal Access"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Access Trend - Security Events"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Access Trend Analysis"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Access Type Distribution (Last 7 Days)"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Access Type Distribution (Today)"
+msgstr ""
+
+msgid "Access all %s exclusive content"
+msgstr ""
+
+msgid "Access denied"
+msgstr ""
+
+#: user-center
+msgid "Account Stats"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Action Type"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Action Type:"
+msgstr ""
+
+#: inc/class-notification-admin.php:443
+#: inc/class-unified-performance-admin.php:402
+msgid "Actions"
+msgstr ""
+
+#: inc/class-membership-admin.php:579 inc/class-membership-admin.php:581
+#: inc/class-membership-admin.php:645 inc/class-membership-admin.php:700
+#: inc/class-unified-performance-admin.php:376
+msgid "Active"
+msgstr ""
+
+msgid "Ad-free browsing"
+msgstr ""
+
+msgid "Ad-free browsing experience"
+msgstr ""
+
+msgid "Add custom CSS without editing theme files."
+msgstr ""
+
+#: inc/cache-optimized-config.php:284
+msgid "Add real-time performance monitoring to detect issues earlier."
+msgstr ""
+
+msgid "Add this in post meta area:"
+msgstr ""
+
+msgid "Add this where breadcrumbs should appear (e.g., post header):"
+msgstr ""
+
+msgid "Added to favorites!"
+msgstr ""
+
+msgid "Admin Optimization"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Admin Profile Update"
+msgstr ""
+
+#: inc/class-notification-admin.php:1306
+msgid "Admin Test Notification"
+msgstr ""
+
+#: inc/class-notification-admin.php:1177
+msgid "Admin User Registration Alert"
+msgstr ""
+
+#: inc/class-notification-admin.php:327
+msgid "Administrator"
+msgstr ""
+
+msgid "Ads"
+msgstr ""
+
+msgid "Advanced"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0 inc/class-theme-options.php:170
+#: inc/class-theme-options.php:1593
+msgid "Advanced Settings"
+msgstr ""
+
+msgid "After enabling, complete the following steps:"
+msgstr ""
+
+#: user-center
+msgid ""
+"After expiry, you can no longer access exclusive content. You can renew or "
+"upgrade anytime."
+msgstr ""
+
+msgid "After payment, please save a screenshot as payment proof"
+msgstr ""
+
+#: user-center
+msgid "After payment, please save a screenshot of your receipt"
+msgstr ""
+
+msgid ""
+"After saving settings, test all enabled AI API connections. Each API config "
+"will be tested automatically."
+msgstr ""
+
+#: user-center
+msgid ""
+"After upgrading, all benefits take effect immediately and you can access "
+"exclusive content right away."
+msgstr ""
+
+#: archive.php:32
+msgid "All"
+msgstr ""
+
+#: inc/class-ai-api-manager.php:108
+msgid "All API calls failed"
+msgstr ""
+
+#: inc/class-ai-content-generator.php:702
+msgid "All API connections failed. Please check configuration."
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "All IP blocks have been removed"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "All IP blocks removed"
+msgstr ""
+
+#: inc/class-membership-admin.php:455
+msgid "All Members"
+msgstr ""
+
+#: inc/class-notification-admin.php:296
+msgid "All Registered Users"
+msgstr ""
+
+#: inc/class-notification-admin.php:414
+msgid "All Statuses"
+msgstr ""
+
+#: inc/class-notification-admin.php:401
+msgid "All Types"
+msgstr ""
+
+msgid "All cache cleared"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1142
+msgid "All cache has been cleared"
+msgstr ""
+
+msgid "All caches cleared"
+msgstr ""
+
+msgid "All content, 24h support, exclusive resources"
+msgstr ""
+
+msgid "All images have been optimized!"
+msgstr ""
+
+msgid "All marked as read"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Allow search engines to index preview content"
+msgstr ""
+
+msgid "Allow uploading WebP images (server support required)."
+msgstr ""
+
+msgid "Allow visitors to switch light/dark mode manually"
+msgstr ""
+
+#: user-center/register.php:67
+msgid "Already have an account?"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Analysis Days:"
+msgstr ""
+
+msgid "Analysis Result:"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Analysis completed: found %1$d spider types and added %2$d IP ranges"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Analysis days must be between 1 and 365"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Analysis failed"
+msgstr ""
+
+msgid "Analysis failed: "
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:474
+msgid "Analyze Cache Efficiency"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Analyze Logs and Add Spiders"
+msgstr ""
+
+msgid "Analyze Memory Usage"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Analyze logs from the last"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Analyzing logs, please wait..."
+msgstr ""
+
+msgid "Analyzing memory usage..."
+msgstr ""
+
+msgid "Analyzing..."
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Applied "
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Apply protection rules to REST API as well"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Are you sure to clear all membership audit logs?"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Are you sure to delete this record?"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Are you sure to delete this report?"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:183
+msgid ""
+"Are you sure you want to clear all cache? This may temporarily affect site "
+"performance."
+msgstr ""
+
+msgid ""
+"Are you sure you want to clear all cache? This may temporarily affect site "
+"performance."
+msgstr ""
+
+msgid "Are you sure you want to clear all maintenance logs?"
+msgstr ""
+
+msgid "Are you sure you want to clear all performance logs?"
+msgstr ""
+
+msgid "Are you sure you want to clear optimized cache?"
+msgstr ""
+
+#: inc/class-notification-admin.php:1051
+msgid "Are you sure you want to delete selected notifications?"
+msgstr ""
+
+msgid "Are you sure you want to delete this API config?"
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid "Are you sure you want to delete this benefit item?"
+msgstr ""
+
+#: inc/class-notification-admin.php:983
+msgid "Are you sure you want to delete this notification?"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid ""
+"Are you sure you want to migrate historical portfolio content to posts?"
+msgstr ""
+
+#: user-center
+msgid "Are you sure you want to remove this favorite?"
+msgstr ""
+
+msgid "Are you sure you want to reset all settings? This cannot be undone!"
+msgstr ""
+
+msgid "Article bookmarking"
+msgstr ""
+
+#: inc/class-membership-admin.php:443
+msgid "Ascending"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "Asset optimization completed"
+msgstr ""
+
+msgid "Asset optimization completed!"
+msgstr ""
+
+#: user-center/register.php:51
+msgid "At least 6 characters"
+msgstr ""
+
+#: inc/class-notification-admin.php:325
+msgid "Author"
+msgstr ""
+
+msgid "Auto (based on sunrise/sunset)"
+msgstr ""
+
+msgid "Auto Cleanup"
+msgstr ""
+
+msgid "Auto Compression"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Auto Expiry Check"
+msgstr ""
+
+msgid "Auto Featured Image"
+msgstr ""
+
+msgid "Auto Preview"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Auto Preview:"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Auto generated"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Auto preview"
+msgstr ""
+
+msgid "Auto-generate by Default"
+msgstr ""
+
+#: inc/class-ai-content-generator.php:70
+msgid "Auto-generate on save"
+msgstr ""
+
+msgid "Automatic cleanup is disabled and requires manual cleanup"
+msgstr ""
+
+msgid "Automatic cleanup of expired cache is enabled"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid ""
+"Automatically analyze access logs, identify spider/crawler IPs, and add them"
+" to the spider pool."
+msgstr ""
+
+msgid "Automatically compress images on upload to reduce file size."
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid "Automatically disable some features when memory usage is too high"
+msgstr ""
+
+msgid "Automatically enable/disable maintenance mode by schedule"
+msgstr ""
+
+msgid "Automatically set the first image in post as featured image"
+msgstr ""
+
+msgid "Autosave"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:269
+msgid "Available"
+msgstr ""
+
+#: user-center
+msgid "Avatar"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Average Access"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Average Daily Access:"
+msgstr ""
+
+msgid "Average Load Time:"
+msgstr ""
+
+msgid "Average Memory Usage:"
+msgstr ""
+
+msgid "Average Query Count:"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:627
+msgid "Average write: %1$s ops/s, average read: %2$s ops/s"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Avg Visits per IP"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Avg Visits/User"
+msgstr ""
+
+msgid "Avoid formatting issues in shortcode output."
+msgstr ""
+
+#: user-center/login.php:116 user-center/register.php:77
+msgid "Back to Home"
+msgstr ""
+
+#: user-center/forgot-password.php:60
+msgid "Back to Sign In"
+msgstr ""
+
+msgid "Back to Top Button"
+msgstr ""
+
+#: footer.php:48
+msgid "Back to top"
+msgstr ""
+
+msgid "Backup & Restore"
+msgstr ""
+
+#: inc/cache-optimized-config.php:268
+msgid ""
+"Based on a 98.83% hit rate, extending cache TTL can further improve "
+"performance."
+msgstr ""
+
+msgid "Basic Environment Check"
+msgstr ""
+
+#: user-center
+msgid "Basic Information"
+msgstr ""
+
+msgid "Basic Performance Settings"
+msgstr ""
+
+msgid "Basic SEO Settings"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:461
+msgid "Batch Operations"
+msgstr ""
+
+msgid "Batch Optimize Images"
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid "Batch Size"
+msgstr ""
+
+msgid "Batch Update Alt Text"
+msgstr ""
+
+msgid "Batch optimizing images..."
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:493
+msgid "Batch read of %1$d 1KB items took %2$s ms"
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid "Batch size when processing user data"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:471
+msgid "Batch write of %1$d 1KB items took %2$s ms"
+msgstr ""
+
+msgid ""
+"Batch-generate Alt text for existing images to improve SEO and "
+"accessibility."
+msgstr ""
+
+msgid ""
+"Batch-optimize existing images and review optimization stats and storage "
+"savings."
+msgstr ""
+
+msgid "Become a Member"
+msgstr ""
+
+msgid "Become a VIP member to unlock all exclusive content and features."
+msgstr ""
+
+msgid "Benefit name"
+msgstr ""
+
+#: user-center
+msgid "Bio"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Blacklist"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid ""
+"Blacklisted IPs are denied directly. Supports single IP and CIDR format"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Block Duration"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Block duration in seconds, default 3600 (1 hour)"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Blocked IP Count"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Blocked IPs"
+msgstr ""
+
+msgid "Bookmark your favorite works"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:385
+msgid "Boosted"
+msgstr ""
+
+msgid "Bounce Rate (%)"
+msgstr ""
+
+msgid "Bounce Sessions"
+msgstr ""
+
+msgid "Breadcrumb Navigation"
+msgstr ""
+
+msgid "Breadcrumbs"
+msgstr ""
+
+msgid "Breadcrumbs are enabled. Use this code in templates:"
+msgstr ""
+
+#: user-center
+msgid "Browse Portfolio"
+msgstr ""
+
+#: manual
+msgid "Browse Posts"
+msgstr ""
+
+#: user-center
+msgid "Browse Works"
+msgstr ""
+
+#: manual
+msgid "Browse latest posts"
+msgstr ""
+
+msgid "Browse our featured content"
+msgstr ""
+
+msgid "Browser Cache Duration"
+msgstr ""
+
+msgid "Built-in"
+msgstr ""
+
+msgid "Built-in object cache is in use, with limited performance"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Bulk Actions"
+msgstr ""
+
+#: inc/class-notification-admin.php:387
+msgid "Bulk Delete"
+msgstr ""
+
+#: inc/class-notification-admin.php:388
+msgid "Bulk Mark Read"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Bulk Membership Protection Settings"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Bulk Protection Settings"
+msgstr ""
+
+#: inc/class-seo-admin.php:263
+msgid "Bulk SEO Settings Update"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Bulk settings applied"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Bulk settings failed"
+msgstr ""
+
+#: inc/class-seo-admin.php:265
+msgid ""
+"Bulk update SEO settings for all protected posts to improve search engine "
+"friendliness."
+msgstr ""
+
+#: inc/class-seo-admin.php:372
+msgid "Bulk update completed. %1$d posts updated, %2$d errors."
+msgstr ""
+
+msgid "Business hours"
+msgstr ""
+
+#: inc/class-notification-admin.php:298
+msgid "By Role"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Bypass"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Bypass Attempt"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Bypass Attempts"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "CSS Files"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "CSS Optimization"
+msgstr ""
+
+#: inc/class-theme-options.php:581
+msgid "CSS优化"
+msgstr ""
+
+#: inc/class-theme-options.php:550
+msgid "CSS文件"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "Cache"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:363
+msgid "Cache Backend"
+msgstr ""
+
+msgid "Cache Backend Check"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:554
+msgid "Cache Configuration"
+msgstr ""
+
+msgid "Cache Directory"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:329
+msgid "Cache Distribution"
+msgstr ""
+
+msgid "Cache Enabled"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:374
+msgid "Cache Entries"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:279
+msgid "Cache Hit Rate"
+msgstr ""
+
+msgid "Cache Hit Rate (%)"
+msgstr ""
+
+#: inc/cache-auto-validation.php:588 inc/cache-auto-validation.php:604
+#: inc/class-membership-admin.php:1106
+#: inc/class-unified-performance-admin.php:212
+msgid "Cache Management"
+msgstr ""
+
+msgid "Cache Plugins:"
+msgstr ""
+
+msgid "Cache Read/Write"
+msgstr ""
+
+msgid "Cache Settings"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:358
+msgid "Cache Status Overview"
+msgstr ""
+
+#: inc/cache-auto-validation.php:586
+msgid "Cache System Alert:"
+msgstr ""
+
+#: inc/cache-auto-validation.php:602
+msgid "Cache System Warning:"
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid "Cache Time"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:397
+msgid "Cache Type"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:393
+msgid "Cache Type Management"
+msgstr ""
+
+msgid "Cache analysis complete"
+msgstr ""
+
+msgid "Cache analysis completed"
+msgstr ""
+
+#: inc/class-membership-admin.php:345
+msgid "Cache clear failed:"
+msgstr ""
+
+#: inc/class-membership-admin.php:1309
+msgid "Cache cleared"
+msgstr ""
+
+#: inc/class-membership-admin.php:343
+msgid "Cache cleared successfully"
+msgstr ""
+
+msgid "Cache cleared!"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Cache cleared, reloading..."
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:368
+msgid "Cache data flow"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:412
+msgid "Cache data integrity is valid"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:413
+msgid "Cache data may be corrupted or serialization has issues"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:425
+msgid "Cache delete operation may have issues"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:424
+msgid "Cache delete operation succeeded"
+msgstr ""
+
+msgid "Cache directory is writable"
+msgstr ""
+
+msgid "Cache directory permissions are insufficient"
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid "Cache duration for user membership information"
+msgstr ""
+
+msgid "Cache hit rate is average and optimization is recommended"
+msgstr ""
+
+#: inc/cache-auto-validation.php:251
+msgid "Cache hit rate is excellent"
+msgstr ""
+
+#: inc/cache-auto-validation.php:254
+msgid "Cache hit rate is fair"
+msgstr ""
+
+msgid "Cache hit rate is good"
+msgstr ""
+
+#: inc/cache-auto-validation.php:257
+msgid "Cache hit rate is low"
+msgstr ""
+
+msgid "Cache hit rate is low and needs optimization"
+msgstr ""
+
+msgid "Cache hit rate:"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1435
+msgid "Cache hit rate: "
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:436
+msgid "Cache item deleted correctly"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:437
+msgid "Cache item is still accessible after deletion"
+msgstr ""
+
+#: inc/cache-auto-validation.php:135
+msgid "Cache manager is available"
+msgstr ""
+
+#: inc/cache-auto-validation.php:140
+msgid "Cache manager is unavailable"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1303
+msgid "Cache optimization completed"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:447
+msgid "Cache performance"
+msgstr ""
+
+#: inc/cache-auto-validation.php:202
+msgid "Cache performance is excellent"
+msgstr ""
+
+#: inc/cache-auto-validation.php:205
+msgid "Cache performance is fair"
+msgstr ""
+
+#: inc/cache-auto-validation.php:477
+msgid ""
+"Cache performance is not ideal. Check server resources and cache "
+"configuration."
+msgstr ""
+
+#: inc/cache-auto-validation.php:208
+msgid "Cache performance is poor"
+msgstr ""
+
+msgid "Cache preload completed"
+msgstr ""
+
+msgid "Cache preloading completed"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:401
+msgid "Cache read operation failed"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:400
+msgid "Cache read operation succeeded"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1418
+msgid "Cache read/write is normal"
+msgstr ""
+
+msgid "Cache read/write is not functioning correctly"
+msgstr ""
+
+msgid "Cache read/write is working normally"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1418
+msgid "Cache read/write test failed"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:389
+msgid "Cache write operation failed"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:388
+msgid "Cache write operation succeeded"
+msgstr ""
+
+msgid "Caching and Compression"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:366
+msgid "Can Be Improved"
+msgstr ""
+
+msgid "Can be improved"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+#: inc/class-notification-admin.php:934
+msgid "Cannot find result display area"
+msgstr ""
+
+#: single.php:70
+msgid "Category"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Change"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Change Membership Level"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Change Rate"
+msgstr ""
+
+#: user-center
+msgid "Change avatar on Gravatar"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Chart canvas element not found"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Chart.js is not loaded"
+msgstr ""
+
+#: inc/class-membership-admin.php:1100
+msgid "Check Expired Members"
+msgstr ""
+
+msgid "Check Memcached service status"
+msgstr ""
+
+msgid "Check Updates"
+msgstr ""
+
+msgid "Check cache configuration"
+msgstr ""
+
+#: inc/class-membership-admin.php:1272
+msgid "Check completed. Processed %d expired members."
+msgstr ""
+
+#: inc/class-membership-admin.php:325
+msgid "Check completed:"
+msgstr ""
+
+#: inc/class-membership-admin.php:327
+msgid "Check failed:"
+msgstr ""
+
+#: inc/class-membership-admin.php:1278
+msgid "Check failed: "
+msgstr ""
+
+msgid "Check plugin management page and disable unnecessary plugins"
+msgstr ""
+
+msgid "Check related plugin and theme files"
+msgstr ""
+
+#: inc/cache-auto-validation.php:559
+msgid "Check time: %s"
+msgstr ""
+
+#: inc/class-membership-admin.php:318
+msgid "Checking expired memberships..."
+msgstr ""
+
+#: inc/class-notification-admin.php:938
+msgid "Checking..."
+msgstr ""
+
+msgid ""
+"Choose the default display mode. In \"Auto\", the theme switches between "
+"light/dark based on sunrise and sunset times."
+msgstr ""
+
+msgid "Choose which editor is used for post editing."
+msgstr ""
+
+msgid "Choose which editor is used for widget management."
+msgstr ""
+
+#: inc/class-notification-admin.php:1168
+msgid ""
+"Choose which notification types should send email notifications. Only "
+"enabled types will send emails."
+msgstr ""
+
+msgid "Classic Editor (TinyMCE)"
+msgstr ""
+
+msgid "Classic Widgets"
+msgstr ""
+
+msgid "Clean Database"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Clean Expired Logs"
+msgstr ""
+
+msgid "Clean Image HTML"
+msgstr ""
+
+msgid "Clean Unused Plugins"
+msgstr ""
+
+msgid "Clean expired cache"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Clean logs older than %d days?"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Cleaned %1$d expired logs older than %2$d days"
+msgstr ""
+
+msgid "Cleaning database..."
+msgstr ""
+
+#: inc/class-notification-admin.php:421
+#: inc/class-unified-performance-admin.php:413
+#: inc/class-unified-performance-admin.php:424
+#: inc/class-unified-performance-admin.php:435
+#: inc/class-unified-performance-admin.php:446
+msgid "Clear"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:464
+msgid "Clear Actions"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Clear All"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:341
+#: inc/class-unified-performance-admin.php:465
+msgid "Clear All Cache"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Clear All Logs"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Clear Audit Logs"
+msgstr ""
+
+#: inc/class-membership-admin.php:1109
+msgid "Clear Cache"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:466
+msgid "Clear Expired Cache"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Clear Filters"
+msgstr ""
+
+msgid "Clear Logs"
+msgstr ""
+
+msgid "Clear Membership Restriction"
+msgstr ""
+
+msgid "Clear Optimized Cache"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:467
+msgid "Clear User Cache"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Clear all access logs (dangerous)"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Clear all access logs? This action cannot be undone."
+msgstr ""
+
+#: inc/class-membership-admin.php:1111
+msgid "Clear all cached data used by the membership system"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Clear all spider IP ranges? This action cannot be undone."
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Clear failed"
+msgstr ""
+
+msgid "Clear failed:"
+msgstr ""
+
+#: inc/class-membership-admin.php:1311
+msgid "Clear failed: "
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:179
+msgid "Cleared"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1289
+msgid "Cleared expired cache"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Cleared successfully"
+msgstr ""
+
+#: inc/class-membership-admin.php:336
+msgid "Clearing cache..."
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Clearing membership audit logs..."
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:178
+msgid "Clearing..."
+msgstr ""
+
+msgid "Click \"Save Changes\""
+msgstr ""
+
+msgid "Click \\\"Install Memcached\\\" button"
+msgstr ""
+
+#: user-center
+msgid "Click the \"Upgrade VIP\" or \"Upgrade SVIP\" button"
+msgstr ""
+
+#: user-center
+msgid "Click the upgrade button above and complete payment as instructed."
+msgstr ""
+
+msgid "Click to log in and upgrade membership"
+msgstr ""
+
+#: inc/class-maintenance-mode.php:0
+msgid "Click to manage maintenance mode settings"
+msgstr ""
+
+msgid "Click to upgrade to %s membership"
+msgstr ""
+
+#: user-center/login.php:49
+msgid "Close"
+msgstr ""
+
+msgid "Close menu"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "Combine CSS files"
+msgstr ""
+
+msgid "Combine JavaScript files"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "Combine JavaScript files (experimental)"
+msgstr ""
+
+msgid "Comment Styles"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Compare"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Comparing..."
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Comparison failed"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Comparison failed: "
+msgstr ""
+
+msgid "Config Name"
+msgstr ""
+
+msgid "Configuration Check"
+msgstr ""
+
+msgid "Configuration failed: "
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid "Configure benefits comparison data shown on membership upgrade pages"
+msgstr ""
+
+#: inc/class-notification-admin.php:1113
+msgid "Configure email notification settings for membership expiry reminders."
+msgstr ""
+
+msgid ""
+"Configure multiple AI services for auto-generating summaries and keywords. "
+"Supports OpenAI-compatible APIs (OpenAI, Azure OpenAI, Qwen, ERNIE, etc.). "
+"The system automatically rotates available APIs."
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid "Configure payment QR code and instructions for membership purchase"
+msgstr ""
+
+msgid "Configure social links and icons displayed in the sidebar."
+msgstr ""
+
+#: user-center/register.php:55
+msgid "Confirm Password"
+msgstr ""
+
+msgid ""
+"Congratulations! Your %s membership is now active. You can now enjoy all "
+"member-exclusive benefits."
+msgstr ""
+
+#: inc/class-notification-admin.php:622
+msgid ""
+"Congratulations! Your membership is now active. You can enjoy all member-"
+"exclusive benefits."
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:248
+#: inc/class-cache-backend-validator.php:326
+msgid "Connected"
+msgstr ""
+
+msgid "Connection Test"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:286
+#: inc/class-cache-backend-validator.php:353
+msgid "Connection error"
+msgstr ""
+
+#: inc/class-ai-api-manager.php:289 inc/class-ai-api-manager.php:304
+#: inc/class-cache-backend-validator.php:279
+#: inc/class-cache-backend-validator.php:346
+msgid "Connection failed"
+msgstr ""
+
+#: inc/class-ai-api-manager.php:289 inc/class-ai-api-manager.php:304
+msgid "Connection successful"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:699
+msgid "Connections: %s"
+msgstr ""
+
+msgid "Consider enabling object cache"
+msgstr ""
+
+msgid "Consider optimizing cache configuration"
+msgstr ""
+
+msgid "Consider replacing it with Folio optimized version"
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid "Contact Information"
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid "Contact info for customer support after payment"
+msgstr ""
+
+msgid ""
+"Contact support or send payment proof. We will activate your membership "
+"within 24 hours"
+msgstr ""
+
+#: user-center
+msgid ""
+"Contact support or send your receipt, and we will activate your membership "
+"within 24 hours"
+msgstr ""
+
+#: user-center
+msgid "Contact:"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Content Concentration"
+msgstr ""
+
+msgid "Content Display Settings"
+msgstr ""
+
+#: inc/class-seo-admin.php:225
+msgid "Content Distribution"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Content Migration"
+msgstr ""
+
+msgid "Content Optimization"
+msgstr ""
+
+msgid "Content Preview"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:418
+msgid "Content Preview Cache"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Content Preview Mode"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Content View"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1159
+msgid "Content preview cache cleared"
+msgstr ""
+
+msgid "Content unlocked"
+msgstr ""
+
+msgid "Continue Optimization"
+msgstr ""
+
+#: inc/class-notification-admin.php:324
+msgid "Contributor"
+msgstr ""
+
+#: inc/class-membership-analytics.php:553
+msgid "Conversion Analysis (30 days)"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Conversion Rate"
+msgstr ""
+
+#: inc/class-membership-admin.php inc/class-membership-analytics.php:561
+#: inc/class-membership-analytics.php:594
+msgid "Conversions"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid ""
+"Convert historical portfolio posts and categories to the default post "
+"system."
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Copy"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Copy failed, please copy manually"
+msgstr ""
+
+msgid "Copyright Text"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Core Operations Metrics"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:410
+msgid "Corrupted"
+msgstr ""
+
+#: inc/class-seo-admin.php:314
+msgid "Crawler Friendly:"
+msgstr ""
+
+#: inc/class-seo-admin.php:458
+msgid "Crawler test completed:"
+msgstr ""
+
+#: user-center/register.php:21
+msgid "Create Account"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Created At"
+msgstr ""
+
+#: inc/cache-auto-validation.php:547
+msgid ""
+"Critical cache system issues were detected:\n"
+"\n"
+msgstr ""
+
+#: inc/cache-auto-validation.php:587
+msgid "Critical issues were detected. Please review"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Cron Expiry Check"
+msgstr ""
+
+msgid "Current Level"
+msgstr ""
+
+#: inc/class-membership-admin.php:389
+msgid "Current Memory Usage:"
+msgstr ""
+
+msgid "Current Settings Info"
+msgstr ""
+
+msgid ""
+"Current cache hit rate is %s%%. Consider optimizing your cache strategy."
+msgstr ""
+
+#: inc/cache-auto-validation.php:487
+msgid "Current hit rate is %s%%. Consider optimizing your cache strategy."
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:650
+msgid "Current items: %s"
+msgstr ""
+
+msgid "Current level: %1$s. Upgrade to %2$s to view."
+msgstr ""
+
+#: inc/class-article-protection-manager.php:565
+msgid "Current level: %s"
+msgstr ""
+
+msgid ""
+"Current memory usage is high (%s). Consider checking plugins and theme code."
+msgstr ""
+
+msgid "Current page has %d database queries. Consider optimizing queries."
+msgstr ""
+
+msgid ""
+"Current system performance is excellent. Here are some further optimization "
+"suggestions."
+msgstr ""
+
+#: user-center
+msgid "Currently using Gravatar avatar"
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid "Currently using default instructions:"
+msgstr ""
+
+msgid "Currently using the Folio-optimized object cache."
+msgstr ""
+
+#: inc/class-notification-admin.php:343 inc/class-notification-admin.php:410
+msgid "Custom"
+msgstr ""
+
+msgid "Custom CSS"
+msgstr ""
+
+msgid "Custom Code"
+msgstr ""
+
+msgid "Custom Preview"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Custom Preview Content"
+msgstr ""
+
+msgid "Custom Preview Content:"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Custom Preview:"
+msgstr ""
+
+msgid "Custom homepage SEO title. Leave blank to use default."
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Custom preview"
+msgstr ""
+
+msgid "Dark Mode"
+msgstr ""
+
+#: user-center
+msgid "Dashboard"
+msgstr ""
+
+msgid "Dashicons"
+msgstr ""
+
+#: inc/class-theme-options.php:1004
+msgid "Dashicons图标"
+msgstr ""
+
+msgid "Data Size"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:524
+msgid "Data consistency"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:408
+msgid "Data integrity"
+msgstr ""
+
+msgid "Database Optimization"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:312
+msgid "Database Queries"
+msgstr ""
+
+msgid "Database Table"
+msgstr ""
+
+msgid "Database queries:"
+msgstr ""
+
+msgid "Database query count is excellent"
+msgstr ""
+
+msgid "Database query count is good"
+msgstr ""
+
+msgid "Database query count is high and optimization is recommended"
+msgstr ""
+
+msgid ""
+"Database query count is high. Consider query optimization or enabling cache."
+msgstr ""
+
+msgid "Database query count is too high and requires optimization"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:430
+msgid "Database query result cache"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Date From:"
+msgstr ""
+
+msgid "Days Remaining"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Days to keep access logs"
+msgstr ""
+
+msgid "Dear <strong>%s</strong>,"
+msgstr ""
+
+msgid "Debug Info:"
+msgstr ""
+
+msgid "Debug Mode"
+msgstr ""
+
+msgid "Debug Mode:"
+msgstr ""
+
+msgid "Debug mode is disabled"
+msgstr ""
+
+msgid "Debug mode is enabled and may impact performance"
+msgstr ""
+
+#: inc/class-theme-options.php:400 inc/template-tags.php:233
+msgid "Default"
+msgstr ""
+
+msgid "Default (15s)"
+msgstr ""
+
+#: inc/class-ai-api-manager.php:60
+msgid "Default API"
+msgstr ""
+
+msgid "Default Theme Mode"
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid "Default instructions:"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "Defer non-critical resources"
+msgstr ""
+
+#: inc/class-notification-admin.php:472
+msgid "Delete"
+msgstr ""
+
+#: inc/class-notification-admin.php:1668
+msgid "Delete failed"
+msgstr ""
+
+#: inc/class-notification-admin.php:1007 inc/class-notification-admin.php:1068
+msgid "Delete failed:"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Delete failed: "
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:420
+msgid "Delete operation"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:432
+msgid "Delete verification"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:434
+msgid "Deleted"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Deleted successfully"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Deleting..."
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Denied"
+msgstr ""
+
+#: inc\class-security-admin.php:0 inc/class-membership-analytics.php:593
+msgid "Denied Access"
+msgstr ""
+
+msgid "Denied Accesses"
+msgstr ""
+
+#: inc/class-membership-admin.php:444
+msgid "Descending"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:398
+msgid "Description"
+msgstr ""
+
+msgid "Desktop Device"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Detailed Security Events Trend"
+msgstr ""
+
+#: inc/cache-optimized-config.php:286
+msgid "Detect and resolve performance issues earlier"
+msgstr ""
+
+#: inc/cache-auto-validation.php:511
+msgid "Detected %d cache-related errors. Investigation is required."
+msgstr ""
+
+#: inc/cache-auto-validation.php:467
+msgid "Detected %d health check issues. Please resolve them immediately."
+msgstr ""
+
+msgid "Detected %d slow queries. Database query optimization is required."
+msgstr ""
+
+#: inc/cache-auto-validation.php:499
+msgid "Detected system resource issues: %s"
+msgstr ""
+
+msgid "Disable Dashicons on frontend (for logged-out users)"
+msgstr ""
+
+msgid "Disable Emoji"
+msgstr ""
+
+msgid "Disable Google Fonts loading"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Disable Membership Protection"
+msgstr ""
+
+msgid "Disable REST API for logged-out users"
+msgstr ""
+
+msgid "Disable XML-RPC Pingback"
+msgstr ""
+
+msgid "Disable auto-update email notifications"
+msgstr ""
+
+msgid "Disable completely"
+msgstr ""
+
+msgid "Disable debug mode in production"
+msgstr ""
+
+msgid "Disable default WordPress Emoji scripts"
+msgstr ""
+
+msgid "Disable editor autosave"
+msgstr ""
+
+msgid "Disable post revisions completely"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:78
+#: inc/class-cache-backend-validator.php:89
+msgid "Disabled"
+msgstr ""
+
+#: inc/template-tags.php:289
+msgid "Discord"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Dismiss this notice"
+msgstr ""
+
+#: inc/class-membership-admin.php:487 inc/class-membership-admin.php:532
+msgid "Display Name"
+msgstr ""
+
+msgid ""
+"Display a theme toggle in the header so visitors can switch modes manually."
+msgstr ""
+
+msgid "Display latest notifications for current user"
+msgstr ""
+
+#: inc/class-post-sidebar-widgets.php:95
+msgid "Display recent popular posts (sorted by views)"
+msgstr ""
+
+#: inc/class-post-sidebar-widgets.php:21
+msgid "Display tags for the current post"
+msgstr ""
+
+msgid "Do not show top admin bar on frontend even when logged in."
+msgstr ""
+
+#: user-center/login.php:106
+msgid "Don't have an account?"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:444
+msgid "Dynamic"
+msgstr ""
+
+msgid "Early access to new features"
+msgstr ""
+
+#: page.php:61
+msgid "Edit"
+msgstr ""
+
+#: inc/class-admin-posts-list.php:343
+msgid "Edited"
+msgstr ""
+
+#: inc/class-notification-admin.php:326
+msgid "Editor"
+msgstr ""
+
+msgid "Editor Settings"
+msgstr ""
+
+msgid "Efficiency score: "
+msgstr ""
+
+#: header.php:237 inc/class-membership-admin.php:493
+#: inc/class-membership-admin.php:535 inc/template-tags.php:383
+#: inc/template-tags.php:237
+msgid "Email"
+msgstr ""
+
+#: user-center/forgot-password.php:48 user-center/register.php:44
+msgid "Email Address"
+msgstr ""
+
+#: inc/class-notification-admin.php:50 inc/class-notification-admin.php:183
+msgid "Email Notification Settings"
+msgstr ""
+
+#: inc/class-notification-admin.php:1353 inc/class-notification-admin.php:1364
+msgid "Email Notification Test"
+msgstr ""
+
+#: inc/class-notification-admin.php:532
+msgid "Email Test"
+msgstr ""
+
+#: user-center
+msgid "Email address cannot be changed"
+msgstr ""
+
+#: inc/class-notification-admin.php:1333
+msgid "Email notifications are disabled. Please enable them in settings."
+msgstr ""
+
+#: inc/class-notification-admin.php:1372
+msgid "Email sending failed, please check WordPress mail configuration"
+msgstr ""
+
+msgid "Email:"
+msgstr ""
+
+msgid "Enable \"auto-generate on save\" by default for new posts"
+msgstr ""
+
+msgid "Enable AI Generation"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Enable Access Logging"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:557
+msgid "Enable Cache"
+msgstr ""
+
+#: inc/class-notification-admin.php:57
+msgid "Enable Email Notifications"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:562
+msgid "Enable Folio cache system"
+msgstr ""
+
+msgid "Enable Frontend Optimization"
+msgstr ""
+
+msgid "Enable Gzip compression"
+msgstr ""
+
+msgid "Enable Maintenance Mode"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Enable Membership Protection"
+msgstr ""
+
+msgid "Enable Open Graph"
+msgstr ""
+
+msgid "Enable Query Cache"
+msgstr ""
+
+#: inc/class-notification-admin.php:117
+msgid "Enable SMTP"
+msgstr ""
+
+#: inc/class-notification-admin.php:1221
+msgid "Enable SMTP mail server"
+msgstr ""
+
+msgid "Enable Scheduled Maintenance"
+msgstr ""
+
+msgid "Enable WebP format support"
+msgstr ""
+
+msgid "Enable all frontend optimization features"
+msgstr ""
+
+msgid "Enable automatic cleanup"
+msgstr ""
+
+msgid "Enable automatic cleanup of expired cache"
+msgstr ""
+
+msgid "Enable automatic image compression"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "Enable cache busting"
+msgstr ""
+
+#: inc/cache-optimized-config.php:293
+msgid "Enable compression, binary protocol, and connection pooling"
+msgstr ""
+
+#: inc/class-notification-admin.php:1124
+msgid ""
+"Enable email notifications (if disabled, only on-site notifications will be "
+"sent)"
+msgstr ""
+
+msgid "Enable frontend performance monitoring"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "Enable image lazy loading"
+msgstr ""
+
+#: inc/cache-optimized-config.php:275
+msgid "Enable intelligent preloading"
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid "Enable memory protection (recommended)"
+msgstr ""
+
+msgid ""
+"Enable performance monitoring and regularly review site trends and user "
+"experience metrics."
+msgstr ""
+
+msgid "Enable query cache"
+msgstr ""
+
+msgid "Enable this API config"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:78
+#: inc/class-cache-backend-validator.php:89
+#: inc/class-unified-performance-admin.php:1107
+msgid "Enabled"
+msgstr ""
+
+msgid "Enabling query cache..."
+msgstr ""
+
+#: inc/class-notification-admin.php:141
+msgid "Encryption Method"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "End Date:"
+msgstr ""
+
+msgid "End Time"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Engagement Score"
+msgstr ""
+
+#: inc/cache-optimized-config.php:283
+msgid "Enhance performance monitoring"
+msgstr ""
+
+msgid "Enhancements"
+msgstr ""
+
+#: user-center
+msgid "Enjoy %d premium benefits and unlock all exclusive content"
+msgstr ""
+
+#: user-center
+msgid "Enjoy %d premium benefits and unlock more curated albums"
+msgstr ""
+
+msgid "Enjoy %d premium benefits and unlock more featured albums"
+msgstr ""
+
+msgid "Ensure Memcached service is installed on server"
+msgstr ""
+
+#: inc/class-seo-admin.php:311
+msgid "Ensure every post has proper title, description, and keywords."
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Enter IP address"
+msgstr ""
+
+msgid "Enter SVIP exclusive content here"
+msgstr ""
+
+msgid "Enter VIP exclusive content here"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Enter custom preview text, HTML is supported..."
+msgstr ""
+
+msgid "Enter custom preview text..."
+msgstr ""
+
+msgid "Enter user ID (leave empty to clear current user cache):"
+msgstr ""
+
+#: inc/class-notification-admin.php:316
+msgid "Enter usernames or emails, separated by commas"
+msgstr ""
+
+#: user-center/forgot-password.php:28
+msgid "Enter your email address and we will send you a password reset link"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:399
+msgid "Entries"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Error loading logs: "
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Error loading page: "
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1441
+msgid "Error occurred during health check: "
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1308
+msgid "Error occurred during optimization: "
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1202
+msgid "Error occurred while clearing cache: "
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "Error while clearing cache: "
+msgstr ""
+
+#: inc/class-notification-admin.php:1402
+msgid "Errors: "
+msgstr ""
+
+#: inc/class-maintenance-mode.php:0
+msgid "Estimated Recovery"
+msgstr ""
+
+#: inc/cache-optimized-config.php:270
+msgid "Estimated hit rate improvement to 99%+"
+msgstr ""
+
+#: inc/cache-auto-validation.php:647
+msgid "Every 6 hours"
+msgstr ""
+
+#: inc/class-notification-admin.php:297
+msgid "Everyone (including guests)"
+msgstr ""
+
+msgid "Example: /category/design/ -> /design/"
+msgstr ""
+
+msgid "Example: OpenAI Primary"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:282
+#: inc/class-unified-performance-admin.php:293
+#: inc/class-unified-performance-admin.php:315
+msgid "Excellent"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:288
+#: inc/class-cache-backend-validator.php:355
+msgid "Exception"
+msgstr ""
+
+#: user-center
+msgid "Exclusive Badge"
+msgstr ""
+
+msgid "Exclusive HD resources"
+msgstr ""
+
+msgid "Exclusive SVIP badge"
+msgstr ""
+
+msgid "Exclusive content customization"
+msgstr ""
+
+msgid "Exclusive content push"
+msgstr ""
+
+msgid "Exclusive content that requires membership subscription"
+msgstr ""
+
+msgid "Exclusive content, ad-free, priority support"
+msgstr ""
+
+msgid "Exclusive high-quality resources"
+msgstr ""
+
+msgid "Exclusive member badge"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Execute Action"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Execute action"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Executing..."
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:144
+msgid "Exists"
+msgstr ""
+
+#: inc/class-membership-admin.php:577 inc/class-membership-admin.php:649
+#: inc/class-membership-admin.php:702 inc/class-membership-admin.php:1200
+msgid "Expired"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1184
+msgid "Expired cache cleared"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Expired logs cleaned"
+msgstr ""
+
+#: inc/class-membership-safe.php:338
+msgid "Expires"
+msgstr ""
+
+#: user-center
+msgid "Expires today"
+msgstr ""
+
+#: inc/class-membership-admin.php:1203
+msgid "Expiring Soon"
+msgstr ""
+
+#: inc/class-membership-admin.php:375
+msgid "Expiring Within 7 Days"
+msgstr ""
+
+#: inc/class-membership-admin.php:1097
+msgid "Expiry Check"
+msgstr ""
+
+#: inc/class-membership-admin.php:505 inc/class-membership-admin.php:557
+#: inc/class-membership-admin.php:1187 inc/class-membership-safe.php:379
+msgid "Expiry Date"
+msgstr ""
+
+#: inc/class-notification-admin.php:945
+msgid "Expiry check completed!"
+msgstr ""
+
+#: inc/class-notification-admin.php:1394
+msgid ""
+"Expiry check completed. Checked %d users, sent %d expiry reminders, and sent"
+" %d expired notices."
+msgstr ""
+
+#: inc/class-notification-admin.php:950
+msgid "Expiry check failed"
+msgstr ""
+
+#: user-center
+msgid "Explore great works and click the star icon to add favorites."
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Export Report"
+msgstr ""
+
+msgid "Export Settings"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:479
+msgid "Export Stats"
+msgstr ""
+
+msgid "Export all current theme settings as JSON for backup or migration."
+msgstr ""
+
+msgid "Export failed: "
+msgstr ""
+
+msgid "Exporting..."
+msgstr ""
+
+msgid "External Object Cache"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:87
+msgid "External object cache"
+msgstr ""
+
+#: inc/cache-auto-validation.php:117
+msgid "External object cache is enabled"
+msgstr ""
+
+msgid ""
+"External object cache is not enabled. Installing object-cache.php is "
+"recommended."
+msgstr ""
+
+#: user-center
+msgid "FAQ"
+msgstr ""
+
+#: inc/class-theme-options.php:453 inc/template-tags.php:253
+msgid "Facebook"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:386
+#: inc/class-cache-backend-validator.php:398
+#: inc/class-cache-backend-validator.php:422
+msgid "Failed"
+msgstr ""
+
+msgid "Failed to add favorite"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Failed to clean expired logs"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Failed to clear logs: "
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1151
+msgid "Failed to clear permission cache: "
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1161
+msgid "Failed to clear preview cache: "
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1171
+msgid "Failed to clear query cache: "
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Failed to create charts:"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Failed to generate preview"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Failed to generate report"
+msgstr ""
+
+msgid "Failed to get Memcached stats:"
+msgstr ""
+
+msgid "Failed to get Redis stats:"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1228
+msgid "Failed to get cache stats: "
+msgstr ""
+
+#: inc/cache-auto-validation.php:290
+msgid "Failed to get hit rate data: %s"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1270
+msgid "Failed to get performance stats: "
+msgstr ""
+
+msgid "Failed to remove favorite"
+msgstr ""
+
+msgid "Failed to send reminder for user ID %1$d: %2$s"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Falling"
+msgstr ""
+
+msgid "Favicon Preview"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Favorite feature is currently unavailable"
+msgstr ""
+
+#: user-center
+msgid "Favorites"
+msgstr ""
+
+msgid "Feature Settings"
+msgstr ""
+
+msgid "Featured Image"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:142
+msgid "File exists"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:170
+msgid "File may be incomplete or empty"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:158
+msgid "File permissions are valid"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:154
+msgid "File readable"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:165
+msgid "File size"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:169
+msgid "File size looks normal"
+msgstr ""
+
+msgid "File upload failed"
+msgstr ""
+
+msgid "Filesystem Check"
+msgstr ""
+
+#: inc/class-notification-admin.php:419
+msgid "Filter"
+msgstr ""
+
+#: inc/class-membership-admin.php:453
+msgid "Filter by membership level"
+msgstr ""
+
+msgid "Final confirmation: really reset?"
+msgstr ""
+
+#: inc/cache-optimized-config.php:278
+msgid "First-visit speed improvement by 30-50%"
+msgstr ""
+
+#: inc/cache-auto-validation.php:464
+msgid "Fix health check issues"
+msgstr ""
+
+msgid "Folio Cache:"
+msgstr ""
+
+msgid "Folio Settings"
+msgstr ""
+
+msgid "Folio Theme Settings"
+msgstr ""
+
+#: inc/cache-auto-validation.php:278
+msgid "Folio cache hit rate: %s%%"
+msgstr ""
+
+msgid "Folio cache system is disabled"
+msgstr ""
+
+msgid "Folio cache system is enabled"
+msgstr ""
+
+msgid "Folio optimized object-cache.php is installed"
+msgstr ""
+
+msgid "Folio optimized version"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:180
+msgid "Folio version"
+msgstr ""
+
+#: inc/class-theme-options.php:29 inc/class-theme-options.php:2448
+msgid "Folio 主题设置"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "Font Optimization"
+msgstr ""
+
+msgid "Footer Area"
+msgstr ""
+
+msgid "Footer Code"
+msgstr ""
+
+msgid "Footer Settings"
+msgstr ""
+
+msgid "Footer widget area"
+msgstr ""
+
+#: inc/class-theme-options.php:1532
+msgid "Footer 代码"
+msgstr ""
+
+#: inc/cache-auto-validation.php:556
+msgid "For details, visit the cache management page in WordPress admin."
+msgstr ""
+
+msgid "For example: Support QQ: 123456789 or WeChat: example"
+msgstr ""
+
+#: inc/class-maintenance-mode.php:0
+msgid "For urgent matters, please contact:"
+msgstr ""
+
+#: inc/class-user-center.php:160 inc/class-user-center.php:180
+#: user-center/forgot-password.php:27
+msgid "Forgot Password"
+msgstr ""
+
+#: user-center/login.php:94
+msgid "Forgot password?"
+msgstr ""
+
+msgid ""
+"Found %1$d optimization items, including %2$d high-priority items that "
+"should be handled first."
+msgstr ""
+
+msgid "Free Articles"
+msgstr ""
+
+#: inc/class-membership-safe.php:90 user-center/membership.php:75
+msgid "Free User"
+msgstr ""
+
+msgid "Free user"
+msgstr ""
+
+msgid "Free user (e.g. x or ads)"
+msgstr ""
+
+#: inc/class-notification-admin.php:73
+msgid "From Email"
+msgstr ""
+
+#: inc/class-notification-admin.php:81
+msgid "From Name"
+msgstr ""
+
+msgid "Frontend Admin Bar"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "Frontend Optimization Settings"
+msgstr ""
+
+msgid "Frontend Page Performance"
+msgstr ""
+
+msgid "Frontend Resource Optimization"
+msgstr ""
+
+msgid "Frontend page data only"
+msgstr ""
+
+msgid "Functionality Test"
+msgstr ""
+
+msgid "General"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Generate New Report"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Generate Preview"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Generate Report"
+msgstr ""
+
+#: inc/class-ai-content-generator.php:77
+msgid "Generate excerpt and keywords"
+msgstr ""
+
+#: inc/class-ai-content-generator.php:82
+msgid "Generate excerpt only"
+msgstr ""
+
+#: inc/class-ai-content-generator.php:85
+msgid "Generate keywords only"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Generate preview"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Generated At"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Generated At:"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:419
+msgid "Generated article preview results"
+msgstr ""
+
+#: inc/class-ai-content-generator.php:208 inc/class-ai-seo.php:602
+msgid "Generated successfully!"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Generating preview..."
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Generating report, please wait (this may take a few minutes)..."
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Generating..."
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Generation failed"
+msgstr ""
+
+#: inc/class-ai-content-generator.php:209
+msgid "Generation failed. Please try again."
+msgstr ""
+
+#: inc/class-theme-options.php:460 inc/template-tags.php:257
+msgid "GitHub"
+msgstr ""
+
+#: inc/cache-optimized-config.php:276
+msgid ""
+"Given strong read/write performance, intelligent preloading can further "
+"improve user experience."
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:100
+msgid "Global cache groups"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:107
+msgid "Global groups: "
+msgstr ""
+
+#: user-center
+msgid "Go explore some amazing works!"
+msgstr ""
+
+msgid "Go to \"Settings > Permalinks\""
+msgstr ""
+
+#: user-center
+msgid "Go to Admin"
+msgstr ""
+
+#: inc/class-ai-content-generator.php:57
+msgid "Go to Settings"
+msgstr ""
+
+msgid "Go to User Center"
+msgstr ""
+
+#: inc/class-maintenance-mode.php:0
+msgid "Go to settings to disable"
+msgstr ""
+
+msgid "Google Fonts"
+msgstr ""
+
+#: inc/class-theme-options.php:1046
+msgid "Google字体"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Granted"
+msgstr ""
+
+#: inc/class-membership-analytics.php:592
+msgid "Granted Access"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Guest"
+msgstr ""
+
+msgid "Gutenberg Editor (Block Editor)"
+msgstr ""
+
+msgid "Gutenberg Widgets (Block Editor)"
+msgstr ""
+
+msgid "HD image download"
+msgstr ""
+
+msgid "HTML Minification"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "HTML is supported. Recommended: 100-300 characters"
+msgstr ""
+
+#: inc/class-theme-options.php:656
+msgid "HTML压缩"
+msgstr ""
+
+msgid "Header Code"
+msgstr ""
+
+#: inc/class-theme-options.php:1525
+msgid "Header 代码"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:342
+msgid "Health Check"
+msgstr ""
+
+msgid "Health Check Results"
+msgstr ""
+
+msgid "Health check complete"
+msgstr ""
+
+msgid "Health check failed: "
+msgstr ""
+
+#: inc/class-theme-options.php:1029
+msgid "Heartbeat API"
+msgstr ""
+
+msgid ""
+"Heartbeat is used for autosave and real-time notifications. Disabling it "
+"reduces server load."
+msgstr ""
+
+#: inc/class-theme-options.php:1042
+msgid "Heartbeat用于自动保存和实时通知，禁用可减少服务器负载"
+msgstr ""
+
+msgid "Height:"
+msgstr ""
+
+msgid "Hello Admin,"
+msgstr ""
+
+#: user-center
+msgid "Hello, %s"
+msgstr ""
+
+msgid "Help prevent DDoS abuse and improve security."
+msgstr ""
+
+msgid "Hide frontend admin bar"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Hide post content completely"
+msgstr ""
+
+msgid "Hide toolbar (Ctrl+Shift+P to show again)"
+msgstr ""
+
+msgid "Hide version info for better security."
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:304
+msgid "High"
+msgstr ""
+
+msgid "High Priority"
+msgstr ""
+
+#: inc/cache-auto-validation.php:337
+msgid "High disk usage: %s%%"
+msgstr ""
+
+#: inc/cache-auto-validation.php:320
+msgid "High memory usage: %s%%"
+msgstr ""
+
+msgid "High-resolution image downloads"
+msgstr ""
+
+#: inc/class-notification-admin.php:1407
+msgid ""
+"Hint: users were checked but no reminders were sent. Possible reasons: 1) "
+"remaining days do not match configured reminder days; 2) reminder already "
+"sent today; 3) user already expired and expired notice already sent."
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:400
+msgid "Hit Rate"
+msgstr ""
+
+msgid "Hit rate: "
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:667
+msgid "Hit rate: %s%%"
+msgstr ""
+
+#: inc/template-tags.php:446 inc/template-tags.php:654
+#: inc/template-tags.php:657
+msgid "Home"
+msgstr ""
+
+msgid "Homepage Description"
+msgstr ""
+
+msgid "Homepage Keywords"
+msgstr ""
+
+msgid "Homepage Title"
+msgstr ""
+
+#: user-center
+msgid "How do I upgrade my membership?"
+msgstr ""
+
+msgid "How to use these features"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "IP Address"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "IP Address:"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "IP Count"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "IP Range"
+msgstr ""
+
+msgid "IP Whitelist"
+msgstr ""
+
+msgid "IP addresses allowed to bypass maintenance mode, one per line."
+msgstr ""
+
+#: inc/class-theme-options.php:1628
+msgid "IP地址"
+msgstr ""
+
+#: inc/class-theme-options.php:1596
+msgid "IP白名单"
+msgstr ""
+
+msgid "Icon"
+msgstr ""
+
+msgid "If comments are disabled, related CSS can be removed."
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid ""
+"If custom instructions are not set, the default payment guide will be "
+"displayed."
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "If the issue persists, check error logs or contact technical support."
+msgstr ""
+
+msgid ""
+"If you believe this is an error, please contact the site administrator."
+msgstr ""
+
+msgid "If you have any questions, feel free to contact us."
+msgstr ""
+
+msgid "If you have any questions, please contact customer support"
+msgstr ""
+
+#: user-center
+msgid "If you have any questions, please contact support"
+msgstr ""
+
+#: inc/class-notification-admin.php:1356
+msgid "If you receive this email, email notifications are working correctly."
+msgstr ""
+
+#: inc/class-notification-admin.php:1210
+msgid ""
+"If your server cannot send email directly, configure an SMTP server. If not "
+"configured, WordPress default mail method will be used."
+msgstr ""
+
+msgid "Image Alt Text Optimization"
+msgstr ""
+
+msgid "Image Lazy Load"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "Image Optimization"
+msgstr ""
+
+msgid "Image Optimization Management"
+msgstr ""
+
+#: single.php:65 single.php:137
+msgid "Images"
+msgstr ""
+
+msgid "Images larger than this will be auto-resized."
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Import Data"
+msgstr ""
+
+msgid "Import Settings"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Import Spider IP Ranges Manually"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Import failed"
+msgstr ""
+
+msgid "Import will overwrite all current settings. Export a backup first."
+msgstr ""
+
+msgid "Important:"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Importing..."
+msgstr ""
+
+msgid "Improve Cache Hit Rate"
+msgstr ""
+
+#: inc/cache-auto-validation.php:484
+msgid "Improve cache hit rate"
+msgstr ""
+
+msgid "Improve regional access speed, but may affect font rendering."
+msgstr ""
+
+msgid ""
+"Improve security and reduce data exposure (still available for logged-in "
+"users)."
+msgstr ""
+
+msgid "Include in RSS (show preview content in RSS)"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Include in RSS Feed"
+msgstr ""
+
+#: user-center
+msgid ""
+"Incorrect password. Please try again. If you forgot it, <a href=\"%s\">reset"
+" here</a>."
+msgstr ""
+
+msgid "Increase Cache TTL"
+msgstr ""
+
+msgid "Increase PHP memory limit to 256M or higher"
+msgstr ""
+
+msgid "Increase cache expiration time"
+msgstr ""
+
+msgid "Increasing cache TTL..."
+msgstr ""
+
+msgid "Insert SVIP exclusive content"
+msgstr ""
+
+msgid "Insert VIP exclusive content"
+msgstr ""
+
+msgid "Insert code before &lt;/body&gt;."
+msgstr ""
+
+msgid "Insert code inside &lt;head&gt; (e.g., Google Analytics)."
+msgstr ""
+
+msgid "Insert membership card"
+msgstr ""
+
+#: header.php:245 inc/class-theme-options.php:432 inc/template-tags.php:241
+msgid "Instagram"
+msgstr ""
+
+msgid "Install Folio Object Cache"
+msgstr ""
+
+msgid "Install Folio object cache to improve performance"
+msgstr ""
+
+msgid ""
+"Install Folio object cache? This will significantly improve site "
+"performance."
+msgstr ""
+
+msgid "Install Memcached"
+msgstr ""
+
+msgid "Install Object Cache"
+msgstr ""
+
+msgid "Install PHP Memcached extension"
+msgstr ""
+
+msgid "Install and enable external object cache"
+msgstr ""
+
+msgid "Install failed: "
+msgstr ""
+
+msgid "Install php-memcached extension for better performance"
+msgstr ""
+
+msgid ""
+"Install the Folio-optimized Memcached object cache to significantly improve "
+"site performance."
+msgstr ""
+
+msgid "Installed"
+msgstr ""
+
+msgid ""
+"Installing Redis or Memcached is recommended for better cache performance."
+msgstr ""
+
+msgid ""
+"Installing Redis or Memcached object cache can significantly improve "
+"database query performance."
+msgstr ""
+
+msgid "Installing..."
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:159
+msgid "Insufficient file permissions, cannot read file"
+msgstr ""
+
+#: inc/cache-auto-validation.php:621 inc/class-cache-backend-validator.php:746
+#: inc/class-membership-admin.php:1229 inc/class-membership-admin.php:1264
+#: inc/class-membership-admin.php:1289 inc/class-notification-admin.php:1296
+#: inc/class-notification-admin.php:1327 inc/class-notification-admin.php:1383
+#: inc/class-notification-admin.php:1500 inc/class-notification-admin.php:1536
+#: inc/class-notification-admin.php:1649 inc/class-notification-admin.php:1679
+#: inc/class-notification-admin.php:1714 inc/class-notification-admin.php:1752
+#: inc/class-seo-admin.php:331 inc/class-seo-admin.php:389
+#: inc/class-unified-performance-admin.php:1126
+#: inc/class-unified-performance-admin.php:1212
+#: inc/class-unified-performance-admin.php:1238
+#: inc/class-unified-performance-admin.php:1254
+#: inc/class-unified-performance-admin.php:1280
+#: inc/class-unified-performance-admin.php:1377
+#: inc/class-unified-performance-admin.php:1394
+#: inc/class-unified-performance-admin.php:1471
+#: inc/class-unified-performance-admin.php:1489
+#: inc/class-unified-performance-admin.php:1511
+#: inc/class-ai-content-generator.php:270
+#: inc/class-ai-content-generator.php:669 inc/class-ai-seo.php:673
+#: inc/class-membership-analytics.php:740
+#: inc/class-membership-analytics.php:780 inc/class-theme-options.php:2422
+msgid "Insufficient permissions"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Insufficient permissions, please refresh and try again"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:410
+msgid "Intact"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:204
+msgid "Invalid"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Invalid ID"
+msgstr ""
+
+msgid "Invalid JSON file"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Invalid JSON format: "
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1195
+msgid "Invalid cache type"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Invalid data format"
+msgstr ""
+
+msgid "Invalid file format"
+msgstr ""
+
+#: inc/class-notification-admin.php:1655 inc/class-notification-admin.php:1721
+msgid "Invalid notification ID"
+msgstr ""
+
+msgid "Invalid post"
+msgstr ""
+
+msgid "Invalid post ID"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Invalid report ID"
+msgstr ""
+
+#: inc/cache-auto-validation.php:508
+msgid "Investigate cache errors"
+msgstr ""
+
+msgid "JPEG Quality"
+msgstr ""
+
+msgid "JPEG compression quality (60-100%, recommended 85%)."
+msgstr ""
+
+#: inc/class-theme-options.php:1086
+msgid "JPEG图片压缩质量（60-100%，推荐85%）"
+msgstr ""
+
+#: inc/class-theme-options.php:1082
+msgid "JPEG质量"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "JavaScript Files"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "JavaScript Optimization"
+msgstr ""
+
+#: inc/class-theme-options.php:595
+msgid "JavaScript优化"
+msgstr ""
+
+#: inc/class-theme-options.php:556
+msgid "JavaScript文件"
+msgstr ""
+
+#: user-center/register.php:22
+msgid "Join us and explore more amazing content"
+msgstr ""
+
+#: user-center
+msgid "Joined Date"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Just now"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Last 7 Days"
+msgstr ""
+
+#: inc/class-seo-admin.php:238
+msgid "Last Updated"
+msgstr ""
+
+msgid "Lazy Loaded"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "Lazy Loaded:"
+msgstr ""
+
+msgid "Lazy loading is applied automatically to images."
+msgstr ""
+
+#: inc/class-membership-safe.php:383
+msgid "Leave blank for permanent membership (VIP/SVIP only)"
+msgstr ""
+
+msgid "Leave blank to use default text. HTML is supported."
+msgstr ""
+
+#: inc/class-membership-admin.php:1187
+msgid "Level"
+msgstr ""
+
+#: user-center
+msgid "Lifetime Member"
+msgstr ""
+
+msgid "Light Mode"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Light Protection"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Like failed"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Like feature is currently unavailable"
+msgstr ""
+
+msgid "Likes"
+msgstr ""
+
+msgid "Limited download"
+msgstr ""
+
+msgid "Limited download quota"
+msgstr ""
+
+msgid "Limited downloads"
+msgstr ""
+
+msgid "Limited quota"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Link copied to clipboard"
+msgstr ""
+
+#: header.php:253 inc/class-theme-options.php:439 inc/template-tags.php:245
+msgid "LinkedIn"
+msgstr ""
+
+msgid "Load Failed"
+msgstr ""
+
+msgid "Load Performance Data"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Load Recent Posts"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Load failed"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Load failed: "
+msgstr ""
+
+msgid "Load images only when they enter the viewport to improve page speed."
+msgstr ""
+
+msgid "Load images only when visible to improve page speed."
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:229
+#: inc/class-cache-backend-validator.php:311
+msgid "Loaded"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:181
+msgid "Loading..."
+msgstr ""
+
+#: user-center
+msgid "Log Out"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Log Retention Days"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Log table does not exist"
+msgstr ""
+
+msgid ""
+"Log visitor info on maintenance page for analysis and security monitoring."
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Logged-in User Access"
+msgstr ""
+
+#: user-center
+msgid "Login"
+msgstr ""
+
+#: user-center
+msgid "Login failed. Please check your username and password."
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Login link configuration error"
+msgstr ""
+
+msgid "Login required"
+msgstr ""
+
+#: user-center
+msgid "Login successful!"
+msgstr ""
+
+msgid "Login successful! Checking your access permissions..."
+msgstr ""
+
+msgid "Logo Preview"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Logs cleared"
+msgstr ""
+
+#: inc/class-notification-admin.php:1261
+msgid "Mail encryption method (TLS recommended)"
+msgstr ""
+
+#: inc/class-seo-admin.php:531
+msgid "Main Sitemap"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:478
+msgid "Maintenance Actions"
+msgstr ""
+
+msgid "Maintenance Message"
+msgstr ""
+
+#: inc/class-maintenance-mode.php:0
+msgid "Maintenance Mode"
+msgstr ""
+
+msgid "Maintenance Suggestion"
+msgstr ""
+
+msgid "Maintenance end time (optional, leave blank to end manually)."
+msgstr ""
+
+msgid "Maintenance message displayed to visitors. HTML tags are supported."
+msgstr ""
+
+msgid "Maintenance start time (optional, leave blank to start immediately)."
+msgstr ""
+
+msgid "Manage All Users"
+msgstr ""
+
+#: inc/class-seo-admin.php:283
+msgid ""
+"Manage and optimize XML sitemaps to ensure membership content is indexed "
+"correctly."
+msgstr ""
+
+#: inc/class-membership-admin.php:1102
+msgid "Manually check and process expired membership accounts"
+msgstr ""
+
+msgid "Mark All as Read"
+msgstr ""
+
+#: user-center
+msgid "Mark all as read"
+msgstr ""
+
+#: inc/class-notification-admin.php:474
+msgid "Mark as Read"
+msgstr ""
+
+#: inc/class-notification-admin.php:476
+msgid "Mark as Unread"
+msgstr ""
+
+#: user-center
+msgid "Mark as read"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Mark this post as membership-only content"
+msgstr ""
+
+#: inc/class-notification-admin.php:1737
+msgid "Marked as read"
+msgstr ""
+
+#: inc/class-notification-admin.php:1737
+msgid "Marked as unread"
+msgstr ""
+
+msgid "Max Execution Time:"
+msgstr ""
+
+msgid "Max Load Time:"
+msgstr ""
+
+msgid "Maximum Size"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Maximum number of visits allowed within 10 minutes"
+msgstr ""
+
+msgid "Media uploader is not loaded. Please refresh the page and try again."
+msgstr ""
+
+msgid "Medium Priority"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Medium Protection"
+msgstr ""
+
+msgid "Member Accesses"
+msgstr ""
+
+msgid "Member Content"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Member Management"
+msgstr ""
+
+msgid "Member-only Content Settings"
+msgstr ""
+
+msgid "Member-only activities"
+msgstr ""
+
+msgid "Members-only content"
+msgstr ""
+
+msgid "Members-only events"
+msgstr ""
+
+#: inc/class-notification-admin.php:339 inc/class-notification-admin.php:406
+#: inc/class-notification-admin.php:621 inc/class-notification-admin.php:1181
+#: inc/class-notification-admin.php:1788
+msgid "Membership Activated"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Membership Analytics"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Membership Audit Logs"
+msgstr ""
+
+#: user-center
+msgid "Membership Benefits"
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid "Membership Benefits Comparison Settings"
+msgstr ""
+
+msgid "Membership Card"
+msgstr ""
+
+#: user-center
+msgid "Membership Center"
+msgstr ""
+
+#: inc/class-seo-admin.php:197
+msgid "Membership Content SEO Optimization"
+msgstr ""
+
+#: inc/class-seo-admin.php:538
+msgid "Membership Content Sitemap"
+msgstr ""
+
+#: inc/class-membership-analytics.php:492
+msgid "Membership Content Stats"
+msgstr ""
+
+#: inc/class-notification-admin.php:337 inc/class-notification-admin.php:404
+#: inc/class-notification-admin.php:613 inc/class-notification-admin.php:1179
+#: inc/class-notification-admin.php:1786
+msgid "Membership Expired"
+msgstr ""
+
+msgid "Membership Expires Today"
+msgstr ""
+
+msgid "Membership Expires in %d Days"
+msgstr ""
+
+#: inc/class-notification-admin.php:609
+msgid "Membership Expiring Soon"
+msgstr ""
+
+#: user-center
+msgid "Membership Expiry"
+msgstr ""
+
+#: inc/class-notification-admin.php:336 inc/class-notification-admin.php:403
+#: inc/class-notification-admin.php:1178 inc/class-notification-admin.php:1785
+msgid "Membership Expiry Reminder"
+msgstr ""
+
+#: inc/class-membership-admin.php:499 inc/class-membership-admin.php:538
+#: inc/class-membership-safe.php:313 inc/class-membership-safe.php:367
+#: user-center/dashboard.php:106 user-center/profile.php:85
+msgid "Membership Level"
+msgstr ""
+
+#: inc/class-notification-admin.php:338 inc/class-notification-admin.php:405
+#: inc/class-notification-admin.php:617 inc/class-notification-admin.php:1180
+#: inc/class-notification-admin.php:1787
+msgid "Membership Level Changed"
+msgstr ""
+
+#: inc/class-membership-admin.php:447
+msgid "Membership Management"
+msgstr ""
+
+#: inc/class-notification-admin.php:34 inc/class-notification-admin.php:173
+msgid "Membership Notification Management"
+msgstr ""
+
+#: inc/class-notification-admin.php:35
+msgid "Membership Notifications"
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid "Membership Pricing"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Membership Protection Settings"
+msgstr ""
+
+#: inc/class-membership-safe.php:364
+msgid "Membership Settings"
+msgstr ""
+
+#: inc/class-seo-admin.php:286
+msgid "Membership Sitemap"
+msgstr ""
+
+#: inc/class-membership-admin.php:32
+msgid "Membership System"
+msgstr ""
+
+#: inc/class-membership-admin.php:31
+msgid "Membership System Management"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Membership analytics module is not loaded."
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Membership audit logs cleared"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Membership level"
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid "Membership prices displayed on the upgrade page"
+msgstr ""
+
+msgid "Membership restriction removed for %d posts."
+msgstr ""
+
+#: inc/class-membership-admin.php:1275
+msgid "Membership system is not loaded"
+msgstr ""
+
+msgid "Membership updated! Checking your access permissions..."
+msgstr ""
+
+msgid "Membership upgrade required"
+msgstr ""
+
+msgid "Memcached Connection"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:231
+msgid "Memcached PHP extension is available"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:232
+msgid "Memcached PHP extension is not installed"
+msgstr ""
+
+msgid "Memcached Support:"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:219
+msgid "Memcached backend"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1384
+msgid "Memcached check feature is unavailable"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:289
+msgid "Memcached connection exception: "
+msgstr ""
+
+#: inc/cache-auto-validation.php:126
+msgid "Memcached connection failed"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1426
+msgid "Memcached connection has issues"
+msgstr ""
+
+#: inc/cache-auto-validation.php:126
+#: inc/class-unified-performance-admin.php:1426
+msgid "Memcached connection is healthy"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:227
+msgid "Memcached extension"
+msgstr ""
+
+msgid "Memcached extension is available"
+msgstr ""
+
+msgid "Memcached extension is not installed. Built-in cache will be used."
+msgstr ""
+
+msgid "Memcached extension is not installed. Cache performance is limited."
+msgstr ""
+
+msgid "Memcached is enabled. Cache performance has been optimized."
+msgstr ""
+
+msgid "Memcached is unavailable"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:249
+msgid "Memcached server version: "
+msgstr ""
+
+msgid "Memcached service connection failed"
+msgstr ""
+
+msgid "Memcached service connection is healthy"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:191
+msgid "Memcached support"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:195
+msgid "Memcached support is included"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:196
+msgid "Memcached support may be unavailable"
+msgstr ""
+
+msgid "Memory Limit"
+msgstr ""
+
+msgid "Memory Limit:"
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid "Memory Protection"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:301
+msgid "Memory Usage"
+msgstr ""
+
+msgid "Memory limit is low and may affect cache performance"
+msgstr ""
+
+msgid "Memory limit is sufficient"
+msgstr ""
+
+msgid "Memory protection"
+msgstr ""
+
+msgid "Memory usage is high"
+msgstr ""
+
+msgid "Memory usage is high (%s). Check plugins and theme."
+msgstr ""
+
+msgid "Memory usage is normal"
+msgstr ""
+
+msgid "Memory usage:"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1411
+msgid "Memory usage: "
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:657
+#: inc/class-cache-backend-validator.php:692
+msgid "Memory usage: %s"
+msgstr ""
+
+#: inc/class-notification-admin.php:440
+msgid "Message"
+msgstr ""
+
+msgid "Meta description for homepage, recommended length 150-160 characters."
+msgstr ""
+
+msgid "Metadata"
+msgstr ""
+
+#: inc/class-seo-admin.php:311
+msgid "Metadata Completion:"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Metric"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Metric Comparison"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Migrate Portfolio To Posts"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Migrating portfolio data..."
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Migration completed. Converted %1$d posts and mapped %2$d categories."
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "Minify CSS files"
+msgstr ""
+
+msgid "Minify HTML output"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "Minify JavaScript files"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Minimum Visits:"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Minimum visits must be between 1 and 1000"
+msgstr ""
+
+msgid "Mobile Device"
+msgstr ""
+
+msgid "Mobile Visits:"
+msgstr ""
+
+msgid "Model"
+msgstr ""
+
+msgid "Model Name"
+msgstr ""
+
+msgid ""
+"Monitor frontend performance metrics (load time, memory usage, DB queries) "
+"and provide optimization suggestions. Visible to admins on frontend only."
+msgstr ""
+
+#: inc/cache-optimized-config.php:285
+msgid "Monitor hit rate, response time, and memory usage"
+msgstr ""
+
+msgid ""
+"Monitor site performance metrics including load time, memory usage, and DB "
+"queries."
+msgstr ""
+
+msgid "Monitoring Suggestion"
+msgstr ""
+
+#: inc/class-notification-admin.php:295
+msgid "Multiple Users"
+msgstr ""
+
+#: user-center
+msgid "My Favorites"
+msgstr ""
+
+#: user-center footer.php:59 inc/class-user-center.php:157
+#: inc/class-user-center.php:177 user-center.php:84
+#: user-center/notifications.php:52
+msgid "My Notifications"
+msgstr ""
+
+msgid "Navigation and Reading"
+msgstr ""
+
+msgid "Needs Attention"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:282
+#: inc/class-unified-performance-admin.php:293
+#: inc/class-unified-performance-admin.php:315
+msgid "Needs Optimization"
+msgstr ""
+
+msgid "Needs optimization"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Network connection error, please check your connection"
+msgstr ""
+
+#: inc/class-notification-admin.php:881
+msgid "Network error, please try again"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Network error, please try again later"
+msgstr ""
+
+#: inc/class-ai-api-manager.php:181
+msgid "Network error: %s"
+msgstr ""
+
+#: inc/cache-optimized-config.php:294
+msgid "Network transfer efficiency improvement by 20-30%"
+msgstr ""
+
+#: inc/template-tags.php:101
+msgid "New"
+msgstr ""
+
+msgid "New Badge Days"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "New Ranges"
+msgstr ""
+
+msgid "New User Registration"
+msgstr ""
+
+msgid "New User Registration Alert"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "New membership level"
+msgstr ""
+
+#: inc/class-notification-admin.php:501
+msgid "Next"
+msgstr ""
+
+#: archive.php:89 category.php:66 front-page.php:147 home.php:113 index.php:36
+msgid "Next &rarr;"
+msgstr ""
+
+#: single.php:263 inc/class-editor-navigation.php:77
+msgid "Next Post"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:156
+#: inc/class-cache-backend-validator.php:182 inc/class-seo-admin.php:451
+#: inc/class-seo-admin.php:452
+msgid "No"
+msgstr ""
+
+#: inc/class-notification-admin.php:1257
+msgid "No Encryption"
+msgstr ""
+
+msgid "No Preview"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "No Preview:"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "No analytics data found in the selected period."
+msgstr ""
+
+#: inc/class-ai-api-manager.php:77
+msgid "No available API configuration"
+msgstr ""
+
+msgid "No content yet"
+msgstr ""
+
+msgid "No favorite posts yet"
+msgstr ""
+
+#: user-center
+msgid "No favorites yet"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "No historical portfolio data found. Nothing changed."
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "No logs found"
+msgstr ""
+
+#: inc/class-membership-admin.php:467
+msgid "No members match the current filter."
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "No membership audit logs yet."
+msgstr ""
+
+#: inc/class-membership-admin.php:1182
+msgid "No membership users yet"
+msgstr ""
+
+#: inc/class-notification-admin.php:428
+msgid "No notification records yet."
+msgstr ""
+
+#: inc/class-script-manager.php user-center/notifications.php:72
+msgid "No notifications"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:513
+msgid ""
+"No optimization issues were detected. Your site performance looks excellent."
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "No posts found"
+msgstr ""
+
+msgid "No posts yet"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "No preview"
+msgstr ""
+
+#: inc/class-seo-admin.php:410
+msgid "No protected posts found for testing."
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "No reports yet. Please generate one first."
+msgstr ""
+
+msgid "No response content"
+msgstr ""
+
+msgid "No slow query records"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "No spider IP range data yet. Please import data first."
+msgstr ""
+
+#: inc/class-notification-admin.php:747
+msgid "No users found"
+msgstr ""
+
+#: inc/class-notification-admin.php:1603
+msgid "No users selected"
+msgstr ""
+
+#: inc/class-maintenance-mode.php:0
+msgid "Non-admin users will see the maintenance page."
+msgstr ""
+
+msgid "Non-member Accesses"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:115
+msgid "Non-persistent groups"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:122
+msgid "Non-persistent groups: "
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+#: inc/class-membership-admin.php:1194 inc/class-seo-admin.php:533
+#: inc/class-seo-admin.php:540 inc/class-unified-performance-admin.php:304
+msgid "Normal"
+msgstr ""
+
+#: 404.php:22
+msgid "Not Found"
+msgstr ""
+
+msgid "Not Installed"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Not Protected"
+msgstr ""
+
+msgid "Not Writable"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1110
+msgid "Not detected"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:144
+msgid "Not found"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:229
+#: inc/class-cache-backend-validator.php:311
+msgid "Not loaded"
+msgstr ""
+
+msgid "Not set"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:193
+msgid "Not supported"
+msgstr ""
+
+#: inc/class-notification-admin.php:377 inc/class-notification-admin.php:538
+msgid "Note:"
+msgstr ""
+
+msgid ""
+"Note: Combining CSS may cause FOUC (flash of unstyled content). Use with "
+"caution."
+msgstr ""
+
+msgid "Note: Combining JS may cause compatibility issues. Use with caution."
+msgstr ""
+
+msgid "Note: Deferring resources may cause FOUC. Use with caution."
+msgstr ""
+
+#: inc/class-notification-admin.php:1413
+msgid ""
+"Note: email notifications are disabled; only on-site notifications were "
+"sent."
+msgstr ""
+
+#: inc/class-notification-admin.php:1415
+msgid ""
+"Note: membership expiry reminder emails are disabled; only on-site "
+"notifications were sent."
+msgstr ""
+
+#: user-center user-center/membership.php:295
+msgid "Notes:"
+msgstr ""
+
+#: inc/class-notification-admin.php:385
+msgid "Notification Management"
+msgstr ""
+
+#: inc/class-notification-admin.php:354
+msgid "Notification Message"
+msgstr ""
+
+#: inc/class-notification-admin.php:348
+msgid "Notification Title"
+msgstr ""
+
+#: inc/class-notification-admin.php:332
+msgid "Notification Type"
+msgstr ""
+
+#: inc/class-notification-admin.php:90
+msgid "Notification Type Email Settings"
+msgstr ""
+
+#: inc/class-notification-admin.php:1666
+msgid "Notification deleted"
+msgstr ""
+
+msgid "Notification not found"
+msgstr ""
+
+#: inc/class-notification-admin.php:1316 inc/class-notification-admin.php:1420
+#: inc/class-notification-admin.php:1550 inc/class-notification-admin.php:1659
+#: inc/class-notification-admin.php:1689
+msgid "Notification system is not initialized"
+msgstr ""
+
+#: inc/class-notification-admin.php:1545
+msgid "Notification title and message cannot be empty"
+msgstr ""
+
+msgid "Notifications"
+msgstr ""
+
+msgid "Now"
+msgstr ""
+
+msgid "Now you can:"
+msgstr ""
+
+msgid "Number of items:"
+msgstr ""
+
+msgid "Number of posts shown per archive page."
+msgstr ""
+
+#: inc/class-post-sidebar-widgets.php:197
+msgid "Number of posts:"
+msgstr ""
+
+msgid "OPcache:"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:440
+msgid "Object Cache"
+msgstr ""
+
+msgid "Object Cache Installation Guide"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:455
+msgid "Object Cache Management"
+msgstr ""
+
+msgid "Object Cache Status:"
+msgstr ""
+
+msgid "Object Cache:"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1178
+msgid "Object cache cleared"
+msgstr ""
+
+msgid "Object cache installed successfully"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1404
+msgid "Object cache is enabled"
+msgstr ""
+
+msgid "Object cache is enabled."
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1404
+msgid "Object cache is recommended"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1479
+#: inc/class-unified-performance-admin.php:1497
+msgid "Object cache management is unavailable"
+msgstr ""
+
+msgid "Object cache uninstalled"
+msgstr ""
+
+msgid "Object cache:"
+msgstr ""
+
+#: inc/class-notification-admin.php:180
+msgid "On-site Notification Management"
+msgstr ""
+
+#: inc/class-notification-admin.php:372
+msgid "On-site Notification Test"
+msgstr ""
+
+#: inc/class-notification-admin.php:905
+msgid ""
+"On-site test notification sent successfully. Please check your on-site "
+"notification center."
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "One IP or CIDR per line&#10;Example:&#10;1.2.3.4&#10;5.6.0.0/16"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "One IP or CIDR per line&#10;Example:&#10;192.168.1.1&#10;10.0.0.0/24"
+msgstr ""
+
+msgid "One-click Optimize"
+msgstr ""
+
+msgid "Open Graph Settings"
+msgstr ""
+
+#: inc/class-theme-options.php:506
+msgid "Open Graph 设置"
+msgstr ""
+
+msgid "Open menu"
+msgstr ""
+
+#: inc/class-ai-seo.php:493
+msgid ""
+"OpenAI: gpt-3.5-turbo, gpt-4 | Claude: claude-3-haiku-20240307 | DeepSeek: "
+"deepseek-chat | Qwen: qwen-turbo"
+msgstr ""
+
+#: inc/class-notification-admin.php:1741 inc/class-notification-admin.php:1776
+#: inc/class-unified-performance-admin.php:180
+msgid "Operation failed"
+msgstr ""
+
+msgid "Operation failed, please try again"
+msgstr ""
+
+#: inc/class-notification-admin.php:1033 inc/class-notification-admin.php:1099
+msgid "Operation failed:"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Operation failed: "
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:182
+msgid "Operation successful"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:213
+msgid "Optimization"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:471
+msgid "Optimization Actions"
+msgstr ""
+
+msgid "Optimization Issues:"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "Optimization Stats"
+msgstr ""
+
+msgid "Optimization Suggestions"
+msgstr ""
+
+msgid "Optimization failed"
+msgstr ""
+
+msgid "Optimization failed:"
+msgstr ""
+
+msgid "Optimization failed: "
+msgstr ""
+
+msgid "Optimization items: "
+msgstr ""
+
+msgid "Optimize CSS, JavaScript, and image assets to improve loading speed."
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:472
+msgid "Optimize Cache Config"
+msgstr ""
+
+msgid "Optimize Database"
+msgstr ""
+
+#: inc/cache-optimized-config.php:291
+msgid "Optimize Memcached configuration"
+msgstr ""
+
+msgid "Optimize Memory Usage"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:343
+msgid "Optimize Performance"
+msgstr ""
+
+msgid "Optimize cache configuration"
+msgstr ""
+
+#: inc/cache-optimized-config.php:267
+msgid "Optimize cache expiration time"
+msgstr ""
+
+#: inc/cache-auto-validation.php:476
+msgid "Optimize cache performance"
+msgstr ""
+
+msgid "Optimize caching strategy"
+msgstr ""
+
+msgid "Optimize database queries"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "Optimize font loading"
+msgstr ""
+
+msgid "Optimize font loading strategy to reduce render-blocking."
+msgstr ""
+
+msgid "Optimize social sharing (Facebook, Twitter, etc.)"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:366
+msgid "Optimized"
+msgstr ""
+
+msgid "Optimized %d images and saved %s space"
+msgstr ""
+
+msgid "Optimized Images:"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1295
+msgid "Optimized cache configuration"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "Optimized:"
+msgstr ""
+
+msgid "Optimizing assets..."
+msgstr ""
+
+msgid "Optimizing cache configuration..."
+msgstr ""
+
+msgid "Optimizing database..."
+msgstr ""
+
+msgid "Optimizing..."
+msgstr ""
+
+msgid "Option Name"
+msgstr ""
+
+msgid "Or click the button below to refresh rewrite rules"
+msgstr ""
+
+msgid "Or get minutes value:"
+msgstr ""
+
+msgid "Or limit revisions count:"
+msgstr ""
+
+msgid "Original"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Original length"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "Original:"
+msgstr ""
+
+msgid "Other Optimizations"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:211
+msgid "Overview"
+msgstr ""
+
+msgid "PHP Cache"
+msgstr ""
+
+#: inc/class-membership-admin.php:391
+msgid "PHP Memory Limit:"
+msgstr ""
+
+msgid "PHP Version"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:202
+msgid "PHP syntax"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:206
+msgid "PHP syntax is valid"
+msgstr ""
+
+msgid "PHP version is too low. Upgrade to %s or later."
+msgstr ""
+
+msgid "PHP version meets requirements"
+msgstr ""
+
+msgid "PNG Quality"
+msgstr ""
+
+msgid "PNG compression quality (70-100%, recommended 90%)."
+msgstr ""
+
+#: inc/class-theme-options.php:1094
+msgid "PNG图片压缩质量（70-100%，推荐90%）"
+msgstr ""
+
+#: inc/class-theme-options.php:1090
+msgid "PNG质量"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Page %1$d of %2$d (%3$s records)"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:290
+msgid "Page Load Time"
+msgstr ""
+
+msgid "Page Load Time (s)"
+msgstr ""
+
+msgid "Page Not Found"
+msgstr ""
+
+msgid "Page Type"
+msgstr ""
+
+msgid "Page URL"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Page View"
+msgstr ""
+
+msgid "Page load time is relatively long and can be further optimized"
+msgstr ""
+
+msgid "Page load time is too long (>%ss). Optimization is recommended."
+msgstr ""
+
+#: 404.php:27 inc/class-theme-seo.php:95
+msgid "Page not found"
+msgstr ""
+
+#: page.php:96
+msgid "Pages:"
+msgstr ""
+
+msgid "Partial content"
+msgstr ""
+
+msgid "Partial events"
+msgstr ""
+
+#: user-center/login.php:84 user-center/register.php:49
+msgid "Password"
+msgstr ""
+
+#: user-center/forgot-password.php:34
+msgid "Password reset link has been sent to your email"
+msgstr ""
+
+#: user-center/register.php:92
+msgid "Passwords do not match"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Paste spider pool data in JSON format:"
+msgstr ""
+
+#: user-center
+msgid "Payment Instructions"
+msgstr ""
+
+#: user-center
+msgid "Payment Methods"
+msgstr ""
+
+#: user-center
+msgid "Payment QR Code"
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid ""
+"Payment QR image URL (supports WeChat Pay, Alipay, etc.). You can upload an "
+"image directly or enter an image URL."
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid "Payment Settings"
+msgstr ""
+
+#: user-center user-center/membership.php:285
+msgid "Payment Steps:"
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid ""
+"Payment steps and notes (HTML supported). If left empty, default "
+"instructions will be shown."
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Peak Day:"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Peak Hour:"
+msgstr ""
+
+msgid "Peak Memory"
+msgstr ""
+
+#: inc/class-membership-admin.php:390
+msgid "Peak Memory Usage:"
+msgstr ""
+
+msgid "Pending Optimization:"
+msgstr ""
+
+msgid "Percentage Preview"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Percentage Preview:"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Percentage preview"
+msgstr ""
+
+msgid "Performance"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:51
+msgid "Performance & Cache"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:50
+#: inc/class-unified-performance-admin.php:207
+msgid "Performance & Cache Management"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:383
+msgid "Performance Boost"
+msgstr ""
+
+msgid "Performance Dashboard"
+msgstr ""
+
+msgid "Performance Metrics Check"
+msgstr ""
+
+msgid "Performance Monitoring"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:496
+msgid "Performance Optimization Recommendations"
+msgstr ""
+
+msgid "Performance Optimization Tools"
+msgstr ""
+
+msgid "Performance Score:"
+msgstr ""
+
+msgid "Performance Stats"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:324
+msgid "Performance Trend"
+msgstr ""
+
+msgid "Performance logs have been cleared"
+msgstr ""
+
+msgid "Performance monitoring is under development..."
+msgstr ""
+
+msgid "Performance optimization completed"
+msgstr ""
+
+msgid "Performance reports are under development..."
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:255
+msgid "Performance test"
+msgstr ""
+
+#: inc/cache-auto-validation.php:215
+msgid "Performance test failed: %s"
+msgstr ""
+
+#: inc/class-membership-admin.php:1207 inc/class-membership-admin.php:1214
+#: inc/class-membership-safe.php:344 user-center/profile.php:98
+msgid "Permanent"
+msgstr ""
+
+#: inc/class-membership-admin.php:560
+msgid "Permanent Member"
+msgstr ""
+
+#: inc/class-membership-safe.php:387 user-center/dashboard.php:39
+#: user-center/membership.php:54
+msgid "Permanent Membership"
+msgstr ""
+
+msgid "Permission Cache"
+msgstr ""
+
+msgid "Permission Cache Expiry"
+msgstr ""
+
+msgid "Permission Check Function"
+msgstr ""
+
+msgid "Permission Validation"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:407
+msgid "Permission Validation Cache"
+msgstr ""
+
+msgid "Permission cache cleared"
+msgstr ""
+
+#: inc/cache-optimized-config.php:269
+msgid ""
+"Permission cache: 1 hour -> 2 hours, preview cache: 24 hours -> 48 hours"
+msgstr ""
+
+msgid "Permission check function is unavailable"
+msgstr ""
+
+msgid "Permission check function is working"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1149
+msgid "Permission validation cache cleared"
+msgstr ""
+
+#: inc/template-tags.php:265
+msgid "Pinterest"
+msgstr ""
+
+#: user-center
+msgid ""
+"Please ask the administrator to configure a payment QR code in backend."
+msgstr ""
+
+#: inc/cache-auto-validation.php:555
+msgid "Please check cache configuration and server status immediately."
+msgstr ""
+
+#: inc/class-ai-content-generator.php:55
+msgid "Please configure AI API in Theme Settings first"
+msgstr ""
+
+#: inc/class-ai-content-generator.php:676
+msgid "Please configure API first"
+msgstr ""
+
+msgid "Please ensure the payment amount matches the selected membership type"
+msgstr ""
+
+#: user-center
+msgid "Please ensure the payment amount matches your selected membership type"
+msgstr ""
+
+#: inc/class-notification-admin.php:826
+msgid "Please enter notification title and message"
+msgstr ""
+
+#: user-center
+msgid "Please enter password."
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Please enter the report ID to compare:"
+msgstr ""
+
+#: inc/class-ai-content-generator.php:210
+#: inc/class-ai-content-generator.php:279
+msgid "Please enter title and content first"
+msgstr ""
+
+#: user-center
+msgid "Please enter username or email."
+msgstr ""
+
+msgid "Please fill all required fields"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Please input spider data"
+msgstr ""
+
+msgid "Please keep your payment proof after payment for verification"
+msgstr ""
+
+#: user-center
+msgid "Please keep your payment receipt for verification"
+msgstr ""
+
+msgid "Please log in and upgrade to %s to view this exclusive content"
+msgstr ""
+
+msgid "Please log in first"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Please login before favoriting"
+msgstr ""
+
+msgid "Please login first"
+msgstr ""
+
+#: inc/class-ai-api-manager.php:282 inc/class-ai-api-manager.php:297
+msgid "Please reply: connection successful"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Please select a time range"
+msgstr ""
+
+#: inc/class-notification-admin.php:842
+msgid "Please select a user"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Please select an action type"
+msgstr ""
+
+#: inc/class-notification-admin.php:848
+msgid "Please select at least one user"
+msgstr ""
+
+#: inc/class-notification-admin.php:1047 inc/class-notification-admin.php:1685
+msgid "Please select notifications to delete"
+msgstr ""
+
+#: inc/class-notification-admin.php:1082 inc/class-notification-admin.php:1758
+msgid "Please select notifications to operate on"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Please select posts to operate"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Please select posts to operate on"
+msgstr ""
+
+msgid "Please sign in first"
+msgstr ""
+
+msgid "Please sign in to view favorites"
+msgstr ""
+
+#: inc/class-article-protection-manager.php:552
+msgid "Please sign in to view member-only content."
+msgstr ""
+
+#: inc/class-post-sidebar-widgets.php:103
+#: inc/class-post-sidebar-widgets.php:186 inc/template-tags.php:548
+msgid "Popular Posts"
+msgstr ""
+
+#: inc/class-membership-analytics.php:586
+msgid "Popular Protected Articles (30 days)"
+msgstr ""
+
+#: inc/class-maintenance-mode.php:0
+msgid "Portfolio Theme"
+msgstr ""
+
+msgid "Post Editor"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Post ID"
+msgstr ""
+
+msgid "Post Revisions"
+msgstr ""
+
+#: inc/class-post-sidebar-widgets.php:20
+msgid "Post Tags"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Post Title"
+msgstr ""
+
+#: inc\class-security-admin.php:0 inc/class-membership-analytics.php:590
+msgid "Post Title"
+msgstr ""
+
+msgid "Post favorites feature"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Post not found"
+msgstr ""
+
+#: archive.php:34
+msgid "Posts"
+msgstr ""
+
+msgid "Posts Per Page"
+msgstr ""
+
+#: inc/cache-auto-validation.php:603
+msgid "Potential issues were detected. Consider reviewing"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:473
+msgid "Preload Cache"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "Preload critical resources"
+msgstr ""
+
+msgid "Preload failed: "
+msgstr ""
+
+#: inc/cache-optimized-config.php:277
+msgid "Preload permission and preview cache for popular content"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1300
+msgid "Preloaded important cache"
+msgstr ""
+
+msgid "Preloading..."
+msgstr ""
+
+msgid "Preview"
+msgstr ""
+
+msgid "Preview Cache"
+msgstr ""
+
+msgid "Preview Cache Expiry"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Preview Length"
+msgstr ""
+
+msgid "Preview Length (characters):"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Preview Mode Description:"
+msgstr ""
+
+msgid "Preview Mode:"
+msgstr ""
+
+#: inc/class-seo-admin.php:310
+msgid "Preview Optimization:"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Preview Percentage"
+msgstr ""
+
+msgid "Preview Percentage:"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Preview Result"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Preview Result:"
+msgstr ""
+
+msgid "Preview cache cleared"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Preview length"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Preview length (auto mode)"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Preview mode"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Preview percentage (percentage mode)"
+msgstr ""
+
+#: inc/class-notification-admin.php:500
+msgid "Previous"
+msgstr ""
+
+#: single.php:263 inc/class-editor-navigation.php:77
+msgid "Previous Post"
+msgstr ""
+
+msgid "Primary Navigation"
+msgstr ""
+
+#: footer.php:33
+msgid "Print"
+msgstr ""
+
+#: user-center
+msgid "Priority Support"
+msgstr ""
+
+msgid "Priority comment display"
+msgstr ""
+
+msgid "Priority customer support"
+msgstr ""
+
+msgid "Priority support"
+msgstr ""
+
+#: inc/class-seo-admin.php:77
+msgid "Processing..."
+msgstr ""
+
+#: user-center
+msgid "Profile"
+msgstr ""
+
+#: user-center
+msgid "Profile updated!"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Programmatic Update"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Protected (%s)"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Protected Articles"
+msgstr ""
+
+#: inc/class-seo-admin.php:314
+msgid ""
+"Provide proper previews for crawlers instead of completely blocking access."
+msgstr ""
+
+#: inc/template-tags.php:281
+msgid "QQ"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:429
+msgid "Query Cache"
+msgstr ""
+
+msgid "Query Cache Expiry"
+msgstr ""
+
+msgid "Query Time"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1169
+msgid "Query cache cleared"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:338
+msgid "Quick Actions"
+msgstr ""
+
+#: inc/class-theme-optimize.php:588
+msgid "REST API is disabled"
+msgstr ""
+
+#: inc/template-tags.php:297
+msgid "RSS"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "RSS Access"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Rank"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Rate Limit"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Ratio"
+msgstr ""
+
+msgid "Re-optimize Assets"
+msgstr ""
+
+#: inc/class-notification-admin.php:416 inc/class-notification-admin.php:465
+msgid "Read"
+msgstr ""
+
+#: single.php:309
+msgid "Read More"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:396
+msgid "Read operation"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:488
+msgid "Read performance"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:513
+msgid "Read performance exceeds write performance, as expected"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:514
+msgid "Read/write performance ratio is low and may need optimization"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:509
+msgid "Read/write ratio"
+msgstr ""
+
+msgid "Reading Time"
+msgstr ""
+
+msgid "Reading Time Estimate"
+msgstr ""
+
+msgid "Reading time estimation is enabled. Use this code in templates:"
+msgstr ""
+
+msgid "Recent Access Logs"
+msgstr ""
+
+#: user-center
+msgid "Recent Favorites"
+msgstr ""
+
+#: inc/class-membership-admin.php:406
+msgid "Recent Membership Activity"
+msgstr ""
+
+msgid "Recent Optimizations"
+msgstr ""
+
+#: inc/class-post-sidebar-widgets.php:94
+msgid "Recent Popular Posts"
+msgstr ""
+
+msgid "Recent Requests"
+msgstr ""
+
+#: inc/class-post-sidebar-widgets.php:203
+msgid "Recent days:"
+msgstr ""
+
+msgid "Recommendation count:"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Recommended: 20%-50%"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Recommended: 200-500 characters"
+msgstr ""
+
+msgid "Recommended: 50-500 characters"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Record access logs (may impact performance)"
+msgstr ""
+
+msgid "Record access logs during maintenance"
+msgstr ""
+
+#: inc/template-tags.php:293
+msgid "Reddit"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Redirecting to %s membership upgrade page..."
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Redirecting to login page..."
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:313
+msgid "Redis PHP extension is available"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:314
+msgid "Redis PHP extension is not installed (optional)"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:301
+msgid "Redis backend"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:356
+msgid "Redis connection exception: "
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:309
+msgid "Redis extension"
+msgstr ""
+
+msgid "Redis extension is available"
+msgstr ""
+
+msgid "Redis extension is not installed (optional)"
+msgstr ""
+
+msgid "Redis is enabled. Cache performance has been optimized."
+msgstr ""
+
+msgid "Redis is unavailable"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:327
+msgid "Redis server connected successfully"
+msgstr ""
+
+msgid "Redis:"
+msgstr ""
+
+msgid "Reduce CSS loading when frontend does not use Dashicons."
+msgstr ""
+
+msgid "Reduce Database Queries"
+msgstr ""
+
+msgid "Reduce JS loading, but old plugin compatibility may be affected."
+msgstr ""
+
+msgid "Reduce database load, but you cannot restore old revisions."
+msgstr ""
+
+msgid "Reduce database writes, but unsaved content may be lost."
+msgstr ""
+
+msgid "Reduced frequency (60s)"
+msgstr ""
+
+msgid "Referrer"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:414
+#: inc/class-unified-performance-admin.php:425
+#: inc/class-unified-performance-admin.php:436
+msgid "Refresh"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:514
+msgid "Refresh Check"
+msgstr ""
+
+msgid "Refresh Data"
+msgstr ""
+
+msgid "Refresh Rewrite Rules"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:340
+msgid "Refresh Stats"
+msgstr ""
+
+msgid "Refresh failed: "
+msgstr ""
+
+msgid "Refreshing..."
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Register link configuration error"
+msgstr ""
+
+msgid "Registered At:"
+msgstr ""
+
+#: inc/class-membership-admin.php:517 inc/class-membership-admin.php:585
+msgid "Registration Date"
+msgstr ""
+
+#: inc/class-notification-admin.php:605
+msgid "Registration Successful"
+msgstr ""
+
+msgid "Registration successful!"
+msgstr ""
+
+msgid "Regular Maintenance"
+msgstr ""
+
+#: inc/class-seo-admin.php:507
+msgid "Regular Posts"
+msgstr ""
+
+#: header.php:154 inc/class-membership-admin.php:541
+#: inc/class-membership-admin.php:575 inc/class-membership-admin.php:647
+#: inc/class-membership-admin.php:701
+msgid "Regular User"
+msgstr ""
+
+msgid ""
+"Regularly clean the database and update plugins/themes to keep the system in"
+" best condition."
+msgstr ""
+
+msgid "Reinstall"
+msgstr ""
+
+#: single.php:172
+msgid "Related Posts"
+msgstr ""
+
+#: user-center/login.php:91
+msgid "Remember me"
+msgstr ""
+
+#: inc/class-notification-admin.php:65
+msgid "Reminder Days"
+msgstr ""
+
+#: inc/class-notification-admin.php:1136
+msgid ""
+"Reminder days separated by commas (e.g. 7,3,1,0 means send reminders 7 days,"
+" 3 days, 1 day before expiry, and on expiry day)"
+msgstr ""
+
+msgid "Remove "
+msgstr ""
+
+msgid "Remove /category/ prefix from category URLs"
+msgstr ""
+
+msgid "Remove Category Prefix"
+msgstr ""
+
+#: user-center
+msgid "Remove Favorite"
+msgstr ""
+
+msgid "Remove Icon"
+msgstr ""
+
+msgid "Remove Logo"
+msgstr ""
+
+msgid "Remove Top Logo"
+msgstr ""
+
+msgid "Remove WordPress logo from admin bar"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Remove access logs older than %d days"
+msgstr ""
+
+msgid "Remove automatic paragraph tags around shortcodes"
+msgstr ""
+
+msgid "Remove camera/GPS privacy data and reduce file size."
+msgstr ""
+
+msgid "Remove comment-related styles"
+msgstr ""
+
+msgid "Remove image EXIF metadata"
+msgstr ""
+
+msgid "Remove jQuery Migrate script"
+msgstr ""
+
+msgid "Remove redundant HTML attributes from inserted images"
+msgstr ""
+
+msgid "Remove version query strings from CSS/JS files"
+msgstr ""
+
+msgid "Remove whitespace in HTML output to reduce page size."
+msgstr ""
+
+msgid "Remove width, height, class, srcset, etc. Keep only src and alt."
+msgstr ""
+
+msgid "Removed from favorites"
+msgstr ""
+
+#: user-center
+msgid "Renew SVIP"
+msgstr ""
+
+#: user-center
+msgid "Renew VIP"
+msgstr ""
+
+msgid "Replace "
+msgstr ""
+
+msgid "Replace Icon"
+msgstr ""
+
+msgid "Replace Logo"
+msgstr ""
+
+msgid "Replace with Folio Version"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Report 1"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Report 1:"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Report 2"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Report 2:"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Report Comparison"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Report History"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Report Name"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Report Name:"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Report generated successfully! Report ID: %d"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Report not found"
+msgstr ""
+
+msgid "Request failed"
+msgstr ""
+
+#: inc/class-notification-admin.php:953
+msgid "Request failed, please check your network connection"
+msgstr ""
+
+msgid "Request failed, please try again"
+msgstr ""
+
+#: inc/class-membership-admin.php:312 inc/class-membership-admin.php:330
+#: inc/class-membership-admin.php:348
+msgid "Request failed:"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Request failed: "
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Request timed out, please try again later"
+msgstr ""
+
+msgid "Required Level:"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Required Membership Level"
+msgstr ""
+
+msgid "Requires %s"
+msgstr ""
+
+msgid "Requires %s level to view"
+msgstr ""
+
+msgid "Requires %s membership level"
+msgstr ""
+
+msgid "Requires %s membership to view full content"
+msgstr ""
+
+msgid "Reset All Settings"
+msgstr ""
+
+msgid "Reset Settings"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:480
+msgid "Reset Stats"
+msgstr ""
+
+msgid "Reset all settings to defaults."
+msgstr ""
+
+msgid "Reset all statistics? This action cannot be undone."
+msgstr ""
+
+msgid "Reset failed: "
+msgstr ""
+
+msgid "Resetting..."
+msgstr ""
+
+#: inc/class-seo-admin.php:299
+msgid "Resolve Issue"
+msgstr ""
+
+#: inc/cache-auto-validation.php:496
+msgid "Resolve resource issues"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "Resource Loading"
+msgstr ""
+
+msgid "Restart cache service"
+msgstr ""
+
+msgid "Restore settings from a previously exported JSON file."
+msgstr ""
+
+msgid "Restrict REST API"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Result"
+msgstr ""
+
+msgid "Rewrite rules refreshed"
+msgstr ""
+
+msgid "Right sidebar widget area for single post page"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Rising"
+msgstr ""
+
+#: inc/class-seo-admin.php:267
+msgid "Run Bulk Update"
+msgstr ""
+
+#: inc/class-notification-admin.php:535
+msgid "Run Expiry Check Manually"
+msgstr ""
+
+msgid "SEO"
+msgstr ""
+
+#: inc/class-seo-admin.php:308
+msgid "SEO Best Practice Suggestions"
+msgstr ""
+
+#: inc/class-seo-admin.php:293
+msgid "SEO Issues Requiring Attention"
+msgstr ""
+
+#: inc/class-seo-admin.php:30 inc/class-seo-admin.php:31
+msgid "SEO Optimization"
+msgstr ""
+
+#: inc/class-seo-admin.php:260
+msgid "SEO Optimization Tools"
+msgstr ""
+
+#: inc/class-seo-admin.php:559
+msgid "SEO Visibility Issue"
+msgstr ""
+
+#: inc/class-seo-admin.php:208
+msgid "SEO Visible Posts"
+msgstr ""
+
+#: inc/class-ai-seo.php:551
+msgid "SEO 关键词"
+msgstr ""
+
+#: inc/class-theme-options.php:479
+msgid "SEO 基础设置"
+msgstr ""
+
+#: inc/class-ai-seo.php:557
+msgid "SEO 描述"
+msgstr ""
+
+#: inc/class-ai-seo.php:531
+msgid "SEO 设置"
+msgstr ""
+
+#: inc/class-theme-options.php:155
+msgid "SEO优化"
+msgstr ""
+
+#: inc/class-notification-admin.php:110
+msgid "SMTP Mail Server Settings (Optional)"
+msgstr ""
+
+#: inc/class-notification-admin.php:157
+msgid "SMTP Password"
+msgstr ""
+
+#: inc/class-notification-admin.php:133
+msgid "SMTP Port"
+msgstr ""
+
+#: inc/class-notification-admin.php:125
+msgid "SMTP Server"
+msgstr ""
+
+#: inc/class-notification-admin.php:149
+msgid "SMTP Username"
+msgstr ""
+
+#: inc/class-notification-admin.php:1285
+msgid ""
+"SMTP authentication password (some providers require an app password instead"
+" of login password)"
+msgstr ""
+
+#: inc/class-notification-admin.php:1273
+msgid "SMTP authentication username (usually your email address)"
+msgstr ""
+
+#: inc/class-notification-admin.php:1245
+msgid "SMTP port (common: 25, 465, 587)"
+msgstr ""
+
+#: inc/class-notification-admin.php:1233
+msgid "SMTP server address (e.g. smtp.gmail.com, smtp.qq.com)"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "SVIP Articles"
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid "SVIP Benefits Comparison"
+msgstr ""
+
+msgid "SVIP Content"
+msgstr ""
+
+#: inc/class-membership-admin.php:543 inc/class-membership-safe.php:102
+msgid "SVIP Member"
+msgstr ""
+
+#: inc/class-membership-admin.php:456
+msgid "SVIP Members"
+msgstr ""
+
+#: inc/class-seo-admin.php:218 inc/class-seo-admin.php:509
+msgid "SVIP Posts"
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid "SVIP Price:"
+msgstr ""
+
+#: inc/class-membership-admin.php:371
+msgid "SVIP Users"
+msgstr ""
+
+msgid "SVIP exclusive activities"
+msgstr ""
+
+msgid "SVIP exclusive events"
+msgstr ""
+
+msgid "SVIP user (e.g. checkmark)"
+msgstr ""
+
+#: inc/class-membership-analytics.php:529
+msgid "SVIP文章"
+msgstr ""
+
+#: user-center
+msgid "Save Changes"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:605
+msgid "Save Configuration"
+msgstr ""
+
+#: inc/class-notification-admin.php:526
+msgid "Save Settings"
+msgstr ""
+
+msgid "Save this setting"
+msgstr ""
+
+msgid "Saved:"
+msgstr ""
+
+msgid "Savings"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "Savings:"
+msgstr ""
+
+#: user-center
+msgid "Scan to Pay"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:481
+msgid "Schedule Cleanup"
+msgstr ""
+
+msgid "Scheduled Maintenance"
+msgstr ""
+
+msgid "Scheduled cleanup configured"
+msgstr ""
+
+msgid "Scheduled cleanup has been configured and will run daily"
+msgstr ""
+
+msgid "Script Optimization"
+msgstr ""
+
+#: inc/class-seo-admin.php:272
+msgid "Search Crawler Test"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Search Engine Spider Distribution"
+msgstr ""
+
+#: inc/class-seo-admin.php:573
+msgid "Search Engine Visibility"
+msgstr ""
+
+msgid "Search Optimization"
+msgstr ""
+
+msgid "Search Results"
+msgstr ""
+
+msgid "Search by post title only (improves search speed)"
+msgstr ""
+
+#: inc/class-notification-admin.php:308
+msgid "Search by username or email"
+msgstr ""
+
+#: inc/class-notification-admin.php:314
+msgid "Search by username or email, supports multiple..."
+msgstr ""
+
+#: inc/class-notification-admin.php:305
+msgid "Search by username or email..."
+msgstr ""
+
+msgid "Search engine visible (allow indexing preview content)"
+msgstr ""
+
+#: inc/class-theme-seo.php:91
+msgid "Search results for \"%s\""
+msgstr ""
+
+#: inc/class-notification-admin.php:398
+msgid "Search user, title, or message..."
+msgstr ""
+
+msgid "Seconds (300-7200)"
+msgstr ""
+
+msgid "Seconds (300-86400)"
+msgstr ""
+
+msgid "Seconds (3600-604800)"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Security Actions"
+msgstr ""
+
+#: inc/class-notification-admin.php:340 inc/class-notification-admin.php:407
+#: inc/class-notification-admin.php:625 inc/class-notification-admin.php:1182
+#: inc/class-notification-admin.php:1790
+msgid "Security Alert"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Security Overview"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Security Protection"
+msgstr ""
+
+#: inc/class-security-admin.php
+msgid "Security Protection Management"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Security Settings"
+msgstr ""
+
+#: inc/class-notification-admin.php:341 inc/class-notification-admin.php:408
+#: inc/class-notification-admin.php:629 inc/class-notification-admin.php:1183
+#: inc/class-notification-admin.php:1791
+msgid "Security Warning"
+msgstr ""
+
+#: inc/cache-auto-validation.php:617 inc/class-cache-backend-validator.php:742
+#: inc/class-seo-admin.php:327 inc/class-seo-admin.php:385
+#: inc/class-unified-performance-admin.php:1122
+#: inc/class-unified-performance-admin.php:1208
+#: inc/class-unified-performance-admin.php:1234
+#: inc/class-unified-performance-admin.php:1250
+#: inc/class-unified-performance-admin.php:1276
+#: inc/class-unified-performance-admin.php:1373
+#: inc/class-unified-performance-admin.php:1390
+#: inc/class-unified-performance-admin.php:1467
+#: inc/class-unified-performance-admin.php:1485
+#: inc/class-unified-performance-admin.php:1507 inc/class-ai-seo.php:666
+#: inc/class-membership-analytics.php:776 inc/class-post-stats.php:125
+#: inc/class-post-stats.php:307 inc/class-user-center.php:218
+#: inc/class-user-center.php:294 inc/class-user-center.php:337
+#: inc/class-user-center.php:359 inc/class-user-center.php:373
+#: inc/class-user-center.php:406
+msgid "Security verification failed"
+msgstr ""
+
+msgid "Select "
+msgstr ""
+
+msgid "Select Icon"
+msgstr ""
+
+msgid "Select Image"
+msgstr ""
+
+msgid "Select Logo"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Select Posts"
+msgstr ""
+
+#: inc/class-notification-admin.php:303
+msgid "Select User"
+msgstr ""
+
+#: inc/class-notification-admin.php:312
+msgid "Select Users"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid ""
+"Select a time range, and the system will analyze access logs to generate an "
+"AI operations report."
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Select action..."
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid "Select payment QR code image"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Select posts and settings for bulk operation:"
+msgstr ""
+
+#: user-center
+msgid "Select the membership type you want to purchase (VIP or SVIP)"
+msgstr ""
+
+msgid "Selection"
+msgstr ""
+
+#: inc/class-notification-admin.php:362
+msgid "Send Notification"
+msgstr ""
+
+#: inc/class-notification-admin.php:287
+msgid "Send On-site Notification"
+msgstr ""
+
+#: inc/class-notification-admin.php:374
+msgid "Send On-site Test Notification"
+msgstr ""
+
+#: user-center/forgot-password.php:53
+msgid "Send Reset Link"
+msgstr ""
+
+#: inc/class-notification-admin.php:534
+msgid "Send Test Email"
+msgstr ""
+
+#: inc/class-notification-admin.php:291
+msgid "Send To"
+msgstr ""
+
+#: inc/class-notification-admin.php:877 inc/class-notification-admin.php:1313
+#: inc/class-notification-admin.php:1638
+msgid "Send failed"
+msgstr ""
+
+#: inc/class-notification-admin.php:907
+msgid "Send failed:"
+msgstr ""
+
+#: inc/class-notification-admin.php:1148
+msgid "Sender email address (defaults to site admin email)"
+msgstr ""
+
+#: inc/class-notification-admin.php:1160
+msgid "Sender name (defaults to site name)"
+msgstr ""
+
+#: inc/class-notification-admin.php:859 inc/class-notification-admin.php:898
+#: inc/class-notification-admin.php:917
+msgid "Sending..."
+msgstr ""
+
+#: inc/class-notification-admin.php:1355
+msgid "Sent at: "
+msgstr ""
+
+msgid "Separate multiple keywords with commas."
+msgstr ""
+
+msgid "Server administrator access is required"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:246
+#: inc/class-cache-backend-validator.php:277
+#: inc/class-cache-backend-validator.php:324
+#: inc/class-cache-backend-validator.php:344
+msgid "Server connection"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Server error, please try again later"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:335
+msgid "Server info"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:267
+msgid "Server stats"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Set Preview Mode"
+msgstr ""
+
+msgid "Set Up Monitoring"
+msgstr ""
+
+msgid "Set as SVIP Only"
+msgstr ""
+
+msgid "Set as VIP Only"
+msgstr ""
+
+msgid "Set as member-only post"
+msgstr ""
+
+#: inc/class-membership-safe.php:392
+msgid "Set as permanent membership (no expiry limit)"
+msgstr ""
+
+msgid "Set browser cache duration for static assets."
+msgstr ""
+
+#: inc/class-seo-admin.php:310
+msgid ""
+"Set proper previews for protected posts so search engines can understand "
+"content value."
+msgstr ""
+
+msgid "Set sunrise time (24h). Theme switches to light mode after sunrise."
+msgstr ""
+
+msgid "Set sunset time (24h). Theme switches to dark mode after sunset."
+msgstr ""
+
+msgid "Set wp-content directory permissions to 755 or 775"
+msgstr ""
+
+msgid "Set write permissions for the cache directory"
+msgstr ""
+
+msgid "Setting failed: "
+msgstr ""
+
+msgid "Setting..."
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:214
+msgid "Settings"
+msgstr ""
+
+msgid "Settings Count"
+msgstr ""
+
+msgid "Settings have been reset to defaults"
+msgstr ""
+
+msgid "Settings imported successfully!"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Settings saved"
+msgstr ""
+
+msgid "Settings saved!"
+msgstr ""
+
+#: footer.php:40
+msgid "Share"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Share to"
+msgstr ""
+
+msgid "Shortcode Paragraphs"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Shortcode Usage:"
+msgstr ""
+
+msgid "Shortcuts:"
+msgstr ""
+
+msgid "Show \"Brain Powered Fun\" Hexagon"
+msgstr ""
+
+msgid "Show AI generation panel on post editor page"
+msgstr ""
+
+msgid "Show Theme Toggle"
+msgstr ""
+
+msgid "Show a decorative hexagon at the end of the homepage post grid."
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Show a specified number of characters from the beginning of the post"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Show a specified percentage of post content"
+msgstr ""
+
+msgid "Show after scrolling 300px; click to smoothly scroll to top."
+msgstr ""
+
+msgid "Show again"
+msgstr ""
+
+msgid "Show back-to-top button"
+msgstr ""
+
+msgid "Show maintenance page to non-admin users"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Show preview content in RSS feed"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Show suspicious activity only"
+msgstr ""
+
+msgid "Show the \"New\" badge for this many days after publish."
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Show your custom preview text"
+msgstr ""
+
+msgid "Show/Hide toolbar"
+msgstr ""
+
+msgid "Shown automatically at the bottom-right of pages."
+msgstr ""
+
+#: header.php:182 inc/class-article-protection-manager.php:555
+#: inc/class-user-center.php:158 inc/class-user-center.php:178
+#: user-center/login.php:99 user-center/register.php:69
+msgid "Sign In"
+msgstr ""
+
+#: inc/class-article-protection-manager.php:558 inc/class-user-center.php:159
+#: inc/class-user-center.php:179 user-center/login.php:108
+#: user-center/register.php:60
+msgid "Sign Up"
+msgstr ""
+
+#: user-center/login.php:33
+msgid "Sign in to your account"
+msgstr ""
+
+msgid "Single Post Sidebar"
+msgstr ""
+
+#: inc/class-notification-admin.php:294
+msgid "Single User"
+msgstr ""
+
+msgid "Site Favicon"
+msgstr ""
+
+msgid "Site Identity"
+msgstr ""
+
+msgid "Site Logo"
+msgstr ""
+
+#: inc/class-helper-manager.php:0
+msgid "Site is under maintenance. Please visit later."
+msgstr ""
+
+#: inc/class-maintenance-mode.php:0
+msgid ""
+"Site is under maintenance. Please visit later. We will restore service as "
+"soon as possible."
+msgstr ""
+
+#: inc/class-seo-admin.php:281
+msgid "Sitemap Management"
+msgstr ""
+
+#: inc/class-seo-admin.php:313
+msgid "Sitemap Optimization:"
+msgstr ""
+
+#: inc/class-seo-admin.php:231
+msgid "Sitemap Status"
+msgstr ""
+
+#: inc/class-seo-admin.php:235
+msgid "Sitemap Type"
+msgstr ""
+
+msgid "Skip to content"
+msgstr ""
+
+msgid "Slow Query Warning"
+msgstr ""
+
+msgid "Slow Query Warnings"
+msgstr ""
+
+msgid "Social Links"
+msgstr ""
+
+msgid "Social Media Links"
+msgstr ""
+
+msgid "Sorry, the page you requested does not exist or has been removed."
+msgstr ""
+
+#: inc/class-membership-admin.php:440
+msgid "Sort"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Source Domain"
+msgstr ""
+
+msgid "Space Saved:"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Spider"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Spider Access"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Spider Auto Whitelist"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Spider ID:"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Spider Name"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Spider Pool Management"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Spider Type"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Spiders/crawlers bypass rate limit and blocking automatically"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Stable"
+msgstr ""
+
+msgid "Standard order"
+msgstr ""
+
+msgid "Standard queue"
+msgstr ""
+
+msgid "Standard resources"
+msgstr ""
+
+msgid "Standard sorting"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Start Date:"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Start Log Analysis"
+msgstr ""
+
+#: inc/class-maintenance-mode.php:0
+msgid "Start Time"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Start date cannot be later than end date"
+msgstr ""
+
+msgid "Statistics exported"
+msgstr ""
+
+msgid "Statistics refreshed"
+msgstr ""
+
+msgid "Statistics reset"
+msgstr ""
+
+msgid "Statistics reset completed"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Statistics window:"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1245
+msgid "Stats refreshed"
+msgstr ""
+
+#: inc/class-membership-admin.php:511 inc/class-membership-admin.php:572
+#: inc/class-membership-admin.php:1187 inc/class-notification-admin.php:441
+#: inc/class-seo-admin.php:236
+msgid "Status"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:434
+msgid "Still exists"
+msgstr ""
+
+msgid "Stop receiving WordPress/plugin/theme update emails."
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Strict Protection"
+msgstr ""
+
+#: inc/class-seo-admin.php:312
+msgid "Structured Data:"
+msgstr ""
+
+#: inc/class-notification-admin.php:323
+msgid "Subscriber"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:386
+#: inc/class-cache-backend-validator.php:398
+#: inc/class-cache-backend-validator.php:422
+msgid "Success"
+msgstr ""
+
+#: inc/class-notification-admin.php:1702
+msgid "Successfully deleted %d notifications"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Successfully imported %d spider IP ranges"
+msgstr ""
+
+#: inc/class-notification-admin.php:1772
+msgid "Successfully marked %d notifications as read"
+msgstr ""
+
+#: inc/class-notification-admin.php:1626
+msgid "Successfully sent notifications to %d users"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Successfully updated settings for %d posts"
+msgstr ""
+
+msgid "Sunrise Time"
+msgstr ""
+
+msgid "Sunset Time"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:193
+msgid "Supported"
+msgstr ""
+
+msgid "Supports HTML tags"
+msgstr ""
+
+msgid ""
+"Supports single IP (e.g. 192.168.1.1) and CIDR format (e.g. 192.168.1.0/24)."
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Suspicious"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Suspicious Activity"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Suspicious Activity Ratio"
+msgstr ""
+
+msgid ""
+"Suspicious access behavior was detected. Your access has been temporarily "
+"limited."
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:207
+msgid "Syntax error: "
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "System"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:610
+msgid "System Information"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "System Overview"
+msgstr ""
+
+msgid "System Running Well"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "System Settings"
+msgstr ""
+
+#: inc/class-membership-admin.php:380
+msgid "System Status"
+msgstr ""
+
+#: inc/class-membership-admin.php:1088
+msgid "System Test"
+msgstr ""
+
+#: inc/class-membership-admin.php:1083
+msgid "System Tools"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:512
+msgid "System is running great!"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:401
+msgid "TTL"
+msgstr ""
+
+#: inc/class-post-sidebar-widgets.php:34 inc/class-post-sidebar-widgets.php:65
+#: inc/template-tags.php:505
+msgid "Tags"
+msgstr ""
+
+#: inc/template-tags.php:285
+msgid "Telegram"
+msgstr ""
+
+#: user-center
+msgid "Tell us about yourself..."
+msgstr ""
+
+msgid "Test All APIs"
+msgstr ""
+
+msgid "Test Connection"
+msgstr ""
+
+#: inc/class-seo-admin.php:276
+msgid "Test Crawler Access"
+msgstr ""
+
+#: inc/class-membership-admin.php:1091
+msgid "Test Membership System"
+msgstr ""
+
+#: inc/class-notification-admin.php:342 inc/class-notification-admin.php:409
+#: inc/class-notification-admin.php:633 inc/class-notification-admin.php:1792
+msgid "Test Notification"
+msgstr ""
+
+#: inc/class-ai-content-generator.php:696
+msgid "Test completed: %d/%d APIs connected successfully"
+msgstr ""
+
+#: inc/class-seo-admin.php:274
+msgid ""
+"Test crawler access to membership content and verify SEO configuration."
+msgstr ""
+
+#: inc/class-notification-admin.php:1370
+msgid "Test email has been sent to: "
+msgstr ""
+
+#: inc/class-membership-admin.php:309
+msgid "Test failed:"
+msgstr ""
+
+#: inc/class-notification-admin.php:1311
+msgid "Test notification sent successfully"
+msgstr ""
+
+#: inc/class-membership-admin.php:307
+msgid "Test succeeded:"
+msgstr ""
+
+#: inc/class-membership-admin.php:1093
+msgid "Test whether all membership system functions work properly"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:569
+msgid "Tested %1$d data types, %2$d passed"
+msgstr ""
+
+msgid "Testing all API connections..."
+msgstr ""
+
+#: inc/class-membership-admin.php:300
+msgid "Testing membership system..."
+msgstr ""
+
+#: inc/class-seo-admin.php:101
+msgid "Testing..."
+msgstr ""
+
+msgid ""
+"Thank you for registering on our site. Your account has been created "
+"successfully."
+msgstr ""
+
+#: inc/class-maintenance-mode.php:0
+msgid "Thank you for your patience"
+msgstr ""
+
+msgid "Thank you for your support!"
+msgstr ""
+
+msgid "Thanks for your like!"
+msgstr ""
+
+#: inc/class-seo-admin.php:574
+msgid ""
+"The site is currently set to discourage search engine indexing, which will "
+"impact SEO."
+msgstr ""
+
+msgid "The site is under maintenance, please visit later."
+msgstr ""
+
+msgid ""
+"The wp-content directory is not writable, so cache files cannot be managed."
+msgstr ""
+
+msgid "Theme Mode"
+msgstr ""
+
+#: inc/class-helper-manager.php:0
+msgid "Theme Settings"
+msgstr ""
+
+msgid "There are still"
+msgstr ""
+
+msgid "Third-Party Version"
+msgstr ""
+
+msgid "Third-party object-cache.php file detected"
+msgstr ""
+
+msgid "Third-party version"
+msgstr ""
+
+msgid "This action cannot be undone. Export a backup first."
+msgstr ""
+
+msgid "This content is available to SVIP members only"
+msgstr ""
+
+msgid "This content is available to VIP members only"
+msgstr ""
+
+msgid "This content is available to members only"
+msgstr ""
+
+#: inc/class-article-protection-manager.php:545
+msgid "This content is exclusive to %s members."
+msgstr ""
+
+msgid ""
+"This content is for %s members only and includes high-quality premium "
+"materials. Upgrade membership to unlock full access."
+msgstr ""
+
+msgid "This content is for %s members only."
+msgstr ""
+
+msgid ""
+"This content is for members only. %s level is required to view full content."
+msgstr ""
+
+msgid ""
+"This content is for members only. Please log in to view the full content."
+msgstr ""
+
+msgid "This content is for members only. Please log in to view."
+msgstr ""
+
+#: inc/class-article-protection-manager.php:349
+#: inc/class-article-protection-manager.php:438
+#: inc/class-article-protection-manager.php:448
+msgid "This content is member-only and requires %s access."
+msgstr ""
+
+#: inc/class-article-protection-manager.php:481
+msgid "This content is member-only."
+msgstr ""
+
+#: inc/class-article-protection-manager.php:371
+#: inc/class-article-protection-manager.php:374
+msgid ""
+"This content is member-only. Please visit the website to view the full "
+"content."
+msgstr ""
+
+msgid ""
+"This content is members only and requires the corresponding membership "
+"level."
+msgstr ""
+
+msgid "This content is members only. %s level is required to view it."
+msgstr ""
+
+msgid ""
+"This content is members only. Please log in and ensure you have the required"
+" permission level."
+msgstr ""
+
+msgid ""
+"This content is members only. Please visit the site to view the full "
+"content."
+msgstr ""
+
+msgid ""
+"This content is members only. Please visit the website to view the full "
+"content."
+msgstr ""
+
+msgid "This content requires %s membership to view."
+msgstr ""
+
+msgid ""
+"This email was sent automatically by <strong style=\\\"color: "
+"#ffffff;\\\">%s</strong>."
+msgstr ""
+
+msgid "This email was sent automatically by the system."
+msgstr ""
+
+msgid "This email was sent automatically by the system. Please do not reply."
+msgstr ""
+
+#: inc/class-notification-admin.php:1354
+msgid ""
+"This is a test email used to verify whether email notifications are working "
+"properly."
+msgstr ""
+
+#: inc/class-notification-admin.php:1307
+msgid ""
+"This is a test notification from the admin panel used to verify the "
+"notification system. Sent at: "
+msgstr ""
+
+#: inc/class-notification-admin.php:634
+msgid ""
+"This is a test notification used to verify that the notification system "
+"works correctly."
+msgstr ""
+
+#: inc/class-maintenance-mode.php:0
+msgid "This page will auto-refresh every 5 minutes to check status"
+msgstr ""
+
+#: inc/class-admin-posts-list.php:341
+msgid "This post has been edited"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid ""
+"This post is exclusive to members. Please log in and upgrade your membership"
+" to view it."
+msgstr ""
+
+#: inc/template-tags.php:269
+msgid "TikTok"
+msgstr ""
+
+#: inc/class-notification-admin.php:442
+msgid "Time"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Time Range"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Time Range:"
+msgstr ""
+
+#: inc/class-membership-admin.php:594
+msgid "Tip:"
+msgstr ""
+
+#: inc/class-notification-admin.php:439
+msgid "Title"
+msgstr ""
+
+#: inc/class-post-sidebar-widgets.php:68
+#: inc/class-post-sidebar-widgets.php:191
+msgid "Title:"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Today"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Today's Stats"
+msgstr ""
+
+#: inc/class-maintenance-mode.php:0
+msgid "Toggle dark mode"
+msgstr ""
+
+msgid "Too many database queries (%d). Cache usage is recommended."
+msgstr ""
+
+#: inc/cache-auto-validation.php:350
+msgid "Too many database queries: %d"
+msgstr ""
+
+msgid ""
+"Too many requests. Please try again later. If you believe this is an error, "
+"contact the site administrator."
+msgstr ""
+
+msgid "Tool Recommendation"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Top Content 20"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Top Protected Posts (%d days)"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Top Traffic Sources"
+msgstr ""
+
+#: inc/class-notification-admin.php:506
+msgid "Total %d notifications"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Total Access"
+msgstr ""
+
+#: inc\class-security-admin.php:0 inc/class-membership-analytics.php:591
+msgid "Total Access"
+msgstr ""
+
+#: inc\class-security-admin.php:0 inc/class-membership-analytics.php:539
+msgid "Total Accesses"
+msgstr ""
+
+#: inc/class-notification-admin.php:276
+msgid "Total Notifications"
+msgstr ""
+
+msgid "Total Page Visits:"
+msgstr ""
+
+msgid "Total Protected Articles"
+msgstr ""
+
+#: inc/class-seo-admin.php:203
+msgid "Total Protected Posts"
+msgstr ""
+
+#: inc/class-membership-admin.php:363
+msgid "Total Users"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Total spider IP range records: %d"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "Track who changed membership levels and when."
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Traffic Quality Score"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Trend Analysis"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Trend Direction:"
+msgstr ""
+
+msgid "Turn off XML-RPC Pingback functionality"
+msgstr ""
+
+#: inc/class-theme-options.php:446 inc/template-tags.php:249
+msgid "Twitter/X"
+msgstr ""
+
+#: inc/class-notification-admin.php:438
+msgid "Type"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:564
+msgid "Type consistency"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Type:"
+msgstr ""
+
+#: inc/class-seo-admin.php:237
+msgid "URL Count"
+msgstr ""
+
+msgid "URL Optimization"
+msgstr ""
+
+#: inc/class-theme-options.php:802
+msgid "URL优化"
+msgstr ""
+
+msgid "UX Enhancements"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:280
+msgid "Unable to connect to Memcached server"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:347
+msgid "Unable to connect to Redis server"
+msgstr ""
+
+#: inc/class-notification-admin.php:1341
+msgid "Unable to get your email address"
+msgstr ""
+
+msgid "Unable to open media uploader. Please refresh and try again."
+msgstr ""
+
+#: inc/class-ai-api-manager.php:232
+msgid "Unable to parse response"
+msgstr ""
+
+#: inc/cache-auto-validation.php:414
+msgid "Unable to read error log: %s"
+msgstr ""
+
+msgid "Unavailable"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Unblock All IPs"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Unblock all IPs?"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Unblock all blocked IP addresses"
+msgstr ""
+
+#: inc/class-maintenance-mode.php:0
+msgid "Under Maintenance"
+msgstr ""
+
+msgid "Uninstall Object Cache"
+msgstr ""
+
+msgid "Uninstall failed: "
+msgstr ""
+
+msgid "Uninstall object cache? This will affect site performance."
+msgstr ""
+
+msgid "Uninstalling..."
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Unique IPs"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Unique Visitors"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Unknown Spider"
+msgstr ""
+
+#: inc/class-notification-admin.php:453
+msgid "Unknown User"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Unknown action"
+msgstr ""
+
+#: inc/class-notification-admin.php:1007 inc/class-notification-admin.php:1033
+#: inc/class-notification-admin.php:1068 inc/class-notification-admin.php:1099
+msgid "Unknown error"
+msgstr ""
+
+msgid "Unlimited download access"
+msgstr ""
+
+msgid "Unlimited downloads"
+msgstr ""
+
+msgid "Unlocked"
+msgstr ""
+
+#: inc/class-notification-admin.php:415 inc/class-notification-admin.php:467
+msgid "Unread"
+msgstr ""
+
+#: inc/class-notification-admin.php:280
+msgid "Unread Notifications"
+msgstr ""
+
+#: inc/class-notification-admin.php:626
+msgid ""
+"Unusual activity was detected on your account. Please review your security "
+"settings."
+msgstr ""
+
+msgid "Update Email Notifications"
+msgstr ""
+
+#: inc/class-seo-admin.php:313
+msgid "Update XML sitemaps regularly so new content gets indexed in time."
+msgstr ""
+
+msgid "Update failed"
+msgstr ""
+
+#: inc/template-tags.php:101
+msgid "Updated"
+msgstr ""
+
+#: page.php:51
+msgid "Updated:"
+msgstr ""
+
+msgid "Updating..."
+msgstr ""
+
+msgid "Upgrade Membership for More Benefits"
+msgstr ""
+
+msgid "Upgrade Now"
+msgstr ""
+
+msgid "Upgrade PHP to the latest version"
+msgstr ""
+
+msgid "Upgrade WordPress to the latest version"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "Upgrade link configuration error"
+msgstr ""
+
+msgid "Upgrade membership for more benefits"
+msgstr ""
+
+msgid "Upgrade required"
+msgstr ""
+
+#: inc/class-article-protection-manager.php:578
+msgid "Upgrade to %s"
+msgstr ""
+
+msgid "Upgrade to %s Membership"
+msgstr ""
+
+msgid "Upgrade to %s membership and you will get:"
+msgstr ""
+
+msgid "Upgrade to %s to unlock exclusive content"
+msgstr ""
+
+msgid "Upgrade to SVIP"
+msgstr ""
+
+msgid "Upgrade to VIP"
+msgstr ""
+
+#: user-center
+msgid "Upgrade to unlock more benefits"
+msgstr ""
+
+msgid "Upload Max Filesize:"
+msgstr ""
+
+msgid "Upload a site favicon (recommended size: 32x32px or 16x16px)."
+msgstr ""
+
+msgid ""
+"Upload a site logo image. If not set, the site title will be displayed."
+msgstr ""
+
+msgid "Usage Guide"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Usage Help"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid ""
+"Use AI analysis (requires API Key and Endpoint in Theme Settings > AI "
+"Settings)"
+msgstr ""
+
+#: inc/class-seo-admin.php:312
+msgid ""
+"Use Schema.org markup to help search engines understand paid content "
+"structure."
+msgstr ""
+
+msgid ""
+"Use WeChat Pay or Alipay to scan the QR code above and complete payment"
+msgstr ""
+
+#: user-center
+msgid "Use WeChat Pay or Alipay to scan the QR code above to complete payment"
+msgstr ""
+
+msgid ""
+"Use built-in optimization tools for one-click tuning, including cache "
+"preloading and database optimization."
+msgstr ""
+
+#: inc/class-membership-admin.php:1084
+msgid "Use the following tools to test and maintain the membership system."
+msgstr ""
+
+msgid "Use this image"
+msgstr ""
+
+msgid "Used to identify this API config."
+msgstr ""
+
+#: inc/class-membership-admin.php:1187 inc/class-notification-admin.php:437
+msgid "User"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "User #%d"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "User Access"
+msgstr ""
+
+#: user-center
+msgid "User Center"
+msgstr ""
+
+#: inc/class-membership-admin.php:475 inc/class-membership-admin.php:526
+msgid "User ID"
+msgstr ""
+
+msgid "User ID:"
+msgstr ""
+
+msgid "User Notifications"
+msgstr ""
+
+#: inc/class-notification-admin.php:335 inc/class-notification-admin.php:402
+#: inc/class-notification-admin.php:1789
+msgid "User Registration"
+msgstr ""
+
+#: inc/class-notification-admin.php:1176
+msgid "User Registration Notification"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "User Retention Rate"
+msgstr ""
+
+#: inc/class-notification-admin.php:320
+msgid "User Role"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:408
+msgid "User access permission check results"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:1191
+msgid "User cache cleared"
+msgstr ""
+
+#: inc/class-membership-admin.php:481 inc/class-membership-admin.php:529
+#: user-center/register.php:38
+msgid "Username"
+msgstr ""
+
+#: user-center
+msgid "Username cannot be changed"
+msgstr ""
+
+#: user-center/login.php:79
+msgid "Username or Email"
+msgstr ""
+
+#: user-center
+msgid "Username or email does not exist. Please check and try again."
+msgstr ""
+
+msgid "Username:"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:184
+msgid "Using Folio optimized version"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:92
+msgid "Using built-in WordPress cache with limited performance"
+msgstr ""
+
+#: inc/cache-auto-validation.php:117
+msgid "Using built-in cache"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:91
+msgid "Using external object cache"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:185
+msgid "Using third-party version"
+msgstr ""
+
+#: inc/class-membership-admin.php
+msgid "VIP Articles"
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid "VIP Benefits Comparison"
+msgstr ""
+
+msgid "VIP Content"
+msgstr ""
+
+#: inc/class-membership-admin.php:542 inc/class-membership-safe.php:96
+msgid "VIP Member"
+msgstr ""
+
+#: inc/class-membership-admin.php:457
+msgid "VIP Members"
+msgstr ""
+
+#: inc/class-seo-admin.php:213 inc/class-seo-admin.php:508
+msgid "VIP Posts"
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid "VIP Price:"
+msgstr ""
+
+#: inc/class-membership-admin.php:367
+msgid "VIP Users"
+msgstr ""
+
+msgid "VIP badge"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "VIP exclusive content"
+msgstr ""
+
+msgid "VIP user"
+msgstr ""
+
+msgid "VIP user (e.g. checkmark or specific benefit)"
+msgstr ""
+
+#: inc/class-membership-analytics.php:525
+msgid "VIP文章"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:204
+msgid "Valid"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Value"
+msgstr ""
+
+msgid "Verify connection configuration"
+msgstr ""
+
+msgid "Verify installation success"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:337
+msgid "Version %s"
+msgstr ""
+
+msgid "Version Strings"
+msgstr ""
+
+msgid "Version Type:"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:643
+#: inc/class-cache-backend-validator.php:685
+msgid "Version: %s"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "View"
+msgstr ""
+
+msgid "View %s"
+msgstr ""
+
+#: single.php:266
+msgid "View All"
+msgstr ""
+
+msgid "View Guide"
+msgstr ""
+
+#: user-center
+msgid "View My Favorites"
+msgstr ""
+
+msgid "View Notification Details"
+msgstr ""
+
+msgid "View Reports"
+msgstr ""
+
+#: inc/class-seo-admin.php:285
+msgid "View Sitemap"
+msgstr ""
+
+msgid "View Stats"
+msgstr ""
+
+msgid "View User Details"
+msgstr ""
+
+msgid "View VIP exclusive content"
+msgstr ""
+
+msgid "View all exclusive content"
+msgstr ""
+
+msgid "View all notifications"
+msgstr ""
+
+msgid "View cache settings"
+msgstr ""
+
+#: inc/class-membership-admin.php:448
+msgid "View detailed information for all membership users here."
+msgstr ""
+
+msgid "View details and optimization suggestions"
+msgstr ""
+
+msgid "Views"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "Visible to Search Engines"
+msgstr ""
+
+msgid "Visit Our Website"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Visited Posts"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Visits"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid ""
+"Visits identified as search engine spiders (e.g. Google, Baidu) will skip "
+"protection checks"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:76
+msgid "WP_CACHE constant"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:80
+msgid "WP_CACHE is configured correctly"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:81
+msgid "WP_CACHE is not set and may affect cache performance"
+msgstr ""
+
+msgid "WP_CACHE:"
+msgstr ""
+
+#: user-center
+msgid "Want more benefits?"
+msgstr ""
+
+msgid "Warning:"
+msgstr ""
+
+#: inc/class-maintenance-mode.php:0
+msgid ""
+"We are upgrading and optimizing the website to provide a better experience. "
+"The site is temporarily unavailable during maintenance. Thank you for your "
+"understanding."
+msgstr ""
+
+#: inc/class-maintenance-mode.php:0
+msgid "We will complete maintenance as soon as possible"
+msgstr ""
+
+#: inc/template-tags.php:277
+msgid "WeChat"
+msgstr ""
+
+msgid "WebP Support"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "WebP Support:"
+msgstr ""
+
+#: inc/class-theme-options.php:564 inc/class-theme-options.php:1112
+msgid "WebP支持"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Weekday"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Weekly Access Pattern"
+msgstr ""
+
+#: inc/template-tags.php:273
+msgid "Weibo"
+msgstr ""
+
+#: user-center/login.php:32
+msgid "Welcome Back"
+msgstr ""
+
+msgid "Welcome Registration!"
+msgstr ""
+
+#: inc/class-notification-admin.php:606
+msgid ""
+"Welcome aboard! Your account has been created successfully. You can now "
+"explore our content."
+msgstr ""
+
+msgid ""
+"Welcome aboard! Your account has been created successfully. You can now "
+"start exploring our content."
+msgstr ""
+
+#: user-center
+msgid "Welcome back, %s"
+msgstr ""
+
+msgid "Welcome to %s!"
+msgstr ""
+
+#: user-center
+msgid "What happens after membership expires?"
+msgstr ""
+
+#: user-center
+msgid "When do membership benefits take effect?"
+msgstr ""
+
+msgid ""
+"When saving a post without featured image, use the first image in content "
+"automatically."
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "Whitelist"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid ""
+"Whitelisted IPs bypass rate limits and blocking. Supports single IP and CIDR"
+" format (e.g. 192.168.1.0/24)"
+msgstr ""
+
+msgid "Widget Editor"
+msgstr ""
+
+msgid "Width:"
+msgstr ""
+
+msgid "With ads"
+msgstr ""
+
+#: inc/cache-optimized-config.php:292
+msgid ""
+"With stable connection status, optimize Memcached configuration parameters."
+msgstr ""
+
+msgid "WordPress Cache"
+msgstr ""
+
+msgid "WordPress Version"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:66
+msgid "WordPress cache configuration"
+msgstr ""
+
+#: inc/class-unified-performance-admin.php:441
+msgid "WordPress object cache"
+msgstr ""
+
+msgid "WordPress version is outdated. Upgrade is recommended"
+msgstr ""
+
+msgid "WordPress version meets requirements"
+msgstr ""
+
+msgid "Writable"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:384
+msgid "Write operation"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:466
+msgid "Write performance"
+msgstr ""
+
+#: inc/class-maintenance-mode.php:0
+msgid "Y-m-d H:i"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:156
+#: inc/class-cache-backend-validator.php:182 inc/class-seo-admin.php:451
+#: inc/class-seo-admin.php:452
+msgid "Yes"
+msgstr ""
+
+#: user-center
+msgid "You are already a VIP member"
+msgstr ""
+
+#: user-center
+msgid "You are already an SVIP member and enjoy all benefits!"
+msgstr ""
+
+msgid "You are not allowed to operate this notification"
+msgstr ""
+
+#: inc/class-membership-admin.php:594
+msgid ""
+"You can set each user's membership level and expiry date on the user edit "
+"page."
+msgstr ""
+
+msgid "You can view this %s exclusive content"
+msgstr ""
+
+msgid "You can view this content"
+msgstr ""
+
+msgid "You have %d unread notifications"
+msgstr ""
+
+msgid "You have already favorited this post"
+msgstr ""
+
+msgid "You have already liked this post"
+msgstr ""
+
+#: user-center
+msgid "You have not received any notifications yet"
+msgstr ""
+
+#: inc/template-tags.php:261
+msgid "YouTube"
+msgstr ""
+
+msgid ""
+"Your %1$s membership expires in %2$d days. Please renew in time to keep your"
+" member benefits."
+msgstr ""
+
+msgid ""
+"Your %s membership expires today. Please renew in time to keep your member "
+"benefits."
+msgstr ""
+
+msgid "Your API key"
+msgstr ""
+
+msgid "Your Account Information:"
+msgstr ""
+
+#: inc/class-notification-admin.php:630
+msgid ""
+"Your account may be at risk. Please change your password and review account "
+"settings immediately."
+msgstr ""
+
+msgid ""
+"Your membership has expired, and some features are no longer available. "
+"Please renew to restore your member benefits."
+msgstr ""
+
+#: inc/class-notification-admin.php:614
+msgid "Your membership has expired. Please renew to restore member benefits."
+msgstr ""
+
+#: inc/class-notification-admin.php:618
+msgid ""
+"Your membership level has been changed to {level}. Thank you for your "
+"support!"
+msgstr ""
+
+msgid "Your membership level has changed from %1$s to %2$s."
+msgstr ""
+
+#: inc/class-notification-admin.php:610
+msgid ""
+"Your membership will expire in {days} days. Please renew in time to keep "
+"member benefits."
+msgstr ""
+
+#: inc/cache-auto-validation.php:543
+msgid "[%s] Critical cache system alert"
+msgstr ""
+
+# Generated incrementally due unavailable wp-cli/gettext
+# Date: 2026-02-10 00:11:08+08:00
+#: i18n-auto
+msgid "[Critical]"
+msgstr ""
+
+msgid "[Warning]"
+msgstr ""
+
+#: manual
+msgid "blog,posts"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "chars"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "days and add detected spiders/crawlers to the pool. Continue?"
+msgstr ""
+
+msgid "exclusive content,ad-free,priority support"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "files"
+msgstr ""
+
+#: inc/cache-auto-validation.php:605
+msgid "for optimization."
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "h"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "higher values indicate larger fluctuations"
+msgstr ""
+
+#: inc/class-frontend-optimizer.php:0
+msgid "images"
+msgstr ""
+
+msgid ""
+"images left to optimize. You can continue by clicking the optimize button."
+msgstr ""
+
+#: inc/cache-auto-validation.php:589
+msgid "immediately."
+msgstr ""
+
+#: user-center
+msgid "items"
+msgstr ""
+
+msgid "items (0 = unlimited)"
+msgstr ""
+
+#: inc/class-theme-options.php:994
+msgid "jQuery Migrate"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "m"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "min"
+msgstr ""
+
+msgid "month"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:133
+msgid "object-cache.php file"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:146
+msgid "object-cache.php is installed"
+msgstr ""
+
+#: inc/class-cache-backend-validator.php:147
+msgid "object-cache.php is missing, using default WordPress cache"
+msgstr ""
+
+msgid ""
+"object-cache.php is not installed. WordPress built-in cache is being used."
+msgstr ""
+
+#: inc/template-tags.php:301
+msgid "privacy"
+msgstr ""
+
+#: inc/class-script-manager.php
+msgid "s"
+msgstr ""
+
+#: inc/class-membership-admin.php:0
+msgid "seconds"
+msgstr ""
+
+#: inc/template-tags.php:305
+msgid "statement"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "times"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "times/user"
+msgstr ""
+
+#: inc\class-security-admin.php:0
+msgid "to"
+msgstr ""
+
+msgid "wp-content Write Permission"
+msgstr ""
+
+msgid ""
+"wp-content directory is not writable, so object-cache.php cannot be "
+"installed"
+msgstr ""
+
+msgid "wp-content directory is writable"
+msgstr ""
+
+msgid "¥128/month"
+msgstr ""
+
+msgid "¥68/month"
+msgstr ""
+
+#: inc/class-maintenance-mode.php:0
+msgid "⚠️ Maintenance mode is enabled"
+msgstr ""
+
+msgid ""
+"⚠️ Memcached extension is unavailable. Please install the php-memcached "
+"extension first."
+msgstr ""
+
+#: inc/class-membership-admin.php:398
+msgid "⚠️ Memory usage is high"
+msgstr ""
+
+#: inc/class-membership-admin.php:1245
+msgid "⚠️ Memory usage is high (%sMB)"
+msgstr ""
+
+msgid "⚠️ Reachable but connection failed"
+msgstr ""
+
+msgid "✅ Available"
+msgstr ""
+
+msgid "✅ Connected"
+msgstr ""
+
+#: inc/class-membership-admin.php:1250
+msgid "✅ Database connection is normal"
+msgstr ""
+
+msgid "✅ Installed"
+msgstr ""
+
+#: inc/class-membership-admin.php:1235
+msgid "✅ Membership class loaded correctly"
+msgstr ""
+
+#: inc/class-membership-admin.php:1239
+msgid "✅ Membership function is working"
+msgstr ""
+
+#: inc/class-membership-admin.php:396
+msgid "✅ Memory usage is normal"
+msgstr ""
+
+#: inc/class-membership-admin.php:1244
+msgid "✅ Memory usage is normal (%sMB)"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "✏️ Custom Preview - Use custom preview text"
+msgstr ""
+
+#: inc/class-membership-admin.php:1250
+msgid "❌ Database connection error"
+msgstr ""
+
+#: inc/class-membership-admin.php:1235
+msgid "❌ Membership class not loaded"
+msgstr ""
+
+#: inc/class-membership-admin.php:1239
+msgid "❌ Membership function error"
+msgstr ""
+
+#: inc/class-membership-admin.php:400
+msgid "❌ Memory usage is too high"
+msgstr ""
+
+msgid "❌ Not installed"
+msgstr ""
+
+msgid "❌ Service unreachable"
+msgstr ""
+
+msgid "❌ Unavailable"
+msgstr ""
+
+#: user-center/notifications.php:126
+msgid "上一页"
+msgstr ""
+
+#: inc/class-theme-options.php:1078
+msgid "上传时自动压缩图片，减少文件大小"
+msgstr ""
+
+#: inc/class-theme-options.php:274
+msgid "上传网站Favicon图标（建议尺寸：32x32px或16x16px）。"
+msgstr ""
+
+#: inc/class-theme-options.php:249
+msgid "上传网站LOGO图片。如果未设置，将显示网站标题。"
+msgstr ""
+
+#: inc/class-ai-seo.php:572
+msgid "上次 AI 生成: %s"
+msgstr ""
+
+#: user-center/notifications.php:140
+msgid "下一页"
+msgstr ""
+
+#: inc/class-theme-options.php:1154
+msgid "不再收到WordPress/插件/主题更新的邮件"
+msgstr ""
+
+#: user-center/dashboard.php:56
+msgid "专属标识"
+msgstr ""
+
+#: inc/class-theme-options.php:551 inc/class-theme-options.php:552
+#: inc/class-theme-options.php:557 inc/class-theme-options.php:558
+#: user-center/profile.php:119
+msgid "个"
+msgstr ""
+
+#: user-center/profile.php:55
+msgid "个人简介"
+msgstr ""
+
+#: inc/class-user-center.php:155 inc/class-user-center.php:175
+#: user-center.php:66 user-center/profile.php:20
+msgid "个人资料"
+msgstr ""
+
+#: user-center/profile.php:24
+msgid "个人资料已更新！"
+msgstr ""
+
+#: inc/class-theme-options.php:973
+msgid "个（0=不限制）"
+msgstr ""
+
+#: inc/class-theme-options.php:1709
+msgid "为现有图片批量添加Alt文本，提升SEO和可访问性。"
+msgstr ""
+
+#: inc/class-theme-options.php:513
+msgid "为社交媒体分享优化（Facebook, Twitter等）"
+msgstr ""
+
+#: functions.php:100
+msgid "主导航"
+msgstr ""
+
+#: inc/class-theme-options.php:282
+msgid "主题模式"
+msgstr ""
+
+#: inc/class-theme-options.php:30
+msgid "主题设置"
+msgstr ""
+
+#: inc/class-theme-options.php:292
+msgid "亮色模式"
+msgstr ""
+
+#: user-center/dashboard.php:46 user-center/membership.php:61
+msgid "今日到期"
+msgstr ""
+
+#: user-center/profile.php:56
+msgid "介绍一下自己..."
+msgstr ""
+
+#: inc/class-theme-options.php:1689
+msgid "从之前导出的JSON文件恢复设置。"
+msgstr ""
+
+#: user-center.php:48
+msgid "仪表盘"
+msgstr ""
+
+#: user-center/dashboard.php:58
+msgid "优先支持"
+msgstr ""
+
+#: inc/class-theme-options.php:543
+msgid "优化CSS、JavaScript和图片资源，提升网站加载速度"
+msgstr ""
+
+#: inc/class-theme-options.php:729
+msgid "优化中..."
+msgstr ""
+
+#: inc/class-theme-options.php:552 inc/class-theme-options.php:558
+msgid "优化后"
+msgstr ""
+
+#: inc/class-theme-options.php:745
+msgid "优化失败："
+msgstr ""
+
+#: inc/class-theme-options.php:623
+msgid "优化字体加载"
+msgstr ""
+
+#: inc/class-theme-options.php:625
+msgid "优化字体加载策略，减少字体加载阻塞"
+msgstr ""
+
+#: inc/class-theme-options.php:668
+msgid "优化操作"
+msgstr ""
+
+#: inc/class-theme-options.php:547
+msgid "优化统计"
+msgstr ""
+
+#: inc/class-membership-analytics.php:521
+msgid "会员专属文章"
+msgstr ""
+
+#: inc/class-user-center.php:156 inc/class-user-center.php:176
+#: user-center.php:75 user-center/membership.php:40
+msgid "会员中心"
+msgstr ""
+
+#: inc/class-membership-analytics.php:512
+msgid "会员内容统计分析"
+msgstr ""
+
+#: user-center/profile.php:94
+msgid "会员到期"
+msgstr ""
+
+#: user-center/membership.php:328
+msgid "会员到期后怎么办？"
+msgstr ""
+
+#: user-center/membership.php:329
+msgid "会员到期后，您将无法访问专属内容。您可以随时续费或升级会员。"
+msgstr ""
+
+#: user-center/membership.php:324
+msgid "会员权益如何生效？"
+msgstr ""
+
+#: user-center/dashboard.php:54
+msgid "会员特权"
+msgstr ""
+
+#: inc/class-membership-admin.php:134
+msgid "会员管理"
+msgstr ""
+
+#: inc/class-membership-admin.php:123
+msgid "会员系统管理"
+msgstr ""
+
+#: inc/class-membership-analytics.php:493
+msgid "会员统计"
+msgstr ""
+
+#: inc/class-membership-analytics.php:543
+msgid "会员访问"
+msgstr ""
+
+#: functions.php:127
+msgid "作品"
+msgstr ""
+
+#: functions.php:150 functions.php:151 functions.php:158
+msgid "作品分类"
+msgstr ""
+
+#: functions.php:126
+msgid "作品集"
+msgstr ""
+
+#: inc/class-theme-seo.php:85
+msgid "作品集,portfolio"
+msgstr ""
+
+#: inc/class-theme-options.php:337
+msgid "作品集设置"
+msgstr ""
+
+#: inc/class-user-center.php:582
+msgid "你好，%s"
+msgstr ""
+
+#: inc/class-theme-options.php:1359 inc/class-theme-options.php:1445
+msgid "你的API密钥"
+msgstr ""
+
+#: user-center/membership.php:289
+msgid "使用微信或支付宝扫描上方二维码完成支付"
+msgstr ""
+
+#: inc/class-theme-options.php:1367 inc/class-theme-options.php:1452
+msgid "使用的AI模型"
+msgstr ""
+
+#: inc/class-theme-options.php:1258
+msgid "使用说明"
+msgstr ""
+
+#: inc/class-theme-options.php:812
+msgid "例如：/category/design/ → /design/"
+msgstr ""
+
+#: inc/class-theme-options.php:1330 inc/class-theme-options.php:1421
+msgid "例如：OpenAI主账号"
+msgstr ""
+
+#: inc/class-theme-options.php:874
+msgid "保存文章时，如果没有特色图片，自动使用文章中的第一张图片"
+msgstr ""
+
+#: user-center/profile.php:60
+msgid "保存更改"
+msgstr ""
+
+#: inc/class-theme-options.php:815
+msgid "保存此设置"
+msgstr ""
+
+#: inc/class-theme-options.php:213
+msgid "保存设置"
+msgstr ""
+
+#: inc/class-theme-options.php:1498
+msgid "保存设置后，可以测试所有启用的AI API连接是否正常。系统会自动测试每个API配置。"
+msgstr ""
+
+#: inc/class-theme-options.php:1118
+msgid "允许上传WebP格式图片（需要服务器支持）"
+msgstr ""
+
+#: inc/class-theme-options.php:1600
+msgid "允许绕过维护模式的IP地址，每行一个"
+msgstr ""
+
+#: inc/class-theme-options.php:317
+msgid "允许访客手动切换亮色/暗色模式"
+msgstr ""
+
+#: inc/class-theme-options.php:1122
+msgid "元数据"
+msgstr ""
+
+#: footer.php:62
+msgid "全部已读"
+msgstr ""
+
+#: user-center/notifications.php:62
+msgid "全部标记为已读"
+msgstr ""
+
+#: user-center/favorites.php:29
+msgid "共 %d 个作品"
+msgstr ""
+
+#: footer.php:64
+msgid "关闭"
+msgstr ""
+
+#: inc/class-theme-options.php:1188
+msgid "关闭 XML-RPC Pingback 功能"
+msgstr ""
+
+#: header.php:212
+msgid "关闭菜单"
+msgstr ""
+
+#: inc/class-theme-options.php:1135
+msgid "其他优化"
+msgstr ""
+
+#: inc/class-theme-options.php:865
+msgid "内容优化"
+msgstr ""
+
+#: inc/class-membership-analytics.php:517
+msgid "内容统计"
+msgstr ""
+
+#: inc/class-theme-options.php:1010
+msgid "减少CSS加载，如果前端不使用Dashicons图标"
+msgstr ""
+
+#: inc/class-theme-options.php:1000
+msgid "减少JS加载，但可能影响旧插件兼容性"
+msgstr ""
+
+#: inc/class-theme-options.php:984
+msgid "减少数据库写入，但可能丢失未保存的内容"
+msgstr ""
+
+#: inc/class-theme-options.php:968
+msgid "减少数据库负担，但无法恢复历史版本"
+msgstr ""
+
+#: header.php:193
+msgid "切换深色模式"
+msgstr ""
+
+#: inc/class-theme-options.php:1324 inc/class-theme-options.php:1415
+#: user-center/notifications.php:110
+msgid "删除"
+msgstr ""
+
+#: inc/class-theme-options.php:822
+msgid "刷新重写规则"
+msgstr ""
+
+#: inc/class-theme-options.php:1008
+msgid "前端禁用Dashicons（未登录用户）"
+msgstr ""
+
+#: inc/class-theme-options.php:946
+msgid "前端管理栏"
+msgstr ""
+
+#: inc/class-theme-options.php:542
+msgid "前端资源优化"
+msgstr ""
+
+#: user-center/dashboard.php:44 user-center/membership.php:59
+msgid "剩余 %d 天到期"
+msgstr ""
+
+#: user-center/profile.php:102
+msgid "剩余%d天"
+msgstr ""
+
+#: inc/class-theme-options.php:161
+msgid "功能优化"
+msgstr ""
+
+#: inc/class-theme-options.php:164
+msgid "功能增强"
+msgstr ""
+
+#: inc/class-theme-options.php:1473
+msgid "功能设置"
+msgstr ""
+
+#: user-center/dashboard.php:88
+msgid "加入时间"
+msgstr ""
+
+#: footer.php:69
+msgid "加载中..."
+msgstr ""
+
+#: inc/class-theme-options.php:1885
+msgid "加载性能数据"
+msgstr ""
+
+#: user-center/membership.php:165 user-center/membership.php:230
+msgid "升级SVIP"
+msgstr ""
+
+#: user-center/membership.php:151
+msgid "升级VIP"
+msgstr ""
+
+#: user-center/membership.php:325
+msgid "升级会员后，所有权益立即生效，您可以立即访问所有专属内容。"
+msgstr ""
+
+#: user-center/membership.php:76
+msgid "升级会员解锁更多特权"
+msgstr ""
+
+#: inc/class-theme-options.php:952
+msgid "即使登录后，前端页面也不显示顶部管理栏"
+msgstr ""
+
+#: inc/class-theme-options.php:585
+msgid "压缩CSS文件"
+msgstr ""
+
+#: inc/class-theme-options.php:660
+msgid "压缩HTML输出"
+msgstr ""
+
+#: inc/class-theme-options.php:599
+msgid "压缩JavaScript文件"
+msgstr ""
+
+#: inc/class-theme-options.php:551 inc/class-theme-options.php:557
+msgid "原始"
+msgstr ""
+
+#: user-center/dashboard.php:146
+msgid "去浏览一些精彩的作品吧！"
+msgstr ""
+
+#: user-center/favorites.php:146
+msgid "去浏览一些精彩的作品，点击星形图标即可收藏"
+msgstr ""
+
+#: inc/class-theme-options.php:343
+msgid "发布多少天内显示 \"New\" 角标"
+msgstr ""
+
+#: inc/class-ai-seo.php:513
+msgid "发布文章时自动生成 SEO 内容"
+msgstr ""
+
+#: inc/class-admin-posts-list.php:106
+msgid "取消会员专享"
+msgstr ""
+
+#: user-center/favorites.php:69
+msgid "取消收藏"
+msgstr ""
+
+#: inc/class-post-stats.php:335
+msgid "取消收藏失败"
+msgstr ""
+
+#: inc/class-theme-options.php:921
+msgid "古腾堡小工具（区块编辑器）"
+msgstr ""
+
+#: inc/class-theme-options.php:907
+msgid "古腾堡编辑器（区块编辑器）"
+msgstr ""
+
+#: inc/class-ai-seo.php:484
+msgid "可选，用于代理或自定义端点"
+msgstr ""
+
+#: inc/class-theme-options.php:589
+msgid "合并CSS文件"
+msgstr ""
+
+#: inc/class-theme-options.php:603
+msgid "合并JavaScript文件"
+msgstr ""
+
+#: inc/class-theme-options.php:934
+msgid "后台优化"
+msgstr ""
+
+#: inc/class-theme-options.php:1557
+msgid "向访客显示的维护信息，支持HTML标签"
+msgstr ""
+
+#: inc/class-theme-options.php:564
+msgid "否"
+msgstr ""
+
+#: inc/class-theme-options.php:1335 inc/class-theme-options.php:1426
+msgid "启用"
+msgstr ""
+
+#: inc/class-theme-options.php:509
+msgid "启用 Open Graph"
+msgstr ""
+
+#: inc/class-theme-options.php:1476
+msgid "启用AI生成"
+msgstr ""
+
+#: inc/class-theme-options.php:651
+msgid "启用Gzip压缩"
+msgstr ""
+
+#: inc/class-theme-options.php:1116
+msgid "启用WebP格式支持"
+msgstr ""
+
+#: inc/class-theme-options.php:572
+msgid "启用前端优化"
+msgstr ""
+
+#: inc/class-theme-options.php:1018
+msgid "启用前端性能监控"
+msgstr ""
+
+#: inc/class-theme-options.php:814
+msgid "启用后必须执行以下步骤："
+msgstr ""
+
+#: inc/class-theme-options.php:613 inc/class-theme-options.php:1213
+msgid "启用图片懒加载"
+msgstr ""
+
+#: inc/class-theme-options.php:1076
+msgid "启用图片自动压缩"
+msgstr ""
+
+#: inc/class-theme-options.php:576
+msgid "启用所有前端优化功能"
+msgstr ""
+
+#: inc/class-theme-options.php:1339 inc/class-theme-options.php:1430
+msgid "启用此API配置"
+msgstr ""
+
+#: inc/class-theme-options.php:1545
+msgid "启用维护模式"
+msgstr ""
+
+#: inc/class-theme-options.php:647
+msgid "启用缓存破坏"
+msgstr ""
+
+#: inc/class-theme-options.php:1567
+msgid "启用计划维护"
+msgstr ""
+
+#: functions.php:135
+msgid "回收站中未找到作品"
+msgstr ""
+
+#: inc/class-theme-options.php:1708
+msgid "图片Alt文本优化"
+msgstr ""
+
+#: inc/class-theme-options.php:562 inc/class-theme-options.php:609
+#: inc/class-theme-options.php:1069
+msgid "图片优化"
+msgstr ""
+
+#: inc/class-theme-options.php:1753
+msgid "图片优化管理"
+msgstr ""
+
+#: inc/class-theme-options.php:1209 inc/class-theme-options.php:1262
+msgid "图片懒加载"
+msgstr ""
+
+#: inc/class-theme-options.php:615 inc/class-theme-options.php:1215
+msgid "图片滚动到可视区域时才加载，提升页面加载速度"
+msgstr ""
+
+#: inc/class-theme-options.php:1535
+msgid "在 &lt;/body&gt; 标签前插入代码"
+msgstr ""
+
+#: inc/class-theme-options.php:1528
+msgid "在 &lt;head&gt; 标签内插入代码（如 Google Analytics）"
+msgstr ""
+
+#: user-center/profile.php:76
+msgid "在 Gravatar 修改头像"
+msgstr ""
+
+#: inc/class-theme-options.php:1273
+msgid "在文章元信息区域添加："
+msgstr ""
+
+#: inc/class-theme-options.php:1480
+msgid "在文章编辑页面显示AI生成面板"
+msgstr ""
+
+#: inc/class-theme-options.php:319
+msgid "在网站头部显示主题切换按钮，访客可以手动切换亮色/暗色模式"
+msgstr ""
+
+#: inc/class-theme-options.php:1269
+msgid "在需要显示面包屑的位置（如文章顶部）添加："
+msgstr ""
+
+#: inc/class-theme-options.php:358
+msgid "在首页作品网格末尾显示装饰性六边形"
+msgstr ""
+
+#: user-center/profile.php:35
+msgid "基本信息"
+msgstr ""
+
+#: inc/class-theme-options.php:685
+msgid "基础性能设置"
+msgstr ""
+
+#: inc/class-theme-options.php:173
+msgid "备份恢复"
+msgstr ""
+
+#: inc/class-theme-options.php:492
+msgid "多个关键词用英文逗号分隔"
+msgstr ""
+
+#: user-center/profile.php:66
+msgid "头像"
+msgstr ""
+
+#: inc/class-admin-posts-list.php:29
+msgid "头图"
+msgstr ""
+
+#: inc/class-theme-options.php:1260
+msgid "如何使用这些功能"
+msgstr ""
+
+#: user-center/membership.php:332
+msgid "如何升级会员？"
+msgstr ""
+
+#: user-center/membership.php:299
+msgid "如有疑问，请联系客服"
+msgstr ""
+
+#: inc/class-theme-options.php:1144
+msgid "如果不使用评论功能，可以移除相关CSS"
+msgstr ""
+
+#: inc/class-theme-options.php:619
+msgid "字体优化"
+msgstr ""
+
+#: inc/class-theme-options.php:1171
+msgid "安全设置"
+msgstr ""
+
+#: inc/class-theme-options.php:1039
+msgid "完全禁用"
+msgstr ""
+
+#: inc/class-theme-options.php:966
+msgid "完全禁用文章修订版本"
+msgstr ""
+
+#: inc/class-theme-options.php:1101
+msgid "宽度："
+msgstr ""
+
+#: inc/class-user-center.php:262 inc/class-user-center.php:278
+msgid "密码不正确，请重新输入。如忘记密码，可<a href=\"%s\">点击重置</a>"
+msgstr ""
+
+msgid "密码不正确，请重新输入。如忘记密码，可<a href=\\\"%s\\\">点击重置</a>"
+msgstr ""
+
+#: inc/class-theme-options.php:1178
+msgid "对未登录用户关闭 REST API"
+msgstr ""
+
+#: inc/class-theme-options.php:1549
+msgid "对非管理员用户显示维护页面"
+msgstr ""
+
+#: inc/class-theme-options.php:1692
+msgid "导入将覆盖当前所有设置，建议先导出备份。"
+msgstr ""
+
+#: inc/class-theme-options.php:1688 inc/class-theme-options.php:1702
+msgid "导入设置"
+msgstr ""
+
+#: inc/class-theme-options.php:1676
+msgid "导出当前所有主题设置为JSON文件，可用于备份或迁移到其他网站。"
+msgstr ""
+
+#: inc/class-membership-analytics.php:620
+msgid "导出报告"
+msgstr ""
+
+#: inc/class-theme-options.php:1675 inc/class-theme-options.php:1682
+msgid "导出设置"
+msgstr ""
+
+#: inc/class-theme-options.php:1232
+msgid "导航和阅读"
+msgstr ""
+
+#: inc/class-theme-options.php:2021
+msgid "将所有设置恢复为默认值。"
+msgstr ""
+
+#: user-center/membership.php:103
+msgid "尊享%d大特权，解锁所有专属内容"
+msgstr ""
+
+#: user-center/membership.php:92
+msgid "尊享%d大特权，解锁更多精品相册"
+msgstr ""
+
+#: inc/class-theme-options.php:917
+msgid "小工具编辑器"
+msgstr ""
+
+#: inc/class-admin-posts-list.php:185
+msgid "已取消 %d 篇文章的 VIP 专享状态。"
+msgstr ""
+
+#: inc/class-post-stats.php:332
+msgid "已取消收藏"
+msgstr ""
+
+#: inc/class-admin-posts-list.php:177
+msgid "已将 %d 篇文章设置为 SVIP 专享。"
+msgstr ""
+
+#: inc/class-admin-posts-list.php:169
+msgid "已将 %d 篇文章设置为 VIP 专享。"
+msgstr ""
+
+#: user-center/membership.php:321
+msgid "常见问题"
+msgstr ""
+
+#: inc/class-theme-options.php:149
+msgid "常规设置"
+msgstr ""
+
+#: inc/class-theme-options.php:637
+msgid "延迟非关键资源"
+msgstr ""
+
+#: inc/class-ai-seo.php:559
+msgid "建议 150-160 字符"
+msgstr ""
+
+#: inc/class-ai-seo.php:553
+msgid "建议5个关键词，用英文逗号分隔。关键词应自然、口语化，符合用户搜索习惯"
+msgstr ""
+
+#: inc/class-theme-options.php:1576
+msgid "开始时间"
+msgstr ""
+
+#: inc/class-theme-options.php:563
+msgid "张"
+msgstr ""
+
+#: inc/class-theme-options.php:350
+msgid "归档页面每页显示的作品数量"
+msgstr ""
+
+#: user-center/profile.php:73
+msgid "当前使用 Gravatar 头像"
+msgstr ""
+
+#: inc/class-theme-options.php:2044
+msgid "当前设置信息"
+msgstr ""
+
+#: user-center/profile.php:126
+msgid "快捷操作"
+msgstr ""
+
+#: inc/class-theme-options.php:1022
+msgid "快捷键："
+msgstr ""
+
+#: inc/class-theme-options.php:1879
+msgid "性能仪表盘"
+msgstr ""
+
+#: inc/class-theme-options.php:158
+msgid "性能优化"
+msgstr ""
+
+#: inc/class-theme-options.php:1014
+msgid "性能监控"
+msgstr ""
+
+#: inc/class-post-stats.php:340
+msgid "您已经收藏过了"
+msgstr ""
+
+#: user-center/membership.php:240
+msgid "您已经是SVIP会员，享受所有特权！"
+msgstr ""
+
+#: user-center/membership.php:161
+msgid "您已经是VIP会员"
+msgstr ""
+
+#: inc/class-post-stats.php:137
+msgid "您已经点赞过了"
+msgstr ""
+
+#: user-center/notifications.php:73
+msgid "您还没有收到任何通知"
+msgstr ""
+
+#: user-center/membership.php:162
+msgid "想要更多特权？"
+msgstr ""
+
+#: inc/class-post-stats.php:148
+msgid "感谢您的点赞！"
+msgstr ""
+
+#: inc/class-theme-options.php:563
+msgid "懒加载"
+msgstr ""
+
+#: inc/class-user-center.php:154 inc/class-user-center.php:174
+#: user-center.php:57 user-center/favorites.php:27
+msgid "我的收藏"
+msgstr ""
+
+#: inc/class-theme-options.php:818
+msgid "或点击下方按钮刷新重写规则"
+msgstr ""
+
+#: inc/class-theme-options.php:1249
+msgid "或获取分钟数："
+msgstr ""
+
+#: inc/class-theme-options.php:971
+msgid "或限制修订版本数量："
+msgstr ""
+
+#: functions.php:153
+msgid "所有作品分类"
+msgstr ""
+
+#: header.php:125
+msgid "打开菜单"
+msgstr ""
+
+#: user-center/membership.php:255
+msgid "扫码支付"
+msgstr ""
+
+#: inc/class-theme-options.php:1759
+msgid "批量优化图片"
+msgstr ""
+
+#: inc/class-theme-options.php:1754
+msgid "批量优化现有图片，查看优化统计和节省的存储空间。"
+msgstr ""
+
+#: inc/class-theme-options.php:1713
+msgid "批量更新Alt文本"
+msgstr ""
+
+#: 404.php:31
+msgid "抱歉，您访问的页面不存在或已被移除。"
+msgstr ""
+
+#: inc/class-theme-options.php:1571
+msgid "按时间计划自动启用/禁用维护模式"
+msgstr ""
+
+#: inc/class-theme-options.php:1052
+msgid "提升国内访问速度，但可能影响字体显示"
+msgstr ""
+
+#: inc/class-theme-options.php:1180
+msgid "提升安全性，防止数据泄露（登录用户仍可使用）"
+msgstr ""
+
+#: inc/class-ai-seo.php:574
+msgid "提示：点击按钮将使用最新提示词重新生成，会覆盖现有内容"
+msgstr ""
+
+#: inc/class-theme-options.php:878
+msgid "搜索优化"
+msgstr ""
+
+#: functions.php:133
+msgid "搜索作品"
+msgstr ""
+
+#: functions.php:152
+msgid "搜索作品分类"
+msgstr ""
+
+#: inc/class-theme-options.php:882
+msgid "搜索时只匹配文章标题（提升搜索速度）"
+msgstr ""
+
+#: inc/class-theme-enhancements.php:140
+msgid "搜索结果"
+msgstr ""
+
+#: user-center/favorites.php:196
+msgid "操作失败"
+msgstr ""
+
+#: user-center/membership.php:259
+msgid "支付二维码"
+msgstr ""
+
+#: user-center/membership.php:298
+msgid "支付完成后请保留支付凭证，以便核对"
+msgstr ""
+
+#: user-center/membership.php:290
+msgid "支付完成后，请截图保存支付凭证"
+msgstr ""
+
+#: user-center/membership.php:250
+msgid "支付方式"
+msgstr ""
+
+#: user-center/membership.php:276
+msgid "支付说明"
+msgstr ""
+
+#: inc/class-theme-options.php:1601
+msgid "支持单个IP（如：192.168.1.1）和CIDR格式（如：192.168.1.0/24）"
+msgstr ""
+
+#: inc/class-post-stats.php:407
+msgid "收藏"
+msgstr ""
+
+#: user-center/dashboard.php:76 user-center/profile.php:118
+msgid "收藏作品"
+msgstr ""
+
+#: inc/class-post-stats.php:351
+msgid "收藏失败"
+msgstr ""
+
+#: inc/class-post-stats.php:348
+msgid "收藏成功！"
+msgstr ""
+
+#: inc/class-theme-options.php:2059
+msgid "数据大小"
+msgstr ""
+
+#: inc/class-theme-options.php:959
+msgid "数据库优化"
+msgstr ""
+
+#: inc/class-theme-options.php:2051
+msgid "数据库表"
+msgstr ""
+
+#: inc/class-theme-options.php:2115
+msgid "文件上传失败"
+msgstr ""
+
+#: inc/class-theme-options.php:2128
+msgid "文件格式不正确"
+msgstr ""
+
+#: inc/class-theme-options.php:962
+msgid "文章修订版本"
+msgstr ""
+
+#: inc/class-theme-options.php:903
+msgid "文章编辑器"
+msgstr ""
+
+#: functions.php:329
+msgid "文章页侧边栏"
+msgstr ""
+
+#: functions.php:331
+msgid "文章页右侧边栏小工具区域"
+msgstr ""
+
+#: functions.php:131
+msgid "新作品"
+msgstr ""
+
+#: functions.php:157
+msgid "新作品分类名称"
+msgstr ""
+
+#: inc/class-theme-options.php:340
+msgid "新作品天数"
+msgstr ""
+
+#: inc/class-theme-options.php:1489
+msgid "新文章默认启用\"保存时自动生成\""
+msgstr ""
+
+#: inc/class-theme-options.php:2123
+msgid "无效的JSON文件"
+msgstr ""
+
+#: inc/class-post-stats.php:131 inc/class-post-stats.php:322
+msgid "无效的文章"
+msgstr ""
+
+#: inc/class-theme-options.php:299
+msgid "日出时间"
+msgstr ""
+
+#: inc/class-theme-options.php:306
+msgid "日落时间"
+msgstr ""
+
+#: inc/class-theme-options.php:1627
+msgid "时间"
+msgstr ""
+
+#: inc/class-theme-options.php:564
+msgid "是"
+msgstr ""
+
+#: inc/class-theme-options.php:354
+msgid "显示 \"Brain Powered Fun\" 六边形"
+msgstr ""
+
+#: inc/class-theme-options.php:1023
+msgid "显示/隐藏工具栏"
+msgstr ""
+
+#: inc/class-theme-options.php:313
+msgid "显示主题切换按钮"
+msgstr ""
+
+#: user-center/profile.php:50
+msgid "显示名称"
+msgstr ""
+
+#: inc/class-theme-options.php:1223
+msgid "显示返回顶部按钮"
+msgstr ""
+
+#: index.php:44
+msgid "暂无内容"
+msgstr ""
+
+#: inc/class-post-stats.php:372
+msgid "暂无收藏的作品"
+msgstr ""
+
+#: archive.php:62 category.php:39 front-page.php:156 home.php:122
+msgid "暂无文章"
+msgstr ""
+
+#: inc/class-theme-options.php:293
+msgid "暗色模式"
+msgstr ""
+
+#: inc/class-theme-options.php:242
+msgid "更换LOGO"
+msgstr ""
+
+#: inc/class-theme-options.php:267
+msgid "更换图标"
+msgstr ""
+
+#: functions.php:155
+msgid "更新作品分类"
+msgstr ""
+
+#: inc/class-theme-options.php:1148
+msgid "更新邮件通知"
+msgstr ""
+
+#: inc/class-theme-options.php:2063
+msgid "最后更新"
+msgstr ""
+
+#: inc/class-theme-options.php:2035
+msgid "最后确认：真的要重置吗？"
+msgstr ""
+
+#: inc/class-theme-options.php:1098
+msgid "最大尺寸"
+msgstr ""
+
+#: user-center/dashboard.php:115
+msgid "最近收藏"
+msgstr ""
+
+#: inc/class-theme-options.php:1622
+msgid "最近访问日志"
+msgstr ""
+
+#: functions.php:134
+msgid "未找到作品"
+msgstr ""
+
+#: inc/class-theme-options.php:745 inc/class-theme-options.php:780
+msgid "未知错误"
+msgstr ""
+
+#: inc/class-theme-options.php:1630
+msgid "来源"
+msgstr ""
+
+#: template-parts/content-post.php:154
+msgid "查看 %s"
+msgstr ""
+
+#: functions.php:132
+msgid "查看作品"
+msgstr ""
+
+#: user-center/dashboard.php:117
+msgid "查看全部"
+msgstr ""
+
+#: user-center/profile.php:132
+msgid "查看我的收藏"
+msgstr ""
+
+#: inc/class-theme-options.php:1763
+msgid "查看统计"
+msgstr ""
+
+#: user-center/notifications.php:105
+msgid "标记已读"
+msgstr ""
+
+#: inc/class-ai-seo.php:489
+msgid "模型"
+msgstr ""
+
+#: inc/class-theme-options.php:1363 inc/class-theme-options.php:1449
+msgid "模型名称"
+msgstr ""
+
+#: user-center/dashboard.php:22
+msgid "欢迎回来，%s"
+msgstr ""
+
+#: inc/class-theme-options.php:730
+msgid "正在优化资源..."
+msgstr ""
+
+#: inc/class-theme-options.php:1723
+msgid "正在更新..."
+msgstr ""
+
+#: inc/class-theme-options.php:765
+msgid "正在清除缓存..."
+msgstr ""
+
+#: inc/class-ai-seo.php:586
+msgid "正在生成..."
+msgstr ""
+
+#: inc/class-theme-options.php:2024
+msgid "此操作不可恢复，建议先导出备份。"
+msgstr ""
+
+#: inc/class-theme-options.php:347
+msgid "每页显示作品数"
+msgstr ""
+
+#: inc/class-user-center.php:437
+msgid "注册成功！"
+msgstr ""
+
+#: user-center/profile.php:112
+msgid "注册时间"
+msgstr ""
+
+#: inc/class-theme-options.php:591
+msgid "注意：合并CSS可能导致FOUC（无样式内容闪烁），建议谨慎使用"
+msgstr ""
+
+#: inc/class-theme-options.php:605
+msgid "注意：合并JS可能导致兼容性问题，建议谨慎使用"
+msgstr ""
+
+#: inc/class-theme-options.php:639
+msgid "注意：延迟加载可能导致FOUC，建议谨慎使用"
+msgstr ""
+
+#: inc/class-theme-options.php:1500
+msgid "测试所有API"
+msgstr ""
+
+#: inc/class-theme-options.php:1497
+msgid "测试连接"
+msgstr ""
+
+#: user-center/dashboard.php:148 user-center/favorites.php:148
+msgid "浏览作品"
+msgstr ""
+
+#: user-center/profile.php:138
+msgid "浏览作品集"
+msgstr ""
+
+#: inc/class-theme-options.php:704
+msgid "浏览器缓存时间"
+msgstr ""
+
+#: inc/class-theme-seo.php:86
+msgid "浏览所有作品"
+msgstr ""
+
+#: inc/class-admin-posts-list.php:367 inc/class-post-stats.php:405
+msgid "浏览量"
+msgstr ""
+
+#: functions.php:128
+msgid "添加作品"
+msgstr ""
+
+#: functions.php:156
+msgid "添加作品分类"
+msgstr ""
+
+#: functions.php:129
+msgid "添加新作品"
+msgstr ""
+
+#: inc/class-theme-options.php:1521
+msgid "添加自定义 CSS 代码，无需修改主题文件"
+msgstr ""
+
+#: inc/class-theme-options.php:887
+msgid "清理图片HTML"
+msgstr ""
+
+#: inc/class-theme-options.php:764
+msgid "清除中..."
+msgstr ""
+
+#: inc/class-theme-options.php:676 inc/class-theme-options.php:775
+#: inc/class-theme-options.php:785
+msgid "清除优化缓存"
+msgstr ""
+
+#: inc/class-theme-options.php:780
+msgid "清除失败："
+msgstr ""
+
+#: inc/class-theme-options.php:1647 inc/class-theme-options.php:1889
+msgid "清除日志"
+msgstr ""
+
+#: inc/class-theme-options.php:817
+msgid "点击\"保存更改\"按钮"
+msgstr ""
+
+#: user-center/membership.php:288
+msgid "点击\"升级VIP\"或\"升级SVIP\"按钮"
+msgstr ""
+
+#: user-center/membership.php:333
+msgid "点击上方的升级按钮，按照提示完成支付即可升级会员。"
+msgstr ""
+
+#: inc/class-post-stats.php:406
+msgid "点赞"
+msgstr ""
+
+#: inc/class-theme-options.php:1056
+msgid "版本号"
+msgstr ""
+
+#: inc/class-theme-options.php:369
+msgid "版权文本"
+msgstr ""
+
+#: inc/class-ai-seo.php:604
+msgid "生成失败"
+msgstr ""
+
+#: inc/class-ai-seo.php:499
+msgid "生成语言"
+msgstr ""
+
+#: inc/class-theme-options.php:1331 inc/class-theme-options.php:1422
+msgid "用于标识此API配置"
+msgstr ""
+
+#: header.php:164 inc/class-user-center.php:153 inc/class-user-center.php:163
+#: inc/class-user-center.php:173 inc/class-user-center.php:183
+msgid "用户中心"
+msgstr ""
+
+#: inc/class-theme-options.php:1206
+msgid "用户体验增强"
+msgstr ""
+
+#: user-center/profile.php:38
+msgid "用户名"
+msgstr ""
+
+#: user-center/profile.php:40
+msgid "用户名不可修改"
+msgstr ""
+
+#: inc/class-user-center.php:267 inc/class-user-center.php:282
+msgid "用户名或邮箱不存在，请检查后重试"
+msgstr ""
+
+#: inc/class-theme-options.php:383
+msgid "留空则使用默认文本。支持 HTML。"
+msgstr ""
+
+#: inc/class-user-center.php:584
+msgid "登录"
+msgstr ""
+
+#: inc/class-user-center.php:285
+msgid "登录失败，请检查用户名和密码"
+msgstr ""
+
+#: inc/class-user-center.php:394
+msgid "登录成功！"
+msgstr ""
+
+#: inc/class-theme-options.php:1021
+msgid "监控前端页面性能指标，包括加载时间、内存使用、数据库查询次数等，并提供优化建议。仅在前端页面显示，管理员可见。"
+msgstr ""
+
+#: inc/class-theme-options.php:1880
+msgid "监控网站性能指标，包括页面加载时间、内存使用、数据库查询等。"
+msgstr ""
+
+#: inc/class-theme-options.php:1158
+msgid "短代码段落"
+msgstr ""
+
+#: inc/class-theme-options.php:1464
+msgid "确定要删除此API配置吗？"
+msgstr ""
+
+#: user-center/favorites.php:167
+msgid "确定要取消收藏这个作品吗？"
+msgstr ""
+
+#: inc/class-theme-options.php:758
+msgid "确定要清除优化缓存吗？"
+msgstr ""
+
+#: inc/class-theme-options.php:2034
+msgid "确定要重置所有设置吗？此操作不可恢复！"
+msgstr ""
+
+#: inc/class-theme-options.php:420
+msgid "社交媒体链接"
+msgstr ""
+
+#: inc/class-theme-options.php:152
+msgid "社交链接"
+msgstr ""
+
+#: inc/class-theme-options.php:688
+msgid "禁用 Emoji"
+msgstr ""
+
+#: inc/class-theme-options.php:692
+msgid "禁用 WordPress 默认的 Emoji 脚本"
+msgstr ""
+
+#: inc/class-theme-options.php:1050
+msgid "禁用Google字体加载"
+msgstr ""
+
+#: inc/class-theme-options.php:1184
+msgid "禁用XML-RPC Pingback"
+msgstr ""
+
+#: inc/class-theme-options.php:982
+msgid "禁用编辑器自动保存"
+msgstr ""
+
+#: inc/class-theme-options.php:1152
+msgid "禁用自动更新邮件通知"
+msgstr ""
+
+#: inc/class-membership-admin.php:823
+msgid "移除"
+msgstr ""
+
+#: inc/class-theme-options.php:893
+msgid "移除 width、height、class、srcset 等属性，只保留 src 和 alt"
+msgstr ""
+
+#: inc/class-theme-options.php:1060
+msgid "移除CSS/JS文件的版本号参数"
+msgstr ""
+
+#: inc/class-theme-options.php:662
+msgid "移除HTML中的空白字符，减小页面大小"
+msgstr ""
+
+#: inc/class-theme-options.php:246
+msgid "移除LOGO"
+msgstr ""
+
+#: inc/class-theme-options.php:998
+msgid "移除jQuery Migrate脚本"
+msgstr ""
+
+#: inc/class-theme-options.php:805
+msgid "移除分类前缀"
+msgstr ""
+
+#: inc/class-theme-options.php:809
+msgid "移除分类链接中的 /category/ 前缀"
+msgstr ""
+
+#: inc/class-theme-options.php:941
+msgid "移除后台管理栏的 WordPress Logo"
+msgstr ""
+
+#: inc/class-theme-options.php:271
+msgid "移除图标"
+msgstr ""
+
+#: inc/class-theme-options.php:1126
+msgid "移除图片EXIF数据"
+msgstr ""
+
+#: inc/class-theme-options.php:891
+msgid "移除插入图片时的冗余HTML属性"
+msgstr ""
+
+#: inc/class-theme-options.php:1128
+msgid "移除相机信息、GPS位置等隐私数据，减少文件大小"
+msgstr ""
+
+#: inc/class-theme-options.php:1162
+msgid "移除短代码周围的自动段落标签"
+msgstr ""
+
+#: inc/class-theme-options.php:1142
+msgid "移除评论相关样式"
+msgstr ""
+
+#: inc/class-theme-options.php:937
+msgid "移除顶部Logo"
+msgstr ""
+
+#: inc/class-membership-admin.php:140
+msgid "系统工具"
+msgstr ""
+
+#: inc/class-membership-admin.php:131
+msgid "系统概览"
+msgstr ""
+
+#: inc/class-membership-admin.php:137
+msgid "系统设置"
+msgstr ""
+
+#: inc/class-theme-options.php:924
+msgid "经典小工具"
+msgstr ""
+
+#: inc/class-theme-options.php:910
+msgid "经典编辑器（TinyMCE）"
+msgstr ""
+
+#: inc/class-theme-options.php:1583
+msgid "结束时间"
+msgstr ""
+
+#: user-center/membership.php:235
+msgid "续费SVIP"
+msgstr ""
+
+#: user-center/membership.php:156
+msgid "续费VIP"
+msgstr ""
+
+#: inc/class-theme-options.php:1579
+msgid "维护开始时间（可选，留空表示立即开始）"
+msgstr ""
+
+#: inc/class-theme-options.php:1554
+msgid "维护提示信息"
+msgstr ""
+
+#: inc/class-theme-options.php:1542
+msgid "维护模式"
+msgstr ""
+
+#: inc/class-theme-options.php:1586
+msgid "维护结束时间（可选，留空表示手动结束）"
+msgstr ""
+
+#: inc/class-theme-options.php:643
+msgid "缓存和压缩"
+msgstr ""
+
+#: inc/class-theme-options.php:777
+msgid "缓存已清除！"
+msgstr ""
+
+#: inc/class-theme-options.php:701
+msgid "缓存设置"
+msgstr ""
+
+#: functions.php:130
+msgid "编辑作品"
+msgstr ""
+
+#: functions.php:154
+msgid "编辑作品分类"
+msgstr ""
+
+#: inc/class-theme-options.php:900
+msgid "编辑器设置"
+msgstr ""
+
+#: inc/class-theme-options.php:254
+msgid "网站Favicon图标"
+msgstr ""
+
+#: inc/class-theme-options.php:229
+msgid "网站LOGO"
+msgstr ""
+
+#: inc/class-theme-options.php:226
+msgid "网站标识"
+msgstr ""
+
+#: inc/class-theme-options.php:1556
+msgid "网站正在维护中，请稍后访问。"
+msgstr ""
+
+#: inc/class-theme-options.php:499
+msgid "网站首页的 meta description，建议 150-160 字符"
+msgstr ""
+
+#: user-center/favorites.php:200
+msgid "网络错误，请稍后重试"
+msgstr ""
+
+#: user-center/membership.php:291
+msgid "联系客服或发送支付凭证，我们将在24小时内为您开通会员"
+msgstr ""
+
+#: user-center/membership.php:308
+msgid "联系方式："
+msgstr ""
+
+#: inc/class-theme-options.php:991
+msgid "脚本优化"
+msgstr ""
+
+#: inc/class-theme-options.php:1263
+msgid "自动为所有图片添加懒加载，无需额外操作。"
+msgstr ""
+
+#: inc/class-theme-options.php:978
+msgid "自动保存"
+msgstr ""
+
+#: inc/class-theme-options.php:1072
+msgid "自动压缩"
+msgstr ""
+
+#: inc/class-theme-options.php:872
+msgid "自动将文章第一张图片设为特色图片"
+msgstr ""
+
+#: inc/class-theme-options.php:1266
+msgid "自动显示在页面右下角，无需额外操作。"
+msgstr ""
+
+#: inc/class-theme-options.php:868
+msgid "自动特色图片"
+msgstr ""
+
+#: inc/class-ai-seo.php:509
+msgid "自动生成"
+msgstr ""
+
+#: inc/class-theme-options.php:291
+msgid "自动（根据日落时间）"
+msgstr ""
+
+#: inc/class-ai-seo.php:481
+msgid "自定义 API 端点"
+msgstr ""
+
+#: inc/class-theme-options.php:1518
+msgid "自定义 CSS"
+msgstr ""
+
+#: inc/class-theme-options.php:1515
+msgid "自定义代码"
+msgstr ""
+
+#: inc/class-theme-options.php:485
+msgid "自定义首页 SEO 标题，留空使用默认"
+msgstr ""
+
+#: inc/class-theme-options.php:553 inc/class-theme-options.php:559
+msgid "节省"
+msgstr ""
+
+#: inc/class-membership-analytics.php:547
+msgid "被拒绝访问"
+msgstr ""
+
+#: inc/class-theme-options.php:1691 inc/class-theme-options.php:2023
+msgid "警告："
+msgstr ""
+
+#: inc/class-theme-options.php:1564
+msgid "计划维护"
+msgstr ""
+
+#: inc/class-theme-options.php:1610
+msgid "记录维护期间的访问日志"
+msgstr ""
+
+#: inc/class-theme-options.php:1612
+msgid "记录访问维护页面的用户信息，用于分析和安全监控"
+msgstr ""
+
+#: inc/class-admin-posts-list.php:105
+msgid "设置为 SVIP 专享"
+msgstr ""
+
+#: inc/class-admin-posts-list.php:104
+msgid "设置为 VIP 专享"
+msgstr ""
+
+#: inc/class-theme-options.php:2135
+msgid "设置导入成功！"
+msgstr ""
+
+#: inc/class-theme-options.php:2082
+msgid "设置已重置为默认值"
+msgstr ""
+
+#: inc/class-theme-options.php:302
+msgid "设置日出时间（24小时制），日出后自动切换到亮色模式"
+msgstr ""
+
+#: inc/class-theme-options.php:309
+msgid "设置日落时间（24小时制），日落后自动切换到暗色模式"
+msgstr ""
+
+#: inc/class-theme-options.php:712
+msgid "设置静态资源的浏览器缓存时间"
+msgstr ""
+
+#: inc/class-theme-options.php:2055
+msgid "设置项数量"
+msgstr ""
+
+#: inc/class-theme-options.php:1606
+msgid "访问日志"
+msgstr ""
+
+#: inc/class-membership-analytics.php:574
+msgid "访问趋势"
+msgstr ""
+
+#: inc/class-theme-options.php:1629
+msgid "访问页面"
+msgstr ""
+
+#: inc/class-theme-options.php:1138
+msgid "评论样式"
+msgstr ""
+
+#: inc/class-ai-seo.php:619
+msgid "请先在 %s 中配置 AI API Key 以启用 AI 生成功能"
+msgstr ""
+
+#: inc/class-post-stats.php:313 inc/class-user-center.php:333
+msgid "请先登录"
+msgstr ""
+
+#: inc/class-post-stats.php:361
+msgid "请先登录查看收藏"
+msgstr ""
+
+#: inc/class-ai-seo.php:609 inc/class-theme-options.php:751
+#: inc/class-theme-options.php:786
+msgid "请求失败"
+msgstr ""
+
+#: user-center/membership.php:297
+msgid "请确保支付金额与所选会员类型一致"
+msgstr ""
+
+#: user-center/membership.php:269
+msgid "请管理员在后台设置支付二维码"
+msgstr ""
+
+#: inc/class-user-center.php:273
+msgid "请输入密码"
+msgstr ""
+
+#: inc/class-user-center.php:270
+msgid "请输入用户名或邮箱"
+msgstr ""
+
+#: user-center/profile.php:80
+msgid "账户统计"
+msgstr ""
+
+#: inc/class-theme-options.php:742
+msgid "资源优化完成！"
+msgstr ""
+
+#: inc/class-theme-options.php:629
+msgid "资源加载"
+msgstr ""
+
+#: inc/class-theme-options.php:1108
+msgid "超过此尺寸的图片将被自动缩放"
+msgstr ""
+
+#: inc/class-membership-analytics.php:565
+msgid "跳出率"
+msgstr ""
+
+#: header.php:92
+msgid "跳转到内容"
+msgstr ""
+
+#: inc/class-membership-analytics.php:557
+#: inc/class-membership-analytics.php:595
+msgid "转化率"
+msgstr ""
+
+#: inc/class-membership-analytics.php:579
+msgid "转化趋势"
+msgstr ""
+
+#: inc/class-ai-seo.php:476
+msgid "输入您的 API Key"
+msgstr ""
+
+#: inc/class-theme-options.php:1219 inc/class-theme-options.php:1265
+msgid "返回顶部按钮"
+msgstr ""
+
+#: 404.php:38 user-center/profile.php:144
+msgid "返回首页"
+msgstr ""
+
+#: user-center/dashboard.php:145 user-center/favorites.php:145
+msgid "还没有收藏任何作品"
+msgstr ""
+
+#: inc/class-theme-options.php:816
+msgid "进入\"设置 > 固定链接\""
+msgstr ""
+
+#: user-center.php:106
+msgid "进入后台"
+msgstr ""
+
+#: user-center.php:121
+msgid "退出登录"
+msgstr ""
+
+#: inc/class-ai-seo.php:468
+msgid "选择 AI 服务提供商"
+msgstr ""
+
+#: inc/class-theme-options.php:242
+msgid "选择LOGO"
+msgstr ""
+
+#: inc/class-theme-options.php:267
+msgid "选择图标"
+msgstr ""
+
+#: inc/class-membership-admin.php:816
+msgid "选择图片"
+msgstr ""
+
+#: inc/class-theme-options.php:927
+msgid "选择小工具管理时使用的编辑器类型"
+msgstr ""
+
+#: user-center/membership.php:287
+msgid "选择您要购买的会员类型（VIP或SVIP）"
+msgstr ""
+
+#: inc/class-theme-options.php:913
+msgid "选择文章编辑时使用的编辑器类型"
+msgstr ""
+
+#: inc/class-theme-options.php:295
+msgid "选择网站的默认显示模式。选择\"自动\"时，主题将根据设置的日出日落时间自动切换亮色/暗色模式。"
+msgstr ""
+
+#: inc/class-theme-options.php:2047
+msgid "选项名称"
+msgstr ""
+
+#: header.php:157 header.php:175
+msgid "通知"
+msgstr ""
+
+#: inc/class-theme-options.php:1164
+msgid "避免短代码输出格式问题"
+msgstr ""
+
+#: inc/class-theme-options.php:425 user-center/profile.php:44
+msgid "邮箱地址"
+msgstr ""
+
+#: user-center/profile.php:46
+msgid "邮箱地址不可修改"
+msgstr ""
+
+#: inc/class-theme-options.php:421
+msgid "配置侧边栏显示的社交媒体链接和图标"
+msgstr ""
+
+#: inc/class-theme-options.php:1328 inc/class-theme-options.php:1419
+msgid "配置名称"
+msgstr ""
+
+#: inc/class-theme-options.php:1317
+msgid ""
+"配置多个AI服务用于自动生成文章摘要和关键词。支持OpenAI兼容接口（OpenAI、Azure "
+"OpenAI、通义千问、文心一言等）。系统会自动轮询使用可用的API。"
+msgstr ""
+
+#: inc/class-theme-options.php:2431
+msgid "重写规则已刷新"
+msgstr ""
+
+#: inc/class-theme-options.php:672 inc/class-theme-options.php:740
+#: inc/class-theme-options.php:750
+msgid "重新优化资源"
+msgstr ""
+
+#: inc/class-theme-options.php:1024
+msgid "重新显示"
+msgstr ""
+
+#: inc/class-theme-options.php:2029
+msgid "重置所有设置"
+msgstr ""
+
+#: inc/class-theme-options.php:2020
+msgid "重置设置"
+msgstr ""
+
+#: inc/class-theme-options.php:813
+msgid "重要："
+msgstr ""
+
+#: inc/class-theme-options.php:1272
+msgid "阅读时间"
+msgstr ""
+
+#: inc/class-theme-options.php:1244
+msgid "阅读时间估算"
+msgstr ""
+
+#: inc/class-theme-options.php:1247
+msgid "阅读时间估算已启用，在模板中使用以下代码显示："
+msgstr ""
+
+#: inc/class-theme-options.php:1190
+msgid "防止 DDoS 攻击，提升安全性"
+msgstr ""
+
+#: inc/class-theme-options.php:1036
+msgid "降低频率（60秒）"
+msgstr ""
+
+#: inc/class-theme-options.php:1174
+msgid "限制REST API"
+msgstr ""
+
+#: inc/class-theme-options.php:950
+msgid "隐藏前端顶部管理栏"
+msgstr ""
+
+#: inc/class-theme-options.php:1062
+msgid "隐藏版本信息，提升安全性"
+msgstr ""
+
+#: inc/class-theme-enhancements.php:102 inc/class-theme-options.php:1235
+#: inc/class-theme-options.php:1268
+msgid "面包屑导航"
+msgstr ""
+
+#: inc/class-theme-options.php:1238
+msgid "面包屑导航已启用，在模板中使用以下代码显示："
+msgstr ""
+
+#: functions.php:318
+msgid "页脚区域"
+msgstr ""
+
+#: functions.php:320
+msgid "页脚小工具区域"
+msgstr ""
+
+#: inc/class-theme-options.php:366
+msgid "页脚设置"
+msgstr ""
+
+#: inc/class-theme-options.php:1225
+msgid "页面滚动超过300px时显示，点击平滑滚动到顶部"
+msgstr ""
+
+#: inc/class-theme-options.php:633
+msgid "预加载关键资源"
+msgstr ""
+
+#: inc/class-theme-enhancements.php:100
+msgid "首页"
+msgstr ""
+
+#: inc/class-theme-options.php:489
+msgid "首页关键词"
+msgstr ""
+
+#: inc/class-theme-options.php:496
+msgid "首页描述"
+msgstr ""
+
+#: inc/class-theme-options.php:482
+msgid "首页标题"
+msgstr ""
+
+#: inc/class-theme-options.php:1105
+msgid "高度："
+msgstr ""
+
+#: inc/class-theme-options.php:285
+msgid "默认主题模式"
+msgstr ""
+
+#: inc/class-theme-options.php:1485
+msgid "默认自动生成"
+msgstr ""
+
+#: inc/class-theme-options.php:1033
+msgid "默认（15秒）"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "📊 Percentage Preview - Show X% of content"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "🔤 Auto Preview - Show first N characters"
+msgstr ""
+
+#: inc/class-membership-meta-box.php:0
+msgid "🚫 No Preview - Hide content completely"
+msgstr ""

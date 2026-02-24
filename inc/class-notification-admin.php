@@ -31,8 +31,8 @@ class folio_Notification_Admin {
     public function add_admin_menu() {
         add_submenu_page(
             'users.php',
-            '会员通知管理',
-            '会员通知',
+            __('Membership Notification Management', 'folio'),
+            __('Membership Notifications', 'folio'),
             'manage_options',
             'folio-notifications',
             array($this, 'admin_page')
@@ -47,14 +47,14 @@ class folio_Notification_Admin {
         
         add_settings_section(
             'folio_notification_email',
-            '邮件通知设置',
+            __('Email Notification Settings', 'folio'),
             array($this, 'email_section_callback'),
             'folio_notifications'
         );
         
         add_settings_field(
             'email_enabled',
-            '启用邮件通知',
+            __('Enable Email Notifications', 'folio'),
             array($this, 'email_enabled_callback'),
             'folio_notifications',
             'folio_notification_email'
@@ -62,7 +62,7 @@ class folio_Notification_Admin {
         
         add_settings_field(
             'reminder_days',
-            '提醒天数',
+            __('Reminder Days', 'folio'),
             array($this, 'reminder_days_callback'),
             'folio_notifications',
             'folio_notification_email'
@@ -70,7 +70,7 @@ class folio_Notification_Admin {
         
         add_settings_field(
             'from_email',
-            '发件人邮箱',
+            __('From Email', 'folio'),
             array($this, 'from_email_callback'),
             'folio_notifications',
             'folio_notification_email'
@@ -78,7 +78,7 @@ class folio_Notification_Admin {
         
         add_settings_field(
             'from_name',
-            '发件人名称',
+            __('From Name', 'folio'),
             array($this, 'from_name_callback'),
             'folio_notifications',
             'folio_notification_email'
@@ -87,7 +87,7 @@ class folio_Notification_Admin {
         // 添加通知类型邮件开关设置部分
         add_settings_section(
             'folio_notification_types',
-            '通知类型邮件设置',
+            __('Notification Type Email Settings', 'folio'),
             array($this, 'notification_types_section_callback'),
             'folio_notifications'
         );
@@ -107,14 +107,14 @@ class folio_Notification_Admin {
         
         add_settings_section(
             'folio_smtp_settings',
-            'SMTP 邮件服务器设置（可选）',
+            __('SMTP Mail Server Settings (Optional)', 'folio'),
             array($this, 'smtp_section_callback'),
             'folio_notifications'
         );
         
         add_settings_field(
             'smtp_enabled',
-            '启用 SMTP',
+            __('Enable SMTP', 'folio'),
             array($this, 'smtp_enabled_callback'),
             'folio_notifications',
             'folio_smtp_settings'
@@ -122,7 +122,7 @@ class folio_Notification_Admin {
         
         add_settings_field(
             'smtp_host',
-            'SMTP 服务器',
+            __('SMTP Server', 'folio'),
             array($this, 'smtp_host_callback'),
             'folio_notifications',
             'folio_smtp_settings'
@@ -130,7 +130,7 @@ class folio_Notification_Admin {
         
         add_settings_field(
             'smtp_port',
-            'SMTP 端口',
+            __('SMTP Port', 'folio'),
             array($this, 'smtp_port_callback'),
             'folio_notifications',
             'folio_smtp_settings'
@@ -138,7 +138,7 @@ class folio_Notification_Admin {
         
         add_settings_field(
             'smtp_encryption',
-            '加密方式',
+            __('Encryption Method', 'folio'),
             array($this, 'smtp_encryption_callback'),
             'folio_notifications',
             'folio_smtp_settings'
@@ -146,7 +146,7 @@ class folio_Notification_Admin {
         
         add_settings_field(
             'smtp_username',
-            'SMTP 用户名',
+            __('SMTP Username', 'folio'),
             array($this, 'smtp_username_callback'),
             'folio_notifications',
             'folio_smtp_settings'
@@ -154,7 +154,7 @@ class folio_Notification_Admin {
         
         add_settings_field(
             'smtp_password',
-            'SMTP 密码',
+            __('SMTP Password', 'folio'),
             array($this, 'smtp_password_callback'),
             'folio_notifications',
             'folio_smtp_settings'
@@ -170,17 +170,17 @@ class folio_Notification_Admin {
         
         ?>
         <div class="wrap">
-            <h1>会员通知管理</h1>
+            <h1><?php esc_html_e('Membership Notification Management', 'folio'); ?></h1>
             
             <?php settings_errors(); ?>
             
             <!-- 标签导航 -->
             <nav class="nav-tab-wrapper">
-                <a href="?page=folio-notifications&tab=notifications" class="nav-tab <?php echo $current_tab === 'notifications' ? 'nav-tab-active' : ''; ?>">
-                    <span class="dashicons dashicons-bell"></span> 站内通知管理
+                <a href="?page=folio-notifications&tab=notifications" class="nav-tab <?php echo esc_attr($current_tab === 'notifications' ? 'nav-tab-active' : ''); ?>">
+                    <span class="dashicons dashicons-bell"></span> <?php esc_html_e('On-site Notification Management', 'folio'); ?>
                 </a>
-                <a href="?page=folio-notifications&tab=email" class="nav-tab <?php echo $current_tab === 'email' ? 'nav-tab-active' : ''; ?>">
-                    <span class="dashicons dashicons-email"></span> 邮件通知设置
+                <a href="?page=folio-notifications&tab=email" class="nav-tab <?php echo esc_attr($current_tab === 'email' ? 'nav-tab-active' : ''); ?>">
+                    <span class="dashicons dashicons-email"></span> <?php esc_html_e('Email Notification Settings', 'folio'); ?>
                 </a>
             </nav>
             
@@ -273,85 +273,85 @@ class folio_Notification_Admin {
             <!-- 统计卡片 -->
             <div class="folio-stats-cards" style="display: flex; gap: 20px; margin: 20px 0;">
                 <div class="folio-stat-card" style="background: #fff; padding: 20px; border: 1px solid #ccd0d4; border-radius: 4px; flex: 1;">
-                    <h3 style="margin: 0 0 10px 0; color: #23282d;">总通知数</h3>
+                    <h3 style="margin: 0 0 10px 0; color: #23282d;"><?php esc_html_e('Total Notifications', 'folio'); ?></h3>
                     <p style="font-size: 24px; font-weight: bold; margin: 0; color: #0073aa;"><?php echo $total_notifications; ?></p>
                 </div>
                 <div class="folio-stat-card" style="background: #fff; padding: 20px; border: 1px solid #ccd0d4; border-radius: 4px; flex: 1;">
-                    <h3 style="margin: 0 0 10px 0; color: #23282d;">未读通知</h3>
+                    <h3 style="margin: 0 0 10px 0; color: #23282d;"><?php esc_html_e('Unread Notifications', 'folio'); ?></h3>
                     <p style="font-size: 24px; font-weight: bold; margin: 0; color: #d63638;"><?php echo $unread_notifications; ?></p>
                 </div>
             </div>
             
             <!-- 发送通知 -->
             <div class="folio-send-notification" style="background: #fff; padding: 20px; border: 1px solid #ccd0d4; border-radius: 4px; margin: 20px 0;">
-                <h3>发送站内通知</h3>
+                <h3><?php esc_html_e('Send On-site Notification', 'folio'); ?></h3>
                 <form id="send-notification-form" style="margin-top: 15px;">
                     <table class="form-table">
                         <tr>
-                            <th scope="row"><label for="notification-recipient-type">发送给</label></th>
+                            <th scope="row"><label for="notification-recipient-type"><?php esc_html_e('Send To', 'folio'); ?></label></th>
                             <td>
                                 <select id="notification-recipient-type" name="recipient_type" style="width: 200px;" onchange="toggleRecipientOptions()">
-                                    <option value="single">单个用户</option>
-                                    <option value="multiple">多个用户</option>
-                                    <option value="all">所有注册用户</option>
-                                    <option value="all_users">所有人（包括未登录）</option>
-                                    <option value="role">按角色</option>
+                                    <option value="single"><?php esc_html_e('Single User', 'folio'); ?></option>
+                                    <option value="multiple"><?php esc_html_e('Multiple Users', 'folio'); ?></option>
+                                    <option value="all"><?php esc_html_e('All Registered Users', 'folio'); ?></option>
+                                    <option value="all_users"><?php esc_html_e('Everyone (including guests)', 'folio'); ?></option>
+                                    <option value="role"><?php esc_html_e('By Role', 'folio'); ?></option>
                                 </select>
                             </td>
                         </tr>
                         <tr id="single-user-row" style="display: table-row;">
-                            <th scope="row"><label for="notification-user-id">选择用户</label></th>
+                            <th scope="row"><label for="notification-user-id"><?php esc_html_e('Select User', 'folio'); ?></label></th>
                             <td>
-                                <input type="text" id="notification-user-search" placeholder="输入用户名或邮箱搜索..." style="width: 300px;" autocomplete="off">
+                                <input type="text" id="notification-user-search" placeholder="<?php esc_attr_e('Search by username or email...', 'folio'); ?>" style="width: 300px;" autocomplete="off">
                                 <input type="hidden" id="notification-user-id" name="user_id">
                                 <div id="user-search-results" style="position: absolute; background: white; border: 1px solid #ddd; max-height: 200px; overflow-y: auto; display: none; z-index: 1000; margin-top: 5px;"></div>
-                                <p class="description">输入用户名或邮箱进行搜索</p>
+                                <p class="description"><?php esc_html_e('Search by username or email', 'folio'); ?></p>
                             </td>
                         </tr>
                         <tr id="multiple-users-row" style="display: none;">
-                            <th scope="row"><label>选择用户</label></th>
+                            <th scope="row"><label><?php esc_html_e('Select Users', 'folio'); ?></label></th>
                             <td>
-                                <input type="text" id="notification-users-search" placeholder="输入用户名或邮箱搜索，支持多个..." style="width: 100%;" autocomplete="off">
+                                <input type="text" id="notification-users-search" placeholder="<?php esc_attr_e('Search by username or email, supports multiple...', 'folio'); ?>" style="width: 100%;" autocomplete="off">
                                 <div id="selected-users-list" style="margin-top: 10px;"></div>
-                                <p class="description">输入用户名或邮箱，用逗号分隔多个用户</p>
+                                <p class="description"><?php esc_html_e('Enter usernames or emails, separated by commas', 'folio'); ?></p>
                             </td>
                         </tr>
                         <tr id="role-row" style="display: none;">
-                            <th scope="row"><label for="notification-role">用户角色</label></th>
+                            <th scope="row"><label for="notification-role"><?php esc_html_e('User Role', 'folio'); ?></label></th>
                             <td>
                                 <select id="notification-role" name="role" style="width: 200px;">
-                                    <option value="subscriber">订阅者</option>
-                                    <option value="contributor">投稿者</option>
-                                    <option value="author">作者</option>
-                                    <option value="editor">编辑</option>
-                                    <option value="administrator">管理员</option>
+                                    <option value="subscriber"><?php esc_html_e('Subscriber', 'folio'); ?></option>
+                                    <option value="contributor"><?php esc_html_e('Contributor', 'folio'); ?></option>
+                                    <option value="author"><?php esc_html_e('Author', 'folio'); ?></option>
+                                    <option value="editor"><?php esc_html_e('Editor', 'folio'); ?></option>
+                                    <option value="administrator"><?php esc_html_e('Administrator', 'folio'); ?></option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
-                            <th scope="row"><label for="notification-type">通知类型</label></th>
+                            <th scope="row"><label for="notification-type"><?php esc_html_e('Notification Type', 'folio'); ?></label></th>
                             <td>
                                 <select id="notification-type" name="type" style="width: 200px;">
-                                    <option value="user_register" selected>用户注册</option>
-                                    <option value="membership_expiry">会员到期提醒</option>
-                                    <option value="membership_expired">会员已过期</option>
-                                    <option value="membership_changed">会员等级变更</option>
-                                    <option value="membership_activated">会员开通成功</option>
-                                    <option value="security_alert">安全提醒</option>
-                                    <option value="security_warning">安全警告</option>
-                                    <option value="test">测试通知</option>
-                                    <option value="custom">自定义</option>
+                                    <option value="user_register" selected><?php esc_html_e('User Registration', 'folio'); ?></option>
+                                    <option value="membership_expiry"><?php esc_html_e('Membership Expiry Reminder', 'folio'); ?></option>
+                                    <option value="membership_expired"><?php esc_html_e('Membership Expired', 'folio'); ?></option>
+                                    <option value="membership_changed"><?php esc_html_e('Membership Level Changed', 'folio'); ?></option>
+                                    <option value="membership_activated"><?php esc_html_e('Membership Activated', 'folio'); ?></option>
+                                    <option value="security_alert"><?php esc_html_e('Security Alert', 'folio'); ?></option>
+                                    <option value="security_warning"><?php esc_html_e('Security Warning', 'folio'); ?></option>
+                                    <option value="test"><?php esc_html_e('Test Notification', 'folio'); ?></option>
+                                    <option value="custom"><?php esc_html_e('Custom', 'folio'); ?></option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
-                            <th scope="row"><label for="notification-title">通知标题 <span style="color: red;">*</span></label></th>
+                            <th scope="row"><label for="notification-title"><?php esc_html_e('Notification Title', 'folio'); ?> <span style="color: red;">*</span></label></th>
                             <td>
                                 <input type="text" id="notification-title" name="title" class="regular-text" required>
                             </td>
                         </tr>
                         <tr>
-                            <th scope="row"><label for="notification-message">通知内容 <span style="color: red;">*</span></label></th>
+                            <th scope="row"><label for="notification-message"><?php esc_html_e('Notification Message', 'folio'); ?> <span style="color: red;">*</span></label></th>
                             <td>
                                 <textarea id="notification-message" name="message" rows="5" class="large-text" required></textarea>
                             </td>
@@ -359,7 +359,7 @@ class folio_Notification_Admin {
                         <tr>
                             <th scope="row"></th>
                             <td>
-                                <button type="submit" class="button button-primary">发送通知</button>
+                                <button type="submit" class="button button-primary"><?php esc_html_e('Send Notification', 'folio'); ?></button>
                                 <span id="send-notification-result" style="margin-left: 10px;"></span>
                             </td>
                         </tr>
@@ -369,12 +369,12 @@ class folio_Notification_Admin {
             
             <!-- 站内通知测试工具 -->
             <div class="folio-test-tools" style="background: #fff; padding: 20px; border: 1px solid #ccd0d4; border-radius: 4px; margin: 20px 0;">
-                <h3>站内通知测试</h3>
+                <h3><?php esc_html_e('On-site Notification Test', 'folio'); ?></h3>
                 <p>
-                    <button type="button" class="button button-primary" onclick="sendTestNotification()">发送站内测试通知</button>
+                    <button type="button" class="button button-primary" onclick="sendTestNotification()"><?php esc_html_e('Send On-site Test Notification', 'folio'); ?></button>
                 </p>
                 <p class="description" style="margin-top: 10px;">
-                    <strong>说明：</strong>站内测试通知只会发送到您的站内通知中心，不会发送邮件。您可以在用户中心的"我的通知"页面查看。
+                    <strong><?php esc_html_e('Note:', 'folio'); ?></strong><?php esc_html_e(' On-site test notifications are only sent to your on-site notification center and no emails are sent. You can view them in "My Notifications" in User Center.', 'folio'); ?>
                 </p>
                 <div id="test-result"></div>
             </div>
@@ -382,10 +382,10 @@ class folio_Notification_Admin {
             <!-- 通知管理 -->
             <div class="folio-notification-management" style="background: #fff; padding: 20px; border: 1px solid #ccd0d4; border-radius: 4px; margin: 20px 0;">
                 <div class="folio-notification-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <h3 style="margin: 0;">通知管理</h3>
+                    <h3 style="margin: 0;"><?php esc_html_e('Notification Management', 'folio'); ?></h3>
                     <div class="folio-notification-actions">
-                        <button type="button" class="button" id="bulk-delete-btn" style="display: none;">批量删除</button>
-                        <button type="button" class="button" id="bulk-mark-read-btn" style="display: none;">批量标记已读</button>
+                        <button type="button" class="button" id="bulk-delete-btn" style="display: none;"><?php esc_html_e('Bulk Delete', 'folio'); ?></button>
+                        <button type="button" class="button" id="bulk-mark-read-btn" style="display: none;"><?php esc_html_e('Bulk Mark Read', 'folio'); ?></button>
                     </div>
                 </div>
                 
@@ -395,37 +395,37 @@ class folio_Notification_Admin {
                         <input type="hidden" name="page" value="folio-notifications">
                         <input type="hidden" name="tab" value="notifications">
                         
-                        <input type="text" name="s" value="<?php echo esc_attr($search); ?>" placeholder="搜索用户、标题或内容..." style="flex: 1; min-width: 200px;">
+                        <input type="text" name="s" value="<?php echo esc_attr($search); ?>" placeholder="<?php esc_attr_e('Search user, title, or message...', 'folio'); ?>" style="flex: 1; min-width: 200px;">
                         
                         <select name="filter_type" style="width: 150px;">
-                            <option value="">所有类型</option>
-                            <option value="user_register" <?php selected($filter_type, 'user_register'); ?>>用户注册</option>
-                            <option value="membership_expiry" <?php selected($filter_type, 'membership_expiry'); ?>>会员到期提醒</option>
-                            <option value="membership_expired" <?php selected($filter_type, 'membership_expired'); ?>>会员已过期</option>
-                            <option value="membership_changed" <?php selected($filter_type, 'membership_changed'); ?>>会员等级变更</option>
-                            <option value="membership_activated" <?php selected($filter_type, 'membership_activated'); ?>>会员开通成功</option>
-                            <option value="security_alert" <?php selected($filter_type, 'security_alert'); ?>>安全提醒</option>
-                            <option value="security_warning" <?php selected($filter_type, 'security_warning'); ?>>安全警告</option>
-                            <option value="test" <?php selected($filter_type, 'test'); ?>>测试通知</option>
-                            <option value="custom" <?php selected($filter_type, 'custom'); ?>>自定义</option>
+                            <option value=""><?php esc_html_e('All Types', 'folio'); ?></option>
+                            <option value="user_register" <?php selected($filter_type, 'user_register'); ?>><?php esc_html_e('User Registration', 'folio'); ?></option>
+                            <option value="membership_expiry" <?php selected($filter_type, 'membership_expiry'); ?>><?php esc_html_e('Membership Expiry Reminder', 'folio'); ?></option>
+                            <option value="membership_expired" <?php selected($filter_type, 'membership_expired'); ?>><?php esc_html_e('Membership Expired', 'folio'); ?></option>
+                            <option value="membership_changed" <?php selected($filter_type, 'membership_changed'); ?>><?php esc_html_e('Membership Level Changed', 'folio'); ?></option>
+                            <option value="membership_activated" <?php selected($filter_type, 'membership_activated'); ?>><?php esc_html_e('Membership Activated', 'folio'); ?></option>
+                            <option value="security_alert" <?php selected($filter_type, 'security_alert'); ?>><?php esc_html_e('Security Alert', 'folio'); ?></option>
+                            <option value="security_warning" <?php selected($filter_type, 'security_warning'); ?>><?php esc_html_e('Security Warning', 'folio'); ?></option>
+                            <option value="test" <?php selected($filter_type, 'test'); ?>><?php esc_html_e('Test Notification', 'folio'); ?></option>
+                            <option value="custom" <?php selected($filter_type, 'custom'); ?>><?php esc_html_e('Custom', 'folio'); ?></option>
                         </select>
                         
                         <select name="filter_read" style="width: 120px;">
-                            <option value="">全部状态</option>
-                            <option value="0" <?php selected($filter_read, '0'); ?>>未读</option>
-                            <option value="1" <?php selected($filter_read, '1'); ?>>已读</option>
+                            <option value=""><?php esc_html_e('All Statuses', 'folio'); ?></option>
+                            <option value="0" <?php selected($filter_read, '0'); ?>><?php esc_html_e('Unread', 'folio'); ?></option>
+                            <option value="1" <?php selected($filter_read, '1'); ?>><?php esc_html_e('Read', 'folio'); ?></option>
                         </select>
                         
-                        <button type="submit" class="button">筛选</button>
+                        <button type="submit" class="button"><?php esc_html_e('Filter', 'folio'); ?></button>
                         <?php if ($search || $filter_type || $filter_read !== ''): ?>
-                        <a href="?page=folio-notifications&tab=notifications" class="button">清除</a>
+                        <a href="?page=folio-notifications&tab=notifications" class="button"><?php esc_html_e('Clear', 'folio'); ?></a>
                         <?php endif; ?>
                     </form>
                 </div>
                 
                 <!-- 通知列表 -->
                 <?php if (empty($recent_notifications)): ?>
-                    <p>暂无通知记录</p>
+                    <p><?php esc_html_e('No notification records yet.', 'folio'); ?></p>
                 <?php else: ?>
                     <form id="notifications-form" method="post">
                     <table class="wp-list-table widefat fixed striped">
@@ -434,13 +434,13 @@ class folio_Notification_Admin {
                                     <td class="check-column">
                                         <input type="checkbox" id="cb-select-all">
                                     </td>
-                                <th>用户</th>
-                                <th>类型</th>
-                                <th>标题</th>
-                                <th>消息</th>
-                                <th>状态</th>
-                                <th>时间</th>
-                                    <th>操作</th>
+                                <th><?php esc_html_e('User', 'folio'); ?></th>
+                                <th><?php esc_html_e('Type', 'folio'); ?></th>
+                                <th><?php esc_html_e('Title', 'folio'); ?></th>
+                                <th><?php esc_html_e('Message', 'folio'); ?></th>
+                                <th><?php esc_html_e('Status', 'folio'); ?></th>
+                                <th><?php esc_html_e('Time', 'folio'); ?></th>
+                                <th><?php esc_html_e('Actions', 'folio'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -450,7 +450,7 @@ class folio_Notification_Admin {
                                         <input type="checkbox" name="notification_ids[]" value="<?php echo esc_attr($notification->id); ?>" class="notification-checkbox">
                                     </th>
                                     <td>
-                                        <strong><?php echo esc_html($notification->display_name ?: '未知用户'); ?></strong><br>
+                                        <strong><?php echo esc_html($notification->display_name ?: __('Unknown User', 'folio')); ?></strong><br>
                                         <small style="color: #666;"><?php echo esc_html($notification->user_email ?: ''); ?></small>
                                     </td>
                                 <td>
@@ -462,18 +462,18 @@ class folio_Notification_Admin {
                                     <td><?php echo esc_html(wp_trim_words($notification->message, 15)); ?></td>
                                 <td>
                                     <?php if ($notification->is_read): ?>
-                                        <span style="color: #46b450;">已读</span>
+                                        <span style="color: #46b450;"><?php esc_html_e('Read', 'folio'); ?></span>
                                     <?php else: ?>
-                                            <span style="color: #d63638; font-weight: bold;">未读</span>
+                                        <span style="color: #d63638; font-weight: bold;"><?php esc_html_e('Unread', 'folio'); ?></span>
                                     <?php endif; ?>
                                 </td>
                                 <td><?php echo esc_html($notification->created_at); ?></td>
                                     <td>
-                                        <a href="#" class="delete-notification-link" data-id="<?php echo esc_attr($notification->id); ?>" style="color: #a00;">删除</a> |
+                                        <a href="#" class="delete-notification-link" data-id="<?php echo esc_attr($notification->id); ?>" style="color: #a00;"><?php esc_html_e('Delete', 'folio'); ?></a> |
                                         <?php if (!$notification->is_read): ?>
-                                        <a href="#" class="mark-read-link" data-id="<?php echo esc_attr($notification->id); ?>" style="color: #0073aa;">标记已读</a>
+                                        <a href="#" class="mark-read-link" data-id="<?php echo esc_attr($notification->id); ?>" style="color: #0073aa;"><?php esc_html_e('Mark as Read', 'folio'); ?></a>
                                         <?php else: ?>
-                                        <a href="#" class="mark-unread-link" data-id="<?php echo esc_attr($notification->id); ?>" style="color: #666;">标记未读</a>
+                                        <a href="#" class="mark-unread-link" data-id="<?php echo esc_attr($notification->id); ?>" style="color: #666;"><?php esc_html_e('Mark as Unread', 'folio'); ?></a>
                                         <?php endif; ?>
                                     </td>
                             </tr>
@@ -497,13 +497,13 @@ class folio_Notification_Admin {
                                 'format' => '&paged=%#%',
                                 'current' => $paged,
                                 'total' => $total_pages,
-                                'prev_text' => '&laquo; 上一页',
-                                'next_text' => '下一页 &raquo;',
+                                'prev_text' => '&laquo; ' . __('Previous', 'folio'),
+                                'next_text' => __('Next', 'folio') . ' &raquo;',
                             ));
                             ?>
                         </div>
                         <div class="tablenav-pages" style="float: right;">
-                            <span class="displaying-num">共 <?php echo $total_count; ?> 条通知</span>
+                            <span class="displaying-num"><?php echo esc_html(sprintf(__('Total %d notifications', 'folio'), $total_count)); ?></span>
                         </div>
                     </div>
                     <?php endif; ?>
@@ -523,19 +523,19 @@ class folio_Notification_Admin {
                 <?php
                 settings_fields('folio_notifications');
                 do_settings_sections('folio_notifications');
-                submit_button('保存设置');
+                submit_button(__('Save Settings', 'folio'));
                 ?>
             </form>
             
             <!-- 邮件测试工具 -->
             <div class="folio-email-test" style="background: #fff; padding: 20px; border: 1px solid #ccd0d4; border-radius: 4px; margin: 20px 0;">
-                <h3>邮件测试</h3>
+                <h3><?php esc_html_e('Email Test', 'folio'); ?></h3>
                 <p>
-                    <button type="button" class="button button-primary" onclick="sendTestEmail()">发送测试邮件</button>
-                    <button type="button" class="button" onclick="runExpiryCheck()">手动运行到期检查</button>
+                    <button type="button" class="button button-primary" onclick="sendTestEmail()"><?php esc_html_e('Send Test Email', 'folio'); ?></button>
+                    <button type="button" class="button" onclick="runExpiryCheck()"><?php esc_html_e('Run Expiry Check Manually', 'folio'); ?></button>
                 </p>
                 <p class="description" style="margin-top: 10px;">
-                    <strong>说明：</strong>测试邮件会发送到您当前登录的管理员邮箱。到期检查会检查所有会员的到期时间并发送相应的提醒邮件。
+                    <strong><?php esc_html_e('Note:', 'folio'); ?></strong><?php esc_html_e(' Test email will be sent to the currently logged-in administrator email. Expiry check will scan all members and send reminder emails when needed.', 'folio'); ?>
                 </p>
                 <div id="email-test-result"></div>
         </div>
@@ -602,36 +602,36 @@ class folio_Notification_Admin {
         // 通知类型模板
         var notificationTemplates = {
             'user_register': {
-                title: '注册成功',
-                message: '欢迎加入！您的账户已成功创建，现在可以开始探索我们的精彩内容了。'
+                title: '<?php echo esc_js(__('Registration Successful', 'folio')); ?>',
+                message: '<?php echo esc_js(__('Welcome aboard! Your account has been created successfully. You can now explore our content.', 'folio')); ?>'
             },
             'membership_expiry': {
-                title: '会员即将到期',
-                message: '您的会员将在 {days} 天后到期，请及时续费以继续享受会员权益。'
+                title: '<?php echo esc_js(__('Membership Expiring Soon', 'folio')); ?>',
+                message: '<?php echo esc_js(__('Your membership will expire in {days} days. Please renew in time to keep member benefits.', 'folio')); ?>'
             },
             'membership_expired': {
-                title: '会员已过期',
-                message: '您的会员已过期，请及时续费以恢复会员权益。'
+                title: '<?php echo esc_js(__('Membership Expired', 'folio')); ?>',
+                message: '<?php echo esc_js(__('Your membership has expired. Please renew to restore member benefits.', 'folio')); ?>'
             },
             'membership_changed': {
-                title: '会员等级变更',
-                message: '您的会员等级已变更为 {level}，感谢您的支持！'
+                title: '<?php echo esc_js(__('Membership Level Changed', 'folio')); ?>',
+                message: '<?php echo esc_js(__('Your membership level has been changed to {level}. Thank you for your support!', 'folio')); ?>'
             },
             'membership_activated': {
-                title: '会员开通成功',
-                message: '恭喜！您的会员已成功开通，现在可以享受所有会员专属权益了。'
+                title: '<?php echo esc_js(__('Membership Activated', 'folio')); ?>',
+                message: '<?php echo esc_js(__('Congratulations! Your membership is now active. You can enjoy all member-exclusive benefits.', 'folio')); ?>'
             },
             'security_alert': {
-                title: '安全提醒',
-                message: '检测到您的账户有异常活动，请及时检查账户安全设置。'
+                title: '<?php echo esc_js(__('Security Alert', 'folio')); ?>',
+                message: '<?php echo esc_js(__('Unusual activity was detected on your account. Please review your security settings.', 'folio')); ?>'
             },
             'security_warning': {
-                title: '安全警告',
-                message: '您的账户可能存在安全风险，请立即修改密码并检查账户设置。'
+                title: '<?php echo esc_js(__('Security Warning', 'folio')); ?>',
+                message: '<?php echo esc_js(__('Your account may be at risk. Please change your password and review account settings immediately.', 'folio')); ?>'
             },
             'test': {
-                title: '测试通知',
-                message: '这是一条测试通知，用于验证通知系统是否正常工作。'
+                title: '<?php echo esc_js(__('Test Notification', 'folio')); ?>',
+                message: '<?php echo esc_js(__('This is a test notification used to verify that the notification system works correctly.', 'folio')); ?>'
             },
             'custom': {
                 title: '',
@@ -744,7 +744,7 @@ class folio_Notification_Admin {
                                 });
                                 $('#user-search-results').html(html).show();
                             } else {
-                                $('#user-search-results').html('<div style="padding: 8px;">未找到用户</div>').show();
+                                $('#user-search-results').html('<div style="padding: 8px;"><?php echo esc_js(__('No users found', 'folio')); ?></div>').show();
                             }
                         }
                     });
@@ -823,7 +823,7 @@ class folio_Notification_Admin {
                 var message = $('#notification-message').val();
                 
                 if (!title || !message) {
-                    alert('请填写通知标题和内容');
+                    alert('<?php echo esc_js(__('Please enter notification title and message', 'folio')); ?>');
                     return;
                 }
                 
@@ -839,13 +839,13 @@ class folio_Notification_Admin {
                 if (recipientType === 'single') {
                     var userId = $('#notification-user-id').val();
                     if (!userId) {
-                        alert('请选择用户');
+                        alert('<?php echo esc_js(__('Please select a user', 'folio')); ?>');
                         return;
                     }
                     data.user_id = userId;
                 } else if (recipientType === 'multiple') {
                     if (selectedUsers.length === 0) {
-                        alert('请选择至少一个用户');
+                        alert('<?php echo esc_js(__('Please select at least one user', 'folio')); ?>');
                         return;
                     }
                     data.user_ids = selectedUsers.map(function(u) { return u.id; });
@@ -856,7 +856,7 @@ class folio_Notification_Admin {
                 }
                 
                 var resultDiv = $('#send-notification-result');
-                resultDiv.html('<span style="color: #0073aa;">发送中...</span>');
+                resultDiv.html('<span style="color: #0073aa;"><?php echo esc_js(__('Sending...', 'folio')); ?></span>');
                 
                 $.ajax({
                     url: ajaxurl,
@@ -874,11 +874,11 @@ class folio_Notification_Admin {
                                 location.reload();
                             }, 2000);
                         } else {
-                            resultDiv.html('<span style="color: red;">✗ ' + (response.data || '发送失败') + '</span>');
+                            resultDiv.html('<span style="color: red;">✗ ' + (response.data || '<?php echo esc_js(__('Send failed', 'folio')); ?>') + '</span>');
                         }
                     },
                     error: function() {
-                        resultDiv.html('<span style="color: red;">✗ 网络错误，请重试</span>');
+                        resultDiv.html('<span style="color: red;">✗ <?php echo esc_js(__('Network error, please try again', 'folio')); ?></span>');
                     }
                 });
             });
@@ -895,16 +895,16 @@ class folio_Notification_Admin {
         
         function sendTestNotification() {
             var result = document.getElementById('test-result');
-            result.innerHTML = '<p>发送中...</p>';
+            result.innerHTML = '<p><?php echo esc_js(__('Sending...', 'folio')); ?></p>';
             
             jQuery.post(ajaxurl, {
                 action: 'folio_send_test_notification',
                 nonce: '<?php echo wp_create_nonce('folio_admin_nonce'); ?>'
             }, function(response) {
                 if (response.success) {
-                    result.innerHTML = '<p style="color: green;">✅ 站内测试通知发送成功！请查看您的站内通知中心。</p>';
+                    result.innerHTML = '<p style="color: green;">✅ <?php echo esc_js(__('On-site test notification sent successfully. Please check your on-site notification center.', 'folio')); ?></p>';
                 } else {
-                    result.innerHTML = '<p style="color: red;">❌ 发送失败: ' + response.data + '</p>';
+                    result.innerHTML = '<p style="color: red;">❌ <?php echo esc_js(__('Send failed:', 'folio')); ?> ' + response.data + '</p>';
                 }
             });
         }
@@ -914,7 +914,7 @@ class folio_Notification_Admin {
             if (!result) {
                 result = document.getElementById('test-result');
             }
-            result.innerHTML = '<p>发送中...</p>';
+            result.innerHTML = '<p><?php echo esc_js(__('Sending...', 'folio')); ?></p>';
             
             jQuery.post(ajaxurl, {
                 action: 'folio_send_test_email',
@@ -931,26 +931,26 @@ class folio_Notification_Admin {
         function runExpiryCheck() {
             var result = document.getElementById('email-test-result') || document.getElementById('test-result');
             if (!result) {
-                alert('无法找到结果显示区域');
+                alert('<?php echo esc_js(__('Cannot find result display area', 'folio')); ?>');
                 return;
             }
             
-            result.innerHTML = '<p>检查中...</p>';
+            result.innerHTML = '<p><?php echo esc_js(__('Checking...', 'folio')); ?></p>';
             
             jQuery.post(ajaxurl, {
                 action: 'folio_run_expiry_check',
                 nonce: '<?php echo wp_create_nonce('folio_admin_nonce'); ?>'
             }, function(response) {
                 if (response.success) {
-                    result.innerHTML = '<p style="color: green;">✅ ' + (response.data || '到期检查已完成！') + '</p>';
+                    result.innerHTML = '<p style="color: green;">✅ ' + (response.data || '<?php echo esc_js(__('Expiry check completed!', 'folio')); ?>') + '</p>';
                 setTimeout(function() {
                     location.reload();
                 }, 2000);
                 } else {
-                    result.innerHTML = '<p style="color: red;">❌ ' + (response.data || '到期检查失败') + '</p>';
+                    result.innerHTML = '<p style="color: red;">❌ ' + (response.data || '<?php echo esc_js(__('Expiry check failed', 'folio')); ?>') + '</p>';
         }
             }).fail(function() {
-                result.innerHTML = '<p style="color: red;">❌ 请求失败，请检查网络连接</p>';
+                result.innerHTML = '<p style="color: red;">❌ <?php echo esc_js(__('Request failed, please check your network connection', 'folio')); ?></p>';
             });
         }
         
@@ -980,7 +980,7 @@ class folio_Notification_Admin {
             // 删除单个通知
             $(document).on('click', '.delete-notification-link', function(e) {
                 e.preventDefault();
-                if (!confirm('确定要删除这条通知吗？')) {
+                if (!confirm('<?php echo esc_js(__('Are you sure you want to delete this notification?', 'folio')); ?>')) {
                     return;
                 }
                 
@@ -1004,7 +1004,7 @@ class folio_Notification_Admin {
                                 }
                             });
                         } else {
-                            alert('删除失败：' + (response.data || '未知错误'));
+                            alert('<?php echo esc_js(__('Delete failed:', 'folio')); ?> ' + (response.data || '<?php echo esc_js(__('Unknown error', 'folio')); ?>'));
                         }
                     }
                 });
@@ -1030,7 +1030,7 @@ class folio_Notification_Admin {
                         if (response.success) {
                             location.reload();
                         } else {
-                            alert('操作失败：' + (response.data || '未知错误'));
+                            alert('<?php echo esc_js(__('Operation failed:', 'folio')); ?> ' + (response.data || '<?php echo esc_js(__('Unknown error', 'folio')); ?>'));
                         }
                     }
                 });
@@ -1044,11 +1044,11 @@ class folio_Notification_Admin {
                 });
                 
                 if (checkedIds.length === 0) {
-                    alert('请选择要删除的通知');
+                    alert('<?php echo esc_js(__('Please select notifications to delete', 'folio')); ?>');
                     return;
                 }
                 
-                if (!confirm('确定要删除选中的 ' + checkedIds.length + ' 条通知吗？')) {
+                if (!confirm('<?php echo esc_js(__('Are you sure you want to delete selected notifications?', 'folio')); ?>')) {
                     return;
                 }
                 
@@ -1065,7 +1065,7 @@ class folio_Notification_Admin {
                             alert(response.data.message);
                             location.reload();
                         } else {
-                            alert('删除失败：' + (response.data || '未知错误'));
+                            alert('<?php echo esc_js(__('Delete failed:', 'folio')); ?> ' + (response.data || '<?php echo esc_js(__('Unknown error', 'folio')); ?>'));
                         }
                     }
                 });
@@ -1079,7 +1079,7 @@ class folio_Notification_Admin {
                 });
                 
                 if (checkedIds.length === 0) {
-                    alert('请选择要操作的通知');
+                    alert('<?php echo esc_js(__('Please select notifications to operate on', 'folio')); ?>');
                     return;
                 }
                 
@@ -1096,7 +1096,7 @@ class folio_Notification_Admin {
                             alert(response.data.message);
                             location.reload();
                         } else {
-                            alert('操作失败：' + (response.data || '未知错误'));
+                            alert('<?php echo esc_js(__('Operation failed:', 'folio')); ?> ' + (response.data || '<?php echo esc_js(__('Unknown error', 'folio')); ?>'));
                         }
                     }
                 });
@@ -1110,7 +1110,7 @@ class folio_Notification_Admin {
      * 邮件设置说明
      */
     public function email_section_callback() {
-        echo '<p>配置会员到期提醒的邮件通知设置。</p>';
+        echo '<p>' . esc_html__('Configure email notification settings for membership expiry reminders.', 'folio') . '</p>';
     }
 
     /**
@@ -1121,7 +1121,7 @@ class folio_Notification_Admin {
         $enabled = isset($options['email_enabled']) ? $options['email_enabled'] : 1;
         ?>
         <input type="checkbox" name="folio_notification_settings[email_enabled]" value="1" <?php checked($enabled, 1); ?> />
-        <label>启用邮件通知（取消勾选将只发送站内通知）</label>
+        <label><?php esc_html_e('Enable email notifications (if disabled, only on-site notifications will be sent)', 'folio'); ?></label>
         <?php
     }
 
@@ -1133,7 +1133,7 @@ class folio_Notification_Admin {
         $days = isset($options['reminder_days']) ? $options['reminder_days'] : '7,3,1,0';
         ?>
         <input type="text" name="folio_notification_settings[reminder_days]" value="<?php echo esc_attr($days); ?>" class="regular-text" />
-        <p class="description">提醒天数，用逗号分隔（如：7,3,1,0 表示提前7天、3天、1天和到期当天发送提醒）</p>
+        <p class="description"><?php esc_html_e('Reminder days separated by commas (e.g. 7,3,1,0 means send reminders 7 days, 3 days, 1 day before expiry, and on expiry day)', 'folio'); ?></p>
         <?php
     }
 
@@ -1145,7 +1145,7 @@ class folio_Notification_Admin {
         $from_email = isset($options['from_email']) ? $options['from_email'] : get_option('admin_email');
         ?>
         <input type="email" name="folio_notification_settings[from_email]" value="<?php echo esc_attr($from_email); ?>" class="regular-text" />
-        <p class="description">邮件发件人邮箱地址（默认使用网站管理员邮箱）</p>
+        <p class="description"><?php esc_html_e('Sender email address (defaults to site admin email)', 'folio'); ?></p>
         <?php
     }
 
@@ -1157,7 +1157,7 @@ class folio_Notification_Admin {
         $from_name = isset($options['from_name']) ? $options['from_name'] : get_bloginfo('name');
         ?>
         <input type="text" name="folio_notification_settings[from_name]" value="<?php echo esc_attr($from_name); ?>" class="regular-text" />
-        <p class="description">邮件发件人名称（默认使用网站名称）</p>
+        <p class="description"><?php esc_html_e('Sender name (defaults to site name)', 'folio'); ?></p>
         <?php
     }
     
@@ -1165,7 +1165,7 @@ class folio_Notification_Admin {
      * 通知类型邮件设置部分说明
      */
     public function notification_types_section_callback() {
-        echo '<p>选择哪些类型的通知需要发送邮件通知。只有启用的通知类型才会发送邮件。</p>';
+        echo '<p>' . esc_html__('Choose which notification types should send email notifications. Only enabled types will send emails.', 'folio') . '</p>';
     }
     
     /**
@@ -1173,14 +1173,14 @@ class folio_Notification_Admin {
      */
     private function get_notification_types() {
         return array(
-            'user_register' => '用户注册通知',
-            'admin_user_register' => '管理员用户注册提醒',
-            'membership_expiry' => '会员到期提醒',
-            'membership_expired' => '会员已过期',
-            'membership_changed' => '会员等级变更',
-            'membership_activated' => '会员开通成功',
-            'security_alert' => '安全提醒',
-            'security_warning' => '安全警告'
+            'user_register' => __('User Registration Notification', 'folio'),
+            'admin_user_register' => __('Admin User Registration Alert', 'folio'),
+            'membership_expiry' => __('Membership Expiry Reminder', 'folio'),
+            'membership_expired' => __('Membership Expired', 'folio'),
+            'membership_changed' => __('Membership Level Changed', 'folio'),
+            'membership_activated' => __('Membership Activated', 'folio'),
+            'security_alert' => __('Security Alert', 'folio'),
+            'security_warning' => __('Security Warning', 'folio')
         );
     }
     
@@ -1207,7 +1207,7 @@ class folio_Notification_Admin {
      * SMTP 设置说明
      */
     public function smtp_section_callback() {
-        echo '<p>如果您的服务器无法直接发送邮件，可以配置 SMTP 服务器来发送邮件。如果不配置，将使用 WordPress 默认的邮件发送方式。</p>';
+        echo '<p>' . esc_html__('If your server cannot send email directly, configure an SMTP server. If not configured, WordPress default mail method will be used.', 'folio') . '</p>';
     }
 
     /**
@@ -1218,7 +1218,7 @@ class folio_Notification_Admin {
         $enabled = isset($options['smtp_enabled']) ? $options['smtp_enabled'] : 0;
         ?>
         <input type="checkbox" name="folio_notification_settings[smtp_enabled]" value="1" <?php checked($enabled, 1); ?> />
-        <label>启用 SMTP 邮件服务器</label>
+        <label><?php esc_html_e('Enable SMTP mail server', 'folio'); ?></label>
         <?php
     }
 
@@ -1230,7 +1230,7 @@ class folio_Notification_Admin {
         $host = isset($options['smtp_host']) ? $options['smtp_host'] : 'smtp.example.com';
         ?>
         <input type="text" name="folio_notification_settings[smtp_host]" value="<?php echo esc_attr($host); ?>" class="regular-text" />
-        <p class="description">SMTP 服务器地址（如：smtp.gmail.com、smtp.qq.com）</p>
+        <p class="description"><?php esc_html_e('SMTP server address (e.g. smtp.gmail.com, smtp.qq.com)', 'folio'); ?></p>
         <?php
     }
 
@@ -1242,7 +1242,7 @@ class folio_Notification_Admin {
         $port = isset($options['smtp_port']) ? $options['smtp_port'] : '587';
         ?>
         <input type="number" name="folio_notification_settings[smtp_port]" value="<?php echo esc_attr($port); ?>" class="small-text" min="1" max="65535" />
-        <p class="description">SMTP 端口（常用：25、465、587）</p>
+        <p class="description"><?php esc_html_e('SMTP port (common: 25, 465, 587)', 'folio'); ?></p>
         <?php
     }
 
@@ -1254,11 +1254,11 @@ class folio_Notification_Admin {
         $encryption = isset($options['smtp_encryption']) ? $options['smtp_encryption'] : 'tls';
         ?>
         <select name="folio_notification_settings[smtp_encryption]">
-            <option value="none" <?php selected($encryption, 'none'); ?>>无加密</option>
+            <option value="none" <?php selected($encryption, 'none'); ?>><?php esc_html_e('No Encryption', 'folio'); ?></option>
             <option value="ssl" <?php selected($encryption, 'ssl'); ?>>SSL</option>
             <option value="tls" <?php selected($encryption, 'tls'); ?>>TLS</option>
         </select>
-        <p class="description">邮件加密方式（推荐使用 TLS）</p>
+        <p class="description"><?php esc_html_e('Mail encryption method (TLS recommended)', 'folio'); ?></p>
         <?php
     }
 
@@ -1270,7 +1270,7 @@ class folio_Notification_Admin {
         $username = isset($options['smtp_username']) ? $options['smtp_username'] : '';
         ?>
         <input type="text" name="folio_notification_settings[smtp_username]" value="<?php echo esc_attr($username); ?>" class="regular-text" />
-        <p class="description">SMTP 认证用户名（通常是您的邮箱地址）</p>
+        <p class="description"><?php esc_html_e('SMTP authentication username (usually your email address)', 'folio'); ?></p>
         <?php
     }
 
@@ -1282,7 +1282,7 @@ class folio_Notification_Admin {
         $password = isset($options['smtp_password']) ? $options['smtp_password'] : '';
         ?>
         <input type="password" name="folio_notification_settings[smtp_password]" value="<?php echo esc_attr($password); ?>" class="regular-text" />
-        <p class="description">SMTP 认证密码（某些邮箱服务商需要使用授权码而非登录密码）</p>
+        <p class="description"><?php esc_html_e('SMTP authentication password (some providers require an app password instead of login password)', 'folio'); ?></p>
         <?php
     }
 
@@ -1293,7 +1293,7 @@ class folio_Notification_Admin {
         check_ajax_referer('folio_admin_nonce', 'nonce');
         
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
         
         $user_id = get_current_user_id();
@@ -1303,17 +1303,17 @@ class folio_Notification_Admin {
             $result = $notifications->add_notification(
                 $user_id,
                 'test',
-                '管理员测试通知',
-                '这是一条来自管理后台的测试通知，用于验证通知系统是否正常工作。发送时间：' . current_time('Y-m-d H:i:s')
+                __('Admin Test Notification', 'folio'),
+                __('This is a test notification from the admin panel used to verify the notification system. Sent at: ', 'folio') . current_time('Y-m-d H:i:s')
             );
             
             if ($result) {
-                wp_send_json_success('测试通知发送成功');
+                wp_send_json_success(__('Test notification sent successfully', 'folio'));
             } else {
-                wp_send_json_error('发送失败');
+                wp_send_json_error(__('Send failed', 'folio'));
             }
         } else {
-            wp_send_json_error('通知系统未初始化');
+            wp_send_json_error(__('Notification system is not initialized', 'folio'));
         }
     }
 
@@ -1324,13 +1324,13 @@ class folio_Notification_Admin {
         check_ajax_referer('folio_admin_nonce', 'nonce');
         
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
         
         $settings = get_option('folio_notification_settings', array());
         
         if (empty($settings['email_enabled'])) {
-            wp_send_json_error('邮件通知未启用，请在设置中启用邮件通知');
+            wp_send_json_error(__('Email notifications are disabled. Please enable them in settings.', 'folio'));
             return;
         }
         
@@ -1338,7 +1338,7 @@ class folio_Notification_Admin {
         $user = get_userdata($user_id);
         
         if (!$user || !$user->user_email) {
-            wp_send_json_error('无法获取您的邮箱地址');
+            wp_send_json_error(__('Unable to get your email address', 'folio'));
             return;
         }
         
@@ -1350,10 +1350,10 @@ class folio_Notification_Admin {
         // 使用邮件模板
         if (class_exists('folio_Membership_Notifications')) {
             $notifications = folio_Membership_Notifications::get_instance();
-            $title = '邮件通知测试';
-            $message = '这是一封测试邮件，用于验证邮件通知功能是否正常工作。' . "\n\n";
-            $message .= '发送时间：' . current_time('Y-m-d H:i:s') . "\n\n";
-            $message .= '如果您收到这封邮件，说明邮件通知功能正常工作。';
+            $title = __('Email Notification Test', 'folio');
+            $message = __('This is a test email used to verify whether email notifications are working properly.', 'folio') . "\n\n";
+            $message .= __('Sent at: ', 'folio') . current_time('Y-m-d H:i:s') . "\n\n";
+            $message .= __('If you receive this email, email notifications are working correctly.', 'folio');
             
             $email_message = $notifications->get_email_template($title, $message, 'test', $user);
         } else {
@@ -1361,15 +1361,15 @@ class folio_Notification_Admin {
             $email_message = nl2br(esc_html($message));
         }
         
-        $subject = '[' . get_bloginfo('name') . '] 邮件通知测试';
+        $subject = '[' . get_bloginfo('name') . '] ' . __('Email Notification Test', 'folio');
         
         $headers = array('Content-Type: text/html; charset=UTF-8');
         $result = wp_mail($user->user_email, $subject, $email_message, $headers);
         
         if ($result) {
-            wp_send_json_success('测试邮件已发送到：' . $user->user_email);
+            wp_send_json_success(__('Test email has been sent to: ', 'folio') . $user->user_email);
         } else {
-            wp_send_json_error('邮件发送失败，请检查 WordPress 邮件配置');
+            wp_send_json_error(__('Email sending failed, please check WordPress mail configuration', 'folio'));
         }
     }
 
@@ -1380,7 +1380,7 @@ class folio_Notification_Admin {
         check_ajax_referer('folio_admin_nonce', 'nonce');
         
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
         
         if (class_exists('folio_Membership_Notifications')) {
@@ -1391,7 +1391,7 @@ class folio_Notification_Admin {
             
             // 构建返回消息
             $message = sprintf(
-                '到期检查已完成。检查了 %d 个用户，发送了 %d 个到期提醒，发送了 %d 个过期通知。',
+                __('Expiry check completed. Checked %d users, sent %d expiry reminders, and sent %d expired notices.', 'folio'),
                 $stats['checked'],
                 $stats['reminders_sent'],
                 $stats['expired_sent']
@@ -1399,25 +1399,25 @@ class folio_Notification_Admin {
             
             // 如果有错误，添加到消息中
             if (!empty($stats['errors'])) {
-                $message .= ' 错误：' . implode('; ', $stats['errors']);
+                $message .= ' ' . __('Errors: ', 'folio') . implode('; ', $stats['errors']);
             }
             
             // 如果检查了用户但没有发送提醒，添加调试信息
             if ($stats['checked'] > 0 && $stats['reminders_sent'] == 0 && $stats['expired_sent'] == 0) {
-                $message .= ' 提示：检查了用户但未发送提醒，可能原因：1) 剩余天数不匹配设置的提醒天数；2) 今天已经发送过提醒；3) 用户已过期但已发送过过期通知。';
+                $message .= ' ' . __('Hint: users were checked but no reminders were sent. Possible reasons: 1) remaining days do not match configured reminder days; 2) reminder already sent today; 3) user already expired and expired notice already sent.', 'folio');
             }
             
             // 检查邮件设置
             $settings = get_option('folio_notification_settings', array());
             if (empty($settings['email_enabled'])) {
-                $message .= ' 注意：邮件通知未启用，只发送了站内通知。';
+                $message .= ' ' . __('Note: email notifications are disabled; only on-site notifications were sent.', 'folio');
             } elseif (isset($settings['email_types']['membership_expiry']) && empty($settings['email_types']['membership_expiry'])) {
-                $message .= ' 注意：会员到期提醒的邮件通知未启用，只发送了站内通知。';
+                $message .= ' ' . __('Note: membership expiry reminder emails are disabled; only on-site notifications were sent.', 'folio');
             }
             
             wp_send_json_success($message);
         } else {
-            wp_send_json_error('通知系统未初始化');
+            wp_send_json_error(__('Notification system is not initialized', 'folio'));
         }
     }
 
@@ -1497,7 +1497,7 @@ class folio_Notification_Admin {
         check_ajax_referer('folio_admin_nonce', 'nonce');
         
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
         
         $query = isset($_POST['query']) ? sanitize_text_field($_POST['query']) : '';
@@ -1533,7 +1533,7 @@ class folio_Notification_Admin {
         check_ajax_referer('folio_admin_nonce', 'nonce');
         
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
         
         $recipient_type = isset($_POST['recipient_type']) ? sanitize_text_field($_POST['recipient_type']) : '';
@@ -1542,12 +1542,12 @@ class folio_Notification_Admin {
         $message = isset($_POST['message']) ? wp_kses_post($_POST['message']) : '';
         
         if (empty($title) || empty($message)) {
-            wp_send_json_error('通知标题和内容不能为空');
+            wp_send_json_error(__('Notification title and message cannot be empty', 'folio'));
             return;
         }
         
         if (!class_exists('folio_Membership_Notifications')) {
-            wp_send_json_error('通知系统未初始化');
+            wp_send_json_error(__('Notification system is not initialized', 'folio'));
             return;
         }
         
@@ -1600,7 +1600,7 @@ class folio_Notification_Admin {
         
         // 检查：如果没有用户且不包含未登录用户，则报错
         if (empty($user_ids) && !$include_guests) {
-            wp_send_json_error('未选择任何用户');
+            wp_send_json_error(__('No users selected', 'folio'));
             return;
         }
         
@@ -1623,9 +1623,9 @@ class folio_Notification_Admin {
         }
         
         if ($sent_count > 0) {
-            $message_text = sprintf('成功发送通知给 %d 个用户', $sent_count);
+            $message_text = sprintf(__('Successfully sent notifications to %d users', 'folio'), $sent_count);
             if ($include_guests) {
-                $message_text .= '（包括未登录用户）';
+                $message_text .= __(' (including guests)', 'folio');
             }
             
             wp_send_json_success(array(
@@ -1635,7 +1635,7 @@ class folio_Notification_Admin {
                 'includes_guests' => $include_guests
             ));
         } else {
-            wp_send_json_error('发送失败');
+            wp_send_json_error(__('Send failed', 'folio'));
         }
     }
 
@@ -1646,26 +1646,26 @@ class folio_Notification_Admin {
         check_ajax_referer('folio_admin_nonce', 'nonce');
         
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
         
         $notification_id = isset($_POST['notification_id']) ? absint($_POST['notification_id']) : 0;
         
         if (!$notification_id) {
-            wp_send_json_error('通知ID无效');
+            wp_send_json_error(__('Invalid notification ID', 'folio'));
         }
         
         if (!class_exists('folio_Membership_Notifications')) {
-            wp_send_json_error('通知系统未初始化');
+            wp_send_json_error(__('Notification system is not initialized', 'folio'));
         }
         
         $notifications = folio_Membership_Notifications::get_instance();
         $result = $notifications->delete_notification($notification_id);
         
         if ($result) {
-            wp_send_json_success('通知已删除');
+            wp_send_json_success(__('Notification deleted', 'folio'));
         } else {
-            wp_send_json_error('删除失败');
+            wp_send_json_error(__('Delete failed', 'folio'));
         }
     }
 
@@ -1676,17 +1676,17 @@ class folio_Notification_Admin {
         check_ajax_referer('folio_admin_nonce', 'nonce');
         
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
         
         $notification_ids = isset($_POST['notification_ids']) ? array_map('absint', $_POST['notification_ids']) : array();
         
         if (empty($notification_ids)) {
-            wp_send_json_error('请选择要删除的通知');
+            wp_send_json_error(__('Please select notifications to delete', 'folio'));
         }
         
         if (!class_exists('folio_Membership_Notifications')) {
-            wp_send_json_error('通知系统未初始化');
+            wp_send_json_error(__('Notification system is not initialized', 'folio'));
         }
         
         $notifications = folio_Membership_Notifications::get_instance();
@@ -1699,7 +1699,7 @@ class folio_Notification_Admin {
         }
         
         wp_send_json_success(array(
-            'message' => sprintf('成功删除 %d 条通知', $deleted_count),
+            'message' => sprintf(__('Successfully deleted %d notifications', 'folio'), $deleted_count),
             'deleted_count' => $deleted_count
         ));
     }
@@ -1711,14 +1711,14 @@ class folio_Notification_Admin {
         check_ajax_referer('folio_admin_nonce', 'nonce');
         
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
         
         $notification_id = isset($_POST['notification_id']) ? absint($_POST['notification_id']) : 0;
         $is_read = isset($_POST['is_read']) ? absint($_POST['is_read']) : 1;
         
         if (!$notification_id) {
-            wp_send_json_error('通知ID无效');
+            wp_send_json_error(__('Invalid notification ID', 'folio'));
         }
         
         global $wpdb;
@@ -1734,11 +1734,11 @@ class folio_Notification_Admin {
         
         if ($result !== false) {
             wp_send_json_success(array(
-                'message' => $is_read ? '已标记为已读' : '已标记为未读',
+                'message' => $is_read ? __('Marked as read', 'folio') : __('Marked as unread', 'folio'),
                 'is_read' => $is_read
             ));
         } else {
-            wp_send_json_error('操作失败');
+            wp_send_json_error(__('Operation failed', 'folio'));
         }
     }
 
@@ -1749,13 +1749,13 @@ class folio_Notification_Admin {
         check_ajax_referer('folio_admin_nonce', 'nonce');
         
         if (!current_user_can('manage_options')) {
-            wp_send_json_error('权限不足');
+            wp_send_json_error(__('Insufficient permissions', 'folio'));
         }
         
         $notification_ids = isset($_POST['notification_ids']) ? array_map('absint', $_POST['notification_ids']) : array();
         
         if (empty($notification_ids)) {
-            wp_send_json_error('请选择要操作的通知');
+            wp_send_json_error(__('Please select notifications to operate on', 'folio'));
         }
         
         global $wpdb;
@@ -1769,11 +1769,11 @@ class folio_Notification_Admin {
         
         if ($result !== false) {
             wp_send_json_success(array(
-                'message' => sprintf('成功标记 %d 条通知为已读', $result),
+                'message' => sprintf(__('Successfully marked %d notifications as read', 'folio'), $result),
                 'updated_count' => $result
             ));
         } else {
-            wp_send_json_error('操作失败');
+            wp_send_json_error(__('Operation failed', 'folio'));
         }
     }
 
@@ -1782,14 +1782,14 @@ class folio_Notification_Admin {
      */
     private function get_type_label($type) {
         $labels = array(
-            'membership_expiry' => '会员到期提醒',
-            'membership_expired' => '会员已过期',
-            'membership_changed' => '会员等级变更',
-            'membership_activated' => '会员开通成功',
-            'user_register' => '用户注册',
-            'security_alert' => '安全提醒',
-            'security_warning' => '安全警告',
-            'test' => '测试通知'
+            'membership_expiry' => __('Membership Expiry Reminder', 'folio'),
+            'membership_expired' => __('Membership Expired', 'folio'),
+            'membership_changed' => __('Membership Level Changed', 'folio'),
+            'membership_activated' => __('Membership Activated', 'folio'),
+            'user_register' => __('User Registration', 'folio'),
+            'security_alert' => __('Security Alert', 'folio'),
+            'security_warning' => __('Security Warning', 'folio'),
+            'test' => __('Test Notification', 'folio')
         );
         
         return isset($labels[$type]) ? $labels[$type] : $type;

@@ -1,0 +1,237 @@
+/**
+ * Folio Admin Common Styles
+ * 管理后台通用样式
+ */
+
+/* 管理页面通用样式 */
+.folio-admin-page {
+    max-width: 1200px;
+}
+
+.folio-admin-header {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.folio-admin-header h1 {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.folio-admin-header .description {
+    color: #666;
+    font-size: 14px;
+}
+
+/* 通用卡片样式 */
+.folio-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.folio-card h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #333;
+    border-bottom: 2px solid #0073aa;
+    padding-bottom: 10px;
+}
+
+.folio-card h3 {
+    margin: 15px 0 10px 0;
+    color: #333;
+    font-size: 16px;
+}
+
+/* 状态指示器 */
+.folio-status {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.folio-status.success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.folio-status.warning {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.folio-status.error {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.folio-status.info {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+/* 网格布局 */
+.folio-grid {
+    display: grid;
+    gap: 20px;
+}
+
+.folio-grid-2 {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.folio-grid-3 {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.folio-grid-4 {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+/* 按钮样式增强 */
+.folio-button-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.folio-button-group .button {
+    margin: 0;
+}
+
+/* 表格样式增强 */
+.folio-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+}
+
+.folio-table th,
+.folio-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.folio-table th {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+}
+
+.folio-table tr:hover {
+    background: #f8f9fa;
+}
+
+/* 通知样式 */
+.folio-notice {
+    padding: 12px 15px;
+    margin: 15px 0;
+    border-radius: 6px;
+    border-left: 4px solid;
+}
+
+.folio-notice.success {
+    background: #d4edda;
+    border-color: #28a745;
+    color: #155724;
+}
+
+.folio-notice.warning {
+    background: #fff3cd;
+    border-color: #ffc107;
+    color: #856404;
+}
+
+.folio-notice.error {
+    background: #f8d7da;
+    border-color: #dc3545;
+    color: #721c24;
+}
+
+.folio-notice.info {
+    background: #d1ecf1;
+    border-color: #17a2b8;
+    color: #0c5460;
+}
+
+/* 加载状态 */
+.folio-loading {
+    position: relative;
+    color: transparent !important;
+}
+
+.folio-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    margin: -8px 0 0 -8px;
+    border: 2px solid #0073aa;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: folio-spin 1s linear infinite;
+}
+
+@keyframes folio-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .folio-grid-2,
+    .folio-grid-3,
+    .folio-grid-4 {
+        grid-template-columns: 1fr;
+    }
+    
+    .folio-button-group {
+        flex-direction: column;
+    }
+    
+    .folio-table {
+        font-size: 14px;
+    }
+    
+    .folio-table th,
+    .folio-table td {
+        padding: 8px;
+    }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+    .folio-card {
+        background: #2c3e50;
+        border-color: #34495e;
+        color: #ecf0f1;
+    }
+    
+    .folio-card h2,
+    .folio-card h3 {
+        color: #ecf0f1;
+    }
+    
+    .folio-table th {
+        background: #34495e;
+        color: #ecf0f1;
+    }
+    
+    .folio-table tr:hover {
+        background: #34495e;
+    }
+}
