@@ -36,4 +36,7 @@ merge-to-main-and-push.bat
 SECURITY.md
 GITHUB_SETUP.md
 TAILWIND-README.md
-README.md
+package-lock.json
+package.json
+tailwind.config.js
+postcss.config.js
