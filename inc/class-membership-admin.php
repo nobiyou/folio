@@ -393,6 +393,14 @@ class folio_Membership_Admin {
                 <div class="folio-stat-number"><?php echo esc_html($stats['total_users']); ?></div>
                 <div class="folio-stat-label"><?php esc_html_e('Total Users', 'folio'); ?></div>
             </div>
+            <div class="folio-stat-card">
+                <div class="folio-stat-number"><?php echo esc_html($stats['active_24h']); ?></div>
+                <div class="folio-stat-label"><?php esc_html_e('Active Users (24h)', 'folio'); ?></div>
+            </div>
+            <div class="folio-stat-card">
+                <div class="folio-stat-number"><?php echo esc_html($stats['active_7d']); ?></div>
+                <div class="folio-stat-label"><?php esc_html_e('Active Users (7 days)', 'folio'); ?></div>
+            </div>
             <div class="folio-stat-card folio-stat-vip">
                 <div class="folio-stat-number"><?php echo esc_html($stats['vip_users']); ?></div>
                 <div class="folio-stat-label"><?php esc_html_e('VIP Users', 'folio'); ?></div>
@@ -1267,7 +1275,9 @@ class folio_Membership_Admin {
             'total_users' => 0,
             'vip_users' => 0,
             'svip_users' => 0,
-            'expiring_soon' => 0
+            'expiring_soon' => 0,
+            'active_24h' => 0,
+            'active_7d' => 0,
         );
         
         // 总用户数
@@ -1294,6 +1304,19 @@ class folio_Membership_Admin {
              AND meta_value >= %s",
             $expiry_date,
             date('Y-m-d')
+        ));
+        
+        // 活跃用户（24小时 / 7天）
+        $now = current_time('timestamp');
+        $threshold_24h = $now - DAY_IN_SECONDS;
+        $threshold_7d = $now - WEEK_IN_SECONDS;
+        $stats['active_24h'] = $wpdb->get_var($wpdb->prepare(
+            "SELECT COUNT(*) FROM {$wpdb->usermeta} WHERE meta_key = 'folio_last_active' AND CAST(meta_value AS UNSIGNED) >= %d",
+            $threshold_24h
+        ));
+        $stats['active_7d'] = $wpdb->get_var($wpdb->prepare(
+            "SELECT COUNT(*) FROM {$wpdb->usermeta} WHERE meta_key = 'folio_last_active' AND CAST(meta_value AS UNSIGNED) >= %d",
+            $threshold_7d
         ));
         
         return $stats;
@@ -1504,8 +1527,8 @@ class folio_Membership_Admin {
             
             // 清除临时缓存
             global $wpdb;
-            $wpdb->query("DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_folio_membership_%'");
-            $wpdb->query("DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_timeout_folio_membership_%'");
+            $wpdb->query($wpdb->prepare("DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", '_transient_folio_membership_%'));
+            $wpdb->query($wpdb->prepare("DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", '_transient_timeout_folio_membership_%'));
             
             wp_send_json_success(array('message' => __('Cache cleared', 'folio')));
         } catch (Exception $e) {

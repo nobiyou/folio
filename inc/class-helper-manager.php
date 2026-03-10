@@ -362,8 +362,7 @@ class folio_Helper_Manager {
              */
             function folio_update_post_seo($post_id) {
                 if (class_exists('folio_SEO_Admin')) {
-                    $seo_admin = new folio_SEO_Admin();
-                    return $seo_admin->update_post_seo_description($post_id);
+                    return folio_SEO_Admin::update_post_seo_description($post_id);
                 }
                 return false;
             }

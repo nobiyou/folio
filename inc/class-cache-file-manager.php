@@ -16,11 +16,21 @@ class folio_Cache_File_Manager {
     // 目标文件路径
     const TARGET_PATH = WP_CONTENT_DIR . '/object-cache.php';
     const BACKUP_PATH = WP_CONTENT_DIR . '/object-cache-backup.php';
+
+    private static $instance = null;
     
     // 模板文件路径
     private $template_path;
     
-    public function __construct() {
+    public static function get_instance() {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
+    }
+
+    private function __construct() {
         $this->template_path = get_template_directory() . '/inc/object-cache-template.php';
         
         // 主题激活时的钩子

@@ -736,7 +736,7 @@ class folio_Unified_Performance_Admin {
             require_once get_template_directory() . '/inc/class-cache-file-manager.php';
         }
         
-        $cache_manager = new folio_Cache_File_Manager();
+        $cache_manager = folio_Cache_File_Manager::get_instance();
         $status = $cache_manager->get_status_info();
         ?>
         <div class="object-cache-status">

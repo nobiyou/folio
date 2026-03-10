@@ -301,13 +301,17 @@ class folio_Performance_Cache_Manager {
         // 批量查询数据库
         global $wpdb;
         
-        $post_ids_str = implode(',', array_map('intval', $post_ids));
-        $query = $wpdb->prepare("
-            SELECT post_id, meta_key, meta_value 
+        // 使用占位符构建 IN 查询，避免 wpdb::prepare 警告
+        $post_ids = array_map('intval', $post_ids);
+        $placeholders = implode(',', array_fill(0, count($post_ids), '%d'));
+        
+        $query = $wpdb->prepare(
+            "SELECT post_id, meta_key, meta_value 
             FROM {$wpdb->postmeta} 
-            WHERE post_id IN ($post_ids_str) 
-            AND meta_key LIKE '_folio_%'
-        ");
+            WHERE post_id IN ($placeholders) 
+            AND meta_key LIKE %s",
+            array_merge($post_ids, array('_folio_%'))
+        );
         
         $results = $wpdb->get_results($query);
         self::$performance_stats['db_queries']++;

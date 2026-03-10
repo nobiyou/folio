@@ -25,6 +25,7 @@ class folio_Security_Admin {
         add_action('wp_ajax_folio_get_report', array($this, 'handle_get_report'));
         add_action('wp_ajax_folio_compare_reports', array($this, 'handle_compare_reports'));
         add_action('wp_ajax_folio_delete_report', array($this, 'handle_delete_report'));
+        add_action('wp_ajax_folio_security_export_logs', array($this, 'handle_export_logs'));
     }
 
     /**
@@ -249,6 +250,41 @@ class folio_Security_Admin {
             border-color: #2271b1;
             outline: none;
             box-shadow: 0 0 0 1px #2271b1;
+        }
+
+        .logs-overview-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .logs-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            background: #f6f7f7;
+            border: 1px solid #dcdcde;
+            border-radius: 6px;
+            padding: 16px;
+            margin: 0 0 20px 0;
+        }
+
+        .logs-meta p {
+            margin: 0;
+            color: #50575e;
+        }
+
+        .logs-meta-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .logs-meta-actions .button-link {
+            text-decoration: none;
         }
         
         .logs-table {
@@ -1042,37 +1078,20 @@ class folio_Security_Admin {
         // 添加错误处理和超时保护
         set_time_limit(30); // 设置30秒超时
         
-        try {
-        $security_manager = folio_Security_Protection_Manager::get_instance();
-        
-        // 处理过滤器
         $filters = array();
-        if (!empty($_GET['filter_ip'])) {
-            $filters['ip'] = sanitize_text_field($_GET['filter_ip']);
-        }
-        if (!empty($_GET['filter_action'])) {
-            $filters['action_type'] = sanitize_text_field($_GET['filter_action']);
-        }
-        if (!empty($_GET['filter_type'])) {
-            $filter_type = sanitize_text_field($_GET['filter_type']);
-            if ($filter_type === 'spider') {
-                $filters['is_spider'] = 1;
-            } elseif ($filter_type === 'user') {
-                $filters['is_spider'] = 0;
-            }
-        }
-        if (!empty($_GET['filter_suspicious'])) {
-            $filters['suspicious_only'] = true;
-        }
-        if (!empty($_GET['filter_date'])) {
-            $filters['date_from'] = sanitize_text_field($_GET['filter_date']);
-        }
+        $filter_query_args = array();
 
-        $page = max(1, intval($_GET['paged'] ?? 1));
-        $per_page = 50;
-        $offset = ($page - 1) * $per_page;
+        try {
+            $security_manager = folio_Security_Protection_Manager::get_instance();
         
-        $logs = $security_manager->get_access_logs($per_page, $offset, $filters);
+            // 处理过滤器
+            list($filters, $filter_query_args) = $this->parse_log_filters();
+
+            $page = max(1, intval($_GET['paged'] ?? 1));
+            $per_page = 50;
+            $offset = ($page - 1) * $per_page;
+        
+            $logs = $security_manager->get_access_logs($per_page, $offset, $filters);
             $total_logs = $security_manager->get_access_logs_count($filters);
             
             // 批量获取蜘蛛信息（优化性能）
@@ -1094,15 +1113,74 @@ class folio_Security_Admin {
                     }
                 }
             }
+
+            $now = current_time('timestamp');
+            $period_start = gmdate('Y-m-d H:i:s', $now - DAY_IN_SECONDS);
+            $period_end = gmdate('Y-m-d H:i:s', $now);
+            $stats_24h = $security_manager->get_security_stats_by_period($period_start, $period_end);
+            $stats_today = $security_manager->get_today_stats();
         } catch (Exception $e) {
             error_log('Folio Security Logs Error: ' . $e->getMessage());
             $logs = array();
             $total_logs = 0;
+            $spider_info_cache = array();
+            $stats_24h = $stats_today = array();
             echo '<div class="notice notice-error"><p>' . esc_html__('Error loading logs: ', 'folio') . esc_html($e->getMessage()) . '</p></div>';
         }
+
+        $sampling_window = (int) apply_filters('folio_security_log_sample_window', 600);
+        $sampling_limit = (int) apply_filters('folio_security_log_sample_limit', 80);
+        $sampling_limit_suspicious = (int) apply_filters('folio_security_log_sample_limit_suspicious', max(20, min($sampling_limit, 40)));
+        $sampling_window_minutes = max(1, floor($sampling_window / 60));
+
+        $export_params = array_merge(array(
+            'action' => 'folio_security_export_logs',
+            'nonce' => wp_create_nonce('folio_security_logs_export'),
+        ), $filter_query_args);
+        $export_url = add_query_arg(array_filter($export_params, 'strlen'), admin_url('admin-ajax.php'));
         ?>
         <div class="logs-section">
             <h2><?php echo esc_html__('Access Logs', 'folio'); ?></h2>
+
+            <div class="logs-overview-cards">
+                <div class="stat-card">
+                    <span class="stat-number"><?php echo number_format($stats_24h['total_access'] ?? 0); ?></span>
+                    <div class="stat-label"><?php esc_html_e('Accesses (24h)', 'folio'); ?></div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number status-suspicious"><?php echo number_format($stats_24h['suspicious_activity'] ?? 0); ?></span>
+                    <div class="stat-label"><?php esc_html_e('Suspicious (24h)', 'folio'); ?></div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number status-denied"><?php echo number_format($stats_24h['denied_access'] ?? 0); ?></span>
+                    <div class="stat-label"><?php esc_html_e('Denied/Blocked', 'folio'); ?></div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number status-blocked"><?php echo number_format($stats_today['blocked_ips'] ?? 0); ?></span>
+                    <div class="stat-label"><?php esc_html_e('Blocked IPs (Today)', 'folio'); ?></div>
+                </div>
+            </div>
+
+            <div class="logs-meta">
+                <p>
+                    <?php
+                    printf(
+                        esc_html__('Sampling: up to %1$s normal entries and %2$s suspicious entries every %3$s minutes. Adjust via filters or the Security Settings tab.', 'folio'),
+                        number_format_i18n($sampling_limit),
+                        number_format_i18n($sampling_limit_suspicious),
+                        number_format_i18n($sampling_window_minutes)
+                    );
+                    ?>
+                </p>
+                <div class="logs-meta-actions">
+                    <a class="button button-secondary" href="<?php echo esc_url($export_url); ?>">
+                        <?php esc_html_e('Export CSV', 'folio'); ?>
+                    </a>
+                    <a class="button-link" href="<?php echo esc_url(admin_url('themes.php?page=folio-security&tab=settings#log-settings')); ?>">
+                        <?php esc_html_e('Security Settings', 'folio'); ?>
+                    </a>
+                </div>
+            </div>
             
             <div class="log-filters">
                 <form method="get">
@@ -1142,6 +1220,7 @@ class folio_Security_Admin {
                         
                         <button type="submit" class="button"><?php echo esc_html__('Filter', 'folio'); ?></button>
                         <a href="?page=folio-security&tab=logs" class="button"><?php echo esc_html__('Clear Filters', 'folio'); ?></a>
+                        <a href="<?php echo esc_url($export_url); ?>" class="button button-secondary"><?php esc_html_e('Export Current View', 'folio'); ?></a>
                     </div>
                 </form>
             </div>
@@ -1257,6 +1336,127 @@ class folio_Security_Admin {
             ?>
         </div>
         <?php
+    }
+
+    public function handle_export_logs() {
+        if (!current_user_can('manage_options')) {
+            wp_die(__('Permission denied', 'folio'));
+        }
+
+        $nonce = isset($_GET['nonce']) ? sanitize_text_field(wp_unslash($_GET['nonce'])) : '';
+        if ($nonce === '' || !wp_verify_nonce($nonce, 'folio_security_logs_export')) {
+            wp_die(__('Security verification failed', 'folio'));
+        }
+
+        list($filters) = $this->parse_log_filters($_GET);
+
+        $limit = isset($_GET['export_limit']) ? intval($_GET['export_limit']) : 1000;
+        $limit = max(100, min(5000, $limit));
+
+        $security_manager = folio_Security_Protection_Manager::get_instance();
+        $logs = $security_manager->get_access_logs($limit, 0, $filters);
+
+        $filename = 'folio-security-logs-' . gmdate('Ymd-His') . '.csv';
+        nocache_headers();
+        header('Content-Type: text/csv; charset=UTF-8');
+        header('Content-Disposition: attachment; filename=' . $filename);
+
+        $output = fopen('php://output', 'w');
+        if ($output === false) {
+            wp_die(__('Failed to create export stream.', 'folio'));
+        }
+
+        // 添加 BOM，兼容 Excel
+        fwrite($output, "\xEF\xBB\xBF");
+
+        fputcsv($output, array(
+            'time',
+            'ip_address',
+            'user',
+            'action_type',
+            'post_id',
+            'result',
+            'type',
+            'user_agent',
+            'status'
+        ));
+
+        if (!empty($logs)) {
+            foreach ($logs as $log) {
+                $user_label = '';
+                if (!empty($log->user_id)) {
+                    $user = get_user_by('id', $log->user_id);
+                    $user_label = $user ? $user->display_name : 'Unknown';
+                } else {
+                    $user_label = 'Guest';
+                }
+
+                $status_labels = array();
+                if (!empty($log->is_suspicious)) {
+                    $status_labels[] = 'suspicious';
+                }
+                if (!empty($log->protection_bypassed)) {
+                    $status_labels[] = 'bypass';
+                }
+                $status_text = !empty($status_labels) ? implode('|', $status_labels) : '-';
+
+                fputcsv($output, array(
+                    $log->created_at,
+                    $log->ip_address,
+                    $user_label,
+                    $log->action_type,
+                    $log->post_id ?: '-',
+                    $log->access_result,
+                    $log->is_spider ? 'spider' : 'user',
+                    $log->user_agent,
+                    $status_text
+                ));
+            }
+        }
+
+        fclose($output);
+        exit;
+    }
+
+    private function parse_log_filters($source = null) {
+        $request = $source ?? $_GET;
+        $filters = array();
+        $query_args = array();
+
+        if (!empty($request['filter_ip'])) {
+            $value = sanitize_text_field($request['filter_ip']);
+            $filters['ip'] = $value;
+            $query_args['filter_ip'] = $value;
+        }
+
+        if (!empty($request['filter_action'])) {
+            $value = sanitize_text_field($request['filter_action']);
+            $filters['action_type'] = $value;
+            $query_args['filter_action'] = $value;
+        }
+
+        if (!empty($request['filter_type'])) {
+            $value = sanitize_text_field($request['filter_type']);
+            $query_args['filter_type'] = $value;
+            if ($value === 'spider') {
+                $filters['is_spider'] = 1;
+            } elseif ($value === 'user') {
+                $filters['is_spider'] = 0;
+            }
+        }
+
+        if (!empty($request['filter_suspicious'])) {
+            $filters['suspicious_only'] = true;
+            $query_args['filter_suspicious'] = '1';
+        }
+
+        if (!empty($request['filter_date'])) {
+            $value = sanitize_text_field($request['filter_date']);
+            $filters['date_from'] = $value;
+            $query_args['filter_date'] = $value;
+        }
+
+        return array($filters, $query_args);
     }
 
     /**
@@ -1527,6 +1727,7 @@ class folio_Security_Admin {
                     return;
                 }
                 
+                // 清空固定日志表，不涉及用户输入，直接执行 SQL，避免 incorrect prepare notice
                 $result = $wpdb->query("TRUNCATE TABLE $table_name");
                 
                 if ($result !== false) {

@@ -191,6 +191,126 @@ if (!function_exists('folio_get_language_switch_url')) {
     }
 }
 
+/**
+ * 在 URL 后追加当前前端语言参数（无痕/禁用 Cookie 时链接仍带 lang，语言不丢失）
+ */
+if (!function_exists('folio_url_with_current_lang')) {
+    function folio_url_with_current_lang($url) {
+        $locale = function_exists('folio_get_current_frontend_locale') ? folio_get_current_frontend_locale() : '';
+        $supported = function_exists('folio_get_supported_frontend_locales') ? folio_get_supported_frontend_locales() : array();
+        if (empty($locale) || !in_array($locale, $supported, true)) {
+            return $url;
+        }
+        return add_query_arg('lang', $locale, $url);
+    }
+}
+
+/**
+ * Front page cache helpers.
+ */
+if (!function_exists('folio_get_front_page_cache_version')) {
+    function folio_get_front_page_cache_version() {
+        $version = get_option('folio_front_page_cache_version', 1);
+        if (!is_numeric($version) || (int)$version <= 0) {
+            $version = 1;
+            update_option('folio_front_page_cache_version', $version);
+        }
+        return (int)$version;
+    }
+}
+
+if (!function_exists('folio_bump_front_page_cache_version')) {
+    function folio_bump_front_page_cache_version() {
+        $version = folio_get_front_page_cache_version();
+        $version = ($version >= PHP_INT_MAX - 1) ? 1 : $version + 1;
+        update_option('folio_front_page_cache_version', $version);
+    }
+}
+
+if (!function_exists('folio_should_invalidate_front_page_cache')) {
+    function folio_should_invalidate_front_page_cache($post_id) {
+        if (!$post_id || wp_is_post_revision($post_id) || wp_is_post_autosave($post_id)) {
+            return false;
+        }
+
+        $post_type = get_post_type($post_id);
+        if ($post_type !== 'post') {
+            return false;
+        }
+
+        return true;
+    }
+}
+
+if (!function_exists('folio_handle_front_page_cache_invalidation')) {
+    function folio_handle_front_page_cache_invalidation($post_id, $post = null, $update = null) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter
+        if (!folio_should_invalidate_front_page_cache($post_id)) {
+            return;
+        }
+
+        folio_bump_front_page_cache_version();
+    }
+}
+
+if (!function_exists('folio_handle_front_page_cache_invalidation_simple')) {
+    function folio_handle_front_page_cache_invalidation_simple($post_id) {
+        folio_handle_front_page_cache_invalidation($post_id);
+    }
+}
+
+add_action('save_post', 'folio_handle_front_page_cache_invalidation', 10, 3);
+add_action('trashed_post', 'folio_handle_front_page_cache_invalidation_simple', 10, 1);
+add_action('untrashed_post', 'folio_handle_front_page_cache_invalidation_simple', 10, 1);
+add_action('deleted_post', 'folio_handle_front_page_cache_invalidation_simple', 10, 1);
+
+/**
+ * 用户活跃度跟踪
+ */
+if (!function_exists('folio_update_user_activity_meta')) {
+    function folio_update_user_activity_meta($user_id, $context = 'frontend') {
+        if (!$user_id) {
+            return;
+        }
+
+        $now = current_time('timestamp');
+        $interval = (int) apply_filters('folio_user_activity_update_interval', 300);
+        $last_active = (int) get_user_meta($user_id, 'folio_last_active', true);
+        if ($interval > 0 && ($now - $last_active) < $interval) {
+            return;
+        }
+
+        update_user_meta($user_id, 'folio_last_active', $now);
+        update_user_meta($user_id, 'folio_last_active_context', sanitize_text_field($context));
+    }
+}
+
+if (!function_exists('folio_track_user_activity_on_request')) {
+    function folio_track_user_activity_on_request() {
+        if (!is_user_logged_in() || is_admin() || wp_doing_ajax()) {
+            return;
+        }
+
+        $user_id = get_current_user_id();
+        if (!$user_id) {
+            return;
+        }
+
+        folio_update_user_activity_meta($user_id, 'frontend');
+    }
+}
+
+if (!function_exists('folio_track_user_activity_on_login')) {
+    function folio_track_user_activity_on_login($user_login, $user) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter
+        if (!isset($user->ID)) {
+            return;
+        }
+        folio_update_user_activity_meta((int) $user->ID, 'login');
+    }
+}
+
+add_action('wp', 'folio_track_user_activity_on_request');
+add_action('wp_login', 'folio_track_user_activity_on_login', 10, 2);
+
 if (!function_exists('folio_format_post_date')) {
     function folio_format_post_date($post_id = null, $format = '') {
         $post_id = $post_id ?: get_the_ID();
@@ -198,17 +318,34 @@ if (!function_exists('folio_format_post_date')) {
             return '';
         }
 
+        $locale = function_exists('folio_get_current_frontend_locale') ? folio_get_current_frontend_locale() : get_locale();
+
         if (!$format) {
-            $locale = function_exists('folio_get_current_frontend_locale') ? folio_get_current_frontend_locale() : get_locale();
+            // 中文使用站点配置的日期格式；其他语言使用纯数字格式，避免出现“3 月 2, 2026”这种中英混排
             if (strpos((string) $locale, 'zh_') === 0) {
                 $format = get_option('date_format');
             } else {
-                $format = 'F j, Y';
+                $format = 'Y-m-d';
             }
         }
+
         $timestamp = get_post_timestamp($post_id);
         if (!$timestamp) {
             return '';
+        }
+
+        // 为避免“后台中文、前端英文”时日期仍按中文本地化，
+        // 这里按前端选择的语言临时切换 locale 来渲染日期。
+        if (!empty($locale) && function_exists('switch_to_locale')) {
+            $switched = switch_to_locale($locale);
+            try {
+                $date = wp_date($format, $timestamp);
+            } finally {
+                if ($switched && function_exists('restore_previous_locale')) {
+                    restore_previous_locale();
+                }
+            }
+            return $date;
         }
 
         return wp_date($format, $timestamp);
@@ -519,6 +656,11 @@ function folio_include_required_files() {
     // AI内容生成器
     require_once FOLIO_DIR . '/inc/class-ai-content-generator.php';
 
+    // AI批量生成器
+    if (is_admin()) {
+        require_once FOLIO_DIR . '/inc/class-ai-batch-generator.php';
+    }
+
     // 主题功能增强
     require_once FOLIO_DIR . '/inc/class-theme-enhancements.php';
 
@@ -672,7 +814,7 @@ function folio_init_classes() {
         // 缓存文件管理器
         if (class_exists('folio_Cache_File_Manager')) {
             global $folio_cache_file_manager;
-            $folio_cache_file_manager = new folio_Cache_File_Manager();
+            $folio_cache_file_manager = folio_Cache_File_Manager::get_instance();
         }
         
         // 缓存健康检查器
@@ -739,29 +881,150 @@ if (!function_exists('Folio_posts_per_page')) {
 }
 
 /**
- * 限制未登录用户访问分页（例如 /cosplay/page/2 等）
- * 未登录时访问任意列表的第 2 页及之后，统一跳转到登录页
+ * Guest pagination protection helpers
+ */
+if (!function_exists('folio_get_request_ip')) {
+    function folio_get_request_ip() {
+        $candidates = array(
+            'HTTP_CF_CONNECTING_IP',
+            'HTTP_X_FORWARDED_FOR',
+            'HTTP_CLIENT_IP',
+            'HTTP_X_REAL_IP',
+            'REMOTE_ADDR',
+        );
+
+        foreach ($candidates as $key) {
+            if (!empty($_SERVER[$key])) {
+                $ip = trim(explode(',', sanitize_text_field(wp_unslash($_SERVER[$key])))[0]);
+                if (filter_var($ip, FILTER_VALIDATE_IP)) {
+                    return $ip;
+                }
+            }
+        }
+
+        return '';
+    }
+}
+
+if (!function_exists('folio_is_allowed_search_bot')) {
+    function folio_is_allowed_search_bot($user_agent) {
+        if ($user_agent === '') {
+            return false;
+        }
+
+        $allowed = apply_filters('folio_allowed_search_bots', array(
+            'googlebot',
+            'bingbot',
+            'baiduspider',
+            'yandexbot',
+            'sogou',
+        ));
+
+        foreach ($allowed as $token) {
+            if ($token && stripos($user_agent, $token) !== false) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+
+if (!function_exists('folio_is_suspicious_user_agent')) {
+    function folio_is_suspicious_user_agent($user_agent) {
+        if ($user_agent === '') {
+            return true;
+        }
+
+        $patterns = apply_filters('folio_suspicious_crawler_patterns', array(
+            'bot',
+            'crawler',
+            'spider',
+            'scraper',
+            'httpclient',
+            'python-requests',
+            'curl',
+            'wget',
+            'java',
+            'libwww',
+        ));
+
+        foreach ($patterns as $pattern) {
+            if ($pattern !== '' && stripos($user_agent, $pattern) !== false) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+
+if (!function_exists('folio_should_block_guest_paged_request')) {
+    function folio_should_block_guest_paged_request() {
+        $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_USER_AGENT'])) : '';
+
+        if (folio_is_allowed_search_bot($user_agent)) {
+            return false;
+        }
+
+        $is_suspicious = folio_is_suspicious_user_agent($user_agent);
+        $ip = folio_get_request_ip();
+        if ($ip === '') {
+            $ip = 'unknown';
+        }
+
+        $key = 'folio_guest_paged_' . md5($ip);
+        $window = (int) apply_filters('folio_guest_paged_rate_limit_window', 600);
+        $record = get_transient($key);
+        $now = time();
+
+        if (!is_array($record) || !isset($record['start']) || ($now - (int) $record['start']) > $window) {
+            $record = array(
+                'count' => 0,
+                'start' => $now,
+            );
+        }
+
+        $record['count']++;
+        set_transient($key, $record, $window);
+
+        $threshold = $is_suspicious ? 20 : 120;
+        $threshold = (int) apply_filters('folio_guest_paged_rate_limit', $threshold, $is_suspicious, $record, $user_agent, $ip);
+
+        return $record['count'] > $threshold;
+    }
+}
+
+/**
+ * 放开访客分页，但对可疑爬虫做速率限制（HTTP 429）
  */
 function folio_restrict_paged_for_guests() {
-    if (is_admin()) {
+    if (is_admin() || wp_doing_ajax() || is_feed() || is_preview()) {
         return;
     }
 
-    // 仅针对前端主查询的分页页面
-    if (!is_user_logged_in() && is_paged()) {
-        $login_url = home_url('user-center/login');
-        $current_request = '';
-        if (isset($GLOBALS['wp']) && isset($GLOBALS['wp']->request) && is_string($GLOBALS['wp']->request)) {
-            $current_request = $GLOBALS['wp']->request;
-        }
+    if (!is_paged()) {
+        return;
+    }
 
-        // 避免重定向死循环：如果当前已经在登录页就不再跳转
-        if ($current_request !== '' && trailingslashit($login_url) === trailingslashit(home_url(add_query_arg(array(), $current_request)))) {
-            return;
-        }
+    if (is_user_logged_in()) {
+        return;
+    }
 
-        wp_safe_redirect($login_url, 302);
-        exit;
+    if (apply_filters('folio_disable_guest_paged_protection', false)) {
+        return;
+    }
+
+    if (folio_should_block_guest_paged_request()) {
+        status_header(429);
+        header('Retry-After: 120');
+        wp_die(
+            esc_html__('Too many paging requests detected. Please slow down and try again in a few minutes.', 'folio'),
+            esc_html__('Slow down', 'folio'),
+            array(
+                'response' => 429,
+            )
+        );
     }
 }
 
@@ -820,6 +1083,9 @@ if (!function_exists('folio_register_compat_hooks')) {
         add_filter('body_class', 'folio_body_classes');
         add_filter('locale', 'folio_filter_frontend_locale', 20);
         add_filter('determine_locale', 'folio_filter_frontend_locale', 20);
+
+        // 在 XML / 站点地图 / feed 等非 HTML 页面禁用 AddToAny 脚本输出
+        add_filter('addtoany_script_disabled', 'folio_disable_addtoany_for_xml');
     }
 }
 
@@ -835,6 +1101,50 @@ if (!function_exists('folio_bootstrap_hooks')) {
     }
 }
 folio_bootstrap_hooks();
+
+/**
+ * 判断当前请求是否为 XML / 站点地图等非 HTML 输出
+ */
+if (!function_exists('folio_is_xml_like_request')) {
+    function folio_is_xml_like_request() {
+        // 标准条件：feed / embed / REST 请求通常为非 HTML
+        if (is_feed() || is_embed() || (function_exists('wp_is_serving_rest_request') && wp_is_serving_rest_request())) {
+            return true;
+        }
+
+        // 根据请求 URI 粗略判断 sitemap / XML
+        $uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+        if (is_string($uri)) {
+            if (strpos($uri, 'wp-sitemap') !== false || preg_match('~\.xml($|\?)~i', $uri)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+
+/**
+ * 在 XML / 站点地图 / feed 等页面禁用 AddToAny 脚本
+ *
+ * AddToAny 官方提供的过滤器：addtoany_script_disabled
+ * 参考其源码中的说明：
+ * // Example: add_filter( 'addtoany_script_disabled', '__return_true' );
+ */
+if (!function_exists('folio_disable_addtoany_for_xml')) {
+    function folio_disable_addtoany_for_xml($disabled) {
+        // 若已被其他逻辑禁用，则保持禁用
+        if ($disabled) {
+            return true;
+        }
+
+        if (function_exists('folio_is_xml_like_request') && folio_is_xml_like_request()) {
+            return true;
+        }
+
+        return false;
+    }
+}
 
 /**
  * 确保 folio_get_post_premium_info 函数始终可用
@@ -913,12 +1223,11 @@ if (!function_exists('folio_get_post_premium_info')) {
             } catch (Exception $e) {
                 error_log('folio_can_user_access_article error: ' . $e->getMessage());
             }
-        } elseif (class_exists('folio_Premium_Content_Enhanced')) {
+        } elseif (class_exists('folio_Article_Protection_Manager')) {
             try {
-                $instance = new folio_Premium_Content_Enhanced();
-                $can_access = $instance->can_user_access($post_id, $current_user_id);
+                $can_access = folio_Article_Protection_Manager::can_user_access($post_id, $current_user_id);
             } catch (Exception $e) {
-                error_log('folio_Premium_Content_Enhanced error: ' . $e->getMessage());
+                error_log('folio_Article_Protection_Manager error: ' . $e->getMessage());
             }
         }
         

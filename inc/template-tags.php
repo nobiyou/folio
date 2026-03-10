@@ -472,8 +472,8 @@ function folio_breadcrumbs($args = array()) {
         $items[] = '<span class="breadcrumb-current">' . esc_html(strip_tags($archive_title)) . '</span>';
     }
     
-    echo '<nav aria-label="Breadcrumb" class="breadcrumb-nav text-xs uppercase font-bold tracking-widest">';
-    echo implode('<span class="breadcrumb-separator mx-2">' . esc_html($args['separator']) . '</span>', $items);
+    echo '<nav aria-label="Breadcrumb" class="breadcrumb-nav breadcrumb-nav--mobile flex flex-wrap items-center gap-x-1.5 gap-y-1 text-[10px] sm:text-xs uppercase font-bold tracking-widest">';
+    echo implode('<span class="breadcrumb-separator flex-shrink-0" aria-hidden="true">' . esc_html($args['separator']) . '</span>', $items);
     echo '</nav>';
 }
 

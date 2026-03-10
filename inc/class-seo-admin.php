@@ -13,7 +13,17 @@ if (!defined('ABSPATH')) {
 
 class folio_SEO_Admin {
 
-    public function __construct() {
+    private static $instance = null;
+
+    public static function get_instance() {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
+    }
+
+    private function __construct() {
         add_action('admin_menu', array($this, 'add_admin_menu'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
         add_action('wp_ajax_folio_seo_bulk_update', array($this, 'handle_bulk_seo_update'));
@@ -357,7 +367,7 @@ class folio_SEO_Admin {
                 }
 
                 // 生成或更新SEO描述
-                $this->update_post_seo_description($post->ID);
+                self::update_post_seo_description($post->ID);
                 
                 $updated_count++;
             } catch (Exception $e) {
@@ -462,7 +472,7 @@ class folio_SEO_Admin {
     /**
      * 更新文章SEO描述
      */
-    private function update_post_seo_description($post_id) {
+    public static function update_post_seo_description($post_id) {
         $post = get_post($post_id);
         if (!$post) {
             return false;
@@ -582,5 +592,5 @@ class folio_SEO_Admin {
 
 // 初始化SEO管理界面
 if (is_admin()) {
-    new folio_SEO_Admin();
+    folio_SEO_Admin::get_instance();
 }

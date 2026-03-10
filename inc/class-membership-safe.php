@@ -104,7 +104,7 @@ class folio_Membership_Safe {
         return delete_option(self::AUDIT_LOG_OPTION);
     }
 
-    public function __construct() {
+    private function __construct() {
         // 内存保护检查
         if (!$this->is_memory_safe()) {
             error_log('Folio Membership: Memory usage too high, skipping initialization');

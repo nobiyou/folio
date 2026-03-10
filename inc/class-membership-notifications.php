@@ -15,7 +15,7 @@ class folio_Membership_Notifications {
     private static $initialized = false;
     private static $table_name = 'folio_notifications';
 
-    public function __construct() {
+    private function __construct() {
         if (self::$initialized) {
             return;
         }
@@ -92,6 +92,7 @@ class folio_Membership_Notifications {
         // 兼容老版本数据结构：确保 read_by_users 字段存在
         $column_exists = $wpdb->get_var($wpdb->prepare("SHOW COLUMNS FROM {$table_name} LIKE %s", 'read_by_users'));
         if (!$column_exists) {
+            // 这里没有外部输入，仅添加固定结构，不需要使用 prepare，以避免 WP_DEBUG 下的 incorrect prepare notice
             $wpdb->query("ALTER TABLE {$table_name} ADD COLUMN read_by_users longtext DEFAULT NULL AFTER is_read");
         }
     }
@@ -596,7 +597,7 @@ class folio_Membership_Notifications {
         global $wpdb;
 
         $table_name = $wpdb->prefix . self::$table_name;
-        $global_notifications = $wpdb->get_results("SELECT id, user_id, read_by_users FROM {$table_name} WHERE user_id = 0");
+        $global_notifications = $wpdb->get_results($wpdb->prepare("SELECT id, user_id, read_by_users FROM {$table_name} WHERE user_id = %d", 0));
         if (!$global_notifications) {
             return true;
         }

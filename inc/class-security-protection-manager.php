@@ -31,7 +31,7 @@ class folio_Security_Protection_Manager {
     private $blocked_ips = array();
     private $access_counts = array();
 
-    public function __construct() {
+    private function __construct() {
         // 初始化数据库表（只在init钩子上执行一次，避免重复）
         add_action('init', array($this, 'init_database'), 1);
         add_action('init', array($this, 'init_spider_nets_table'), 1);
@@ -216,19 +216,15 @@ class folio_Security_Protection_Manager {
     private function maybe_add_spider_column($table_name) {
         global $wpdb;
         
-        // 检查字段是否存在
-        $column_exists = $wpdb->get_results($wpdb->prepare(
-            "SHOW COLUMNS FROM `$table_name` LIKE 'is_spider'"
-        ));
+        // 检查字段是否存在（无外部输入，直接执行查询即可）
+        $column_exists = $wpdb->get_results("SHOW COLUMNS FROM `$table_name` LIKE 'is_spider'");
         
         if (empty($column_exists)) {
-            // 添加字段
+            // 添加字段（固定表结构变更，不需要 prepare）
             $result1 = $wpdb->query("ALTER TABLE `$table_name` ADD COLUMN is_spider tinyint(1) DEFAULT 0 AFTER is_suspicious");
             
-            // 检查索引是否存在
-            $index_exists = $wpdb->get_results($wpdb->prepare(
-                "SHOW INDEX FROM `$table_name` WHERE Key_name = 'idx_is_spider'"
-            ));
+            // 检查索引是否存在（固定 SQL，无用户输入）
+            $index_exists = $wpdb->get_results("SHOW INDEX FROM `$table_name` WHERE Key_name = 'idx_is_spider'");
             
             // 如果字段添加成功且索引不存在，添加索引
             if ($result1 !== false && empty($index_exists)) {
@@ -505,6 +501,11 @@ class folio_Security_Protection_Manager {
         $ip = $this->get_client_ip();
         $current_time = time();
         
+        // XML / 站点地图 / feed / REST 等非 HTML 请求：不做访问频率限制，避免影响 sitemap 与 API
+        if (function_exists('folio_is_xml_like_request') && folio_is_xml_like_request()) {
+            return;
+        }
+        
         // 管理员豁免访问频率限制
         if (current_user_can('manage_options')) {
             return;
@@ -773,6 +774,10 @@ class folio_Security_Protection_Manager {
             'is_spider' => $is_spider ? 1 : 0,
         );
         
+        if (!$this->should_log_access_entry($data)) {
+            return;
+        }
+
         $wpdb->insert($table_name, $data);
     }
 
@@ -817,6 +822,57 @@ class folio_Security_Protection_Manager {
             global $post;
             $this->log_access($post->ID, 'page_view', 'viewed');
         }
+    }
+
+    /**
+     * 判断是否应记录日志（采样/限频）
+     *
+     * @param array $data 日志数据
+     * @return bool
+     */
+    private function should_log_access_entry($data) {
+        $enabled = apply_filters('folio_security_log_enabled', true, $data);
+        if (!$enabled) {
+            return false;
+        }
+
+        // 保留关键事件
+        if (!isset($data['action_type']) || $data['action_type'] !== 'page_view') {
+            return true;
+        }
+
+        // 默认不记录搜索引擎蜘蛛的普通浏览
+        if (!empty($data['is_spider']) && !apply_filters('folio_security_log_spider_views', false, $data)) {
+            return false;
+        }
+
+        $ip = isset($data['ip_address']) && $data['ip_address'] !== '' ? $data['ip_address'] : 'unknown';
+        $window = (int) apply_filters('folio_security_log_sample_window', 600);
+        $base_limit = (int) apply_filters('folio_security_log_sample_limit', 80);
+
+        if (!empty($data['is_suspicious'])) {
+            $base_limit = (int) apply_filters('folio_security_log_sample_limit_suspicious', max(20, min($base_limit, 40)));
+        }
+
+        $key = 'folio_security_log_' . md5($ip);
+        $record = get_transient($key);
+        $now = time();
+
+        if (!is_array($record) || empty($record['start']) || ($now - (int) $record['start']) > $window) {
+            $record = array(
+                'count' => 0,
+                'start' => $now,
+            );
+        }
+
+        $record['count']++;
+        set_transient($key, $record, $window);
+
+        if ($record['count'] > $base_limit) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -1448,6 +1504,7 @@ class folio_Security_Protection_Manager {
             ), ARRAY_A);
         }
         
+        // 无外部输入的简单查询，不需要 prepare，避免 incorrect notice
         return $wpdb->get_results("SELECT * FROM `$table_name` ORDER BY spider_id, id", ARRAY_A);
     }
 
@@ -1468,6 +1525,7 @@ class folio_Security_Protection_Manager {
         global $wpdb;
         $table_name = $wpdb->prefix . self::SPIDER_NETS_TABLE;
         
+        // 固定表结构操作，直接执行 SQL 即可
         return $wpdb->query("TRUNCATE TABLE `$table_name`");
     }
 

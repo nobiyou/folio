@@ -56,7 +56,7 @@ if (!empty($post_ids)) {
 ?>
 
 <!-- 文章网格 -->
-<main class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<main class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
     <?php if (!empty($cached_posts)) : ?>
         <?php foreach ($cached_posts as $post) : ?>
@@ -100,9 +100,9 @@ if (!empty($post_ids)) {
         <div class="col-span-full">
             <?php if (!is_user_logged_in()) : ?>
                 <div class="text-center">
-                    <a href="<?php echo esc_url(home_url('user-center/login')); ?>" 
+                    <a href="<?php echo esc_url(function_exists('folio_url_with_current_lang') ? folio_url_with_current_lang(home_url('user-center/login')) : home_url('user-center/login')); ?>" 
                        class="inline-flex items-center px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-gray-800 transition-colors">
-                        Login To Load More
+                        <?php esc_html_e('Login To Load More', 'folio'); ?>
                     </a>
                 </div>
             <?php else : ?>

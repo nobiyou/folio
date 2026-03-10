@@ -389,22 +389,80 @@ class folio_Membership_SEO {
      * 修改robots.txt
      */
     public function modify_robots_txt($output, $public) {
+        $output = $this->normalize_robots_txt_output($output);
+
         if (!$public) {
             return $output;
         }
 
-        // 添加会员内容相关的robots指令
-        $output .= "\n# Membership Content Guidelines\n";
-        $output .= "# Allow indexing of preview content but respect paywall\n";
-        $output .= "User-agent: *\n";
-        $output .= "Allow: /wp-content/themes/folio/assets/\n";
-        
-        // 如果有特定的会员内容路径，可以在这里添加规则
-        $output .= "\n# Premium content access\n";
-        $output .= "# Crawl delay for premium content\n";
-        $output .= "Crawl-delay: 10\n";
+        // 若站点根目录存在物理 robots.txt，则不在主题层追加规则，避免与服务器/CDN 规则叠加。
+        if (file_exists(ABSPATH . 'robots.txt')) {
+            return $output;
+        }
 
-        return $output;
+        // 默认不追加主题自定义 robots 规则，避免与 sitemap 插件、Cloudflare、SEO 插件混合后造成格式污染。
+        if (!apply_filters('folio_membership_append_robots_rules', false, $output)) {
+            return $output;
+        }
+
+        $custom_lines = apply_filters('folio_membership_robots_lines', array(
+            '# Membership Content Guidelines',
+            '# Allow indexing of preview content but respect paywall',
+            'Allow: /wp-content/themes/folio/assets/',
+        ));
+
+        if (!is_array($custom_lines)) {
+            return $output;
+        }
+
+        $custom_lines = array_values(array_filter(array_map(function($line) {
+            $line = trim((string) $line);
+            return $line === '' ? null : str_replace(array("\r", "\n"), '', $line);
+        }, $custom_lines)));
+
+        if (empty($custom_lines)) {
+            return $output;
+        }
+
+        return rtrim($output) . "\n\n" . implode("\n", $custom_lines) . "\n";
+    }
+
+    /**
+     * 规范化 robots.txt 输出，尽量修正常见的单行拼接问题。
+     */
+    private function normalize_robots_txt_output($output) {
+        $output = (string) $output;
+        if ($output === '') {
+            return '';
+        }
+
+        $output = str_replace(array("\r\n", "\r"), "\n", $output);
+
+        // 修正常见指令被拼到同一行的问题。
+        $directives = array(
+            'User-agent:',
+            'Disallow:',
+            'Allow:',
+            'Sitemap:',
+            'Crawl-delay:',
+            'Host:',
+            'Content-Signal:',
+        );
+
+        foreach ($directives as $directive) {
+            $pattern = '/[ \t]+(?=' . preg_quote($directive, '/') . ')/i';
+            $output = preg_replace($pattern, "\n", $output);
+        }
+
+        $lines = explode("\n", $output);
+        $normalized_lines = array();
+
+        foreach ($lines as $line) {
+            $line = rtrim($line);
+            $normalized_lines[] = $line;
+        }
+
+        return rtrim(implode("\n", $normalized_lines)) . "\n";
     }
 
     /**

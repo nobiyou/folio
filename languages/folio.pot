@@ -79,6 +79,14 @@ msgstr ""
 msgid "%d min read"
 msgstr ""
 
+#: index.php:28
+#: category.php:58
+#: home.php:105
+#: archive.php:81
+#: front-page.php:139
+msgid "Login To Load More"
+msgstr ""
+
 #: inc/class-script-manager.php
 msgid "%d minutes ago"
 msgstr ""
@@ -716,11 +724,6 @@ msgstr ""
 msgid "Are you sure you want to delete this notification?"
 msgstr ""
 
-#: inc/class-membership-admin.php
-msgid ""
-"Are you sure you want to migrate historical portfolio content to posts?"
-msgstr ""
-
 #: user-center
 msgid "Are you sure you want to remove this favorite?"
 msgstr ""
@@ -1015,10 +1018,6 @@ msgid "Breadcrumbs"
 msgstr ""
 
 msgid "Breadcrumbs are enabled. Use this code in templates:"
-msgstr ""
-
-#: user-center
-msgid "Browse Portfolio"
 msgstr ""
 
 #: manual
@@ -1828,12 +1827,6 @@ msgstr ""
 #: inc/class-membership-admin.php inc/class-membership-analytics.php:561
 #: inc/class-membership-analytics.php:594
 msgid "Conversions"
-msgstr ""
-
-#: inc/class-membership-admin.php
-msgid ""
-"Convert historical portfolio posts and categories to the default post "
-"system."
 msgstr ""
 
 #: inc/class-script-manager.php
@@ -4116,14 +4109,6 @@ msgid "Metric Comparison"
 msgstr ""
 
 #: inc/class-membership-admin.php
-msgid "Migrate Portfolio To Posts"
-msgstr ""
-
-#: inc/class-membership-admin.php
-msgid "Migrating portfolio data..."
-msgstr ""
-
-#: inc/class-membership-admin.php
 msgid "Migration completed. Converted %1$d posts and mapped %2$d categories."
 msgstr ""
 
@@ -4290,10 +4275,6 @@ msgstr ""
 
 #: user-center
 msgid "No favorites yet"
-msgstr ""
-
-#: inc/class-membership-admin.php
-msgid "No historical portfolio data found. Nothing changed."
 msgstr ""
 
 #: inc\class-security-admin.php:0
@@ -7037,6 +7018,26 @@ msgstr ""
 msgid "Total Users"
 msgstr ""
 
+#: inc/class-membership-admin.php:398
+msgid "Active Users (24h)"
+msgstr ""
+
+#: inc/class-membership-admin.php:402
+msgid "Active Users (7 days)"
+msgstr ""
+
+#: inc/class-membership-admin.php:407
+msgid "VIP Users"
+msgstr ""
+
+#: inc/class-membership-admin.php:411
+msgid "SVIP Users"
+msgstr ""
+
+#: inc/class-membership-admin.php:415
+msgid "Expiring Within 7 Days"
+msgstr ""
+
 #: inc\class-security-admin.php:0
 msgid "Total spider IP range records: %d"
 msgstr ""
@@ -8211,10 +8212,6 @@ msgstr ""
 
 #: functions.php:126
 msgid "作品集"
-msgstr ""
-
-#: inc/class-theme-seo.php:85
-msgid "作品集,portfolio"
 msgstr ""
 
 #: inc/class-theme-options.php:337
@@ -9993,4 +9990,162 @@ msgstr ""
 
 #: inc/class-membership-meta-box.php:0
 msgid "🚫 No Preview - Hide content completely"
+msgstr ""
+#: inc/class-security-admin.php:1147
+msgid "Accesses (24h)"
+msgstr ""
+
+#: inc/class-security-admin.php:1151
+msgid "Suspicious (24h)"
+msgstr ""
+
+#: inc/class-security-admin.php:1154
+msgid "Denied/Blocked"
+msgstr ""
+
+#: inc/class-security-admin.php:1157
+msgid "Blocked IPs (Today)"
+msgstr ""
+
+#: inc/class-security-admin.php:1168
+msgid "Sampling: up to %1$s normal entries and %2$s suspicious entries every %3$s minutes. Adjust via filters or the Security Settings tab."
+msgstr ""
+
+#: inc/class-security-admin.php:1176
+msgid "Export CSV"
+msgstr ""
+
+#: inc/class-security-admin.php:1196
+msgid "Export Current View"
+msgstr ""
+#: inc/class-ai-batch-generator.php:43 inc/class-ai-batch-generator.php:44 inc/class-ai-batch-generator.php:57
+msgid "AI Batch Generator"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:59
+msgid "Automatically generate excerpts and tags for posts that are missing them."
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:65
+msgid "Please configure AI API in Theme Settings first."
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:67
+msgid "Go to Settings"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:76
+msgid "Scan Settings"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:80
+msgid "Post Type"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:84
+msgid "Posts"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:85
+msgid "Pages"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:91
+msgid "Generate For"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:96
+msgid "Posts without excerpt"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:101
+msgid "Posts without tags"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:110
+msgid "Scan Posts"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:117
+msgid "Scan Results"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:124
+msgid "Start Batch Generation"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:132
+msgid "Generation Progress"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:144
+msgid "Batch generation completed!"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:281
+msgid "Scanning posts..."
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:282
+msgid "Found %d posts that need generation:"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:283
+msgid "No posts found that need generation."
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:284
+msgid "Generating..."
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:285
+msgid "Success"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:286
+msgid "Error"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:287
+msgid "Completed"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:288
+msgid "Excerpt generated"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:289
+msgid "Tags generated"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:290
+msgid "Post"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:291
+msgid "Missing Excerpt"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:292
+msgid "Missing Tags"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:304 inc/class-ai-batch-generator.php:353 inc/class-ai-batch-generator.php:367 inc/class-ai-batch-generator.php:411
+msgid "Insufficient permissions"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:312
+msgid "Please select at least one option"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:362
+msgid "Invalid post ID"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:368
+msgid "Post not found"
+msgstr ""
+
+#: inc/class-ai-batch-generator.php:411
+msgid "Generation failed"
 msgstr ""

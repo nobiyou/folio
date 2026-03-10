@@ -25,7 +25,7 @@ class folio_Operations_Report_Manager {
         return self::$instance;
     }
 
-    public function __construct() {
+    private function __construct() {
         add_action('init', array($this, 'init_database'));
     }
 

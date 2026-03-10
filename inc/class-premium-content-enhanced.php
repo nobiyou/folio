@@ -20,6 +20,8 @@ if (!defined('ABSPATH')) {
 
 class folio_Premium_Content_Enhanced {
 
+    private static $instance = null;
+
     // 预览模式常量
     const PREVIEW_AUTO = 'auto';
     const PREVIEW_PERCENTAGE = 'percentage';
@@ -30,7 +32,15 @@ class folio_Premium_Content_Enhanced {
     const PROTECTION_CONTENT = 'content';
     const PROTECTION_FULL = 'full';
 
-    public function __construct() {
+    public static function get_instance() {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
+    }
+
+    private function __construct() {
         // 注册增强版短代码
         add_shortcode('vip_content', array($this, 'vip_content_shortcode'));
         add_shortcode('svip_content', array($this, 'svip_content_shortcode'));
@@ -1016,7 +1026,7 @@ class folio_Premium_Content_Enhanced {
 }
 
 // 初始化增强版会员专属内容系统
-new folio_Premium_Content_Enhanced();
+folio_Premium_Content_Enhanced::get_instance();
 
 /**
  * 全局辅助函数

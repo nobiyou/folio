@@ -13,7 +13,17 @@ if (!defined('ABSPATH')) {
 
 class folio_Image_Alt_Optimizer {
 
-    public function __construct() {
+    private static $instance = null;
+
+    public static function get_instance() {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
+    }
+
+    private function __construct() {
         // 在上传时自动设置Alt文本
         add_action('add_attachment', array($this, 'auto_set_alt_text'));
         
@@ -342,7 +352,7 @@ class folio_Image_Alt_Optimizer {
 }
 
 // 初始化
-new folio_Image_Alt_Optimizer();
+folio_Image_Alt_Optimizer::get_instance();
 
 /**
  * 批量更新Alt文本的WP-CLI命令或管理员工具
@@ -353,7 +363,7 @@ if (is_admin()) {
             wp_die('Unauthorized');
         }
         
-        $optimizer = new folio_Image_Alt_Optimizer();
+        $optimizer = folio_Image_Alt_Optimizer::get_instance();
         $updated = $optimizer->batch_update_alt_texts(100);
         
         wp_send_json_success(array(

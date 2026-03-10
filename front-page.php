@@ -26,9 +26,10 @@ $show_brain_hexagon = !isset($theme_options['show_brain_hexagon']) || !empty($th
 $query_posts_per_page = $show_brain_hexagon ? max(1, $posts_per_page - 1) : $posts_per_page;
 
 $paged = get_query_var('paged') ? get_query_var('paged') : 1;
-$cache_key = 'folio_front_page_posts_' . get_current_user_id() . '_' . $paged;
-$cached_posts = wp_cache_get($cache_key);
-$cached_query_info = wp_cache_get($cache_key . '_query_info');
+$cache_version = function_exists('folio_get_front_page_cache_version') ? folio_get_front_page_cache_version() : 1;
+$cache_key_base = 'folio_front_page_posts_' . $cache_version . '_' . get_current_user_id() . '_' . $paged;
+$cached_posts = wp_cache_get($cache_key_base);
+$cached_query_info = wp_cache_get($cache_key_base . '_query_info');
 
 if ($cached_posts === false || $cached_query_info === false) {
     // Query posts
@@ -64,8 +65,8 @@ if ($cached_posts === false || $cached_query_info === false) {
     $wp_query->found_posts = $posts_query->found_posts;
     
     // 缓存查询结果和查询信息（5分钟）
-    wp_cache_set($cache_key, $posts_data, '', 300);
-    wp_cache_set($cache_key . '_query_info', $query_info, '', 300);
+    wp_cache_set($cache_key_base, $posts_data, '', 300);
+    wp_cache_set($cache_key_base . '_query_info', $query_info, '', 300);
     $cached_posts = $posts_data;
 } else {
     // 如果使用缓存，恢复查询信息用于分页
@@ -90,7 +91,7 @@ if (!empty($post_ids)) {
 ?>
 
 <!-- 文章网格 -->
-<main class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<main class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
     <?php if (!empty($cached_posts)) : ?>
         <?php foreach ($cached_posts as $post) : ?>
@@ -134,9 +135,9 @@ if (!empty($post_ids)) {
         <div class="col-span-full">
             <?php if (!is_user_logged_in()) : ?>
                 <div class="text-center">
-                    <a href="<?php echo esc_url(home_url('user-center/login')); ?>" 
+                    <a href="<?php echo esc_url(function_exists('folio_url_with_current_lang') ? folio_url_with_current_lang(home_url('user-center/login')) : home_url('user-center/login')); ?>" 
                        class="inline-flex items-center px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-gray-800 transition-colors">
-                        Login To Load More
+                        <?php esc_html_e('Login To Load More', 'folio'); ?>
                     </a>
                 </div>
             <?php else : ?>

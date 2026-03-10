@@ -222,7 +222,7 @@ class folio_Cache_Health_Checker {
         $object_cache_exists = file_exists($object_cache_file);
         
         if ($object_cache_exists && class_exists('folio_Cache_File_Manager')) {
-            $manager = new folio_Cache_File_Manager();
+            $manager = folio_Cache_File_Manager::get_instance();
             $is_folio_version = $manager->is_folio_object_cache();
             
             $this->add_test_result($section, 'object_cache_file', array(

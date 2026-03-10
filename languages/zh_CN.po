@@ -701,10 +701,6 @@ msgstr "确定要删除这个权益项吗？"
 msgid "Are you sure you want to delete this notification?"
 msgstr "确定要删除这条通知吗？"
 
-msgid ""
-"Are you sure you want to migrate historical portfolio content to posts?"
-msgstr "确定要将历史 portfolio 内容迁移为默认文章吗？"
-
 msgid "Are you sure you want to remove this favorite?"
 msgstr "确定要取消收藏这个作品吗？"
 
@@ -994,9 +990,6 @@ msgstr "面包屑导航"
 
 msgid "Breadcrumbs are enabled. Use this code in templates:"
 msgstr "面包屑导航已启用，在模板中使用以下代码："
-
-msgid "Browse Portfolio"
-msgstr "浏览作品集"
 
 msgid "Browse Posts"
 msgstr "浏览文章"
@@ -1794,11 +1787,6 @@ msgstr "转化率"
 #: inc/class-membership-analytics.php:594
 msgid "Conversions"
 msgstr "转化次数"
-
-msgid ""
-"Convert historical portfolio posts and categories to the default post "
-"system."
-msgstr "将历史 portfolio 文章与分类转换到默认文章系统。"
 
 msgid "Copy"
 msgstr "复制"
@@ -4027,12 +4015,6 @@ msgstr "指标"
 msgid "Metric Comparison"
 msgstr "指标对比"
 
-msgid "Migrate Portfolio To Posts"
-msgstr "迁移 Portfolio 到文章"
-
-msgid "Migrating portfolio data..."
-msgstr "正在迁移 portfolio 数据..."
-
 msgid "Migration completed. Converted %1$d posts and mapped %2$d categories."
 msgstr "迁移完成。已转换 %1$d 篇文章，并映射 %2$d 个分类。"
 
@@ -4193,9 +4175,6 @@ msgstr "暂无收藏的作品"
 
 msgid "No favorites yet"
 msgstr "还没有收藏任何作品"
-
-msgid "No historical portfolio data found. Nothing changed."
-msgstr "未发现历史 portfolio 数据，未做任何变更。"
 
 #: inc\class-security-admin.php:0
 msgid "No logs found"
@@ -6892,6 +6871,26 @@ msgstr "受保护文章总数"
 msgid "Total Users"
 msgstr "总用户数"
 
+#: inc/class-membership-admin.php:398
+msgid "Active Users (24h)"
+msgstr "活跃用户（24 小时）"
+
+#: inc/class-membership-admin.php:402
+msgid "Active Users (7 days)"
+msgstr "活跃用户（7 天）"
+
+#: inc/class-membership-admin.php:407
+msgid "VIP Users"
+msgstr "VIP 用户"
+
+#: inc/class-membership-admin.php:411
+msgid "SVIP Users"
+msgstr "SVIP 用户"
+
+#: inc/class-membership-admin.php:415
+msgid "Expiring Within 7 Days"
+msgstr "7 天内到期"
+
 #: inc\class-security-admin.php:0
 msgid "Total spider IP range records: %d"
 msgstr "蜘蛛 IP 网段总记录数：%d"
@@ -7714,6 +7713,14 @@ msgstr "分钟"
 msgid "month"
 msgstr "月"
 
+#: index.php:28
+#: category.php:58
+#: home.php:105
+#: archive.php:81
+#: front-page.php:139
+msgid "Login To Load More"
+msgstr "登录后查看更多"
+
 #: inc/class-cache-backend-validator.php:133
 msgid "object-cache.php file"
 msgstr "object-cache.php 文件"
@@ -8043,10 +8050,6 @@ msgstr "作品分类"
 #: functions.php:126
 msgid "作品集"
 msgstr "作品集"
-
-#: inc/class-theme-seo.php:85
-msgid "作品集,portfolio"
-msgstr "作品集,portfolio"
 
 #: inc/class-theme-options.php:337
 msgid "作品集设置"
@@ -9884,3 +9887,161 @@ msgstr "未知爬虫封禁时长"
 
 msgid "When action is temporary block, use this duration (seconds). Default: 3600."
 msgstr "当处理方式为临时封禁时，使用此时长（秒）。默认：3600。"
+#: inc/class-security-admin.php:1147
+msgid "Accesses (24h)"
+msgstr "24 小时访问量"
+
+#: inc/class-security-admin.php:1151
+msgid "Suspicious (24h)"
+msgstr "24 小时可疑行为"
+
+#: inc/class-security-admin.php:1154
+msgid "Denied/Blocked"
+msgstr "已拒绝/已阻止"
+
+#: inc/class-security-admin.php:1157
+msgid "Blocked IPs (Today)"
+msgstr "今日封禁 IP"
+
+#: inc/class-security-admin.php:1168
+msgid "Sampling: up to %1$s normal entries and %2$s suspicious entries every %3$s minutes. Adjust via filters or the Security Settings tab."
+msgstr "采样：每 %3$s 分钟最多记录 %1$s 条正常条目和 %2$s 条可疑条目，可在筛选器或安全设置中调整。"
+
+#: inc/class-security-admin.php:1176
+msgid "Export CSV"
+msgstr "导出 CSV"
+
+#: inc/class-security-admin.php:1196
+msgid "Export Current View"
+msgstr "导出当前视图"
+#: inc/class-ai-batch-generator.php:43 inc/class-ai-batch-generator.php:44 inc/class-ai-batch-generator.php:57
+msgid "AI Batch Generator"
+msgstr "AI 批量生成器"
+
+#: inc/class-ai-batch-generator.php:59
+msgid "Automatically generate excerpts and tags for posts that are missing them."
+msgstr "为缺少摘要或标签的文章自动生成。"
+
+#: inc/class-ai-batch-generator.php:65
+msgid "Please configure AI API in Theme Settings first."
+msgstr "请先在主题设置中配置 AI API。"
+
+#: inc/class-ai-batch-generator.php:67
+msgid "Go to Settings"
+msgstr "前往设置"
+
+#: inc/class-ai-batch-generator.php:76
+msgid "Scan Settings"
+msgstr "扫描设置"
+
+#: inc/class-ai-batch-generator.php:80
+msgid "Post Type"
+msgstr "文章类型"
+
+#: inc/class-ai-batch-generator.php:84
+msgid "Posts"
+msgstr "文章"
+
+#: inc/class-ai-batch-generator.php:85
+msgid "Pages"
+msgstr "页面"
+
+#: inc/class-ai-batch-generator.php:91
+msgid "Generate For"
+msgstr "生成目标"
+
+#: inc/class-ai-batch-generator.php:96
+msgid "Posts without excerpt"
+msgstr "缺少摘要的文章"
+
+#: inc/class-ai-batch-generator.php:101
+msgid "Posts without tags"
+msgstr "缺少标签的文章"
+
+#: inc/class-ai-batch-generator.php:110
+msgid "Scan Posts"
+msgstr "扫描文章"
+
+#: inc/class-ai-batch-generator.php:117
+msgid "Scan Results"
+msgstr "扫描结果"
+
+#: inc/class-ai-batch-generator.php:124
+msgid "Start Batch Generation"
+msgstr "开始批量生成"
+
+#: inc/class-ai-batch-generator.php:132
+msgid "Generation Progress"
+msgstr "生成进度"
+
+#: inc/class-ai-batch-generator.php:144
+msgid "Batch generation completed!"
+msgstr "批量生成完成！"
+
+#: inc/class-ai-batch-generator.php:281
+msgid "Scanning posts..."
+msgstr "正在扫描文章..."
+
+#: inc/class-ai-batch-generator.php:282
+msgid "Found %d posts that need generation:"
+msgstr "找到 %d 篇需要生成内容的文章："
+
+#: inc/class-ai-batch-generator.php:283
+msgid "No posts found that need generation."
+msgstr "没有需要生成内容的文章。"
+
+#: inc/class-ai-batch-generator.php:284
+msgid "Generating..."
+msgstr "正在生成..."
+
+#: inc/class-ai-batch-generator.php:285
+msgid "Success"
+msgstr "成功"
+
+#: inc/class-ai-batch-generator.php:286
+msgid "Error"
+msgstr "错误"
+
+#: inc/class-ai-batch-generator.php:287
+msgid "Completed"
+msgstr "已完成"
+
+#: inc/class-ai-batch-generator.php:288
+msgid "Excerpt generated"
+msgstr "已生成摘要"
+
+#: inc/class-ai-batch-generator.php:289
+msgid "Tags generated"
+msgstr "已生成标签"
+
+#: inc/class-ai-batch-generator.php:290
+msgid "Post"
+msgstr "文章"
+
+#: inc/class-ai-batch-generator.php:291
+msgid "Missing Excerpt"
+msgstr "无摘要"
+
+#: inc/class-ai-batch-generator.php:292
+msgid "Missing Tags"
+msgstr "无标签"
+
+#: inc/class-ai-batch-generator.php:304 inc/class-ai-batch-generator.php:353 inc/class-ai-batch-generator.php:367 inc/class-ai-batch-generator.php:411
+msgid "Insufficient permissions"
+msgstr "权限不足"
+
+#: inc/class-ai-batch-generator.php:312
+msgid "Please select at least one option"
+msgstr "请至少选择一个选项"
+
+#: inc/class-ai-batch-generator.php:362
+msgid "Invalid post ID"
+msgstr "无效的文章 ID"
+
+#: inc/class-ai-batch-generator.php:368
+msgid "Post not found"
+msgstr "未找到文章"
+
+#: inc/class-ai-batch-generator.php:411
+msgid "Generation failed"
+msgstr "生成失败"

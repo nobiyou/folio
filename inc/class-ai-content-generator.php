@@ -13,9 +13,18 @@ if (!defined('ABSPATH')) {
 
 class Folio_AI_Content_Generator {
     
+    private static $instance = null;
     private $api_manager;
     
-    public function __construct() {
+    public static function get_instance() {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
+    }
+
+    private function __construct() {
         // 使用统一的API管理器
         $this->api_manager = Folio_AI_API_Manager::get_instance();
         
@@ -661,6 +670,20 @@ Return only the JSON object, no other content.";
         $raw = $this->get_tags_raw($title, $content);
         return $raw ? $this->parse_tags_response($raw) : array();
     }
+
+    /**
+     * 对外暴露的摘要生成方法，供批量生成器复用
+     */
+    public function generate_excerpt_content($title, $content) {
+        return $this->generate_excerpt($title, $content);
+    }
+
+    /**
+     * 对外暴露的标签生成方法，供批量生成器复用
+     */
+    public function generate_tags_content($title, $content) {
+        return $this->generate_tags($title, $content);
+    }
     
     /**
      * AJAX测试连接
@@ -718,4 +741,4 @@ Return only the JSON object, no other content.";
 }
 
 // 初始化
-new Folio_AI_Content_Generator();
+Folio_AI_Content_Generator::get_instance();

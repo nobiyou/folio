@@ -44,13 +44,15 @@
   - `login.js`
 - 使用 `enqueue_script_if_exists()` 避免 404 与依赖报错。
 
-### 5. Portfolio 兼容层
-- 当站点未注册时，兼容注册 `portfolio` 文章类型与 `portfolio_category` 分类法。
-- 新增开关：
-  - `folio_enable_portfolio_compat`（默认 `true`）
-- 新增一次性重写刷新机制：
-  - 标记：`folio_portfolio_compat_rewrite_pending`
-  - 后台触发：`folio_maybe_flush_portfolio_compat_rewrite()`
+### 5. 内容模型更新
+- 移除历史 `portfolio` 自定义文章类型兼容层，统一使用 WordPress 默认 `post` 类型承载作品与博客。
+- 作品展示的筛选/统计改为基于文章分类与标签，无需额外重写规则。
+- 所有相关设置迁移到「主题设置 > 常规」内，后续不再注册 `portfolio`/`portfolio_category`。
+
+### 6. 安全日志采样
+- `folio_Security_Protection_Manager` 对 `page_view` 级别的访问日志增加采样窗口（默认 10 分钟 80 条），避免数据库暴涨。
+- 允许通过过滤器 `folio_security_log_enabled`、`folio_security_log_sample_window`、`folio_security_log_sample_limit` 等调整或关闭采样；关键事件仍按原逻辑完整记录。
+- 安全防护面板的「访问日志」标签新增 24 小时概览卡、采样提示与 CSV 导出按钮，方便运营快速定位异常。
 
 ### 6. 防御性修复
 - 对用户中心与访客分页重定向中的 `$wp->request` 访问增加保护。
@@ -125,8 +127,6 @@
 ## 兼容开关
 - `folio_enable_style_manager_frontend`（默认 `false`）
   - 控制 `inc/class-style-manager.php` 的前台样式加载是否启用
-- `folio_enable_portfolio_compat`（默认 `true`）
-  - 控制 `portfolio` 内容模型兼容注册是否启用
 
 ## 最小回归检查清单
 
@@ -149,8 +149,7 @@
 - 安全/性能管理页无脚本资源报错。
 
 ### 内容模型
-- 在外部未注册场景下，`portfolio` 的归档/单页/分类路由可访问。
-- 兼容注册后重写规则仅刷新一次。
+- 文章列表、单篇与分类使用默认 `post` 类型，确认作品展示不再依赖 `portfolio` CPT。
 
 ## 备注
 - 本目录最初不是 Git 仓库，已在本地初始化后创建分支。

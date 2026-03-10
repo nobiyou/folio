@@ -13,13 +13,23 @@ if (!defined('ABSPATH')) {
 
 class folio_Frontend_Optimizer {
 
+    private static $instance = null;
+
     // 优化选项
     private $options;
     
     // 资源版本
     private static $asset_version;
 
-    public function __construct() {
+    public static function get_instance() {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
+    }
+
+    private function __construct() {
         // 获取优化选项 - 从主题设置中读取
         $theme_options = get_option('folio_theme_options', array());
         $this->options = isset($theme_options['frontend_optimization']) 
@@ -58,8 +68,12 @@ class folio_Frontend_Optimizer {
         add_action('wp_ajax_folio_optimize_assets', array($this, 'ajax_optimize_assets'));
         add_action('wp_ajax_folio_clear_optimized_cache', array($this, 'ajax_clear_optimized_cache'));
         
-        // 如果优化被禁用，直接返回（但 AJAX handlers 已注册）
-        if (!$this->options['enabled'] || defined('FOLIO_DISABLE_OPTIMIZATION') && FOLIO_DISABLE_OPTIMIZATION) {
+        // 如果优化被禁用，或当前为 XML / 站点地图等非 HTML 请求，则直接返回（但 AJAX handlers 已注册）
+        if (
+            !$this->options['enabled']
+            || (defined('FOLIO_DISABLE_OPTIMIZATION') && FOLIO_DISABLE_OPTIMIZATION)
+            || (function_exists('folio_is_xml_like_request') && folio_is_xml_like_request())
+        ) {
             return;
         }
         
@@ -562,7 +576,7 @@ class folio_Frontend_Optimizer {
         
         // 预连接到Google Fonts
         echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
-        echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
+        echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">' . "\n";
         
         // 字体显示优化
         echo '<style>@font-face{font-display:swap;}</style>' . "\n";
@@ -594,7 +608,7 @@ class folio_Frontend_Optimizer {
         
         foreach ($font_files as $font) {
             if (file_exists(str_replace(get_template_directory_uri(), get_template_directory(), $font))) {
-                echo '<link rel="preload" href="' . esc_url($font) . '" as="font" type="font/woff2" crossorigin>' . "\n";
+                echo '<link rel="preload" href="' . esc_url($font) . '" as="font" type="font/woff2" crossorigin=\"anonymous\">' . "\n";
             }
         }
     }
@@ -623,41 +637,66 @@ class folio_Frontend_Optimizer {
      * 延迟非关键脚本
      */
     public function defer_non_critical_scripts($tag, $handle, $src) {
-        // 只在非后台页面运行
-        if (is_admin()) {
+        // 先处理任何已有的 defer（无论是否为前台 / 是否开启延迟），避免 XML 校验错误
+        if (strpos($tag, 'defer') !== false) {
+            // 如果已经有 defer="..." 或 defer='...'，保持不变；否则补上属性值
+            if (strpos($tag, 'defer="') === false && strpos($tag, "defer='") === false) {
+                $tag = preg_replace('/\sdefer(\s|>)/', ' defer="defer"$1', $tag, 1);
+            }
+        }
+        
+        // 非前台 HTML（后台 / feed / embed / AJAX / cron 等）只做属性修正，不做延迟处理
+        if (
+            is_admin()
+            || is_feed()
+            || is_embed()
+            || wp_doing_ajax()
+            || wp_doing_cron()
+        ) {
             return $tag;
         }
         
-        if (!$this->options['defer_non_critical']) {
+        // 前台 HTML 且未启用延迟功能，仅做属性修正
+        if (empty($this->options['defer_non_critical'])) {
             return $tag;
         }
         
         // 关键脚本不延迟
         $critical_scripts = array('jquery', 'jquery-core', 'folio-critical');
-        if (in_array($handle, $critical_scripts)) {
+        if (in_array($handle, $critical_scripts, true)) {
             return $tag;
         }
         
-        // 添加defer属性
-        return str_replace(' src', ' defer src', $tag);
+        // 仅在标准 <script> 标签上添加 defer="defer"
+        if (strpos($tag, '<script') === false) {
+            return $tag;
+        }
+        
+        return str_replace('<script ', '<script defer="defer" ', $tag);
     }
 
     /**
      * 延迟非关键样式
      */
     public function defer_non_critical_styles($html, $handle, $href, $media) {
-        // 只在非后台页面运行
-        if (is_admin()) {
+        // 只在前台 HTML 页面运行（避免影响 feed / XML / 后台 / AJAX 等）
+        if (
+            is_admin()
+            || is_feed()
+            || is_embed()
+            || wp_doing_ajax()
+            || wp_doing_cron()
+        ) {
             return $html;
         }
         
-        if (!$this->options['defer_non_critical']) {
+        if (empty($this->options['defer_non_critical'])) {
             return $html;
         }
         
         // 关键样式不延迟
         $critical_styles = array('folio-style', 'theme-style');
-        if (in_array($handle, $critical_styles)) {
+        if (in_array($handle, $critical_styles, true)) {
             return $html;
         }
         
@@ -1040,4 +1079,4 @@ class folio_Frontend_Optimizer {
 }
 
 // 初始化前端优化器
-new folio_Frontend_Optimizer();
+folio_Frontend_Optimizer::get_instance();

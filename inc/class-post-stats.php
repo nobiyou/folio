@@ -14,12 +14,13 @@ if (!defined('ABSPATH')) {
 class folio_Post_Stats {
 
     public function __construct() {
-        // 在单篇文章页面增加阅读数
-        add_action('wp_head', array($this, 'track_post_views'));
+        add_action('wp_enqueue_scripts', array($this, 'enqueue_view_tracking_script'));
         
         // 注册 AJAX 处理
         add_action('wp_ajax_folio_like_post', array($this, 'ajax_like_post'));
         add_action('wp_ajax_nopriv_folio_like_post', array($this, 'ajax_like_post'));
+        add_action('wp_ajax_folio_track_post_view', array($this, 'ajax_track_post_view'));
+        add_action('wp_ajax_nopriv_folio_track_post_view', array($this, 'ajax_track_post_view'));
         
         // 收藏功能 AJAX（需要注册 nopriv 版本以便未登录用户能收到友好错误提示）
         add_action('wp_ajax_folio_favorite_post', array($this, 'ajax_favorite_post'));
@@ -35,20 +36,88 @@ class folio_Post_Stats {
     }
 
     /**
-     * 追踪文章阅读数
+     * 单篇文章加载时输出统计脚本
      */
-    public function track_post_views() {
+    public function enqueue_view_tracking_script() {
         if (!is_singular('post')) {
             return;
         }
 
-        // 排除管理员和编辑
         if (current_user_can('edit_posts')) {
             return;
         }
 
-        $post_id = get_the_ID();
-        $this->increment_views($post_id);
+        $post_id = get_queried_object_id();
+        if (!$post_id) {
+            return;
+        }
+
+        $script_path = 'assets/js/post-stats.js';
+        wp_enqueue_script(
+            'folio-post-stats',
+            get_template_directory_uri() . '/' . $script_path,
+            array(),
+            function_exists('folio_get_asset_version') ? folio_get_asset_version($script_path) : FOLIO_VERSION,
+            true
+        );
+
+        wp_localize_script('folio-post-stats', 'folioPostStats', array(
+            'ajaxUrl' => admin_url('admin-ajax.php'),
+            'nonce'   => wp_create_nonce('folio_post_stats'),
+            'postId'  => $post_id,
+            'delay'   => apply_filters('folio_post_view_delay', 1500),
+        ));
+    }
+
+    /**
+     * AJAX 记录阅读次数
+     */
+    public function ajax_track_post_view() {
+        if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce'])), 'folio_post_stats')) {
+            wp_send_json_error(array('message' => __('Security verification failed', 'folio')), 403);
+        }
+
+        $post_id = isset($_POST['postId']) ? (int) $_POST['postId'] : 0;
+        if (!$post_id || get_post_type($post_id) !== 'post' || get_post_status($post_id) !== 'publish') {
+            wp_send_json_error(array('message' => __('Invalid post', 'folio')), 400);
+        }
+
+        if (current_user_can('edit_post', $post_id)) {
+            wp_send_json_success(array('views' => self::get_views($post_id)));
+        }
+
+        $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_USER_AGENT'])) : '';
+        if (function_exists('folio_is_suspicious_user_agent') && folio_is_suspicious_user_agent($user_agent)) {
+            wp_send_json_success(array('views' => self::get_views($post_id)));
+        }
+
+        if ($this->has_viewed_recently($post_id)) {
+            wp_send_json_success(array('views' => self::get_views($post_id)));
+        }
+
+        $new_views = $this->increment_views($post_id);
+        $this->mark_viewed($post_id);
+
+        wp_send_json_success(array('views' => $new_views));
+    }
+
+    protected function has_viewed_recently($post_id) {
+        $cookie_name = $this->get_view_cookie_name($post_id);
+        return isset($_COOKIE[$cookie_name]);
+    }
+
+    protected function mark_viewed($post_id) {
+        $cookie_name = $this->get_view_cookie_name($post_id);
+        $ttl = (int) apply_filters('folio_post_view_cookie_ttl', HOUR_IN_SECONDS * 6);
+        $expire = time() + $ttl;
+        $path = defined('COOKIEPATH') ? COOKIEPATH : '/';
+        $domain = defined('COOKIE_DOMAIN') ? COOKIE_DOMAIN : '';
+        setcookie($cookie_name, '1', $expire, $path, $domain, is_ssl(), true);
+        $_COOKIE[$cookie_name] = '1';
+    }
+
+    protected function get_view_cookie_name($post_id) {
+        return 'folio_viewed_' . $post_id;
     }
 
     /**
@@ -56,7 +125,9 @@ class folio_Post_Stats {
      */
     public function increment_views($post_id) {
         $views = (int) get_post_meta($post_id, 'views', true);
-        update_post_meta($post_id, 'views', $views + 1);
+        $views++;
+        update_post_meta($post_id, 'views', $views);
+        return $views;
     }
 
     /**
@@ -374,7 +445,7 @@ class folio_Post_Stats {
 
         ob_start();
         ?>
-        <div class="mpb-favorites-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-<?php echo esc_attr($atts['columns']); ?> gap-6">
+        <div class="mpb-favorites-grid grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-<?php echo esc_attr($atts['columns']); ?> gap-6">
             <?php
             foreach ($favorites as $post_id) {
                 $post = get_post($post_id);
@@ -481,3 +552,4 @@ if (!function_exists('folio_get_user_favorites')) {
         return folio_Post_Stats::get_user_favorites($user_id, $limit);
     }
 }
+
