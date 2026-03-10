@@ -22,6 +22,7 @@ Thumbs.db
 # WordPress
 wp-config.php
 .htaccess
+wp-cli.phar
 
 # Environment / secrets (do not commit)
 .env
