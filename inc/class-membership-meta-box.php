@@ -69,7 +69,7 @@ class folio_Membership_Meta_Box {
             'folio-membership-metabox',
             get_template_directory_uri() . '/assets/js/membership-metabox.js',
             array('jquery'),
-            '1.0.0',
+            FOLIO_VERSION,
             true
         );
         
@@ -112,7 +112,7 @@ class folio_Membership_Meta_Box {
             'folio-membership-metabox',
             get_template_directory_uri() . '/assets/css/membership-metabox.css',
             array(),
-            '1.0.0'
+            FOLIO_VERSION
         );
     }
     

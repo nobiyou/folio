@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 class folio_Script_Manager {
 
     // 脚本版本号
-    const SCRIPT_VERSION = '1.0.0';
+    const SCRIPT_VERSION = '1.1.0';
 
     public function __construct() {
         // 前端脚本加载

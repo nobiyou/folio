@@ -446,7 +446,7 @@ class folio_Premium_Content_Enhanced {
      */
     public function enqueue_scripts() {
         if (is_singular()) {
-            wp_enqueue_script('folio-premium-content', get_template_directory_uri() . '/assets/js/premium-content.js', array('jquery'), '1.0.0', true);
+            wp_enqueue_script('folio-premium-content', get_template_directory_uri() . '/assets/js/premium-content.js', array('jquery'), FOLIO_VERSION, true);
             wp_localize_script('folio-premium-content', 'folioPremium', array(
                 'ajaxurl' => admin_url('admin-ajax.php'),
                 'nonce' => wp_create_nonce('folio_premium_content'),

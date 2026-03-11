@@ -3,7 +3,7 @@
  * Folio Theme Functions
  *
  * @package Folio
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 if (!defined('ABSPATH')) {
@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define theme constants
-define('FOLIO_VERSION', '1.0.0');
+define('FOLIO_VERSION', '1.1.0');
 define('FOLIO_DIR', get_template_directory());
 define('FOLIO_URI', get_template_directory_uri());
 define('FOLIO_FRONTEND_LANG_COOKIE', 'folio_frontend_lang');

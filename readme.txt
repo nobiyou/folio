@@ -3,7 +3,7 @@ Contributors: mpb
 Requires at least: 5.0
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -84,6 +84,12 @@ Folio 是一个简洁、现代的 WordPress 作品展示主题，完全基于标
 If you discover a security vulnerability, please report it responsibly (e.g. via GitHub Security Advisories or a private contact). We will respond to valid reports and credit reporters where appropriate. See the SECURITY.md file in the theme directory for security practices and details.
 
 == Changelog ==
+
+= 1.1.0 =
+* 重构主题设置后台，拆分配置页结构并整理相关模块
+* 新增 AI 批量生成器及使用文档
+* 优化文章统计、安全、SEO、缓存与会员相关后台逻辑
+* 更新语言包、文档与仓库忽略规则
 
 = 1.0.0 =
 * 初始版本发布

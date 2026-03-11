@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 class folio_Style_Manager {
 
     // 样式版本号
-    const STYLE_VERSION = '1.0.0';
+    const STYLE_VERSION = '1.1.0';
 
     public function __construct() {
         // 前端样式加载（默认关闭，避免与 functions.php 的样式链重复）

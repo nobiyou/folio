@@ -865,7 +865,7 @@ class folio_Frontend_Components {
                 'folio-frontend-components',
                 get_template_directory_uri() . '/assets/css/frontend-components.css',
                 array(),
-                '1.0.0'
+                FOLIO_VERSION
             );
             
             // 加载前端组件JavaScript
@@ -873,7 +873,7 @@ class folio_Frontend_Components {
                 'folio-frontend-components',
                 get_template_directory_uri() . '/assets/js/frontend-components.js',
                 array('jquery'),
-                '1.0.0',
+                FOLIO_VERSION,
                 true
             );
             
